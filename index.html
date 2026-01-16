@@ -4,22 +4,43 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>KOR Bytes S.A.S. | Desarrollo de Software a Medida</title>
-    <meta name="description" content="Empresa colombiana especializada en arquitectura backend, desarrollo de software empresarial, aplicaciones móviles e integraciones. Más de 8 años transformando procesos complejos en soluciones digitales." />
-    <meta name="keywords" content="desarrollo software, backend, Laravel, NestJS, React, Flutter, Colombia, Medellín, aplicaciones empresariales" />
+    <meta
+      name="description"
+      content="Empresa colombiana especializada en arquitectura backend, desarrollo de software empresarial, aplicaciones móviles e integraciones. Más de 8 años transformando procesos complejos en soluciones digitales."
+    />
+    <meta
+      name="keywords"
+      content="desarrollo software, backend, Laravel, NestJS, React, Flutter, Colombia, Medellín, aplicaciones empresariales"
+    />
     <meta name="author" content="KOR Bytes S.A.S." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://kor-bytes.com" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kor-bytes.com" />
-    <meta property="og:title" content="KOR Bytes S.A.S. | Desarrollo de Software a Medida" />
-    <meta property="og:description" content="Empresa colombiana especializada en arquitectura backend y desarrollo de software empresarial. Transformamos procesos complejos en soluciones digitales." />
-    <meta property="og:image" content="https://kor-bytes.com/images/logo.webp" />
+    <meta
+      property="og:title"
+      content="KOR Bytes S.A.S. | Desarrollo de Software a Medida"
+    />
+    <meta
+      property="og:description"
+      content="Empresa colombiana especializada en arquitectura backend y desarrollo de software empresarial. Transformamos procesos complejos en soluciones digitales."
+    />
+    <meta
+      property="og:image"
+      content="https://kor-bytes.com/images/logo.webp"
+    />
     <meta property="og:locale" content="es_CO" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="KOR Bytes S.A.S. | Desarrollo de Software a Medida" />
-    <meta name="twitter:description" content="Empresa colombiana especializada en arquitectura backend y desarrollo de software empresarial." />
+    <meta
+      name="twitter:title"
+      content="KOR Bytes S.A.S. | Desarrollo de Software a Medida"
+    />
+    <meta
+      name="twitter:description"
+      content="Empresa colombiana especializada en arquitectura backend y desarrollo de software empresarial."
+    />
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -37,10 +58,39 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Round&amp;display=swap"
       rel="stylesheet"
     />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FGEEJ8RSN0"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-FGEEJ8RSN0");
+    </script>
     <!-- Devicon - Iconos de tecnologías -->
-    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" /></noscript>
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    /></noscript>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
       tailwind.config = {
@@ -143,7 +193,11 @@
   <body
     class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 transition-colors duration-300"
   >
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded">Saltar al contenido principal</a>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded"
+      >Saltar al contenido principal</a
+    >
     <nav
       class="fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
     >
@@ -181,508 +235,662 @@
             >
           </div>
           <div class="md:hidden flex items-center">
-            <button id="mobile-menu-btn" class="p-3 text-slate-400 hover:text-primary transition-colors" aria-label="Abrir menú de navegación" aria-expanded="false">
+            <button
+              id="mobile-menu-btn"
+              class="p-3 text-slate-400 hover:text-primary transition-colors"
+              aria-label="Abrir menú de navegación"
+              aria-expanded="false"
+            >
               <span class="material-icons-round" id="menu-icon">menu</span>
             </button>
           </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden pb-6 border-t border-slate-200 dark:border-slate-800">
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden pb-6 border-t border-slate-200 dark:border-slate-800"
+        >
           <div class="flex flex-col space-y-2 pt-4">
-            <a class="text-sm font-medium hover:text-primary transition-colors px-4 py-3" href="#servicios">Servicios</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors px-4 py-3" href="#proyectos">Proyectos</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors px-4 py-3" href="#nosotros">Nosotros</a>
-            <a class="px-5 py-3 bg-primary text-white rounded-md text-sm font-semibold text-center glow-hover transition-all mx-4 mt-2" href="#contacto">Contáctanos</a>
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              href="#servicios"
+              >Servicios</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              href="#proyectos"
+              >Proyectos</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              href="#nosotros"
+              >Nosotros</a
+            >
+            <a
+              class="px-5 py-3 bg-primary text-white rounded-md text-sm font-semibold text-center glow-hover transition-all mx-4 mt-2"
+              href="#contacto"
+              >Contáctanos</a
+            >
           </div>
         </div>
       </div>
     </nav>
     <main id="main-content">
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10"
-      >
+      <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div
-          class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
-        ></div>
-        <div
-          class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/10 rounded-full blur-[100px]"
-        ></div>
-      </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1
-          class="text-5xl md:text-7xl font-bold tracking-tight mb-6 dark:text-white"
+          class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10"
         >
-          Construimos software que resuelve <br class="hidden lg:block" /><span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-kor-blue"
-            >problemas reales</span
-          >
-        </h1>
-        <p
-          class="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
-        >
-          Expertos en arquitectura backend y sistemas empresariales de alta
-          escalabilidad. Transformamos procesos complejos en soluciones
-          digitales eficientes.
-        </p>
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            class="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-md hover:scale-105 transition-transform glow-hover"
-            href="#contacto"
-          >
-            Hablemos de tu proyecto
-          </a>
-          <a
-            class="w-full sm:w-auto px-8 py-4 border border-slate-300 dark:border-slate-700 font-bold rounded-md hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
-            href="#servicios"
-          >
-            Ver soluciones
-          </a>
+          <div
+            class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
+          ></div>
+          <div
+            class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/10 rounded-full blur-[100px]"
+          ></div>
         </div>
-      </div>
-    </header>
-    <section
-      class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800"
-      id="nosotros"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          <div class="space-y-6">
-            <div
-              class="inline-block px-3 py-1 bg-kor-blue/10 text-kor-blue dark:text-blue-400 text-xs font-bold uppercase tracking-widest rounded"
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1
+            class="text-5xl md:text-7xl font-bold tracking-tight mb-6 dark:text-white"
+          >
+            Construimos software que resuelve
+            <br class="hidden lg:block" /><span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-kor-blue"
+              >problemas reales</span
             >
-              Trayectoria
-            </div>
-            <h2 class="text-3xl md:text-4xl font-bold">
-              Arquitectura robusta con sello colombiano
-            </h2>
-            <p class="text-lg text-slate-600 dark:text-slate-400">
-              En KOR Bytes S.A.S., llevamos más de 8 años diseñando e
-              implementando ecosistemas digitales que soportan el crecimiento de
-              empresas líderes. No solo escribimos código; estructuramos los
-              cimientos del mañana.
-            </p>
-            <div class="grid grid-cols-2 gap-8 pt-4">
-              <div>
-                <div class="text-3xl font-bold text-primary">8+</div>
-                <div class="text-sm text-slate-500 uppercase tracking-tighter">
-                  Años de experiencia
+          </h1>
+          <p
+            class="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
+          >
+            Expertos en arquitectura backend y sistemas empresariales de alta
+            escalabilidad. Transformamos procesos complejos en soluciones
+            digitales eficientes.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a
+              class="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-md hover:scale-105 transition-transform glow-hover"
+              href="#contacto"
+            >
+              Hablemos de tu proyecto
+            </a>
+            <a
+              class="w-full sm:w-auto px-8 py-4 border border-slate-300 dark:border-slate-700 font-bold rounded-md hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+              href="#servicios"
+            >
+              Ver soluciones
+            </a>
+          </div>
+        </div>
+      </header>
+      <section
+        class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800"
+        id="nosotros"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+              <div
+                class="inline-block px-3 py-1 bg-kor-blue/10 text-kor-blue dark:text-blue-400 text-xs font-bold uppercase tracking-widest rounded"
+              >
+                Trayectoria
+              </div>
+              <h2 class="text-3xl md:text-4xl font-bold">
+                Arquitectura robusta con sello colombiano
+              </h2>
+              <p class="text-lg text-slate-600 dark:text-slate-400">
+                En KOR Bytes S.A.S., llevamos más de 8 años diseñando e
+                implementando ecosistemas digitales que soportan el crecimiento
+                de empresas líderes. No solo escribimos código; estructuramos
+                los cimientos del mañana.
+              </p>
+              <div class="grid grid-cols-2 gap-8 pt-4">
+                <div>
+                  <div class="text-3xl font-bold text-primary">8+</div>
+                  <div
+                    class="text-sm text-slate-500 uppercase tracking-tighter"
+                  >
+                    Años de experiencia
+                  </div>
+                </div>
+                <div>
+                  <div class="text-3xl font-bold text-kor-blue">50+</div>
+                  <div
+                    class="text-sm text-slate-500 uppercase tracking-tighter"
+                  >
+                    Proyectos exitosos
+                  </div>
                 </div>
               </div>
-              <div>
-                <div class="text-3xl font-bold text-kor-blue">50+</div>
-                <div class="text-sm text-slate-500 uppercase tracking-tighter">
-                  Proyectos exitosos
+            </div>
+            <div class="relative">
+              <div
+                class="aspect-square rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-slate-300 dark:border-slate-700"
+              >
+                <img
+                  alt="Team collaborating on architecture"
+                  class="object-cover w-full h-full opacity-80"
+                  src="images/team-collaboration.webp"
+                  width="800"
+                  height="800"
+                  fetchpriority="high"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8"
+                >
+                  <p class="text-white font-display text-xl">
+                    Ingeniería que escala con tu negocio.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="relative">
+        </div>
+      </section>
+      <!-- Filosofía -->
+      <section class="py-16 relative overflow-hidden">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-primary/5 to-kor-blue/5 -z-10"
+        ></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span class="material-icons-round text-4xl text-primary/50 mb-4"
+            >format_quote</span
+          >
+          <blockquote
+            class="text-2xl md:text-3xl font-display font-bold leading-relaxed mb-6"
+          >
+            "El software no se vende por pantallas bonitas, se justifica por lo
+            que resuelve."
+          </blockquote>
+          <p class="text-slate-500">Filosofía KOR Bytes</p>
+        </div>
+      </section>
+      <section class="py-24" id="servicios">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">
+              Nuestros Servicios
+            </h2>
+            <div class="w-20 h-1 bg-primary mx-auto"></div>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
-              class="aspect-square rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-slate-300 dark:border-slate-700"
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
             >
-              <img
-                alt="Team collaborating on architecture"
-                class="object-cover w-full h-full opacity-80"
-                src="images/team-collaboration.webp"
-                width="800"
-                height="800"
-                fetchpriority="high"
-              />
               <div
-                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8"
+                class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
               >
-                <p class="text-white font-display text-xl">
-                  Ingeniería que escala con tu negocio.
+                <span class="material-icons-round text-primary text-3xl"
+                  >dns</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Backend Development</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Desarrollo de APIs robustas, microservicios y bases de datos
+                optimizadas para manejar altos volúmenes de tráfico.
+              </p>
+            </div>
+            <div
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+            >
+              <div
+                class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-icons-round text-kor-blue text-3xl"
+                  >terminal</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Plataformas Web</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Interfaces modernas, rápidas y seguras construidas con las
+                últimas tecnologías de frontend integradas a tu lógica de
+                negocio.
+              </p>
+            </div>
+            <div
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+            >
+              <div
+                class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-icons-round text-primary text-3xl"
+                  >smartphone</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Mobile Apps</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Soluciones móviles nativas e híbridas diseñadas para ofrecer la
+                mejor experiencia de usuario en cualquier dispositivo.
+              </p>
+            </div>
+            <div
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+            >
+              <div
+                class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-icons-round text-kor-blue text-3xl"
+                  >hub</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Integraciones</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Conectamos tus sistemas existentes con servicios de terceros
+                (ERP, CRM, Pasarelas de pago) de forma transparente.
+              </p>
+            </div>
+            <div
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+            >
+              <div
+                class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-icons-round text-primary text-3xl"
+                  >cloud</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Infraestructura</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Configuración y gestión de entornos cloud (AWS/GCP/Azure) con
+                enfoque en DevOps y seguridad.
+              </p>
+            </div>
+            <div
+              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+            >
+              <div
+                class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+              >
+                <span class="material-icons-round text-kor-blue text-3xl"
+                  >psychology</span
+                >
+              </div>
+              <h3 class="text-xl font-bold mb-3">Consultoría Técnica</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Asesoramos en la toma de decisiones tecnológicas críticas para
+                asegurar el éxito a largo plazo de tus productos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Tecnologías -->
+      <section class="py-20 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+              Stack Tecnológico
+            </h2>
+            <p class="text-slate-400">
+              Herramientas que dominamos para construir soluciones robustas
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6"
+          >
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-laravel-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Laravel</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-nestjs-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">NestJS</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-react-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">React</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-nextjs-plain text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Next.js</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-flutter-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Flutter</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-nodejs-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Node.js</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-postgresql-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">PostgreSQL</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-mysql-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">MySQL</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-docker-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Docker</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-amazonwebservices-plain-wordmark colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">AWS</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-googlecloud-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">GCP</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+            >
+              <i
+                class="devicon-git-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm text-slate-400">Git</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-24 bg-slate-900/50" id="proyectos">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Casos de Éxito</h2>
+            <p class="text-slate-400 max-w-lg">
+              Sistemas complejos que están operando actualmente en el mercado.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- ArchiveMaster -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-primary mb-2"
+                    >folder_open</span
+                  >
+                  <p class="text-slate-400 text-sm">Gestión Documental</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  ArchiveMaster
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Gestión Documental y PQRS Enterprise
+                </p>
+              </div>
+            </div>
+            <!-- SIGMA -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-kor-blue mb-2"
+                    >analytics</span
+                  >
+                  <p class="text-slate-400 text-sm">Análisis Electoral</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  SIGMA
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Análisis y Gestión de Datos Electorales
+                </p>
+              </div>
+            </div>
+            <!-- VolleyPass -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-primary mb-2"
+                    >sports_volleyball</span
+                  >
+                  <p class="text-slate-400 text-sm">Plataforma Deportiva</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  VolleyPass
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Ecosistema Digital para Ligas de Voleibol
+                </p>
+              </div>
+            </div>
+            <!-- Torcoroma PQRS -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-kor-blue mb-2"
+                    >directions_bus</span
+                  >
+                  <p class="text-slate-400 text-sm">Transporte Público</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  Torcoroma PQRS
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Sistema PQRS para Empresas de Transporte
+                </p>
+              </div>
+            </div>
+            <!-- NEXUS OMS -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-primary mb-2"
+                    >sync_alt</span
+                  >
+                  <p class="text-slate-400 text-sm">E-commerce & Inventario</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  NEXUS OMS
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Middleware de Integración VTEX - ICG
+                </p>
+              </div>
+            </div>
+            <!-- DeadTree Studio -->
+            <div class="group">
+              <div
+                class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
+              >
+                <div class="text-center p-6">
+                  <span class="material-icons-round text-5xl text-kor-blue mb-2"
+                    >palette</span
+                  >
+                  <p class="text-slate-400 text-sm">Producción Creativa</p>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-xl font-bold group-hover:text-primary transition-colors"
+                >
+                  DeadTree Studio
+                </h3>
+                <p class="text-sm text-slate-500">
+                  Branding Digital y Producción Audiovisual
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- Filosofía -->
-    <section class="py-16 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-kor-blue/5 -z-10"></div>
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="material-icons-round text-4xl text-primary/50 mb-4">format_quote</span>
-        <blockquote class="text-2xl md:text-3xl font-display font-bold leading-relaxed mb-6">
-          "El software no se vende por pantallas bonitas, se justifica por lo que resuelve."
-        </blockquote>
-        <p class="text-slate-500">Filosofía KOR Bytes</p>
-      </div>
-    </section>
-    <section class="py-24" id="servicios">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            Nuestros Servicios
+      </section>
+      <section class="py-24 relative overflow-hidden" id="contacto">
+        <div class="absolute inset-0 bg-primary/5 -z-10"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            ¿Listo para llevar tu infraestructura al siguiente nivel?
           </h2>
-          <div class="w-20 h-1 bg-primary mx-auto"></div>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+          <p class="text-xl text-slate-400 mb-12">
+            Evaluamos los requerimientos de tu empresa y diseñamos una solución
+            tecnológica a medida. Sin compromisos iniciales.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              class="px-10 py-5 bg-primary text-white font-bold rounded-md text-lg glow-hover transition-all"
+              href="mailto:gerencia@kor-bytes.com"
             >
-              <span class="material-icons-round text-primary text-3xl"
-                >dns</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Backend Development</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Desarrollo de APIs robustas, microservicios y bases de datos
-              optimizadas para manejar altos volúmenes de tráfico.
-            </p>
+              Iniciar Consultoría
+            </a>
           </div>
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <span class="material-icons-round text-kor-blue text-3xl"
-                >terminal</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Plataformas Web</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Interfaces modernas, rápidas y seguras construidas con las últimas
-              tecnologías de frontend integradas a tu lógica de negocio.
-            </p>
-          </div>
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <span class="material-icons-round text-primary text-3xl"
-                >smartphone</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Mobile Apps</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Soluciones móviles nativas e híbridas diseñadas para ofrecer la
-              mejor experiencia de usuario en cualquier dispositivo.
-            </p>
-          </div>
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <span class="material-icons-round text-kor-blue text-3xl"
-                >hub</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Integraciones</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Conectamos tus sistemas existentes con servicios de terceros (ERP,
-              CRM, Pasarelas de pago) de forma transparente.
-            </p>
-          </div>
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <span class="material-icons-round text-primary text-3xl"
-                >cloud</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Infraestructura</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Configuración y gestión de entornos cloud (AWS/GCP/Azure) con
-              enfoque en DevOps y seguridad.
-            </p>
-          </div>
-          <div
-            class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
-          >
-            <div
-              class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-            >
-              <span class="material-icons-round text-kor-blue text-3xl"
-                >psychology</span
-              >
-            </div>
-            <h3 class="text-xl font-bold mb-3">Consultoría Técnica</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">
-              Asesoramos en la toma de decisiones tecnológicas críticas para
-              asegurar el éxito a largo plazo de tus productos.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Tecnologías -->
-    <section class="py-20 border-y border-slate-200 dark:border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">Stack Tecnológico</h2>
-          <p class="text-slate-400">Herramientas que dominamos para construir soluciones robustas</p>
-        </div>
-        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-laravel-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Laravel</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-nestjs-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">NestJS</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-react-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">React</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-nextjs-plain text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Next.js</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-flutter-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Flutter</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-nodejs-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Node.js</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-postgresql-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">PostgreSQL</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-mysql-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">MySQL</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-docker-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Docker</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-amazonwebservices-plain-wordmark colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">AWS</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-googlecloud-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">GCP</span>
-          </div>
-          <div class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group">
-            <i class="devicon-git-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"></i>
-            <span class="text-sm text-slate-400">Git</span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-24 bg-slate-900/50" id="proyectos">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">Casos de Éxito</h2>
-          <p class="text-slate-400 max-w-lg">
-            Sistemas complejos que están operando actualmente en el mercado.
+          <p class="mt-8 text-slate-500 text-sm">
+            Respuesta garantizada en menos de 24 horas hábiles.
           </p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- ArchiveMaster -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-primary mb-2">folder_open</span>
-                <p class="text-slate-400 text-sm">Gestión Documental</p>
-              </div>
+      </section>
+      <footer class="py-12 border-t border-slate-800 bg-background-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+              <img
+                alt="KOR Bytes S.A.S. Footer Logo"
+                class="h-12 w-auto mb-6 brightness-200"
+                src="images/logo.webp"
+                width="302"
+                height="84"
+                loading="lazy"
+              />
+              <p class="text-slate-500 max-w-xs">
+                KOR Bytes S.A.S. - Ingeniería de software de alta calidad desde
+                Colombia para el mundo.
+              </p>
             </div>
             <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">ArchiveMaster</h3>
-              <p class="text-sm text-slate-500">Gestión Documental y PQRS Enterprise</p>
-            </div>
-          </div>
-          <!-- SIGMA -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-kor-blue mb-2">analytics</span>
-                <p class="text-slate-400 text-sm">Análisis Electoral</p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">SIGMA</h3>
-              <p class="text-sm text-slate-500">Análisis y Gestión de Datos Electorales</p>
-            </div>
-          </div>
-          <!-- VolleyPass -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-primary mb-2">sports_volleyball</span>
-                <p class="text-slate-400 text-sm">Plataforma Deportiva</p>
-              </div>
+              <h3
+                class="font-bold mb-6 uppercase tracking-wider text-sm text-slate-300"
+              >
+                Compañía
+              </h3>
+              <ul class="space-y-4 text-slate-500 text-sm">
+                <li><a class="hover:text-primary" href="#">Inicio</a></li>
+                <li>
+                  <a class="hover:text-primary" href="#servicios">Servicios</a>
+                </li>
+                <li>
+                  <a class="hover:text-primary" href="#proyectos">Proyectos</a>
+                </li>
+                <li>
+                  <a class="hover:text-primary" href="#nosotros"
+                    >Sobre nosotros</a
+                  >
+                </li>
+              </ul>
             </div>
             <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">VolleyPass</h3>
-              <p class="text-sm text-slate-500">Ecosistema Digital para Ligas de Voleibol</p>
+              <h3
+                class="font-bold mb-6 uppercase tracking-wider text-sm text-slate-300"
+              >
+                Contacto
+              </h3>
+              <ul class="space-y-4 text-slate-500 text-sm">
+                <li class="flex items-center gap-2">
+                  <span class="material-icons-round text-xs">email</span>
+                  gerencia@kor-bytes.com
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-icons-round text-xs">location_on</span>
+                  Medellín, Colombia
+                </li>
+              </ul>
             </div>
           </div>
-          <!-- Torcoroma PQRS -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-kor-blue mb-2">directions_bus</span>
-                <p class="text-slate-400 text-sm">Transporte Público</p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">Torcoroma PQRS</h3>
-              <p class="text-sm text-slate-500">Sistema PQRS para Empresas de Transporte</p>
-            </div>
-          </div>
-          <!-- NEXUS OMS -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-primary mb-2">sync_alt</span>
-                <p class="text-slate-400 text-sm">E-commerce & Inventario</p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">NEXUS OMS</h3>
-              <p class="text-sm text-slate-500">Middleware de Integración VTEX - ICG</p>
-            </div>
-          </div>
-          <!-- DeadTree Studio -->
-          <div class="group">
-            <div class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center">
-              <div class="text-center p-6">
-                <span class="material-icons-round text-5xl text-kor-blue mb-2">palette</span>
-                <p class="text-slate-400 text-sm">Producción Creativa</p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold group-hover:text-primary transition-colors">DeadTree Studio</h3>
-              <p class="text-sm text-slate-500">Branding Digital y Producción Audiovisual</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-24 relative overflow-hidden" id="contacto">
-      <div class="absolute inset-0 bg-primary/5 -z-10"></div>
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-8">
-          ¿Listo para llevar tu infraestructura al siguiente nivel?
-        </h2>
-        <p class="text-xl text-slate-400 mb-12">
-          Evaluamos los requerimientos de tu empresa y diseñamos una solución
-          tecnológica a medida. Sin compromisos iniciales.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            class="px-10 py-5 bg-primary text-white font-bold rounded-md text-lg glow-hover transition-all"
-            href="mailto:gerencia@kor-bytes.com"
+          <div
+            class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4"
           >
-            Iniciar Consultoría
-          </a>
-        </div>
-        <p class="mt-8 text-slate-500 text-sm">
-          Respuesta garantizada en menos de 24 horas hábiles.
-        </p>
-      </div>
-    </section>
-    <footer class="py-12 border-t border-slate-800 bg-background-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-4 gap-12 mb-12">
-          <div class="col-span-1 md:col-span-2">
-            <img
-              alt="KOR Bytes S.A.S. Footer Logo"
-              class="h-12 w-auto mb-6 brightness-200"
-              src="images/logo.webp"
-              width="302"
-              height="84"
-              loading="lazy"
-            />
-            <p class="text-slate-500 max-w-xs">
-              KOR Bytes S.A.S. - Ingeniería de software de alta calidad desde
-              Colombia para el mundo.
+            <p class="text-slate-600 text-xs">
+              © 2026 KOR Bytes S.A.S. Todos los derechos reservados.
             </p>
-          </div>
-          <div>
-            <h3
-              class="font-bold mb-6 uppercase tracking-wider text-sm text-slate-300"
-            >
-              Compañía
-            </h3>
-            <ul class="space-y-4 text-slate-500 text-sm">
-              <li><a class="hover:text-primary" href="#">Inicio</a></li>
-              <li>
-                <a class="hover:text-primary" href="#servicios">Servicios</a>
-              </li>
-              <li>
-                <a class="hover:text-primary" href="#proyectos">Proyectos</a>
-              </li>
-              <li>
-                <a class="hover:text-primary" href="#nosotros"
-                  >Sobre nosotros</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3
-              class="font-bold mb-6 uppercase tracking-wider text-sm text-slate-300"
-            >
-              Contacto
-            </h3>
-            <ul class="space-y-4 text-slate-500 text-sm">
-              <li class="flex items-center gap-2">
-                <span class="material-icons-round text-xs">email</span>
-                gerencia@kor-bytes.com
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="material-icons-round text-xs">location_on</span>
-                Medellín, Colombia
-              </li>
-            </ul>
+            <div class="flex items-center gap-2 text-slate-600 text-xs">
+              <span class="material-icons-round text-sm">location_on</span>
+              <span>Medellín, Colombia</span>
+            </div>
           </div>
         </div>
-        <div
-          class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4"
-        >
-          <p class="text-slate-600 text-xs">
-            © 2026 KOR Bytes S.A.S. Todos los derechos reservados.
-          </p>
-          <div class="flex items-center gap-2 text-slate-600 text-xs">
-            <span class="material-icons-round text-sm">location_on</span>
-            <span>Medellín, Colombia</span>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
     </main>
     <script>
       // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.getElementById('menu-icon');
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
 
-      mobileMenuBtn.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.textContent = isHidden ? 'close' : 'menu';
-        mobileMenuBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+      mobileMenuBtn.addEventListener("click", () => {
+        const isHidden = mobileMenu.classList.contains("hidden");
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.textContent = isHidden ? "close" : "menu";
+        mobileMenuBtn.setAttribute(
+          "aria-expanded",
+          isHidden ? "true" : "false"
+        );
       });
 
       // Close menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          menuIcon.textContent = 'menu';
-          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+          menuIcon.textContent = "menu";
+          mobileMenuBtn.setAttribute("aria-expanded", "false");
         });
       });
     </script>
