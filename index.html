@@ -32,14 +32,19 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
+      media="print" onload="this.media='all'"
     />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet" /></noscript>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
       rel="stylesheet"
+      media="print" onload="this.media='all'"
     />
+    <noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" /></noscript>
     <!-- Devicon - Iconos de tecnologías -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" /></noscript>
+    <script defer src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -110,6 +115,8 @@
               alt="KOR Bytes S.A.S. Logo"
               class="h-10 w-auto"
               src="images/logo.webp"
+              width="302"
+              height="84"
             />
           </div>
           <div class="hidden md:flex items-center space-x-8">
@@ -239,7 +246,10 @@
               <img
                 alt="Team collaborating on architecture"
                 class="object-cover w-full h-full opacity-80"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYRapuEKbeiAzEARCL-TET18ixWVYyf2ZRts3IVkfGGDJTX4n1TU2NF767ASHltyJxCdmzKLKucfx0G8dN3bZ2nixTOsm-jLMUer2vbxg9og4Kp9rR3J1uOGtAnacUFFAuigAnoB7QV5sz_8eKAhqTPCAeCfQVdfsStaiqbMIaZBs6XXCaCBMgrGBxOEm1nU5c1CQcXPtKgm_MqLeOnmOYxWIwpxy2OLzdVBIC4pTqlZHHZyHi25tKbgZCRuZILKjWWzbE7KwI27g"
+                src="images/team-collaboration.webp"
+                width="800"
+                height="800"
+                loading="lazy"
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8"
@@ -552,6 +562,9 @@
               alt="KOR Bytes S.A.S. Footer Logo"
               class="h-12 w-auto mb-6 brightness-200"
               src="images/logo.webp"
+              width="302"
+              height="84"
+              loading="lazy"
             />
             <p class="text-slate-500 max-w-xs">
               KOR Bytes S.A.S. - Ingeniería de software de alta calidad desde
