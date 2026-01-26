@@ -52,6 +52,8 @@
     <meta name="theme-color" content="#A0006D" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect" />
+    <link href="https://www.googletagmanager.com" rel="preconnect" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
@@ -170,9 +172,12 @@
             <img
               alt="KOR Bytes S.A.S. Logo"
               class="h-10 w-auto"
-              src="images/logo.webp"
+              src="images/logo-252x70.webp"
+              srcset="images/logo-252x70.webp 252w, images/logo.webp 604w"
+              sizes="(max-width: 768px) 180px, 252px"
               width="302"
               height="84"
+              decoding="async"
             />
           </div>
           <div class="hidden md:flex items-center space-x-8">
@@ -333,10 +338,13 @@
                   id="parallax-about"
                   alt="Team collaborating on architecture"
                   class="object-cover w-full h-full opacity-80"
-                  src="images/team-collaboration.webp"
+                  src="images/team-collaboration-662.webp"
+                  srcset="images/team-collaboration-662.webp 662w, images/team-collaboration.webp 800w"
+                  sizes="(max-width: 1024px) 90vw, 662px"
                   width="800"
                   height="800"
-                  fetchpriority="high"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8"

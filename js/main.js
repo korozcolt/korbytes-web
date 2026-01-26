@@ -21,8 +21,8 @@ if (mobileMenuBtn && mobileMenu && menuIcon) {
   });
 }
 
-// Parallax effect initialization
-document.addEventListener("DOMContentLoaded", () => {
+// Parallax effect initialization (defer to idle to reduce LCP impact)
+const initParallax = () => {
   const parallaxImage = document.getElementById("parallax-about");
   if (parallaxImage && typeof simpleParallax !== "undefined") {
     new simpleParallax(parallaxImage, {
@@ -31,5 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
       orientation: "up",
       transition: "cubic-bezier(0,0,0,1)",
     });
+  }
+};
+
+window.addEventListener("load", () => {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(initParallax, { timeout: 2000 });
+  } else {
+    setTimeout(initParallax, 800);
   }
 });
