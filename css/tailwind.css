@@ -21,7 +21,7 @@ h4,
 
 .gradient-border {
   position: relative;
-  background: #161616;
+  background: #0A0B14;
   border-radius: 0.5rem;
 }
 
@@ -32,11 +32,55 @@ h4,
   left: -1px;
   right: -1px;
   bottom: -1px;
-  background: linear-gradient(45deg, #a0006d, #2e3696);
+  background: linear-gradient(45deg, #a0006d, #2e3696, #a0006d);
+  background-size: 200% 200%;
+  animation: gradientFlow 4s ease infinite;
   z-index: -1;
   border-radius: 0.6rem;
-  opacity: 0.3;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
 }
+
+.gradient-border:hover::before {
+  opacity: 0.8;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-40px) scale(1.05); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 9s ease-in-out infinite alternate-reverse;
+}
+
+/* Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+.reveal-delay-400 { transition-delay: 400ms; }
 
 .sr-only {
   position: absolute;

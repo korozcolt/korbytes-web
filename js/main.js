@@ -48,6 +48,13 @@ window.addEventListener("load", () => {
   const DEFAULT_TEXT =
     "Hola KOR Bytes, quiero información sobre desarrollo de software a medida e integraciones.";
 
+  const hasExistingFab = () =>
+    Boolean(
+      document.querySelector(
+        '[data-whatsapp-fab], a.kb-wa-fab, a[aria-label="Abrir WhatsApp"][href*="wa.me/"]',
+      ),
+    );
+
   const buildUrl = () => {
     const text = encodeURIComponent(DEFAULT_TEXT);
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
@@ -86,7 +93,7 @@ window.addEventListener("load", () => {
 
   const mount = () => {
     // Avoid duplicates
-    if (document.querySelector(".kb-wa-fab")) return;
+    if (hasExistingFab()) return;
 
     ensureStyles();
 
@@ -114,3 +121,36 @@ window.addEventListener("load", () => {
     mount();
   }
 })();
+
+// Scroll Reveal Animations using IntersectionObserver
+const initRevealAnimations = () => {
+  const reveals = document.querySelectorAll('.reveal');
+  
+  const revealOptions = {
+    root: null,
+    rootMargin: '0px 0px -100px 0px',
+    threshold: 0.1
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      // Add 'active' class when element is in view
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Optional: stop observing once revealed
+        // observer.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  reveals.forEach(reveal => {
+    revealObserver.observe(reveal);
+  });
+};
+
+// Initialize animations when DOM is fully loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initRevealAnimations);
+} else {
+  initRevealAnimations();
+}

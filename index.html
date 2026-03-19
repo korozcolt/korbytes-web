@@ -4,45 +4,46 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
-      KOR Bytes S.A.S. | Desarrollo de Software a Medida en Sincelejo y Sucre
+      KOR Bytes S.A.S. | Empresa de Software en Sincelejo | Desarrollo a Medida y Web B2B
     </title>
     <meta
       name="description"
-      content="Desarrollo de software a medida, integraciones ERP/CRM, automatización de procesos y páginas web para empresas en Colombia y LATAM. Priorizamos Sincelejo y Sucre con consultoría tecnológica, apps móviles y plataformas web escalables."
-    />
-    <meta
-      name="keywords"
-      content="desarrollo de software a medida, empresa de desarrollo de software, desarrollo de software empresarial, software a medida para empresas, desarrollo de sistemas de información, fábrica de software, consultoría tecnológica, desarrollo de aplicaciones web, desarrollo de aplicaciones móviles, automatización de procesos empresariales, integración de sistemas, integración ERP, integración CRM, integración de pasarelas de pago, desarrollo de API, desarrollo de microservicios, arquitectura de software, modernización de sistemas legacy, migración a la nube, servicios DevOps, outsourcing de desarrollo de software, mantenimiento de software, desarrollo de software en Colombia, desarrollo de software en LATAM, software para empresas en Colombia, desarrollo web en Colombia, páginas web en Colombia, paginas web en Colombia, desarrollo de software en Sincelejo, software a medida en Sincelejo, desarrollo web Sincelejo, páginas web Sincelejo, paginas web Sincelejo, desarrollo de software en Sucre, desarrollo web en Sucre, páginas web en Sucre, paginas web en Sucre, empresa de software en Sincelejo, empresa de software en Sucre"
+      content="Empresa de software a medida en Sincelejo, Sucre. Integraciones ERP/CRM y desarrollo web comercial para empresas en Colombia y LATAM. Hacemos plataformas enfocadas en ventas y eficiencia."
     />
     <meta name="author" content="KOR Bytes S.A.S." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://kor-bytes.com" />
+    <link rel="canonical" href="https://kor-bytes.com/" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kor-bytes.com" />
+    <meta property="og:url" content="https://kor-bytes.com/" />
     <meta
       property="og:title"
-      content="KOR Bytes S.A.S. | Desarrollo de Software a Medida"
+      content="KOR Bytes S.A.S. | Empresa de Software en Sincelejo"
     />
     <meta
       property="og:description"
-      content="Desarrollo de software a medida, integraciones ERP/CRM y automatización de procesos para empresas en Sincelejo y Sucre, Colombia."
+      content="Partner tecnológico B2B para software a medida, integraciones ERP/CRM y desarrollo web en Sincelejo, Sucre y toda LATAM."
     />
     <meta
       property="og:image"
       content="https://kor-bytes.com/images/logo.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="KOR Bytes, software a medida e integraciones para empresas"
     />
     <meta property="og:locale" content="es_CO" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="KOR Bytes S.A.S. | Desarrollo de Software a Medida"
+      content="KOR Bytes S.A.S. | Empresa de Software en Sincelejo"
     />
     <meta
       name="twitter:description"
-      content="Desarrollo de software a medida, integraciones y automatización para empresas en Sincelejo y Sucre."
+      content="Desarrollo de software a medida, integraciones ERP/CRM y web comercial en Sincelejo orientado a operación y crecimiento comercial."
     />
+    <meta name="twitter:image" content="https://kor-bytes.com/images/logo.webp" />
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -87,6 +88,7 @@
         href="https://fonts.googleapis.com/icon?family=Material+Icons+Round&amp;display=swap"
     /></noscript>
     <link rel="stylesheet" href="css/tailwind.generated.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -129,58 +131,147 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "KOR Bytes S.A.S.",
-        "url": "https://kor-bytes.com",
-        "logo": "https://kor-bytes.com/images/logo.webp",
-        "description": "Empresa de desarrollo de software en Colombia especializada en arquitectura backend, aplicaciones empresariales y soluciones a medida para Sincelejo y Sucre.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Sincelejo",
-          "addressRegion": "Sucre",
-          "addressCountry": "CO"
-        },
-        "areaServed": [
+        "@graph": [
           {
-            "@type": "Country",
-            "name": "Colombia"
+            "@type": "Organization",
+            "@id": "https://kor-bytes.com/#organization",
+            "name": "KOR Bytes S.A.S.",
+            "url": "https://kor-bytes.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://kor-bytes.com/images/logo.webp"
+            },
+            "email": "gerencia@kor-bytes.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Sincelejo",
+              "addressRegion": "Sucre",
+              "addressCountry": "CO"
+            },
+            "areaServed": [
+              {
+                "@type": "Country",
+                "name": "Colombia"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "LATAM"
+              },
+              {
+                "@type": "City",
+                "name": "Sincelejo",
+                "addressRegion": "Sucre",
+                "addressCountry": "CO"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "Sucre",
+                "addressCountry": "CO"
+              }
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "email": "gerencia@kor-bytes.com",
+                "availableLanguage": [
+                  "es"
+                ]
+              }
+            ],
+            "knowsAbout": [
+              "Desarrollo de software a medida",
+              "Integraciones ERP y CRM",
+              "Automatización de procesos",
+              "Desarrollo web B2B",
+              "Arquitectura backend",
+              "Software Sincelejo",
+              "Desarrollo de software a medida en Sucre"
+            ]
           },
           {
-            "@type": "AdministrativeArea",
-            "name": "LATAM"
+            "@type": "WebSite",
+            "@id": "https://kor-bytes.com/#website",
+            "url": "https://kor-bytes.com/",
+            "name": "KOR Bytes S.A.S.",
+            "inLanguage": "es-CO",
+            "publisher": {
+              "@id": "https://kor-bytes.com/#organization"
+            }
           },
           {
-            "@type": "City",
-            "name": "Sincelejo",
-            "addressRegion": "Sucre",
-            "addressCountry": "CO"
+            "@type": "WebPage",
+            "@id": "https://kor-bytes.com/#webpage",
+            "url": "https://kor-bytes.com/",
+            "name": "KOR Bytes S.A.S. | Software a medida, integraciones ERP/CRM y desarrollo web B2B",
+            "description": "Software a medida, integraciones ERP/CRM y desarrollo web comercial para empresas en Colombia y LATAM.",
+            "isPartOf": {
+              "@id": "https://kor-bytes.com/#website"
+            },
+            "about": {
+              "@id": "https://kor-bytes.com/#organization"
+            }
           },
           {
-            "@type": "AdministrativeArea",
-            "name": "Sucre",
-            "addressCountry": "CO"
+            "@type": "ProfessionalService",
+            "@id": "https://kor-bytes.com/#professional-service",
+            "name": "KOR Bytes S.A.S.",
+            "provider": {
+              "@id": "https://kor-bytes.com/#organization"
+            },
+            "url": "https://kor-bytes.com/",
+            "description": "Software a medida, integraciones ERP/CRM y desarrollo web comercial para operaciones B2B.",
+            "audience": {
+              "@type": "BusinessAudience",
+              "audienceType": "Empresas B2B y equipos operativos en crecimiento"
+            },
+            "areaServed": [
+              {
+                "@type": "Country",
+                "name": "Colombia"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "LATAM"
+              }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios de KOR Bytes",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Desarrollo de software a medida",
+                    "url": "https://kor-bytes.com/servicios/desarrollo-software-a-medida.html"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Integraciones ERP/CRM",
+                    "url": "https://kor-bytes.com/servicios/integraciones-erp-crm.html"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Desarrollo web para empresas",
+                    "url": "https://kor-bytes.com/servicios/desarrollo-web.html"
+                  }
+                }
+              ]
+            }
           }
-        ],
-        "serviceType": [
-          "Desarrollo de software a medida",
-          "Desarrollo de aplicaciones web",
-          "Desarrollo de aplicaciones móviles",
-          "Integración de sistemas",
-          "Automatización de procesos empresariales",
-          "Consultoría tecnológica",
-          "Servicios DevOps",
-          "Modernización de sistemas"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "gerencia@kor-bytes.com",
-          "contactType": "sales"
-        }
+        ]
       }
     </script>
   </head>
   <body
-    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 transition-colors duration-300"
+    class="kb-site bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 transition-colors duration-300"
   >
     <a
       href="#main-content"
@@ -188,7 +279,7 @@
       >Saltar al contenido principal</a
     >
     <nav
-      class="fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
+      class="kb-nav fixed w-full z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
@@ -206,32 +297,32 @@
           </div>
           <div class="hidden md:flex items-center space-x-8">
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-3 py-2"
+              class="kb-nav-link text-sm font-medium hover:text-primary transition-colors px-3 py-2"
               href="/"
               >Inicio</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-3 py-2"
+              class="kb-nav-link text-sm font-medium hover:text-primary transition-colors px-3 py-2"
               href="/servicios/"
               >Servicios</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-3 py-2"
+              class="kb-nav-link text-sm font-medium hover:text-primary transition-colors px-3 py-2"
               href="/casos/"
               >Casos</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-3 py-2"
+              class="kb-nav-link text-sm font-medium hover:text-primary transition-colors px-3 py-2"
               href="/ubicaciones/"
               >Cobertura</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-3 py-2"
+              class="kb-nav-link text-sm font-medium hover:text-primary transition-colors px-3 py-2"
               href="/#contacto"
               >Contacto</a
             >
             <a
-              class="px-5 py-2.5 bg-primary text-white rounded-md text-sm font-semibold glow-hover transition-all"
+              class="kb-nav-cta px-5 py-2.5 bg-primary text-white rounded-md text-sm font-semibold glow-hover transition-all"
               href="https://wa.me/573043978157?text=Hola%2C%20quiero%20una%20consultor%C3%ADa%20de%20software."
               >Hablar por WhatsApp</a
             >
@@ -250,36 +341,36 @@
         <!-- Mobile Menu -->
         <div
           id="mobile-menu"
-          class="hidden md:hidden pb-6 border-t border-slate-200 dark:border-slate-800"
+          class="kb-mobile-menu hidden md:hidden pb-6 border-t border-slate-200 dark:border-slate-800"
         >
           <div class="flex flex-col space-y-2 pt-4">
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              class="kb-mobile-link text-sm font-medium hover:text-primary transition-colors px-4 py-3"
               href="/"
               >Inicio</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              class="kb-mobile-link text-sm font-medium hover:text-primary transition-colors px-4 py-3"
               href="/servicios/"
               >Servicios</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              class="kb-mobile-link text-sm font-medium hover:text-primary transition-colors px-4 py-3"
               href="/casos/"
               >Casos</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              class="kb-mobile-link text-sm font-medium hover:text-primary transition-colors px-4 py-3"
               href="/ubicaciones/"
               >Cobertura</a
             >
             <a
-              class="text-sm font-medium hover:text-primary transition-colors px-4 py-3"
+              class="kb-mobile-link text-sm font-medium hover:text-primary transition-colors px-4 py-3"
               href="/#contacto"
               >Contacto</a
             >
             <a
-              class="px-5 py-3 bg-primary text-white rounded-md text-sm font-semibold text-center glow-hover transition-all mx-4 mt-2"
+              class="kb-nav-cta mx-4 mt-2 px-5 py-3 bg-primary text-white rounded-md text-sm font-semibold text-center glow-hover transition-all"
               href="https://wa.me/573043978157?text=Hola%2C%20quiero%20una%20consultor%C3%ADa%20de%20software."
               >Hablar por WhatsApp</a
             >
@@ -288,95 +379,230 @@
       </div>
     </nav>
     <main id="main-content">
-      <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <header class="kb-hero relative overflow-hidden pt-32 pb-20 lg:pt-44 lg:pb-28">
         <div
           class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10"
         >
           <div
-            class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
+            class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px] animate-float"
           ></div>
           <div
-            class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/10 rounded-full blur-[100px]"
+            class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/15 rounded-full blur-[100px] animate-float-delayed"
           ></div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1
-            class="text-5xl md:text-7xl font-bold tracking-tight mb-6 dark:text-white"
-          >
-            Construimos software que resuelve
-            <br class="hidden lg:block" /><span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-kor-blue"
-              >problemas reales</span
-            >
-          </h1>
-          <p
-            class="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
-          >
-            Expertos en arquitectura backend y sistemas empresariales de alta
-            escalabilidad. Transformamos procesos complejos en soluciones
-            digitales eficientes.
-          </p>
-          <div
-            class="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a
-              class="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-md hover:scale-105 transition-transform glow-hover"
-              href="#contacto"
-            >
-              Hablemos de tu proyecto
-            </a>
-            <a
-              class="w-full sm:w-auto px-8 py-4 border border-slate-300 dark:border-slate-700 font-bold rounded-md hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
-              href="#servicios"
-            >
-              Ver soluciones
-            </a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="kb-hero-grid grid gap-12 xl:grid-cols-[minmax(0,1.08fr)_26rem]">
+            <div class="text-left">
+              <div
+                class="kb-eyebrow inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-primary"
+              >
+                Partner tecnologico B2B
+                <span class="h-1.5 w-1.5 rounded-full bg-kor-blue"></span>
+                Colombia y LATAM
+              </div>
+              <h1
+                class="mt-6 text-5xl font-bold tracking-tight md:text-7xl dark:text-white"
+              >
+                Empresa de software en Sincelejo: integraciones y web que
+                <br class="hidden lg:block" />
+                <span
+                  class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-kor-blue"
+                  >mejoran la operación y aceleran ventas</span
+                >
+              </h1>
+              <p
+                class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 md:text-xl"
+              >
+                Diseñamos plataformas internas, integraciones ERP/CRM y
+                experiencias web B2B con una mezcla clara de arquitectura,
+                control operativo y composicion de marca para empresas que no
+                pueden permitirse verse genericas.
+              </p>
+              <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+                <a
+                  class="kb-button-primary w-full rounded-md bg-primary px-8 py-4 text-center font-bold text-white transition-transform hover:scale-[1.02] sm:w-auto"
+                  href="#contacto"
+                >
+                  Agendar diagnostico ejecutivo
+                </a>
+                <a
+                  class="kb-button-secondary w-full rounded-md border px-8 py-4 text-center font-bold sm:w-auto"
+                  href="/servicios/"
+                >
+                  Explorar servicios
+                </a>
+              </div>
+              <div class="mt-8 flex flex-wrap gap-3 text-sm">
+                <a
+                  class="kb-chip rounded-full border px-4 py-2 font-semibold"
+                  href="/servicios/desarrollo-software-a-medida.html"
+                  >Software a medida</a
+                >
+                <a
+                  class="kb-chip rounded-full border px-4 py-2 font-semibold"
+                  href="/servicios/integraciones-erp-crm.html"
+                  >Integraciones ERP/CRM</a
+                >
+                <a
+                  class="kb-chip rounded-full border px-4 py-2 font-semibold"
+                  href="/servicios/desarrollo-web.html"
+                  >Desarrollo web comercial</a
+                >
+              </div>
+              <div class="mt-12 grid gap-4 text-left sm:grid-cols-2 xl:grid-cols-4">
+                <div class="kb-stat-card rounded-2xl p-5">
+                  <p class="text-3xl font-bold text-primary">8+</p>
+                  <p class="mt-2 text-sm text-slate-300">
+                    años construyendo sistemas para operación, trazabilidad y
+                    crecimiento comercial.
+                  </p>
+                </div>
+                <div class="kb-stat-card rounded-2xl p-5">
+                  <p class="text-3xl font-bold text-kor-blue">50+</p>
+                  <p class="mt-2 text-sm text-slate-300">
+                    proyectos entre plataformas internas, integraciones y
+                    canales digitales.
+                  </p>
+                </div>
+                <div class="kb-stat-card rounded-2xl p-5">
+                  <p class="text-3xl font-bold text-primary">&lt;24h</p>
+                  <p class="mt-2 text-sm text-slate-300">
+                    para aterrizar el siguiente paso comercial o tecnico con
+                    contexto.
+                  </p>
+                </div>
+                <div class="kb-stat-card rounded-2xl p-5">
+                  <p class="text-3xl font-bold text-kor-blue">ERP + CRM</p>
+                  <p class="mt-2 text-sm text-slate-300">
+                    experiencia conectando operación, ventas, reportes y
+                    servicio al cliente.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <aside class="kb-hero-panel p-6 sm:p-7">
+              <p class="kb-panel-label text-xs font-bold uppercase tracking-[0.28em]">
+                Operating model
+              </p>
+              <div class="mt-5">
+                <p class="text-2xl font-bold text-white">
+                  De cuello de botella a sistema visible.
+                </p>
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                  Combinamos diagnóstico, arquitectura y ejecución para que la
+                  operación gane orden y la marca gane peso frente a clientes,
+                  aliados e inversionistas.
+                </p>
+              </div>
+              <div class="mt-6 grid gap-4">
+                <div class="kb-signal-card rounded-2xl p-5">
+                  <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">
+                    Lo que activamos
+                  </p>
+                  <p class="mt-3 text-3xl font-bold text-white">
+                    Visibilidad ejecutiva
+                  </p>
+                  <p class="mt-2 text-sm text-slate-300">
+                    KPIs, flujos, responsables y datos conectados en una misma
+                    capa operativa.
+                  </p>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div class="kb-signal-card rounded-2xl p-5">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">
+                      Front stage
+                    </p>
+                    <p class="mt-3 text-xl font-bold text-white">
+                      Marca premium
+                    </p>
+                    <p class="mt-2 text-sm text-slate-300">
+                      Hero, narrativa y CTAs con tono B2B serio y diferenciador.
+                    </p>
+                  </div>
+                  <div class="kb-signal-card rounded-2xl p-5">
+                    <p class="text-xs font-bold uppercase tracking-[0.22em] text-slate-400">
+                      Back stage
+                    </p>
+                    <p class="mt-3 text-xl font-bold text-white">
+                      Integracion real
+                    </p>
+                    <p class="mt-2 text-sm text-slate-300">
+                      ERP, CRM, reportes y automatizaciones listos para escalar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 space-y-4 border-t border-white/10 pt-6">
+                <div class="kb-flow-item">
+                  <span>01</span>
+                  <p class="text-sm leading-relaxed text-slate-300">
+                    Mapeamos operación, datos y fricciones comerciales.
+                  </p>
+                </div>
+                <div class="kb-flow-item">
+                  <span>02</span>
+                  <p class="text-sm leading-relaxed text-slate-300">
+                    Diseñamos una capa visual y técnica con criterio ejecutivo.
+                  </p>
+                </div>
+                <div class="kb-flow-item">
+                  <span>03</span>
+                  <p class="text-sm leading-relaxed text-slate-300">
+                    Convertimos el plan en una experiencia util, medible y lista
+                    para mostrar valor.
+                  </p>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </header>
       <section
-        class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800"
+        class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800 reveal"
         id="nosotros"
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="kb-section-shell grid gap-16 px-6 py-10 lg:grid-cols-2 lg:px-12 lg:py-14 items-center">
             <div class="space-y-6">
               <div
-                class="inline-block px-3 py-1 bg-kor-blue/10 text-kor-blue dark:text-blue-400 text-xs font-bold uppercase tracking-widest rounded"
+                class="kb-overline inline-block rounded-full border border-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.22em]"
               >
                 Trayectoria
               </div>
               <h2 class="text-3xl md:text-4xl font-bold">
-                Arquitectura robusta con sello colombiano
+                Arquitectura robusta con criterio comercial y sello colombiano
               </h2>
-              <p class="text-lg text-slate-600 dark:text-slate-400">
+              <p class="text-lg text-slate-300">
                 En KOR Bytes S.A.S., llevamos más de 8 años diseñando e
-                implementando ecosistemas digitales que soportan el crecimiento
-                de empresas líderes. No solo escribimos código; estructuramos
-                los cimientos del mañana.
+                implementando ecosistemas digitales que soportan operación,
+                visibilidad y expansión. No solo escribimos código;
+                estructuramos sistemas que ayudan a decidir mejor y ejecutar
+                con menos fricción.
               </p>
-              <div class="grid grid-cols-2 gap-8 pt-4">
-                <div>
+              <div class="grid gap-4 pt-4 sm:grid-cols-3">
+                <div class="kb-mini-panel">
                   <div class="text-3xl font-bold text-primary">8+</div>
-                  <div
-                    class="text-sm text-slate-500 uppercase tracking-tighter"
-                  >
+                  <div class="mt-2 text-sm uppercase tracking-[0.18em] text-slate-400">
                     Años de experiencia
                   </div>
                 </div>
-                <div>
+                <div class="kb-mini-panel">
                   <div class="text-3xl font-bold text-kor-blue">50+</div>
-                  <div
-                    class="text-sm text-slate-500 uppercase tracking-tighter"
-                  >
-                    Proyectos exitosos
+                  <div class="mt-2 text-sm uppercase tracking-[0.18em] text-slate-400">
+                    Proyectos activos
+                  </div>
+                </div>
+                <div class="kb-mini-panel">
+                  <div class="text-3xl font-bold text-teal-300">B2B</div>
+                  <div class="mt-2 text-sm uppercase tracking-[0.18em] text-slate-400">
+                    Enfoque real de negocio
                   </div>
                 </div>
               </div>
             </div>
             <div class="relative">
               <div
-                class="aspect-square rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center border border-slate-300 dark:border-slate-700"
+                class="kb-panel aspect-square rounded-[2rem] overflow-hidden flex items-center justify-center"
               >
                 <img
                   id="parallax-about"
@@ -390,11 +616,10 @@
                   loading="lazy"
                   decoding="async"
                 />
-                <div
-                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8"
-                >
-                  <p class="text-white font-display text-xl">
-                    Ingeniería que escala con tu negocio.
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-8">
+                  <p class="text-white font-display text-xl max-w-sm">
+                    Ingeniería que ordena la operación y también eleva la
+                    percepción de la marca.
                   </p>
                 </div>
               </div>
@@ -403,11 +628,11 @@
         </div>
       </section>
       <!-- Filosofía -->
-      <section class="py-16 relative overflow-hidden">
+      <section class="py-16 relative overflow-hidden reveal">
         <div
-          class="absolute inset-0 bg-gradient-to-r from-primary/5 to-kor-blue/5 -z-10"
+          class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-kor-blue/10 -z-10"
         ></div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="kb-panel max-w-4xl mx-auto px-6 py-10 sm:px-8 lg:px-10 text-center rounded-[2rem]">
           <span class="material-icons-round text-4xl text-primary/50 mb-4"
             >format_quote</span
           >
@@ -420,17 +645,29 @@
           <p class="text-slate-500">Filosofía KOR Bytes</p>
         </div>
       </section>
-      <section class="py-24" id="servicios">
+      <section class="py-24 reveal" id="servicios">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">
-              Nuestros Servicios
+          <div class="mb-16 text-center">
+            <p
+              class="text-sm font-bold uppercase tracking-[0.24em] text-primary"
+            >
+              Capacidades clave
+            </p>
+            <h2 class="mt-4 text-3xl font-bold md:text-5xl">
+              Servicios diseñados para operaciones B2B que necesitan resultado
             </h2>
-            <div class="w-20 h-1 bg-primary mx-auto"></div>
+            <p
+              class="mx-auto mt-4 max-w-3xl text-lg text-slate-600 dark:text-slate-400"
+            >
+              Desde software interno hasta integraciones y sitios comerciales:
+              priorizamos impacto operativo, visibilidad comercial y una
+              arquitectura que soporte crecimiento real.
+            </p>
           </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <a
+              href="/servicios/desarrollo-software-a-medida.html"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -439,14 +676,21 @@
                   >dns</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Backend Development</h3>
+              <h3 class="mb-3 text-xl font-bold">Software a medida</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Desarrollo de APIs robustas, microservicios y bases de datos
-                optimizadas para manejar altos volúmenes de tráfico.
+                Plataformas internas, backends y herramientas de negocio para
+                inventario, cartera, PQRS, reportes y operaciones criticas.
               </p>
-            </div>
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a
+              href="/servicios/desarrollo-web.html"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -455,15 +699,21 @@
                   >terminal</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Plataformas Web</h3>
+              <h3 class="mb-3 text-xl font-bold">Desarrollo web comercial</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Interfaces modernas, rápidas y seguras construidas con las
-                últimas tecnologías de frontend integradas a tu lógica de
-                negocio.
+                Sitios y plataformas de alto impacto con foco en performance,
+                SEO, analitica y conversion para equipos comerciales.
               </p>
-            </div>
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a
+              href="/servicios/desarrollo-software-a-medida.html"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -472,14 +722,21 @@
                   >smartphone</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Mobile Apps</h3>
+              <h3 class="mb-3 text-xl font-bold">Apps y portales internos</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Soluciones móviles nativas e híbridas diseñadas para ofrecer la
-                mejor experiencia de usuario en cualquier dispositivo.
+                Experiencias para equipos en campo, clientes o aliados que
+                necesitan datos sincronizados y flujos claros.
               </p>
-            </div>
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a
+              href="/servicios/integraciones-erp-crm.html"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -488,14 +745,21 @@
                   >hub</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Integraciones</h3>
+              <h3 class="mb-3 text-xl font-bold">Integraciones ERP/CRM</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Conectamos tus sistemas existentes con servicios de terceros
-                (ERP, CRM, Pasarelas de pago) de forma transparente.
+                Conectamos ventas, inventario, facturacion, pagos y canales
+                para eliminar reprocesos y errores manuales.
               </p>
-            </div>
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a
+              href="/servicios/integraciones-erp-crm.html"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -504,14 +768,21 @@
                   >cloud</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Infraestructura</h3>
+              <h3 class="mb-3 text-xl font-bold">Automatizacion operativa</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Configuración y gestión de entornos cloud (AWS/GCP/Azure) con
-                enfoque en DevOps y seguridad.
+                Diseñamos flujos confiables con APIs, colas, webhooks,
+                observabilidad y despliegues listos para escalar.
               </p>
-            </div>
-            <div
-              class="p-8 gradient-border bg-card-dark border border-slate-800 group hover:border-primary/50 transition-all"
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
+            <a
+              href="/servicios/"
+              class="kb-service-card group flex h-full flex-col rounded-2xl border border-slate-800 bg-card-dark p-8 gradient-border transition-all hover:border-primary/50"
             >
               <div
                 class="w-14 h-14 bg-kor-blue/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
@@ -520,16 +791,22 @@
                   >psychology</span
                 >
               </div>
-              <h3 class="text-xl font-bold mb-3">Consultoría Técnica</h3>
+              <h3 class="mb-3 text-xl font-bold">Roadmap tecnico y consultoria</h3>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Asesoramos en la toma de decisiones tecnológicas críticas para
-                asegurar el éxito a largo plazo de tus productos.
+                Aterrizamos prioridades, alcance y arquitectura para decidir
+                con menos riesgo y mejor retorno.
               </p>
-            </div>
+              <span
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              >
+                Ver capacidad
+                <span class="material-icons-round text-base">arrow_forward</span>
+              </span>
+            </a>
           </div>
         </div>
       </section>
-      <section class="py-24" id="soluciones">
+      <section class="py-24 reveal" id="soluciones">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-5xl font-bold mb-4">
@@ -540,8 +817,8 @@
               integraciones inteligentes y arquitectura escalable.
             </p>
           </div>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm text-slate-500">
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+          <div class="grid gap-6 text-sm text-slate-500 md:grid-cols-2 lg:grid-cols-3">
+            <a href="/servicios/integraciones-erp-crm.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/erp-solves.webp"
                 alt="Integración ERP con ecommerce"
@@ -550,9 +827,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Integrar ERP con página web o ecommerce.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Integrar ERP con pagina web o ecommerce.</p>
+                <p class="mt-4 font-semibold text-primary">Ver integraciones</p>
+              </div>
+            </a>
+            <a href="/servicios/integraciones-erp-crm.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/crm-solves.webp"
                 alt="CRM integrado con canales digitales"
@@ -561,11 +841,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">
-                Integrar CRM con WhatsApp y automatizar seguimiento.
-              </p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Integrar CRM con WhatsApp y automatizar seguimiento.</p>
+                <p class="mt-4 font-semibold text-primary">Ver integraciones</p>
+              </div>
+            </a>
+            <a href="/servicios/desarrollo-software-a-medida.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/kpi-solves.webp"
                 alt="Automatización de facturación y reportes"
@@ -574,9 +855,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Automatizar facturación, cartera y reportes.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Automatizar facturacion, cartera y reportes.</p>
+                <p class="mt-4 font-semibold text-primary">Ver software a medida</p>
+              </div>
+            </a>
+            <a href="/servicios/desarrollo-software-a-medida.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/real-time-solves.webp"
                 alt="Inventario conectado a ventas en tiempo real"
@@ -585,9 +869,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Conectar inventario con ventas y logística.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Conectar inventario con ventas y logistica.</p>
+                <p class="mt-4 font-semibold text-primary">Ver software a medida</p>
+              </div>
+            </a>
+            <a href="/servicios/desarrollo-software-a-medida.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/dashboard-solves.webp"
                 alt="Control de inventario y ventas"
@@ -596,9 +883,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Sistema de control de inventario y ventas.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Sistema de control de inventario y ventas.</p>
+                <p class="mt-4 font-semibold text-primary">Ver software a medida</p>
+              </div>
+            </a>
+            <a href="/servicios/desarrollo-software-a-medida.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/erp-solves.webp"
                 alt="Cotizaciones y facturación automatizada"
@@ -607,9 +897,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Software para cotizaciones y facturas.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Software para cotizaciones y facturas.</p>
+                <p class="mt-4 font-semibold text-primary">Ver software a medida</p>
+              </div>
+            </a>
+            <a href="/casos/torcoroma-pqrs.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/gestion-documental-ticket.webp"
                 alt="Gestión documental y tickets"
@@ -618,9 +911,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Gestión documental, PQRS y tickets de soporte.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Gestion documental, PQRS y tickets de soporte.</p>
+                <p class="mt-4 font-semibold text-primary">Ver caso relacionado</p>
+              </div>
+            </a>
+            <a href="/servicios/desarrollo-software-a-medida.html" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/dashboard-solves.webp"
                 alt="Dashboard de indicadores y reportes"
@@ -629,9 +925,12 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">Dashboard de indicadores y reportes automáticos.</p>
-            </div>
-            <div class="overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg bg-white/80 dark:bg-card-dark/40">
+              <div class="p-6">
+                <p>Dashboard de indicadores y reportes automaticos.</p>
+                <p class="mt-4 font-semibold text-primary">Ver software a medida</p>
+              </div>
+            </a>
+            <a href="/servicios/" class="kb-problem-card group overflow-hidden rounded-lg border border-slate-200 bg-white/80 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
               <img
                 src="images/body/database-solutions.webp"
                 alt="Optimización de bases de datos"
@@ -640,15 +939,16 @@
                 height="360"
                 loading="lazy"
               />
-              <p class="p-6">
-                Optimización de consultas PostgreSQL y auditoría técnica.
-              </p>
-            </div>
+              <div class="p-6">
+                <p>Optimizacion de consultas PostgreSQL y auditoria tecnica.</p>
+                <p class="mt-4 font-semibold text-primary">Ver mas soluciones</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>
       <!-- Tecnologías -->
-      <section class="py-20 border-y border-slate-200 dark:border-slate-800">
+      <section class="py-20 border-y border-slate-200 dark:border-slate-800 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12">
             <h2 class="text-2xl md:text-3xl font-bold mb-4">
@@ -662,7 +962,7 @@
             class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6"
           >
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-laravel-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -670,7 +970,7 @@
               <span class="text-sm text-slate-400">Laravel</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-nestjs-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -678,7 +978,7 @@
               <span class="text-sm text-slate-400">NestJS</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-react-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -686,7 +986,7 @@
               <span class="text-sm text-slate-400">React</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-nextjs-plain text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -694,7 +994,7 @@
               <span class="text-sm text-slate-400">Next.js</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-flutter-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -702,7 +1002,7 @@
               <span class="text-sm text-slate-400">Flutter</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-nodejs-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -710,7 +1010,7 @@
               <span class="text-sm text-slate-400">Node.js</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-postgresql-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -718,7 +1018,7 @@
               <span class="text-sm text-slate-400">PostgreSQL</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-mysql-original colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -726,7 +1026,7 @@
               <span class="text-sm text-slate-400">MySQL</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-docker-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -734,7 +1034,7 @@
               <span class="text-sm text-slate-400">Docker</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-amazonwebservices-plain-wordmark colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -742,7 +1042,7 @@
               <span class="text-sm text-slate-400">AWS</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-googlecloud-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -750,7 +1050,7 @@
               <span class="text-sm text-slate-400">GCP</span>
             </div>
             <div
-              class="flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
+              class="kb-tech-card flex flex-col items-center p-4 rounded-lg bg-card-dark/50 border border-slate-800 hover:border-primary/50 hover:scale-105 transition-all group"
             >
               <i
                 class="devicon-git-plain colored text-4xl mb-3 group-hover:scale-110 transition-transform"
@@ -760,7 +1060,7 @@
           </div>
         </div>
       </section>
-      <section class="py-24 bg-slate-900/50" id="proyectos">
+      <section class="py-24 bg-slate-900/50 reveal" id="proyectos">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="mb-16">
             <h2 class="text-3xl md:text-5xl font-bold mb-4">Casos de Éxito</h2>
@@ -770,7 +1070,7 @@
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- ArchiveMaster -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -795,7 +1095,7 @@
               </div>
             </div>
             <!-- SIGMA -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -820,7 +1120,7 @@
               </div>
             </div>
             <!-- VolleyPass -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -845,7 +1145,7 @@
               </div>
             </div>
             <!-- Torcoroma PQRS -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -870,7 +1170,7 @@
               </div>
             </div>
             <!-- NEXUS OMS -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -895,7 +1195,7 @@
               </div>
             </div>
             <!-- DeadTree Studio -->
-            <div class="group">
+            <div class="kb-case-card group p-4">
               <div
                 class="overflow-hidden rounded-xl bg-slate-800 border border-slate-700 aspect-video mb-6 flex items-center justify-center"
               >
@@ -931,30 +1231,37 @@
           </div>
         </div>
       </section>
-      <section class="py-24 relative overflow-hidden" id="contacto">
+      <section class="py-24 relative overflow-hidden reveal" id="contacto">
         <div class="absolute inset-0 bg-primary/5 -z-10"></div>
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="kb-contact-panel max-w-4xl mx-auto px-6 py-12 sm:px-8 lg:px-12 text-center">
           <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            ¿Listo para llevar tu infraestructura al siguiente nivel?
+            Agenda una conversacion ejecutiva sobre tu proximo cuello de botella
           </h2>
           <p class="text-xl text-slate-400 mb-12">
-            Evaluamos los requerimientos de tu empresa y diseñamos una solución
-            tecnológica a medida. Sin compromisos iniciales.
+            Revisamos operacion, integraciones y conversion comercial para
+            proponerte un siguiente paso viable, medible y alineado con tu
+            negocio.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a
               class="px-10 py-5 bg-primary text-white font-bold rounded-md text-lg glow-hover transition-all"
-              href="https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20informaci%C3%B3n%20sobre%20desarrollo%20de%20software%20a%20medida%20e%20integraciones." target="_blank" rel="noopener"
+              href="https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20agendar%20un%20diagnostico%20sobre%20software%20a%20medida%2C%20integraciones%20o%20desarrollo%20web." target="_blank" rel="noopener"
             >
-              Hablar por WhatsApp
+              Agendar por WhatsApp
+            </a>
+            <a
+              class="px-10 py-5 rounded-md border border-slate-700 text-lg font-bold text-white transition-colors hover:bg-slate-900"
+              href="/casos/"
+            >
+              Ver casos y referencias
             </a>
           </div>
           <p class="mt-8 text-slate-500 text-sm">
-            Respuesta garantizada en menos de 24 horas hábiles.
+            Respuesta inicial en menos de 24 horas habiles.
           </p>
         </div>
       </section>
-      <footer class="py-12 border-t border-slate-800 bg-background-dark">
+      <footer class="kb-footer py-12 border-t border-slate-800 bg-background-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-4 gap-12 mb-12">
           <div class="col-span-1 md:col-span-2">
@@ -1034,6 +1341,7 @@
       href="https://wa.me/573043978157?text=Hola%2C%20quiero%20una%20consultor%C3%ADa%20de%20software."
       class="fixed bottom-6 right-6 w-14 h-14 bg-green-600 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform z-[60]"
       aria-label="Abrir WhatsApp"
+      data-whatsapp-fab="static"
     >
       <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
         <path

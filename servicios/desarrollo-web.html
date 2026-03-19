@@ -3,14 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Desarrollo Web para Empresas | KOR Bytes S.A.S.</title>
+    <title>Desarrollo Web para Empresas en Sincelejo | KOR Bytes S.A.S.</title>
     <meta
       name="description"
-      content="Desarrollo web para empresas en Colombia y LATAM: sitios corporativos, plataformas y páginas optimizadas para SEO."
-    />
-    <meta
-      name="keywords"
-      content="desarrollo de software a medida, empresa de desarrollo de software, desarrollo de software empresarial, software a medida para empresas, desarrollo de sistemas de información, fábrica de software, consultoría tecnológica, desarrollo de aplicaciones web, desarrollo de aplicaciones móviles, automatización de procesos empresariales, integración de sistemas, integración ERP, integración CRM, integración de pasarelas de pago, desarrollo de API, desarrollo de microservicios, arquitectura de software, modernización de sistemas legacy, migración a la nube, servicios DevOps, outsourcing de desarrollo de software, mantenimiento de software, desarrollo de software en Colombia, desarrollo de software en LATAM, software para empresas en Colombia, desarrollo web en Colombia, páginas web en Colombia, paginas web en Colombia, desarrollo de software en Sincelejo, software a medida en Sincelejo, desarrollo web Sincelejo, páginas web Sincelejo, paginas web Sincelejo, desarrollo de software en Sucre, desarrollo web en Sucre, páginas web en Sucre, paginas web en Sucre, empresa de software en Sincelejo, empresa de software en Sucre"
+      content="Desarrollamos sitios web y plataformas comerciales rápidas, seguras y orientadas a SEO local para empresas de Sincelejo, Sucre y Colombia."
     />
     <meta name="author" content="KOR Bytes S.A.S." />
     <meta name="robots" content="index, follow" />
@@ -20,7 +16,7 @@
     <meta property="og:url" content="https://kor-bytes.com/servicios/desarrollo-web.html" />
     <meta
       property="og:title"
-      content="Desarrollo Web para Empresas | KOR Bytes S.A.S."
+      content="Desarrollo Web para Empresas en Sincelejo | KOR Bytes S.A.S."
     />
     <meta
       property="og:description"
@@ -35,11 +31,15 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Desarrollo Web para Empresas | KOR Bytes S.A.S."
+      content="Desarrollo Web para Empresas en Sincelejo | KOR Bytes S.A.S."
     />
     <meta
       name="twitter:description"
-      content="Desarrollo web con enfoque en performance, SEO y conversión."
+      content="Desarrollo web comercial y SEO local para empresas de Sincelejo, Sucre y Colombia."
+    />
+    <meta
+      name="twitter:image"
+      content="https://kor-bytes.com/images/logo.webp"
     />
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -50,7 +50,6 @@
     <meta name="theme-color" content="#A0006D" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect" />
     <link href="https://www.googletagmanager.com" rel="preconnect" />
     <link
       rel="preload"
@@ -99,81 +98,102 @@
 
       gtag("config", "G-FGEEJ8RSN0");
     </script>
-    <!-- Devicon - Iconos de tecnologías -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-    /></noscript>
     <!-- Tailwind compiled CSS is loaded above -->
-    <!-- simpleParallax.js para efectos de parallax -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"
-      defer
-    ></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "KOR Bytes S.A.S.",
-        "url": "https://kor-bytes.com",
-        "logo": "https://kor-bytes.com/images/logo.webp",
-        "description": "Empresa de desarrollo de software en Colombia especializada en arquitectura backend, aplicaciones empresariales y soluciones a medida para Sincelejo y Sucre.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Sincelejo",
-          "addressRegion": "Sucre",
-          "addressCountry": "CO"
-        },
-        "areaServed": [
+        "@graph": [
           {
-            "@type": "Country",
-            "name": "Colombia"
+            "@type": "Organization",
+            "@id": "https://kor-bytes.com/#organization",
+            "name": "KOR Bytes S.A.S.",
+            "url": "https://kor-bytes.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://kor-bytes.com/images/logo.webp"
+            },
+            "email": "gerencia@kor-bytes.com"
           },
           {
-            "@type": "AdministrativeArea",
-            "name": "LATAM"
+            "@type": "Service",
+            "@id": "https://kor-bytes.com/servicios/desarrollo-web.html#service",
+            "name": "Desarrollo web para empresas",
+            "url": "https://kor-bytes.com/servicios/desarrollo-web.html",
+            "serviceType": "Desarrollo web para empresas",
+            "description": "Servicio de desarrollo web para empresas con foco en SEO local, performance, conversion y medicion.",
+            "provider": {
+              "@id": "https://kor-bytes.com/#organization"
+            },
+            "audience": {
+              "@type": "BusinessAudience",
+              "audienceType": "Equipos comerciales y empresas que quieren captar oportunidades"
+            },
+            "areaServed": [
+              {
+                "@type": "Country",
+                "name": "Colombia"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "LATAM"
+              }
+            ]
           },
           {
-            "@type": "City",
-            "name": "Sincelejo",
-            "addressRegion": "Sucre",
-            "addressCountry": "CO"
+            "@type": "BreadcrumbList",
+            "@id": "https://kor-bytes.com/servicios/desarrollo-web.html#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://kor-bytes.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Servicios",
+                "item": "https://kor-bytes.com/servicios/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Desarrollo web",
+                "item": "https://kor-bytes.com/servicios/desarrollo-web.html"
+              }
+            ]
           },
           {
-            "@type": "AdministrativeArea",
-            "name": "Sucre",
-            "addressCountry": "CO"
+            "@type": "FAQPage",
+            "@id": "https://kor-bytes.com/servicios/desarrollo-web.html#faq-schema",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "El servicio incluye SEO tecnico y medicion?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Si. La base contempla estructura, metas, schema, performance, analitica y eventos para que el sitio sirva a ventas y a posicionamiento."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Pueden conectar formularios o WhatsApp con CRM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Si. Podemos conectar formularios, ecommerce, agendas, WhatsApp o landing pages con CRM y flujos comerciales."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Sirve para posicionamiento local en Sincelejo y Sucre?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Si. Estructuramos el sitio y las paginas de servicio para responder a busquedas locales y comerciales con enfoque en Sincelejo, Sucre y Colombia."
+                }
+              }
+            ]
           }
-        ],
-        "serviceType": [
-          "Desarrollo de software a medida",
-          "Desarrollo de aplicaciones web",
-          "Desarrollo de aplicaciones móviles",
-          "Integración de sistemas",
-          "Automatización de procesos empresariales",
-          "Consultoría tecnológica",
-          "Servicios DevOps",
-          "Modernización de sistemas"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "gerencia@kor-bytes.com",
-          "contactType": "sales"
-        }
+        ]
       }
     </script>
   </head>
@@ -195,7 +215,7 @@
               alt="KOR Bytes S.A.S. Logo"
               class="h-10 w-auto"
               src="/images/logo-252x70.webp"
-              srcset="/images/logo-252x70.webp 252w, images/logo.webp 604w"
+              srcset="/images/logo-252x70.webp 252w, /images/logo.webp 604w"
               sizes="(max-width: 768px) 180px, 252px"
               width="302"
               height="84"
@@ -291,43 +311,62 @@
           class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10"
         >
           <div
-            class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
+            class="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px] animate-float"
           ></div>
           <div
-            class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/10 rounded-full blur-[100px]"
+            class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-kor-blue/15 rounded-full blur-[100px] animate-float-delayed"
           ></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-primary shadow-sm dark:bg-card-dark/60">
+            Web comercial B2B
+            <span class="h-1.5 w-1.5 rounded-full bg-kor-blue"></span>
+            SEO + conversion
+          </div>
           <h1
-            class="text-5xl md:text-7xl font-bold tracking-tight mb-6 dark:text-white"
-          >Desarrollo web para empresas</h1>
+            class="mt-6 text-5xl md:text-7xl font-bold tracking-tight dark:text-white"
+          >Desarrollo web para empresas que quieren ser encontradas y convertir mejor</h1>
           <p
-            class="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
-          >Sitios y plataformas web rápidas, seguras y orientadas a conversión.</p>
+            class="mx-auto mt-6 max-w-3xl text-lg md:text-xl leading-relaxed text-slate-600 dark:text-slate-400"
+          >Creamos sitios y plataformas comerciales rapidas, seguras y listas para SEO, medicion y conversion en Sincelejo, Sucre, Colombia y LATAM.</p>
           <div
-            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+            class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
               class="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-md hover:scale-105 transition-transform glow-hover"
               href="#contacto"
             >
-              Hablemos de tu proyecto
+              Solicitar diagnostico
             </a>
             <a
               class="w-full sm:w-auto px-8 py-4 border border-slate-300 dark:border-slate-700 font-bold rounded-md hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
-              href="#servicios"
+              href="#contenido"
             >
-              Ver soluciones
+              Ver enfoque del servicio
             </a>
+          </div>
+          <div class="mt-10 grid gap-4 text-left sm:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-white/85 p-5 shadow-sm dark:border-slate-800 dark:bg-card-dark/60">
+              <p class="text-2xl font-bold text-primary">SEO util</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Metas, schema, arquitectura y contenido orientado a busquedas comerciales.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white/85 p-5 shadow-sm dark:border-slate-800 dark:bg-card-dark/60">
+              <p class="text-2xl font-bold text-kor-blue">Performance</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Core Web Vitals, imagenes optimizadas y una experiencia mas confiable.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white/85 p-5 shadow-sm dark:border-slate-800 dark:bg-card-dark/60">
+              <p class="text-2xl font-bold text-primary">Conversion</p>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">CTAs claros, eventos, tracking y conexiones con CRM o WhatsApp.</p>
+            </div>
           </div>
         </div>
       </header>
       
-<section class="py-24" id="contenido">
+<section class="py-24 reveal" id="contenido">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-start">
       <div>
-        <div class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest rounded">Desarrollo Web</div>
+        <div class="inline-block px-3 py-1 bg-primary/15 text-primary text-xs font-bold uppercase tracking-widest rounded">Desarrollo Web</div>
         <h2 class="text-3xl md:text-4xl font-bold mt-4">Webs rápidas, seguras y orientadas a conversión</h2>
         <p class="text-lg text-slate-600 dark:text-slate-400 mt-4">
           Creamos sitios web y plataformas que cargan rápido, posicionan en Google y convierten en leads. Ideal si necesitas presencia sólida en Sincelejo/Sucre o vender en LATAM.
@@ -352,7 +391,7 @@
   </div>
 </section>
 
-<section class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800">
+<section class="py-24 bg-slate-50 dark:bg-card-dark/30 border-y border-slate-200 dark:border-slate-800 reveal">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold">SEO local: Sincelejo y Sucre</h2>
@@ -371,26 +410,74 @@
     </div>
   </div>
 </section>
-<section class="py-24 relative overflow-hidden" id="contacto">
+<section class="py-20 border-y border-slate-200 dark:border-slate-800 reveal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-8 lg:grid-cols-3">
+      <a href="/ubicaciones/sincelejo.html" class="group rounded-2xl border border-slate-200 bg-white/80 p-7 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-primary">Cobertura</p>
+        <h3 class="mt-3 text-xl font-bold">Sincelejo y Sucre</h3>
+        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Refuerza presencia local con paginas preparadas para intencion comercial y cobertura geografica.</p>
+        <p class="mt-6 font-semibold text-primary">Ver ubicacion</p>
+      </a>
+      <a href="/servicios/integraciones-erp-crm.html" class="group rounded-2xl border border-slate-200 bg-white/80 p-7 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-kor-blue">Relacionado</p>
+        <h3 class="mt-3 text-xl font-bold">Integraciones ERP/CRM</h3>
+        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Conecta formularios, ecommerce, agendas o landing pages con tu CRM y flujo comercial.</p>
+        <p class="mt-6 font-semibold text-primary">Ver servicio</p>
+      </a>
+      <a href="/servicios/desarrollo-software-a-medida.html" class="group rounded-2xl border border-slate-200 bg-white/80 p-7 transition-colors hover:border-primary/40 dark:border-slate-800 dark:bg-card-dark/40">
+        <p class="text-sm font-bold uppercase tracking-[0.24em] text-kor-blue">Complementario</p>
+        <h3 class="mt-3 text-xl font-bold">Software a medida</h3>
+        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Cuando el sitio debe convivir con backoffice, dashboards o procesos internos propios.</p>
+        <p class="mt-6 font-semibold text-primary">Ver servicio</p>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="py-24 reveal" id="faq">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold">Preguntas frecuentes</h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-400">Lo esencial para evaluar si tu sitio necesita una actualizacion comercial y tecnica.</p>
+    </div>
+    <div class="space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white/80 p-8 dark:border-slate-800 dark:bg-card-dark/40">
+        <h3 class="text-xl font-bold">El servicio incluye SEO tecnico y medicion?</h3>
+        <p class="mt-3 text-slate-600 dark:text-slate-400">Si. Trabajamos estructura, metas, schema, performance, analitica y eventos para que el sitio sirva a ventas y a posicionamiento.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white/80 p-8 dark:border-slate-800 dark:bg-card-dark/40">
+        <h3 class="text-xl font-bold">Pueden conectar formularios o WhatsApp con CRM?</h3>
+        <p class="mt-3 text-slate-600 dark:text-slate-400">Si. Podemos conectar formularios, ecommerce, agendas, WhatsApp o landing pages con CRM y flujos comerciales.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white/80 p-8 dark:border-slate-800 dark:bg-card-dark/40">
+        <h3 class="text-xl font-bold">Sirve para posicionamiento local en Sincelejo y Sucre?</h3>
+        <p class="mt-3 text-slate-600 dark:text-slate-400">Si. Estructuramos paginas y mensajes para responder a busquedas locales y comerciales con foco en Sincelejo, Sucre y Colombia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-24 relative overflow-hidden reveal" id="contacto">
         <div class="absolute inset-0 bg-primary/5 -z-10"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            ¿Listo para llevar tu infraestructura al siguiente nivel?
+            Revisemos si tu sitio hoy esta frenando descubrimiento o conversion
           </h2>
           <p class="text-xl text-slate-400 mb-12">
-            Evaluamos los requerimientos de tu empresa y diseñamos una solución
-            tecnológica a medida. Sin compromisos iniciales.
+            Evaluamos propuesta, contenido, SEO tecnico y CTAs para proponerte una mejora concreta alineada con ventas y posicionamiento.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a
               class="px-10 py-5 bg-primary text-white font-bold rounded-md text-lg glow-hover transition-all"
-              href="https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20informaci%C3%B3n%20sobre%20desarrollo%20de%20software%20a%20medida%20e%20integraciones." target="_blank" rel="noopener"
+              href="https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20hablar%20sobre%20desarrollo%20web%20para%20mi%20empresa." target="_blank" rel="noopener"
             >
-              Hablar por WhatsApp
+              Solicitar diagnostico
+            </a>
+            <a class="px-10 py-5 rounded-md border border-slate-700 text-lg font-bold text-white transition-colors hover:bg-slate-900" href="/ubicaciones/sincelejo.html">
+              Ver cobertura local
             </a>
           </div>
           <p class="mt-8 text-slate-500 text-sm">
-            Respuesta garantizada en menos de 24 horas hábiles.
+            Respuesta inicial en menos de 24 horas habiles.
           </p>
         </div>
       </section>
@@ -474,6 +561,7 @@
       href="https://wa.me/573043978157?text=Hola%2C%20quiero%20una%20consultor%C3%ADa%20de%20software."
       class="fixed bottom-6 right-6 w-14 h-14 bg-green-600 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-transform z-[60]"
       aria-label="Abrir WhatsApp"
+      data-whatsapp-fab="static"
     >
       <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
         <path

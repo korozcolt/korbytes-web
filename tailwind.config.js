@@ -7,8 +7,8 @@ module.exports = {
         primary: "#A0006D",
         "kor-blue": "#2E3696",
         "background-light": "#F8F9FA",
-        "background-dark": "#0B0B0B",
-        "card-dark": "#161616",
+        "background-dark": "#05050A",
+        "card-dark": "#0A0B14",
       },
       fontFamily: {
         display: ["'Space Grotesk'", "sans-serif"],
