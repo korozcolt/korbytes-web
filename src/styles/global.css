@@ -78,8 +78,7 @@ img {
 
 main,
 nav,
-footer,
-.kb-wa-fab {
+footer {
   position: relative;
   z-index: 1;
 }
@@ -732,21 +731,6 @@ h3 {
   padding-top: 1.35rem;
 }
 
-.kb-wa-fab {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 100;
-  width: 62px;
-  height: 62px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: #25d366;
-  color: white;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
-}
 
 .reveal {
   opacity: 1;
