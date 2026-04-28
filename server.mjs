@@ -2,6 +2,8 @@ import { createServer } from 'node:http';
 import { createReadStream, statSync } from 'node:fs';
 import { join, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createGzip, createBrotliCompress } from 'node:zlib';
+import { pipeline } from 'node:stream/promises';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const distDir = resolve(__dirname, 'dist');
@@ -26,6 +28,8 @@ const MIME = {
   '.pdf':  'application/pdf',
 };
 
+const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.json', '.svg', '.xml', '.txt']);
+
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
@@ -39,35 +43,48 @@ const CSP = [
 ].join('; ');
 
 const SECURITY_HEADERS = {
-  'Strict-Transport-Security':  'max-age=31536000; includeSubDomains; preload',
-  'X-Content-Type-Options':     'nosniff',
-  'X-Frame-Options':            'SAMEORIGIN',
-  'X-XSS-Protection':           '1; mode=block',
-  'Referrer-Policy':             'strict-origin-when-cross-origin',
-  'Permissions-Policy':          'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy':     CSP,
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'X-Content-Type-Options':    'nosniff',
+  'X-Frame-Options':           'SAMEORIGIN',
+  'X-XSS-Protection':          '1; mode=block',
+  'Referrer-Policy':            'strict-origin-when-cross-origin',
+  'Permissions-Policy':         'camera=(), microphone=(), geolocation=()',
+  'Content-Security-Policy':    CSP,
 };
 
 function tryFile(p) {
   try { return statSync(p).isFile() ? p : null; } catch { return null; }
 }
 
-function resolve404() {
-  return tryFile(join(distDir, '404.html'));
-}
-
-function serveFile(filePath, statusCode, res) {
+function serveFile(filePath, statusCode, req, res) {
   const ext = extname(filePath).toLowerCase();
   const contentType = MIME[ext] || 'application/octet-stream';
+
   Object.entries(SECURITY_HEADERS).forEach(([k, v]) => res.setHeader(k, v));
   res.setHeader('Content-Type', contentType);
+
   if (ext === '.html') {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+  } else if (['.woff2', '.woff', '.ttf'].includes(ext)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   } else {
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   }
+
   res.statusCode = statusCode;
-  createReadStream(filePath).pipe(res);
+
+  const accept = req.headers['accept-encoding'] || '';
+  const canCompress = COMPRESSIBLE.has(ext);
+
+  if (canCompress && accept.includes('br')) {
+    res.setHeader('Content-Encoding', 'br');
+    pipeline(createReadStream(filePath), createBrotliCompress(), res).catch(() => {});
+  } else if (canCompress && accept.includes('gzip')) {
+    res.setHeader('Content-Encoding', 'gzip');
+    pipeline(createReadStream(filePath), createGzip(), res).catch(() => {});
+  } else {
+    createReadStream(filePath).pipe(res);
+  }
 }
 
 createServer((req, res) => {
@@ -85,11 +102,11 @@ createServer((req, res) => {
     ?? tryFile(join(base, 'index.html'));
 
   if (found) {
-    serveFile(found, 200, res);
+    serveFile(found, 200, req, res);
   } else {
-    const page404 = resolve404();
+    const page404 = tryFile(join(distDir, '404.html'));
     if (page404) {
-      serveFile(page404, 404, res);
+      serveFile(page404, 404, req, res);
     } else {
       res.statusCode = 404;
       res.end('Not found');

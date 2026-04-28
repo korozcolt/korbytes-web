@@ -184,6 +184,7 @@ footer {
   padding: 0.95rem 1.18rem;
   box-shadow: var(--kb-shadow-cyan);
   transition: transform 180ms ease, box-shadow 180ms ease;
+  will-change: transform;
 }
 
 .kb-nav-cta:hover,
@@ -222,6 +223,11 @@ footer {
 .kb-section,
 .kb-hero {
   padding: 96px 0;
+}
+
+.kb-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
 }
 
 .kb-hero {
@@ -323,6 +329,7 @@ h3 {
   font-weight: 900;
   padding: 0.95rem 1.18rem;
   transition: background 180ms ease, transform 180ms ease;
+  will-change: transform;
 }
 
 .kb-button-secondary:hover {
