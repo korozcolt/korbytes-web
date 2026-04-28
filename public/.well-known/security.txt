@@ -1,0 +1,4 @@
+Contact: mailto:hola@kor-bytes.com
+Expires: 2027-04-28T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://kor-bytes.com/.well-known/security.txt
