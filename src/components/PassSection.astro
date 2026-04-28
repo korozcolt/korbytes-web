@@ -1,0 +1,23 @@
+---
+import type { CardItem } from "@/data/site";
+import CardGrid from "./CardGrid.astro";
+import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  title: string;
+  items: CardItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="kb-section">
+  <div class="kb-container">
+    <SectionHead
+      badge="PASS"
+      title={title}
+      text="Productos verticales publicados con su estado real para comunicar visión estratégica sin prometer madurez que todavía no existe."
+    />
+    <CardGrid items={items} />
+  </div>
+</section>

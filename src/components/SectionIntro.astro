@@ -1,0 +1,28 @@
+---
+import Badge from "./Badge.astro";
+
+interface Props {
+  badge: string;
+  title: string;
+  text: string;
+  list: string[];
+}
+
+const { badge, title, text, list } = Astro.props;
+---
+
+<section class="kb-section reveal">
+  <div class="kb-container kb-grid kb-grid-2">
+    <div>
+      <Badge label={badge} />
+      <h2 style="margin-top:1rem">{title}</h2>
+      <p class="kb-lead">{text}</p>
+    </div>
+    <div class="kb-card">
+      <h3>Qué significa en la práctica</h3>
+      <ul class="kb-list">
+        {list.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

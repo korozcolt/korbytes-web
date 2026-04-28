@@ -1,0 +1,25 @@
+---
+import { whatsapp } from "@/data/site";
+
+interface Props {
+  title: string;
+  text: string;
+  message: string;
+}
+
+const { title, text, message } = Astro.props;
+---
+
+<section class="kb-section" id="contacto">
+  <div class="kb-container">
+    <div class="kb-cta reveal">
+      <span class="kb-badge">Siguiente paso</span>
+      <h2 style="margin-top:1rem">{title}</h2>
+      <p class="kb-lead">{text}</p>
+      <div class="kb-actions">
+        <a class="kb-button-primary" href={whatsapp(message)} target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a class="kb-button-secondary" href="mailto:gerencia@kor-bytes.com">gerencia@kor-bytes.com</a>
+      </div>
+    </div>
+  </div>
+</section>

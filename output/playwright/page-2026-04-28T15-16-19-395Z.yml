@@ -1,0 +1,369 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido principal" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - navigation "Navegación principal" [ref=e3]:
+    - generic [ref=e5]:
+      - link "KOR Bytes inicio" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "KOR Bytes S.A.S." [ref=e7]
+      - generic [ref=e8]:
+        - link "Inicio" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "Ecosistema PASS" [ref=e10] [cursor=pointer]:
+          - /url: /ecosistema-pass/
+        - link "Servicios" [ref=e11] [cursor=pointer]:
+          - /url: /servicios/
+        - link "Proyectos/Casos" [ref=e12] [cursor=pointer]:
+          - /url: /casos/
+        - link "Cobertura" [ref=e13] [cursor=pointer]:
+          - /url: /ubicaciones/
+        - link "Contacto" [ref=e14] [cursor=pointer]:
+          - /url: /#contacto
+      - link "Hablar por WhatsApp" [ref=e15] [cursor=pointer]:
+        - /url: https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20una%20consultoria%20para%20mi%20proyecto%20digital.
+  - main [ref=e16]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]: KOR Bytes S.A.S. · Tech premium desde Sincelejo
+        - heading "Software operativo, productos verticales y sistemas que sí aguantan la operación." [level=1] [ref=e21]
+        - paragraph [ref=e22]: Construimos software a medida, productos PASS reutilizables, integraciones, automatizaciones e infraestructura digital para empresas que necesitan control, trazabilidad y crecimiento con criterio técnico.
+        - generic [ref=e23]:
+          - link "Hablar del proyecto" [ref=e24] [cursor=pointer]:
+            - /url: https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20un%20diagnostico%20para%20mi%20proyecto%20de%20software%20o%20producto%20digital.
+          - link "Explorar ecosistema PASS" [ref=e25] [cursor=pointer]:
+            - /url: /ecosistema-pass/
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - strong [ref=e28]: PASS
+            - generic [ref=e29]: Productos verticales reutilizables
+          - generic [ref=e30]:
+            - strong [ref=e31]: Laravel
+            - generic [ref=e32]: Arquitectura para operación real
+          - generic [ref=e33]:
+            - strong [ref=e34]: LATAM
+            - generic [ref=e35]: Base en Sucre, trabajo remoto
+      - generic [ref=e36]:
+        - text: K
+        - generic [ref=e40]:
+          - strong [ref=e41]: PASS Core
+          - generic [ref=e42]: Usuarios, roles, pagos, QR, reportes y configuración.
+        - generic [ref=e43]:
+          - strong [ref=e44]: Operación
+          - generic [ref=e45]: Procesos, trazabilidad, tableros, estados y evidencia.
+        - generic [ref=e46]:
+          - strong [ref=e47]: Infraestructura
+          - generic [ref=e48]: Deploys, VPS, Docker, Dokploy y automatización.
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]: KOR Bytes como empresa madre
+        - heading "De servicios a productos" [level=2] [ref=e53]
+        - paragraph [ref=e54]: "La nueva narrativa no abandona el software a medida: lo ordena dentro de una casa de producto. PASS permite convertir patrones repetidos en verticales con módulos reutilizables."
+      - generic [ref=e55]:
+        - heading "Qué significa en la práctica" [level=3] [ref=e56]
+        - list [ref=e57]:
+          - listitem [ref=e58]: Diagnóstico, arquitectura y desarrollo de sistemas internos.
+          - listitem [ref=e59]: Verticales PASS para sectores con operación recurrente.
+          - listitem [ref=e60]: Automatización, integraciones y despliegues para llevarlo a producción.
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]: Servicios
+          - heading "Capacidades comerciales" [level=2] [ref=e66]
+        - paragraph [ref=e67]: Servicios que cubren desde la web pública hasta el sistema que opera por dentro.
+      - generic [ref=e68]:
+        - link "Operación crítica Software a medida Sistemas internos, backoffice, dashboards y flujos con trazabilidad para empresas que ya no pueden depender de hojas de cálculo o procesos manuales. Laravel Roles Auditoría Dashboards" [ref=e69] [cursor=pointer]:
+          - /url: /servicios/desarrollo-software-a-medida.html
+          - generic [ref=e70]: Operación crítica
+          - heading "Software a medida" [level=3] [ref=e71]
+          - paragraph [ref=e72]: Sistemas internos, backoffice, dashboards y flujos con trazabilidad para empresas que ya no pueden depender de hojas de cálculo o procesos manuales.
+          - generic [ref=e73]:
+            - generic [ref=e74]: Laravel
+            - generic [ref=e75]: Roles
+            - generic [ref=e76]: Auditoría
+            - generic [ref=e77]: Dashboards
+        - link "Producto reutilizable Productos verticales PASS Una línea de productos para deporte, reservas, farmacia, transporte, educación, comercio, certificados y gestión documental. PASS Core SaaS QR Pagos" [ref=e78] [cursor=pointer]:
+          - /url: /ecosistema-pass/
+          - generic [ref=e79]: Producto reutilizable
+          - heading "Productos verticales PASS" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Una línea de productos para deporte, reservas, farmacia, transporte, educación, comercio, certificados y gestión documental.
+          - generic [ref=e82]:
+            - generic [ref=e83]: PASS Core
+            - generic [ref=e84]: SaaS
+            - generic [ref=e85]: QR
+            - generic [ref=e86]: Pagos
+        - link "Conectar sistemas Integraciones y APIs Middleware, APIs, pagos, ecommerce, CRM, ERP, sincronización de datos y automatizaciones para que los sistemas conversen sin fricción. APIs ERP CRM Pagos" [ref=e87] [cursor=pointer]:
+          - /url: /servicios/integraciones-erp-crm.html
+          - generic [ref=e88]: Conectar sistemas
+          - heading "Integraciones y APIs" [level=3] [ref=e89]
+          - paragraph [ref=e90]: Middleware, APIs, pagos, ecommerce, CRM, ERP, sincronización de datos y automatizaciones para que los sistemas conversen sin fricción.
+          - generic [ref=e91]:
+            - generic [ref=e92]: APIs
+            - generic [ref=e93]: ERP
+            - generic [ref=e94]: CRM
+            - generic [ref=e95]: Pagos
+        - link "Presencia comercial Web, SEO y conversión Sitios rápidos, claros y medibles para empresas, productos, medios y marcas que necesitan ser encontradas y convertir oportunidades. SEO Core Web Vitals GA4 WordPress" [ref=e96] [cursor=pointer]:
+          - /url: /servicios/desarrollo-web.html
+          - generic [ref=e97]: Presencia comercial
+          - heading "Web, SEO y conversión" [level=3] [ref=e98]
+          - paragraph [ref=e99]: Sitios rápidos, claros y medibles para empresas, productos, medios y marcas que necesitan ser encontradas y convertir oportunidades.
+          - generic [ref=e100]:
+            - generic [ref=e101]: SEO
+            - generic [ref=e102]: Core Web Vitals
+            - generic [ref=e103]: GA4
+            - generic [ref=e104]: WordPress
+        - link "Flujos inteligentes Automatización n8n, OpenClaw, webhooks, Gemini, notificaciones y flujos operativos para reducir tareas repetitivas y conectar servicios externos. n8n Webhooks Gemini Dokploy" [ref=e105] [cursor=pointer]:
+          - /url: /servicios/#automatizacion
+          - generic [ref=e106]: Flujos inteligentes
+          - heading "Automatización" [level=3] [ref=e107]
+          - paragraph [ref=e108]: n8n, OpenClaw, webhooks, Gemini, notificaciones y flujos operativos para reducir tareas repetitivas y conectar servicios externos.
+          - generic [ref=e109]:
+            - generic [ref=e110]: n8n
+            - generic [ref=e111]: Webhooks
+            - generic [ref=e112]: Gemini
+            - generic [ref=e113]: Dokploy
+        - link "Operar en producción Infraestructura y despliegues VPS, Docker, Dokploy, Hostinger, Redis, bases de datos, GitHub Actions y despliegues para productos Laravel, WordPress y servicios internos. Docker VPS Dokploy CI/CD" [ref=e114] [cursor=pointer]:
+          - /url: /servicios/#infraestructura
+          - generic [ref=e115]: Operar en producción
+          - heading "Infraestructura y despliegues" [level=3] [ref=e116]
+          - paragraph [ref=e117]: VPS, Docker, Dokploy, Hostinger, Redis, bases de datos, GitHub Actions y despliegues para productos Laravel, WordPress y servicios internos.
+          - generic [ref=e118]:
+            - generic [ref=e119]: Docker
+            - generic [ref=e120]: VPS
+            - generic [ref=e121]: Dokploy
+            - generic [ref=e122]: CI/CD
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - generic [ref=e126]:
+          - generic [ref=e127]: PASS
+          - heading "Ecosistema PASS destacado" [level=2] [ref=e128]
+        - paragraph [ref=e129]: Productos verticales publicados con su estado real para comunicar visión estratégica sin prometer madurez que todavía no existe.
+      - generic [ref=e130]:
+        - article [ref=e131]:
+          - generic [ref=e133]: K
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e136]: Concepto paraguas
+              - generic [ref=e137]: PASS Core
+            - heading "KORPass" [level=3] [ref=e138]
+            - paragraph [ref=e139]: Núcleo conceptual para reutilizar usuarios, roles, organizaciones, sedes, pagos, notificaciones, reportes, auditoría, archivos, QR e integraciones.
+            - generic [ref=e140]:
+              - generic [ref=e141]: PASS Core
+              - generic [ref=e142]: Módulos comunes
+              - generic [ref=e143]: Marca madre
+        - article [ref=e144]:
+          - generic [ref=e146]: V
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - generic [ref=e149]: Producto muy definido
+              - generic [ref=e150]: Deporte y voleibol
+            - heading "VolleyPass" [level=3] [ref=e151]
+            - paragraph [ref=e152]: "Operación digital para ligas, clubes y torneos: carnet digital con QR, jugadores, clubes, pagos, reglas por liga, documentación y competencias."
+            - generic [ref=e153]:
+              - generic [ref=e154]: QR
+              - generic [ref=e155]: Torneos
+              - generic [ref=e156]: Clubes
+              - generic [ref=e157]: Pagos
+        - article [ref=e158]:
+          - generic [ref=e160]: D
+          - generic [ref=e161]:
+            - generic [ref=e162]:
+              - generic [ref=e163]: Arquitectura/repositorio
+              - generic [ref=e164]: Reservas y estética
+            - heading "DatesPass" [level=3] [ref=e165]
+            - paragraph [ref=e166]: Reservas, staff, diagnóstico capilar, seguimiento, tienda, promociones, notificaciones y widget embebible para negocios de servicios por cita.
+            - generic [ref=e167]:
+              - generic [ref=e168]: Laravel 12
+              - generic [ref=e169]: Filament
+              - generic [ref=e170]: Livewire
+              - generic [ref=e171]: Reverb
+        - article [ref=e172]:
+          - generic [ref=e174]: F
+          - generic [ref=e175]:
+            - generic [ref=e176]:
+              - generic [ref=e177]: Definido técnico/estratégico
+              - generic [ref=e178]: Farmacia y POS
+            - heading "FarmaPass" [level=3] [ref=e179]
+            - paragraph [ref=e180]: POS + ecommerce para farmacia con inventario, código de barras, impresión térmica, FEFO, operación LAN local-first y posible sincronización cloud.
+            - generic [ref=e181]:
+              - generic [ref=e182]: Bagisto
+              - generic [ref=e183]: MySQL
+              - generic [ref=e184]: POS
+              - generic [ref=e185]: FEFO
+        - article [ref=e186]:
+          - generic [ref=e188]: S
+          - generic [ref=e189]:
+            - generic [ref=e190]:
+              - generic [ref=e191]: Concepto derivado
+              - generic [ref=e192]: Comercio general
+            - heading "StorePass" [level=3] [ref=e193]
+            - paragraph [ref=e194]: Base reusable para tiendas con productos, inventario, POS, caja, ventas, clientes, ecommerce, pagos, sucursales y reportes.
+            - generic [ref=e195]:
+              - generic [ref=e196]: Ecommerce
+              - generic [ref=e197]: POS
+              - generic [ref=e198]: Inventario
+              - generic [ref=e199]: Sucursales
+        - article [ref=e200]:
+          - generic [ref=e202]: M
+          - generic [ref=e203]:
+            - generic [ref=e204]:
+              - generic [ref=e205]: Propuesta definida
+              - generic [ref=e206]: Transporte
+            - heading "MoviPass" [level=3] [ref=e207]
+            - paragraph [ref=e208]: Gestión de rutas, viajes, vehículos, asientos, taquilla, pasajeros, cancelaciones, validación QR, reportes y pagos para boletería.
+            - generic [ref=e209]:
+              - generic [ref=e210]: React
+              - generic [ref=e211]: PostgreSQL
+              - generic [ref=e212]: Redis
+              - generic [ref=e213]: Pagos
+    - generic [ref=e215]:
+      - generic [ref=e216]:
+        - generic [ref=e217]:
+          - generic [ref=e218]: Proyectos
+          - heading "Proyectos destacados" [level=2] [ref=e219]
+        - paragraph [ref=e220]: Fichas resumidas para mostrar alcance, sector y madurez sin publicar métricas no verificadas ni claims sensibles.
+      - generic [ref=e221]:
+        - article [ref=e222]:
+          - generic [ref=e224]: S
+          - generic [ref=e225]:
+            - generic [ref=e226]:
+              - generic [ref=e227]: Base construida
+              - generic [ref=e228]: Gestión electoral
+            - heading "SIGMA" [level=3] [ref=e229]
+            - paragraph [ref=e230]: Centro de comando electoral con campañas, equipos, líderes, votantes, censo, validación, puestos, zonas, call center, encuestas, mensajería, Día D, evidencias y reportes.
+            - generic [ref=e231]:
+              - generic [ref=e232]: Comando político
+              - generic [ref=e233]: Call center
+              - generic [ref=e234]: Día D
+              - generic [ref=e235]: Hablame SMS
+        - article [ref=e236]:
+          - generic [ref=e238]: L
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - generic [ref=e241]: Propuesta definida
+              - generic [ref=e242]: Rifas y sorteos
+            - heading "LuckyCore" [level=3] [ref=e243]
+            - paragraph [ref=e244]: Plataforma web para rifas, números, carrito, checkout, pagos, auditoría, estados de compra, reportes y administración en Filament.
+            - generic [ref=e245]:
+              - generic [ref=e246]: Rifas
+              - generic [ref=e247]: Checkout
+              - generic [ref=e248]: Filament
+              - generic [ref=e249]: Auditoría
+        - article [ref=e250]:
+          - generic [ref=e252]: A
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - generic [ref=e255]: Repositorio trabajado
+              - generic [ref=e256]: Gestión documental
+            - heading "ArchiveMaster" [level=3] [ref=e257]
+            - paragraph [ref=e258]: Administración documental con roles operativos, carga, consulta, edición, movimientos, impresión, oficinas, trazabilidad y posibles funciones con IA.
+            - generic [ref=e259]:
+              - generic [ref=e260]: Documentos
+              - generic [ref=e261]: Roles
+              - generic [ref=e262]: IA
+              - generic [ref=e263]: Trazabilidad
+        - article [ref=e264]:
+          - generic [ref=e266]: SP
+          - generic [ref=e267]:
+            - generic [ref=e268]:
+              - generic [ref=e269]: Repositorio existente
+              - generic [ref=e270]: Peticiones y solicitudes
+            - heading "Sistema PQRS" [level=3] [ref=e271]
+            - paragraph [ref=e272]: Recepción, radicación, estados, dependencias, respuestas, vencimientos, reportes, adjuntos y trazabilidad para solicitudes ciudadanas o institucionales.
+            - generic [ref=e273]:
+              - generic [ref=e274]: PQRS
+              - generic [ref=e275]: SLAs
+              - generic [ref=e276]: Reportes
+              - generic [ref=e277]: Adjuntos
+            - paragraph [ref=e278]:
+              - link "Ver detalle" [ref=e279] [cursor=pointer]:
+                - /url: /casos/torcoroma-pqrs.html
+        - article [ref=e280]:
+          - generic [ref=e282]: "NO"
+          - generic [ref=e283]:
+            - generic [ref=e284]:
+              - generic [ref=e285]: Caso detallado
+              - generic [ref=e286]: Retail omnicanal
+            - heading "NEXUS OMS" [level=3] [ref=e287]
+            - paragraph [ref=e288]: Integración VTEX + ICG para sincronizar pedidos, inventario y estados operativos entre ecommerce, backoffice y operación comercial.
+            - generic [ref=e289]:
+              - generic [ref=e290]: VTEX
+              - generic [ref=e291]: ICG
+              - generic [ref=e292]: OMS
+              - generic [ref=e293]: Middleware
+            - paragraph [ref=e294]:
+              - link "Ver detalle" [ref=e295] [cursor=pointer]:
+                - /url: /casos/nexus-oms-integracion-vtex-icg.html
+        - article [ref=e296]:
+          - generic [ref=e298]: CQ
+          - generic [ref=e299]:
+            - generic [ref=e300]:
+              - generic [ref=e301]: Análisis técnico
+              - generic [ref=e302]: Educación/certificación
+            - heading "Certificados QR" [level=3] [ref=e303]
+            - paragraph [ref=e304]: Certificados con firma visual institucional, QR de validación, hash único, URL pública, estados, logs, revocación y plantillas controladas.
+            - generic [ref=e305]:
+              - generic [ref=e306]: QR
+              - generic [ref=e307]: Hash
+              - generic [ref=e308]: Validación
+              - generic [ref=e309]: Plantillas
+    - generic [ref=e312]:
+      - generic [ref=e313]: Siguiente paso
+      - heading "Cuéntanos qué proceso quieres ordenar primero" [level=2] [ref=e314]
+      - paragraph [ref=e315]: Podemos partir desde un producto nuevo, una integración, un rediseño web, una automatización o una plataforma existente que necesita estructura.
+      - generic [ref=e316]:
+        - link "Escribir por WhatsApp" [ref=e317] [cursor=pointer]:
+          - /url: https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20ordenar%20un%20proyecto%20digital%20con%20ustedes.
+        - link "gerencia@kor-bytes.com" [ref=e318] [cursor=pointer]:
+          - /url: mailto:gerencia@kor-bytes.com
+      - text: K
+  - contentinfo [ref=e319]:
+    - generic [ref=e320]:
+      - generic [ref=e321]:
+        - generic [ref=e322]:
+          - img "KOR Bytes S.A.S." [ref=e324]
+          - paragraph [ref=e325]: KOR Bytes S.A.S. construye software operativo, productos verticales PASS, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.
+        - generic [ref=e326]:
+          - heading "Empresa" [level=3] [ref=e327]
+          - list [ref=e328]:
+            - listitem [ref=e329]:
+              - link "Inicio" [ref=e330] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e331]:
+              - link "Ecosistema PASS" [ref=e332] [cursor=pointer]:
+                - /url: /ecosistema-pass/
+            - listitem [ref=e333]:
+              - link "Proyectos/Casos" [ref=e334] [cursor=pointer]:
+                - /url: /casos/
+            - listitem [ref=e335]:
+              - link "Cobertura" [ref=e336] [cursor=pointer]:
+                - /url: /ubicaciones/
+        - generic [ref=e337]:
+          - heading "Servicios" [level=3] [ref=e338]
+          - list [ref=e339]:
+            - listitem [ref=e340]:
+              - link "Software a medida" [ref=e341] [cursor=pointer]:
+                - /url: /servicios/desarrollo-software-a-medida.html
+            - listitem [ref=e342]:
+              - link "Integraciones" [ref=e343] [cursor=pointer]:
+                - /url: /servicios/integraciones-erp-crm.html
+            - listitem [ref=e344]:
+              - link "Web y SEO" [ref=e345] [cursor=pointer]:
+                - /url: /servicios/desarrollo-web.html
+            - listitem [ref=e346]:
+              - link "Todos los servicios" [ref=e347] [cursor=pointer]:
+                - /url: /servicios/
+        - generic [ref=e348]:
+          - heading "Contacto" [level=3] [ref=e349]
+          - list [ref=e350]:
+            - listitem [ref=e351]:
+              - link "gerencia@kor-bytes.com" [ref=e352] [cursor=pointer]:
+                - /url: mailto:gerencia@kor-bytes.com
+            - listitem [ref=e353]:
+              - link "WhatsApp" [ref=e354] [cursor=pointer]:
+                - /url: https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20una%20consultoria.
+            - listitem [ref=e355]: Sincelejo, Sucre
+            - listitem [ref=e356]: Colombia y LATAM
+      - paragraph [ref=e357]: © 2026 KOR Bytes S.A.S. Todos los derechos reservados. Información de proyectos publicada según su estado de madurez, sin métricas no verificadas.
+  - link "Escribir por WhatsApp a KOR Bytes" [ref=e358] [cursor=pointer]:
+    - /url: https://wa.me/573043978157?text=Hola%20KOR%20Bytes%2C%20quiero%20un%20diagnostico%20para%20mi%20proyecto%20de%20software%20o%20producto%20digital.
+    - img [ref=e359]

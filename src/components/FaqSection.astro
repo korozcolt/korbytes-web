@@ -1,0 +1,29 @@
+---
+import type { FaqItem } from "@/data/site";
+import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  title: string;
+  items: FaqItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="kb-section">
+  <div class="kb-container">
+    <SectionHead
+      badge="FAQ"
+      title={title}
+      text="Respuestas cortas para búsquedas comerciales y para clientes que están evaluando alcance técnico."
+    />
+    <div class="kb-grid kb-grid-2">
+      {items.map((item) => (
+        <article class="kb-faq reveal">
+          <h3>{item.q}</h3>
+          <p>{item.a}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

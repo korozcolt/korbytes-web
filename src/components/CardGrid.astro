@@ -1,0 +1,45 @@
+---
+import type { CardItem } from "@/data/site";
+import { initials } from "@/data/site";
+import Chips from "./Chips.astro";
+
+interface Props {
+  items: CardItem[];
+  kind?: "project" | "service" | "location";
+}
+
+const { items, kind = "project" } = Astro.props;
+---
+
+<div class="kb-grid kb-grid-3">
+  {items.map((item) => (
+    kind === "service" || kind === "location" ? (
+      <a class="kb-service reveal" href={item.href}>
+        {item.tag && <span class="kb-badge">{item.tag}</span>}
+        <h3 style={item.tag ? "margin-top:1rem" : undefined}>{item.title}</h3>
+        <p>{item.text}</p>
+        <Chips chips={item.chips} />
+      </a>
+    ) : (
+      <article class="kb-project reveal">
+        <div class="kb-project-visual" aria-hidden="true">
+          <span class="kb-project-code">{initials(item.title)}</span>
+        </div>
+        <div class="kb-project-body">
+          <div class="kb-meta">
+            {item.status && <span>{item.status}</span>}
+            {item.sector && <span>{item.sector}</span>}
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <Chips chips={item.chips} />
+          {item.href && (
+            <p style="margin-top:1.1rem">
+              <a class="kb-button-secondary" href={item.href}>Ver detalle</a>
+            </p>
+          )}
+        </div>
+      </article>
+    )
+  ))}
+</div>

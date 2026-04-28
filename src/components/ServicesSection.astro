@@ -1,0 +1,19 @@
+---
+import { services } from "@/data/site";
+import CardGrid from "./CardGrid.astro";
+import SectionHead from "./SectionHead.astro";
+
+interface Props {
+  title: string;
+  text: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<section class="kb-section kb-band">
+  <div class="kb-container">
+    <SectionHead badge="Servicios" title={title} text={text} />
+    <CardGrid items={services} kind="service" />
+  </div>
+</section>

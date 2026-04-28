@@ -1,0 +1,37 @@
+---
+import type { PageData } from "@/data/site";
+import { whatsapp } from "@/data/site";
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+---
+
+<header class="kb-hero">
+  <div class="kb-container kb-hero-grid">
+    <div>
+      <span class="kb-eyebrow">{page.eyebrow}</span>
+      <h1><span class="kb-gradient-text">{page.h1}</span></h1>
+      <p class="kb-lead">{page.lead}</p>
+      <div class="kb-actions">
+        <a class="kb-button-primary" href={whatsapp(page.cta)} target="_blank" rel="noopener">Hablar del proyecto</a>
+        <a class="kb-button-secondary" href={page.secondary[0]}>{page.secondary[1]}</a>
+      </div>
+      <div class="kb-stat-row">
+        <div class="kb-stat"><strong>PASS</strong><span>Productos verticales reutilizables</span></div>
+        <div class="kb-stat"><strong>Laravel</strong><span>Arquitectura para operación real</span></div>
+        <div class="kb-stat"><strong>LATAM</strong><span>Base en Sucre, trabajo remoto</span></div>
+      </div>
+    </div>
+    <div class="kb-orbit" aria-hidden="true">
+      <div class="kb-orbit-line"></div>
+      <div class="kb-orbit-line"></div>
+      <div class="kb-orbit-line"></div>
+      <div class="kb-orbit-card"><strong>PASS Core</strong><span>Usuarios, roles, pagos, QR, reportes y configuración.</span></div>
+      <div class="kb-orbit-card"><strong>Operación</strong><span>Procesos, trazabilidad, tableros, estados y evidencia.</span></div>
+      <div class="kb-orbit-card"><strong>Infraestructura</strong><span>Deploys, VPS, Docker, Dokploy y automatización.</span></div>
+    </div>
+  </div>
+</header>

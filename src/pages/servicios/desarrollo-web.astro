@@ -1,0 +1,13 @@
+---
+import Hero from "@/components/Hero.astro";
+import PageSections from "@/components/PageSections.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { pages } from "@/data/site";
+
+const page = pages.web;
+---
+
+<BaseLayout page={page}>
+  <Hero page={page} />
+  <PageSections variant="web" />
+</BaseLayout>

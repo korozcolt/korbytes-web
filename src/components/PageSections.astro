@@ -1,0 +1,251 @@
+---
+import { faqFor, locations, passProducts, projects } from "@/data/site";
+import CardGrid from "./CardGrid.astro";
+import CtaSection from "./CtaSection.astro";
+import FaqSection from "./FaqSection.astro";
+import PassSection from "./PassSection.astro";
+import ProjectsSection from "./ProjectsSection.astro";
+import SectionHead from "./SectionHead.astro";
+import SectionIntro from "./SectionIntro.astro";
+import ServicesSection from "./ServicesSection.astro";
+
+interface Props {
+  variant:
+    | "home"
+    | "pass"
+    | "services"
+    | "software"
+    | "integrations"
+    | "web"
+    | "cases"
+    | "nexus"
+    | "pqrs"
+    | "locations"
+    | "sincelejo"
+    | "sucre";
+}
+
+const { variant } = Astro.props;
+
+const byTitle = (titles: string[]) => projects.filter((project) => titles.includes(project.title));
+---
+
+{variant === "home" && (
+  <>
+    <SectionIntro
+      badge="KOR Bytes como empresa madre"
+      title="De servicios a productos"
+      text="La nueva narrativa no abandona el software a medida: lo ordena dentro de una casa de producto. PASS permite convertir patrones repetidos en verticales con módulos reutilizables."
+      list={[
+        "Diagnóstico, arquitectura y desarrollo de sistemas internos.",
+        "Verticales PASS para sectores con operación recurrente.",
+        "Automatización, integraciones y despliegues para llevarlo a producción.",
+      ]}
+    />
+    <ServicesSection title="Capacidades comerciales" text="Servicios que cubren desde la web pública hasta el sistema que opera por dentro." />
+    <PassSection title="Ecosistema PASS destacado" items={passProducts.slice(0, 6)} />
+    <ProjectsSection title="Proyectos destacados" items={projects.slice(0, 6)} />
+    <CtaSection
+      title="Cuéntanos qué proceso quieres ordenar primero"
+      text="Podemos partir desde un producto nuevo, una integración, un rediseño web, una automatización o una plataforma existente que necesita estructura."
+      message="Hola KOR Bytes, quiero ordenar un proyecto digital con ustedes."
+    />
+  </>
+)}
+
+{variant === "pass" && (
+  <>
+    <SectionIntro
+      badge="PASS Core"
+      title="Una base común para productos diferentes"
+      text="La hipótesis estratégica es simple: muchos sectores necesitan usuarios, sedes, roles, pagos, notificaciones, documentos, QR, auditoría y reportes. PASS Core evita reconstruir esa base cada vez."
+      list={[
+        "KORPass funciona como identidad central y núcleo conceptual.",
+        "Cada vertical adapta reglas de negocio, UX y módulos propios.",
+        "Los productos se publican con su estado real: concepto, definido, propuesta o repositorio.",
+      ]}
+    />
+    <PassSection title="Verticales PASS" items={passProducts} />
+    <CtaSection
+      title="Diseñemos la vertical que falta"
+      text="Si un sector comparte operación repetible, PASS puede convertirse en una base comercial y técnica más fuerte que un desarrollo aislado."
+      message="Hola KOR Bytes, quiero evaluar una nueva vertical PASS."
+    />
+    <FaqSection title="Preguntas sobre PASS" items={faqFor("pass")} />
+  </>
+)}
+
+{variant === "services" && (
+  <>
+    <ServicesSection title="Mapa de servicios" text="Seis frentes conectados para construir, publicar, automatizar y operar productos digitales." />
+    <SectionIntro
+      badge="Método de trabajo"
+      title="Menos promesas, más claridad por fases"
+      text="Cada proyecto se ordena por diagnóstico, alcance, arquitectura, implementación, QA, despliegue y evolución. La meta es reducir riesgo antes de escribir demasiado código."
+      list={[
+        "Discovery para entender operación, usuarios, datos y restricciones.",
+        "Arquitectura y roadmap con decisiones técnicas explícitas.",
+        "Entregas incrementales con QA, documentación y soporte evolutivo.",
+      ]}
+    />
+    <ProjectsSection title="Servicios puestos en contexto" items={projects.slice(0, 9)} />
+    <FaqSection title="Preguntas frecuentes" items={faqFor("services")} />
+  </>
+)}
+
+{variant === "software" && (
+  <>
+    <SectionIntro
+      badge="Software a medida"
+      title="Cuando la operación necesita reglas propias"
+      text="Este servicio cubre plataformas internas, dashboards, paneles operativos, PQRS, gestión documental, inventario, cartera, reportes, roles y flujos a la medida."
+      list={[
+        "Arquitectura Laravel orientada a dominios y operación real.",
+        "Roles, permisos, auditoría, trazabilidad y reportes.",
+        "Integraciones con pagos, ERP, CRM, ecommerce o herramientas internas.",
+      ]}
+    />
+    <ProjectsSection title="Referencias relacionadas" items={byTitle(["ArchiveMaster", "Sistema PQRS", "SIGMA", "LuckyCore", "Certificados QR", "korozcolt/payments"])} />
+    <FaqSection title="FAQ software a medida" items={faqFor("software")} />
+    <CtaSection
+      title="Hablemos del flujo crítico"
+      text="Si el cuello de botella tiene responsables, estados, reglas, documentos o pagos, probablemente merece una solución a medida."
+      message="Hola KOR Bytes, quiero evaluar software a medida."
+    />
+  </>
+)}
+
+{variant === "integrations" && (
+  <>
+    <SectionIntro
+      badge="Integraciones"
+      title="Datos consistentes entre sistemas que ya existen"
+      text="El objetivo es unir ecommerce, ERP, CRM, POS, pagos, notificaciones y automatizaciones sin esconder la complejidad operativa."
+      list={[
+        "Middleware y APIs con trazabilidad y control de errores.",
+        "Sincronización de pedidos, inventario, estados, pagos y reportes.",
+        "Automatizaciones con webhooks, n8n, OpenClaw o servicios externos.",
+      ]}
+    />
+    <ProjectsSection title="Casos y módulos relacionados" items={byTitle(["NEXUS OMS", "korozcolt/payments", "Automatizaciones n8n/OpenClaw", "Ecosistema VPS", "Shopify + API headless"])} />
+    <FaqSection title="FAQ integraciones" items={faqFor("integrations")} />
+    <CtaSection
+      title="Conectemos el sistema que hoy está aislado"
+      text="Revisamos fuentes, reglas de sincronización, errores posibles y el flujo mínimo para empezar con seguridad."
+      message="Hola KOR Bytes, quiero evaluar una integracion."
+    />
+  </>
+)}
+
+{variant === "web" && (
+  <>
+    <SectionIntro
+      badge="Web y SEO"
+      title="Una presencia digital debe ser clara, rápida y creíble"
+      text="El rediseño web no es decoración: estructura contenido, mejora confianza, organiza intención de búsqueda y conecta la marca con conversión."
+      list={[
+        "Arquitectura SEO, metadatos, sitemap, schema y páginas por intención.",
+        "Diseño responsive con identidad visual propia y CTAs medibles.",
+        "WordPress, sitios estáticos, landing pages, portales y experiencias comerciales.",
+      ]}
+    />
+    <ProjectsSection title="Proyectos web y marca" items={byTitle(["Portal de noticias", "NotFound Band", "Athletic Sincelejo", "Shopify + API headless"])} />
+    <FaqSection title="FAQ web y SEO" items={faqFor("web")} />
+    <CtaSection
+      title="Rediseñemos una web que se sienta importante"
+      text="Podemos empezar por estructura, SEO, performance, diseño o integración con flujos comerciales."
+      message="Hola KOR Bytes, quiero revisar mi web o SEO."
+    />
+  </>
+)}
+
+{variant === "cases" && (
+  <>
+    <PassSection title="Productos PASS" items={passProducts.slice(0, 7)} />
+    <ProjectsSection title="Proyectos fuera de PASS" items={projects} />
+    <CtaSection
+      title="¿Tu proyecto se parece a alguno de estos?"
+      text="Lo importante no es copiar una solución, sino reconocer patrones: pagos, roles, trazabilidad, QR, reportes, despliegues o contenido con intención comercial."
+      message="Hola KOR Bytes, quiero hablar sobre un proyecto parecido a su portafolio."
+    />
+  </>
+)}
+
+{(variant === "nexus" || variant === "pqrs") && (
+  <>
+    <SectionIntro
+      badge={variant === "nexus" ? "Retail omnicanal" : "Gestión de solicitudes"}
+      title={variant === "nexus" ? "NEXUS OMS: lectura operativa" : "Torcoroma PQRS: lectura operativa"}
+      text="Este caso se presenta como referencia de patrón técnico y de negocio. La comunicación evita métricas no verificadas y se enfoca en reto, solución y aplicabilidad."
+      list={variant === "nexus"
+        ? [
+            "Brecha entre ecommerce, inventario y operación de tienda.",
+            "Necesidad de sincronizar pedidos, disponibilidad y estados.",
+            "Middleware para conectar VTEX, ICG y reglas operativas.",
+            "Visibilidad para reducir reprocesos y mejorar confiabilidad.",
+          ]
+        : [
+            "Centralización de PQRS, responsables y dependencias.",
+            "Estados, vencimientos, documentos adjuntos y trazabilidad.",
+            "Reportes para supervisión, auditoría y mejora del servicio.",
+            "Enfoque replicable para operaciones institucionales o reguladas.",
+          ]}
+    />
+    <ServicesSection title="Capacidades usadas en este caso" text="Integración, software a medida, trazabilidad, reportes y despliegue se combinan según el flujo real del negocio." />
+    <ProjectsSection title="Proyectos relacionados" items={byTitle(["NEXUS OMS", "Sistema PQRS", "ArchiveMaster", "korozcolt/payments", "Automatizaciones n8n/OpenClaw"])} />
+    <CtaSection
+      title={variant === "nexus" ? "Hablemos sobre un caso tipo NEXUS OMS" : "Hablemos sobre un caso tipo Torcoroma PQRS"}
+      text="Si reconoces el patrón, el siguiente paso es mapear sistemas, responsables, estados, datos y riesgos antes de estimar."
+      message={variant === "nexus" ? "Hola KOR Bytes, quiero evaluar una integracion tipo NEXUS OMS." : "Hola KOR Bytes, quiero evaluar un sistema PQRS."}
+    />
+  </>
+)}
+
+{variant === "locations" && (
+  <>
+    <section class="kb-section">
+      <div class="kb-container">
+        <SectionHead
+          badge="Cobertura"
+          title="Cercanía regional, ejecución remota."
+          text="KOR Bytes comunica su origen local sin encerrarse geográficamente: el sitio debe posicionar Sincelejo/Sucre y también vender capacidad para Colombia y LATAM."
+        />
+        <CardGrid items={locations} kind="location" />
+      </div>
+    </section>
+    <ServicesSection title="Servicios disponibles por cobertura" text="Software, productos PASS, integraciones, web, automatización e infraestructura se pueden ejecutar por fases y con comunicación remota." />
+    <FaqSection title="FAQ cobertura" items={faqFor("locations")} />
+    <CtaSection
+      title="Conversemos desde tu contexto local o remoto"
+      text="La primera conversación debe ubicar operación, restricciones, presupuesto, urgencia y sistemas actuales."
+      message="Hola KOR Bytes, quiero evaluar un proyecto desde mi ciudad."
+    />
+  </>
+)}
+
+{(variant === "sincelejo" || variant === "sucre") && (
+  <>
+    <SectionIntro
+      badge={variant === "sincelejo" ? "Sincelejo" : "Sucre"}
+      title={variant === "sincelejo" ? "KOR Bytes para empresas en Sincelejo" : "KOR Bytes para empresas en Sucre"}
+      text={variant === "sincelejo"
+        ? "La base local importa: permite entender comercios, instituciones, clubes y operaciones regionales sin perder capacidad de ejecución remota."
+        : "Los proyectos regionales suelen necesitar control entre sedes, municipios, canales, usuarios, documentos y pagos. Ese es el terreno natural de KOR Bytes."}
+      list={[
+        "Diagnóstico de procesos, usuarios, sedes y datos actuales.",
+        "Diseño de arquitectura para software, web, automatización o infraestructura.",
+        "Implementación por fases con soporte remoto y documentación.",
+      ]}
+    />
+    <ServicesSection
+      title={variant === "sincelejo" ? "Servicios para Sincelejo" : "Servicios para Sucre"}
+      text="El objetivo es cubrir necesidades comerciales, operativas y técnicas desde una misma casa de software."
+    />
+    <ProjectsSection title="Referencias útiles" items={projects.slice(0, 6)} />
+    <CtaSection
+      title={variant === "sincelejo" ? "Hablemos de software en Sincelejo" : "Hablemos de software en Sucre"}
+      text="Podemos iniciar con una llamada de diagnóstico para entender si el problema necesita web, automatización, integración, producto PASS o software a medida."
+      message={variant === "sincelejo" ? "Hola KOR Bytes, quiero evaluar software en Sincelejo." : "Hola KOR Bytes, quiero evaluar software en Sucre."}
+    />
+  </>
+)}

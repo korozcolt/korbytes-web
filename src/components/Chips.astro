@@ -1,0 +1,13 @@
+---
+interface Props {
+  chips?: string[];
+}
+
+const { chips = [] } = Astro.props;
+---
+
+{chips.length > 0 && (
+  <div class="kb-chip-row">
+    {chips.map((chip) => <span class="kb-chip">{chip}</span>)}
+  </div>
+)}
