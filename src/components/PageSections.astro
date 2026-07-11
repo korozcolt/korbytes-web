@@ -43,8 +43,8 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
       ]}
     />
     <ServicesSection title="Capacidades comerciales" text="Servicios que cubren desde la web pública hasta el sistema que opera por dentro." />
-    <PassSection title="Ecosistema PASS destacado" items={passProducts.slice(0, 6)} />
-    <ProjectsSection title="Proyectos destacados" items={projects.slice(0, 6)} />
+    <PassSection title="Ecosistema PASS destacado" items={passProducts.slice(0, 4)} moreHref="/ecosistema-pass/" featured />
+    <ProjectsSection title="Proyectos destacados" items={projects.slice(0, 4)} moreHref="/casos/" featured />
     <CtaSection
       title="Cuéntanos qué proceso quieres ordenar primero"
       text="Podemos partir desde un producto nuevo, una integración, un rediseño web, una automatización o una plataforma existente que necesita estructura."
@@ -88,7 +88,7 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
         "Entregas incrementales con QA, documentación y soporte evolutivo.",
       ]}
     />
-    <ProjectsSection title="Servicios puestos en contexto" items={projects.slice(0, 9)} />
+    <ProjectsSection title="Servicios puestos en contexto" items={projects.slice(0, 6)} moreHref="/casos/" />
     <FaqSection title="Preguntas frecuentes" items={faqFor("services")} />
   </>
 )}
@@ -161,8 +161,8 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
 
 {variant === "cases" && (
   <>
-    <PassSection title="Productos PASS" items={passProducts.slice(0, 7)} />
-    <ProjectsSection title="Proyectos fuera de PASS" items={projects} />
+    <PassSection title="Productos PASS" items={passProducts.slice(0, 4)} moreHref="/ecosistema-pass/" />
+    <ProjectsSection title="Proyectos fuera de PASS" items={projects.slice(0, 8)} />
     <CtaSection
       title="¿Tu proyecto se parece a alguno de estos?"
       text="Lo importante no es copiar una solución, sino reconocer patrones: pagos, roles, trazabilidad, QR, reportes, despliegues o contenido con intención comercial."
@@ -203,8 +203,8 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
 
 {variant === "locations" && (
   <>
-    <section class="kb-section">
-      <div class="kb-container warm-surface">
+    <section class="kb-section section-warm">
+      <div class="kb-container">
         <SectionHead
           badge="Cobertura"
           title="Cercanía regional, ejecución remota."
@@ -241,7 +241,7 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
       title={variant === "sincelejo" ? "Servicios para Sincelejo" : "Servicios para Sucre"}
       text="El objetivo es cubrir necesidades comerciales, operativas y técnicas desde una misma casa de software."
     />
-    <ProjectsSection title="Referencias útiles" items={projects.slice(0, 6)} />
+    <ProjectsSection title="Referencias útiles" items={projects.slice(0, 4)} moreHref="/casos/" />
     <CtaSection
       title={variant === "sincelejo" ? "Hablemos de software en Sincelejo" : "Hablemos de software en Sucre"}
       text="Podemos iniciar con una llamada de diagnóstico para entender si el problema necesita web, automatización, integración, producto PASS o software a medida."

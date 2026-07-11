@@ -67,7 +67,15 @@ mm.add("(prefers-reduced-motion: no-preference)", () => {
     });
   }
 
-  // ── 4. CTA scale-in ───────────────────────────────────────
+  // ── 4. Section headings: fade & slide up on scroll ─────
+  gsap.utils.toArray(".kb-section-head").forEach((el) => {
+    gsap.from(el, {
+      y: 20, opacity: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" },
+    });
+  });
+
+  // ── 5. CTA scale-in ───────────────────────────────────────
   const cta = document.querySelector(".kb-cta");
   if (cta) {
     ScrollTrigger.create({

@@ -6,22 +6,25 @@ import Chips from "./Chips.astro";
 interface Props {
   items: CardItem[];
   kind?: "project" | "service" | "location";
+  featured?: boolean;
 }
 
-const { items, kind = "project" } = Astro.props;
+const { items, kind = "project", featured } = Astro.props;
 ---
 
 <div class="kb-grid kb-grid-3">
-  {items.map((item) => (
+  {items.map((item, idx) => (
     kind === "service" || kind === "location" ? (
-      <a class="kb-service reveal" href={item.href}>
-        {item.tag && <span class="kb-badge">{item.tag}</span>}
-        <h3 style={item.tag ? "margin-top:1rem" : undefined}>{item.title}</h3>
-        <p>{item.text}</p>
-        <Chips chips={item.chips} />
-      </a>
+      <div class={`dbl-shell reveal${featured && idx === 0 ? " kb-featured" : ""}`}>
+        <a class="dbl-core" href={item.href}>
+          {item.tag && <span class="kb-badge">{item.tag}</span>}
+          <h3 style={item.tag ? "margin-top:1rem" : undefined}>{item.title}</h3>
+          <p>{item.text}</p>
+          <Chips chips={item.chips} />
+        </a>
+      </div>
     ) : (
-      <article class="kb-project reveal">
+      <article class={`kb-project reveal${featured && idx === 0 ? " kb-featured" : ""}`}>
         <div class="kb-project-visual" aria-hidden="true">
           <span class="kb-project-code">{initials(item.title)}</span>
         </div>
