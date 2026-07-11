@@ -15,21 +15,31 @@ const { current } = Astro.props;
       <a class="kb-logo" href="/" aria-label="KOR Bytes inicio">
         <img src="/images/logo-oficial-dark.png" width="600" height="200" alt="KOR Bytes S.A.S." decoding="async" fetchpriority="high" />
       </a>
-      <div class="kb-nav-links">
+
+      <div class="kb-nav-links" role="menubar">
         {navItems.map(([label, href]) => (
-          <a href={href} aria-current={href === current ? "page" : undefined}>{label}</a>
+          <a class="kb-nav-link" role="menuitem" href={href} aria-current={href === current ? "page" : undefined}>{label}</a>
         ))}
       </div>
-      <a class="kb-nav-cta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
-        <i class="ph ph-whatsapp-logo"></i> Hablar por WhatsApp
+
+      <a class="kb-nav-cta kb-nav-cta-desktop" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+        <span class="dot" aria-hidden="true"></span>
+        Hablar por WhatsApp
       </a>
-      <button class="kb-menu-button" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+
+      <button class="kb-menu-btn" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
     </div>
+
     <div class="kb-mobile-menu" id="mobile-menu">
-      {navItems.map(([label, href]) => <a href={href} aria-current={href === current ? "page" : undefined}>{label}</a>)}
-      <a href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i> WhatsApp</a>
+      {navItems.map(([label, href]) => (
+        <a class="kb-nav-link" href={href} aria-current={href === current ? "page" : undefined}>{label}</a>
+      ))}
+      <a class="kb-nav-cta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+        <span class="dot" aria-hidden="true"></span>
+        Hablar por WhatsApp
+      </a>
     </div>
   </div>
 </nav>

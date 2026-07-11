@@ -1,18 +1,26 @@
 ---
 import { whatsapp } from "@/data/site";
+const year = new Date().getFullYear();
 ---
 
-<footer class="kb-footer">
+<footer class="kb-foot">
   <div class="kb-container">
-    <div class="kb-footer-grid">
-      <div>
-        <div class="kb-footer-logo">
+    <div class="kb-foot-grid">
+      <div class="kb-foot-brand-block">
+        <a class="kb-foot-logo" href="/" aria-label="KOR Bytes inicio">
           <img src="/images/logo-oficial-dark.png" width="600" height="200" alt="KOR Bytes S.A.S." loading="lazy" />
-        </div>
-        <p>KOR Bytes S.A.S. construye software operativo, productos verticales PASS, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.</p>
+        </a>
+        <p class="kb-foot-pitch">
+          Construimos software operativo, productos verticales <span class="kb-wordmark">PASS</span>, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.
+        </p>
+        <address class="kb-foot-address">
+          <div><strong>Sincelejo</strong> · Sucre · Colombia</div>
+          <div class="kb-foot-mute">Trabajo remoto · Modelo B2B</div>
+        </address>
       </div>
+
       <div>
-        <h3>Empresa</h3>
+        <h4>Empresa</h4>
         <ul>
           <li><a href="/">Inicio</a></li>
           <li><a href="/ecosistema-pass/">Ecosistema PASS</a></li>
@@ -20,25 +28,77 @@ import { whatsapp } from "@/data/site";
           <li><a href="/ubicaciones/">Cobertura</a></li>
         </ul>
       </div>
+
       <div>
-        <h3>Servicios</h3>
+        <h4>Servicios</h4>
         <ul>
-          <li><a href="/servicios/desarrollo-software-a-medida.html">Software a medida</a></li>
-          <li><a href="/servicios/integraciones-erp-crm.html">Integraciones</a></li>
-          <li><a href="/servicios/desarrollo-web.html">Web y SEO</a></li>
-          <li><a href="/servicios/">Todos los servicios</a></li>
+          <li><a href="/servicios/desarrollo-software-a-medida">Software a medida</a></li>
+          <li><a href="/servicios/integraciones-erp-crm">Integraciones</a></li>
+          <li><a href="/servicios/desarrollo-web">Web + SEO</a></li>
+          <li><a href="/servicios/">Ver mapa completo</a></li>
         </ul>
       </div>
+
       <div>
-        <h3>Contacto</h3>
+        <h4>Contacto</h4>
         <ul>
           <li><a href="mailto:gerencia@kor-bytes.com">gerencia@kor-bytes.com</a></li>
-          <li><a href={whatsapp("Hola KOR Bytes, quiero una consultoría.")} target="_blank" rel="noopener">WhatsApp</a></li>
-          <li>Sincelejo, Sucre</li>
-          <li>Colombia y LATAM</li>
+          <li>
+            <a href={whatsapp("Hola KOR Bytes, quiero una consultoría.")} target="_blank" rel="noopener">
+              WhatsApp directo
+            </a>
+          </li>
+          <li class="kb-foot-mono">+57 304 397 8157</li>
         </ul>
+        <div class="kb-foot-cta">
+          <a class="kb-btn kb-btn--amber kb-foot-btn" href={whatsapp("Hola KOR Bytes, quiero empezar un proyecto.")} target="_blank" rel="noopener">
+            Empezar un proyecto
+          </a>
+        </div>
       </div>
     </div>
-    <p class="kb-footnote">© {new Date().getFullYear()} KOR Bytes S.A.S. Todos los derechos reservados. Información de proyectos publicada según su estado de madurez, sin métricas no verificadas.</p>
+
+    <div class="kb-foot-foot">
+      <div>© {year} KOR Bytes S.A.S. · Todos los derechos reservados</div>
+      <div class="kb-foot-claim">Información de proyectos publicada según su estado de madurez, sin métricas no verificadas.</div>
+    </div>
   </div>
 </footer>
+
+<style>
+  .kb-foot-logo {
+    display: inline-flex;
+    margin-bottom: 1.25rem;
+  }
+  .kb-foot-logo img {
+    width: 188px; height: auto;
+    filter: drop-shadow(0 0 18px oklch(0.78 0.155 215 / 0.18));
+  }
+  .kb-foot-pitch {
+    color: var(--kb-text-muted);
+    line-height: 1.62;
+    font-size: 0.94rem;
+    margin: 0 0 1.1rem;
+    max-width: 360px;
+  }
+  .kb-foot-address {
+    font-style: normal;
+    color: var(--kb-text-muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .kb-foot-mute { color: var(--kb-text-soft); font-size: 0.8rem; }
+  .kb-foot-mono {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--kb-text-soft);
+    letter-spacing: 0.02em;
+  }
+  .kb-foot-cta {
+    margin-top: 1.1rem;
+  }
+  .kb-foot-btn {
+    font-size: 0.86rem;
+    padding: 0.7rem 1rem;
+  }
+</style>

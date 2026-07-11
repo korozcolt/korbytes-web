@@ -6,9 +6,10 @@ interface Props {
   title: string;
   items: CardItem[];
   moreHref?: string;
+  featured?: boolean;
 }
 
-const { title, items, moreHref } = Astro.props;
+const { title, items, moreHref, featured } = Astro.props;
 
 const statusColor: Record<string, string> = {
   "Concepto": "kb-text-muted",

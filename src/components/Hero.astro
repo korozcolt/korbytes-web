@@ -9,152 +9,135 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<header class="kb-hero ink-surface">
-  <canvas id="kb-particles" aria-hidden="true"></canvas>
-  <div class="kb-container kb-hero-grid">
-    <div>
-      <span class="kb-eyebrow">{page.eyebrow}</span>
-      <h1 class="kb-hero-title">{page.h1}</h1>
-      <p class="kb-lead">{page.lead}</p>
-      <div class="kb-hero-accent">
-        <div class="kb-hero-accent-line"></div>
-        <span>Arquitectura &middot; Producto &middot; Operaci&oacute;n</span>
+<header class="kb-hero surface-ink" id="hero">
+  <!-- Three.js scene: orbital architecture visualization -->
+  <canvas id="kb-hero-canvas" aria-hidden="true"></canvas>
+
+  <!-- Animated SVG: schematic overlay (orbit traces) -->
+  <svg class="kb-hero-traces" aria-hidden="true" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="kb-trace" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"  stop-color="oklch(0.78 0.155 215)" stop-opacity="0.45"/>
+        <stop offset="80%" stop-color="oklch(0.78 0.155 215)" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g fill="none" stroke="url(#kb-trace)" stroke-width="1">
+      <circle cx="400" cy="400" r="120"/>
+      <circle cx="400" cy="400" r="220" stroke-dasharray="2 6"/>
+      <circle cx="400" cy="400" r="340" stroke-dasharray="1 14"/>
+    </g>
+  </svg>
+
+  <div class="kb-container">
+    <div class="kb-hero-grid" data-reveal-stagger>
+      <!-- BIG TYPE STACK ─ left aligned, never centered -->
+      <div class="kb-hero-copy">
+        <div class="kb-hero-kicker">
+          <span class="kb-status kb-status--production">Operando desde 2019</span>
+          <span class="kb-hero-loc">Sincelejo, Sucre · LATAM</span>
+        </div>
+
+        <h1 class="kb-hero-title">
+          <span class="kb-hero-line">
+            <span class="kb-hero-word">Software</span> <span class="kb-hero-word kb-hero-word--accent">operativo,</span>
+          </span>
+          <span class="kb-hero-line">
+            <span class="kb-hero-word">productos</span> <span class="kb-hero-word kb-hero-word--italic">verticales</span>
+          </span>
+          <span class="kb-hero-line">
+            <span class="kb-hero-word kb-hero-word--accent">y</span> <span class="kb-hero-word">sistemas</span> <span class="kb-hero-word kb-hero-word--italic">que</span>
+          </span>
+          <span class="kb-hero-line">
+            <span class="kb-hero-word">sí aguantan</span> <span class="kb-hero-word kb-hero-word--accent">la operación.</span>
+          </span>
+        </h1>
+
+        <p class="kb-lead kb-hero-lead">{page.lead}</p>
+
+        <div class="kb-hero-actions">
+          <a class="kb-btn kb-btn--primary" data-magnetic href={whatsapp(page.cta)} target="_blank" rel="noopener">
+            <i class="ph ph-chat-teardrop-text" aria-hidden="true"></i>
+            Hablar del proyecto
+          </a>
+          <a class="kb-btn kb-btn--ghost" data-magnetic href={page.secondary[0]}>
+            <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+            {page.secondary[1]}
+          </a>
+        </div>
+
+        <!-- Compact stat row (no hero-metric template) -->
+        <dl class="kb-hero-stats">
+          <div>
+            <dt class="kb-mono">Productos verticales</dt>
+            <dd><span class="kb-stat-num">11</span><span class="kb-stat-suf">PASS</span></dd>
+          </div>
+          <div>
+            <dt class="kb-mono">Arquitectura</dt>
+            <dd><span class="kb-stat-num">Laravel</span><span class="kb-stat-suf">+ Filament</span></dd>
+          </div>
+          <div>
+            <dt class="kb-mono">Cobertura</dt>
+            <dd><span class="kb-stat-num">LATAM</span><span class="kb-stat-suf">remoto-first</span></dd>
+          </div>
+        </dl>
       </div>
-      <div class="kb-actions">
-        <a class="kb-button-primary" href={whatsapp(page.cta)} target="_blank" rel="noopener">Hablar del proyecto</a>
-        <a class="kb-button-secondary" href={page.secondary[0]}>{page.secondary[1]}</a>
-      </div>
-      <div class="kb-stat-row">
-        <div class="kb-stat"><strong>PASS</strong><span>Productos verticales reutilizables</span></div>
-        <div class="kb-stat"><strong>Laravel</strong><span>Arquitectura para operación real</span></div>
-        <div class="kb-stat"><strong>LATAM</strong><span>Base en Sucre, trabajo remoto</span></div>
+
+      <!-- RIGHT: cinematic 3D visualization with overlay info card -->
+      <div class="kb-hero-visual">
+        <div class="kb-hero-canvas-wrap" id="kb-three-scene"></div>
+
+        <div class="kb-hero-overlay-card">
+          <div class="kb-hero-overlay-row">
+            <span class="kb-status kb-status--released">NEXUS <span class="kb-mono">/ OMS</span></span>
+            <span class="kb-mono kb-mono--sm">v1.4 — producción</span>
+          </div>
+          <p class="kb-hero-overlay-text">
+            Middleware <span class="kb-wordmark">VTEX ↔ ICG</span> sincronizando pedidos, inventario y estados para retail omnicanal.
+          </p>
+          <div class="kb-hero-overlay-foot">
+            <span class="kb-chip kb-chip--amber">Middleware</span>
+            <span class="kb-chip kb-chip--ink">Retail</span>
+            <a href="/casos/nexus-oms-integracion-vtex-icg" class="kb-hero-overlay-link">
+              Ver caso <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Floating data tickers (surprise element) -->
+        <div class="kb-hero-ticker kb-hero-ticker--top" aria-hidden="true">
+          <span class="kb-mono">↗ 247 ops/min</span>
+        </div>
+        <div class="kb-hero-ticker kb-hero-ticker--bottom" aria-hidden="true">
+          <span class="kb-mono">⟳ sync 0.3s</span>
+        </div>
       </div>
     </div>
-    <div class="kb-orbit" aria-hidden="true">
-      <div id="kb-three-scene"></div>
-      <div class="kb-orbit-line"></div>
-      <div class="kb-orbit-line"></div>
-      <div class="kb-orbit-line"></div>
+
+    <!-- Bottom reveal ribbon: marquee of tech vocabulary, single shot -->
+    <div class="kb-hero-marquee" aria-hidden="true">
+      <div class="kb-hero-marquee-track" id="kb-hero-marquee">
+        <span>Laravel</span><i>·</i>
+        <span>Filament</span><i>·</i>
+        <span>Livewire</span><i>·</i>
+        <span>PASS Core</span><i>·</i>
+        <span>n8n</span><i>·</i>
+        <span>Dokploy</span><i>·</i>
+        <span>VPS</span><i>·</i>
+        <span>Redis</span><i>·</i>
+        <span>Postgres</span><i>·</i>
+        <span>WordPress</span><i>·</i>
+        <span>Shopify</span><i>·</i>
+        <span>MercadoPago</span><i>·</i>
+        <span>Wompi</span><i>·</i>
+        <span>OpenClaw</span><i>·</i>
+        <span>Gemini</span><i>·</i>
+      </div>
     </div>
   </div>
 </header>
 
-<script is:inline>
-  (function() {
-    const canvas = document.getElementById("kb-particles");
-    if (!canvas || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = canvas.getContext("2d");
-    let w, h, particles = [];
-    const COUNT = 120;
-    const MAX_DIST = 160;
-
-    function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      w = canvas.width = rect.width;
-      h = canvas.height = rect.height;
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    for (let i = 0; i < COUNT; i++) {
-      particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < COUNT; i++) {
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-        const isBrand = i % 3 !== 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, isBrand ? 2.5 : 2, 0, Math.PI * 2);
-        ctx.fillStyle = isBrand ? "oklch(0.55 0.120 260 / 0.5)" : "oklch(0.68 0.145 85 / 0.35)";
-        ctx.fill();
-        for (let j = i + 1; j < COUNT; j++) {
-          const q = particles[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MAX_DIST) {
-            const alpha = Math.max(0, (1 - dist / MAX_DIST) * 0.35);
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `oklch(0.55 0.120 260 / ${alpha})`;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  })();
-</script>
-
-<script is:inline>
-  (async function() {
-    const container = document.getElementById("kb-three-scene");
-    if (!container || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    try {
-      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js");
-      const w = container.clientWidth, h = container.clientHeight;
-      if (w < 200 || h < 200) return;
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
-      camera.position.set(0, 0, 5.5);
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(w, h);
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-      container.appendChild(renderer.domElement);
-
-      const knotGeom = new THREE.TorusKnotGeometry(1.6, 0.5, 128, 24);
-      const knotEdges = new THREE.EdgesGeometry(knotGeom);
-      const knotMat = new THREE.LineBasicMaterial({ color: 0x4488ee, transparent: true, opacity: 0.5 });
-      const knot = new THREE.LineSegments(knotEdges, knotMat);
-      scene.add(knot);
-
-      const innerGeom = new THREE.TorusKnotGeometry(1.6, 0.5, 64, 16);
-      const innerMat = new THREE.MeshBasicMaterial({ color: 0xcc8833, wireframe: true, transparent: true, opacity: 0.25 });
-      const inner = new THREE.Mesh(innerGeom, innerMat);
-      scene.add(inner);
-
-      const ringData = [
-        { radius: 2.1, tube: 0.03, rotX: 0.3, rotY: 0.5, color: 0x4488ee, speed: 0.003 },
-        { radius: 2.1, tube: 0.03, rotX: 1.0, rotY: 0.2, color: 0xcc8833, speed: -0.004 },
-        { radius: 2.1, tube: 0.03, rotX: 0.6, rotY: 0.8, color: 0x44ccbb, speed: 0.002 },
-      ];
-      const rings = ringData.map((d) => {
-        const g = new THREE.TorusGeometry(d.radius, d.tube, 48, 64);
-        const e = new THREE.EdgesGeometry(g);
-        const m = new THREE.LineBasicMaterial({ color: d.color, transparent: true, opacity: 0.25 });
-        const ring = new THREE.LineSegments(e, m);
-        ring.rotation.x = d.rotX;
-        ring.rotation.y = d.rotY;
-        scene.add(ring);
-        return { mesh: ring, ...d };
-      });
-
-      function animate() {
-        requestAnimationFrame(animate);
-        knot.rotation.x += 0.006;
-        knot.rotation.y += 0.01;
-        inner.rotation.x += 0.004;
-        inner.rotation.y += 0.007;
-        rings.forEach((r) => {
-          r.mesh.rotation.x += r.speed * 0.5;
-          r.mesh.rotation.y += r.speed;
-        });
-        renderer.render(scene, camera);
-      }
-      animate();
-      const ro = new ResizeObserver(() => {
-        const nw = container.clientWidth, nh = container.clientHeight;
-        camera.aspect = nw / nh;
-        camera.updateProjectionMatrix();
-        renderer.setSize(nw, nh);
-      });
-      ro.observe(container);
-    } catch (e) { /* Three.js failed to load — degrade gracefully */ }
-  })();
+<!-- Three.js + ancillary scene (loaded only here to keep payloads small on inner pages) -->
+<script>
+  import { initHeroScene } from "@/scripts/hero-scene";
+  initHeroScene();
 </script>
