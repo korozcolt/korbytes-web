@@ -13,12 +13,16 @@ const { title, text, message } = Astro.props;
 <section class="kb-section" id="contacto">
   <div class="kb-container">
     <div class="kb-cta reveal">
-      <span class="kb-badge">Siguiente paso</span>
-      <h2 style="margin-top:1rem">{title}</h2>
-      <p class="kb-lead">{text}</p>
-      <div class="kb-actions">
-        <a class="kb-button-primary" href={whatsapp(message)} target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a class="kb-button-secondary" href="mailto:gerencia@kor-bytes.com">gerencia@kor-bytes.com</a>
+      <div class="dbl-shell">
+        <div class="dbl-core">
+          <span class="kb-badge badge-success">Siguiente paso</span>
+          <h2 style="margin-top:1rem">{title}</h2>
+          <p class="kb-lead">{text}</p>
+          <div class="kb-actions">
+            <a class="kb-button-primary" href={whatsapp(message)} target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i> Escribir por WhatsApp</a>
+            <a class="kb-button-secondary" href="mailto:gerencia@kor-bytes.com"><i class="ph ph-envelope"></i> gerencia@kor-bytes.com</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

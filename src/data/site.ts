@@ -69,7 +69,7 @@ export const services: CardItem[] = [
   },
   {
     title: "Integraciones y APIs",
-    href: "/servicios/integraciones-erp-crm.html",
+    href: "/servicios/integraciónes-erp-crm.html",
     tag: "Conectar sistemas",
     text: "Middleware, APIs, pagos, ecommerce, CRM, ERP, sincronización de datos y automatizaciones para que los sistemas conversen sin fricción.",
     chips: ["APIs", "ERP", "CRM", "Pagos"],
@@ -102,7 +102,7 @@ export const passProducts: CardItem[] = [
     title: "KORPass",
     status: "Concepto paraguas",
     sector: "PASS Core",
-    text: "Núcleo conceptual para reutilizar usuarios, roles, organizaciones, sedes, pagos, notificaciones, reportes, auditoría, archivos, QR e integraciones.",
+    text: "Núcleo conceptual para reutilizar usuarios, roles, organizaciones, sedes, pagos, notificaciones, reportes, auditoría, archivos, QR e integraciónes.",
     chips: ["PASS Core", "Módulos comunes", "Marca madre"],
   },
   {
@@ -213,7 +213,7 @@ export const projects: CardItem[] = [
     sector: "Retail omnicanal",
     text: "Integración VTEX + ICG para sincronizar pedidos, inventario y estados operativos entre ecommerce, backoffice y operación comercial.",
     chips: ["VTEX", "ICG", "OMS", "Middleware"],
-    href: "/casos/nexus-oms-integracion-vtex-icg.html",
+    href: "/casos/nexus-oms-integración-vtex-icg.html",
   },
   {
     title: "Certificados QR",
@@ -287,7 +287,7 @@ export const locations: CardItem[] = [
   {
     title: "Colombia y LATAM",
     href: "/ubicaciones/",
-    text: "Trabajo remoto y despliegues para proyectos Laravel, WordPress, integraciones, automatizaciones y productos verticales.",
+    text: "Trabajo remoto y despliegues para proyectos Laravel, WordPress, integraciónes, automatizaciones y productos verticales.",
   },
 ];
 
@@ -296,14 +296,14 @@ export const pages = {
     route: "/",
     title: "KOR Bytes S.A.S. | Software operativo, productos PASS e infraestructura digital",
     description:
-      "Casa de software en Sincelejo para productos verticales PASS, software a medida, integraciones, automatización, web SEO e infraestructura digital en Colombia y LATAM.",
+      "Casa de software en Sincelejo para productos verticales PASS, software a medida, integraciónes, automatización, web SEO e infraestructura digital en Colombia y LATAM.",
     nav: "/",
     type: "home",
     h1: "Software operativo, productos verticales y sistemas que sí aguantan la operación.",
     eyebrow: "KOR Bytes S.A.S. · Tech premium desde Sincelejo",
     lead:
-      "Construimos software a medida, productos PASS reutilizables, integraciones, automatizaciones e infraestructura digital para empresas que necesitan control, trazabilidad y crecimiento con criterio técnico.",
-    cta: "Hola KOR Bytes, quiero un diagnostico para mi proyecto de software o producto digital.",
+      "Construimos software a medida, productos PASS reutilizables, integraciónes, automatizaciones e infraestructura digital para empresas que necesitan control, trazabilidad y crecimiento con criterio técnico.",
+    cta: "Hola KOR Bytes, quiero un diagnóstico para mi proyecto de software o producto digital.",
     secondary: ["/ecosistema-pass/", "Explorar ecosistema PASS"],
   },
   pass: {
@@ -316,7 +316,7 @@ export const pages = {
     h1: "PASS es la línea de productos verticales de KOR Bytes.",
     eyebrow: "KORPass · PASS Core · Productos reutilizables",
     lead:
-      "Una familia estratégica de soluciones que comparten módulos de usuarios, roles, organizaciones, pagos, notificaciones, reportes, auditoría, QR, archivos e integraciones.",
+      "Una familia estratégica de soluciones que comparten módulos de usuarios, roles, organizaciones, pagos, notificaciones, reportes, auditoría, QR, archivos e integraciónes.",
     cta: "Hola KOR Bytes, quiero hablar sobre el ecosistema PASS o una vertical para mi sector.",
     secondary: ["/casos/", "Ver proyectos relacionados"],
   },
@@ -324,21 +324,21 @@ export const pages = {
     route: "/servicios/",
     title: "Servicios de software, productos PASS e infraestructura | KOR Bytes",
     description:
-      "Servicios de KOR Bytes: software a medida, productos verticales PASS, integraciones, desarrollo web SEO, automatización e infraestructura para empresas.",
+      "Servicios de KOR Bytes: software a medida, productos verticales PASS, integraciónes, desarrollo web SEO, automatización e infraestructura para empresas.",
     nav: "/servicios/",
     type: "services",
     h1: "Servicios para convertir operación compleja en software claro.",
     eyebrow: "Servicios B2B · Software · Web · Infraestructura",
     lead:
       "Acompañamos desde diagnóstico y arquitectura hasta implementación, despliegue y evolución. El foco es que cada sistema reduzca fricción y produzca datos útiles.",
-    cta: "Hola KOR Bytes, quiero una consultoria sobre servicios de software para mi empresa.",
+    cta: "Hola KOR Bytes, quiero una consultoría sobre servicios de software para mi empresa.",
     secondary: ["/casos/", "Ver proyectos/casos"],
   },
   software: {
     route: "/servicios/desarrollo-software-a-medida.html",
     title: "Desarrollo de software a medida en Colombia | KOR Bytes",
     description:
-      "Software a medida para procesos críticos: backoffice, dashboards, PQRS, inventario, pagos, roles, reportes e integraciones con arquitectura Laravel.",
+      "Software a medida para procesos críticos: backoffice, dashboards, PQRS, inventario, pagos, roles, reportes e integraciónes con arquitectura Laravel.",
     nav: "/servicios/",
     type: "software",
     h1: "Software a medida para procesos que necesitan control real.",
@@ -349,7 +349,7 @@ export const pages = {
     secondary: ["/casos/torcoroma-pqrs.html", "Ver caso PQRS"],
   },
   integrations: {
-    route: "/servicios/integraciones-erp-crm.html",
+    route: "/servicios/integraciónes-erp-crm.html",
     title: "Integraciones ERP, CRM, ecommerce y pagos | KOR Bytes",
     description:
       "Integraciones ERP/CRM, APIs, ecommerce, pagos, middleware, automatización y sincronización de datos para operaciones B2B en Colombia y LATAM.",
@@ -359,8 +359,8 @@ export const pages = {
     eyebrow: "APIs · Middleware · Pagos · Datos",
     lead:
       "Conectamos ecommerce, ERP, CRM, POS, pasarelas de pago, notificaciones y herramientas internas con una arquitectura pensada para trazabilidad y soporte.",
-    cta: "Hola KOR Bytes, quiero evaluar una integracion ERP, CRM, ecommerce o pagos.",
-    secondary: ["/casos/nexus-oms-integracion-vtex-icg.html", "Ver NEXUS OMS"],
+    cta: "Hola KOR Bytes, quiero evaluar una integración ERP, CRM, ecommerce o pagos.",
+    secondary: ["/casos/nexus-oms-integración-vtex-icg.html", "Ver NEXUS OMS"],
   },
   web: {
     route: "/servicios/desarrollo-web.html",
@@ -391,7 +391,7 @@ export const pages = {
     secondary: ["/ecosistema-pass/", "Explorar PASS"],
   },
   nexus: {
-    route: "/casos/nexus-oms-integracion-vtex-icg.html",
+    route: "/casos/nexus-oms-integración-vtex-icg.html",
     title: "Caso NEXUS OMS: integración VTEX + ICG | KOR Bytes",
     description:
       "Caso NEXUS OMS: middleware e integración VTEX + ICG para sincronizar pedidos, inventario y estados operativos en retail omnicanal.",
@@ -401,8 +401,8 @@ export const pages = {
     eyebrow: "Caso · Retail · Middleware",
     lead:
       "Un caso enfocado en cerrar la brecha entre la promesa comercial del ecommerce y la realidad operativa del backoffice, inventario y cumplimiento.",
-    cta: "Hola KOR Bytes, quiero evaluar una integracion tipo NEXUS OMS.",
-    secondary: ["/servicios/integraciones-erp-crm.html", "Ver servicio de integraciones"],
+    cta: "Hola KOR Bytes, quiero evaluar una integración tipo NEXUS OMS.",
+    secondary: ["/servicios/integraciónes-erp-crm.html", "Ver servicio de integraciónes"],
   },
   pqrs: {
     route: "/casos/torcoroma-pqrs.html",
@@ -422,7 +422,7 @@ export const pages = {
     route: "/ubicaciones/",
     title: "Cobertura de KOR Bytes en Sincelejo, Sucre, Colombia y LATAM",
     description:
-      "KOR Bytes desarrolla software, productos PASS, integraciones, automatizaciones, web e infraestructura desde Sincelejo para Sucre, Colombia y LATAM.",
+      "KOR Bytes desarrolla software, productos PASS, integraciónes, automatizaciones, web e infraestructura desde Sincelejo para Sucre, Colombia y LATAM.",
     nav: "/ubicaciones/",
     type: "locations",
     h1: "Desde Sincelejo, construimos software para operaciones que pueden crecer en cualquier lugar.",
@@ -436,7 +436,7 @@ export const pages = {
     route: "/ubicaciones/sincelejo.html",
     title: "Empresa de software en Sincelejo | KOR Bytes",
     description:
-      "Empresa de software en Sincelejo para desarrollo a medida, productos PASS, integraciones, desarrollo web, automatización e infraestructura digital.",
+      "Empresa de software en Sincelejo para desarrollo a medida, productos PASS, integraciónes, desarrollo web, automatización e infraestructura digital.",
     nav: "/ubicaciones/",
     type: "sincelejo",
     h1: "Software en Sincelejo con ambición de producto y criterio de operación.",
@@ -479,7 +479,7 @@ export function faqFor(type: PageType): FaqItem[] {
   const common: FaqItem[] = [
     {
       q: "¿KOR Bytes solo desarrolla software a medida?",
-      a: "No. KOR Bytes combina software a medida, productos verticales PASS, integraciones, automatización, desarrollo web e infraestructura digital.",
+      a: "No. KOR Bytes combina software a medida, productos verticales PASS, integraciónes, automatización, desarrollo web e infraestructura digital.",
     },
     {
       q: "¿Trabajan solo en Sincelejo y Sucre?",
@@ -505,12 +505,12 @@ export function faqFor(type: PageType): FaqItem[] {
     software: [
       {
         q: "¿Cuándo conviene software a medida?",
-        a: "Cuando el proceso requiere reglas propias, trazabilidad, roles, integraciones o reportes que una herramienta genérica no resuelve bien.",
+        a: "Cuando el proceso requiere reglas propias, trazabilidad, roles, integraciónes o reportes que una herramienta genérica no resuelve bien.",
       },
     ],
     integrations: [
       {
-        q: "¿Qué tipo de integraciones hacen?",
+        q: "¿Qué tipo de integraciónes hacen?",
         a: "Integraciones con ecommerce, ERP, CRM, POS, pasarelas de pago, notificaciones, APIs internas, bases de datos y herramientas de automatización.",
       },
     ],

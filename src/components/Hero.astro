@@ -9,11 +9,11 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<header class="kb-hero">
+<header class="kb-hero ink-surface">
   <div class="kb-container kb-hero-grid">
     <div>
       <span class="kb-eyebrow">{page.eyebrow}</span>
-      <h1><span class="kb-gradient-text">{page.h1}</span></h1>
+      <h1>{page.h1}</h1>
       <p class="kb-lead">{page.lead}</p>
       <div class="kb-actions">
         <a class="kb-button-primary" href={whatsapp(page.cta)} target="_blank" rel="noopener">Hablar del proyecto</a>

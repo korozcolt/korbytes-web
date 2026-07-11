@@ -1,9 +1,12 @@
 ---
+type BadgeKind = "production" | "development" | "concept" | "success";
+
 interface Props {
   label: string;
+  kind?: BadgeKind;
 }
 
-const { label } = Astro.props;
+const { label, kind = "production" } = Astro.props;
 ---
 
-<span class="kb-badge">{label}</span>
+<span class={`kb-badge badge-${kind}`}>{label}</span>
