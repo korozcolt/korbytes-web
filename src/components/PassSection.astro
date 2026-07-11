@@ -1,16 +1,30 @@
 ---
 import type { CardItem } from "@/data/site";
-import CardGrid from "./CardGrid.astro";
 import SectionHead from "./SectionHead.astro";
 
 interface Props {
   title: string;
   items: CardItem[];
   moreHref?: string;
-  featured?: boolean;
 }
 
-const { title, items, moreHref, featured } = Astro.props;
+const { title, items, moreHref } = Astro.props;
+
+const statusColor: Record<string, string> = {
+  "Concepto": "kb-text-muted",
+  "Producto definido": "kb-amber",
+  "Arquitectura/repositorio": "kb-cyan",
+  "Propuesta": "kb-brand",
+  "Potencial": "kb-text-soft",
+};
+
+const statusBg: Record<string, string> = {
+  "Concepto": "oklch(0.62 0.015 260 / 0.12)",
+  "Producto definido": "oklch(0.68 0.145 85 / 0.15)",
+  "Arquitectura/repositorio": "oklch(0.72 0.155 215 / 0.15)",
+  "Propuesta": "oklch(0.36 0.140 260 / 0.20)",
+  "Potencial": "oklch(0.42 0.012 260 / 0.10)",
+};
 ---
 
 <section class="kb-section section-warm">
@@ -20,7 +34,146 @@ const { title, items, moreHref, featured } = Astro.props;
       title={title}
       text="Productos verticales publicados con su estado real para comunicar visión estratégica sin prometer madurez que todavía no existe."
     />
-    <CardGrid items={items} featured={featured} />
-    {moreHref && <div class="kb-more-link"><a href={moreHref}>Ver todos los productos PASS &rarr;</a></div>}
+    <div class="kb-pass-list">
+      {items.map((item) => {
+        const color = statusColor[item.status ?? ""] || "kb-text-muted";
+        const bg = statusBg[item.status ?? ""] || "oklch(0.62 0.015 260 / 0.08)";
+        return (
+          <a class="kb-pass-item" href={item.href}>
+            <span class="kb-pass-dot" style={`background:${bg};--dot-color:var(--${color})`}></span>
+            <div class="kb-pass-content">
+              <strong>{item.title}</strong>
+              <span class="kb-pass-text">{item.text}</span>
+              {item.chips && item.chips.length > 0 && (
+                <div class="kb-chip-row">
+                  {item.chips.map((chip) => <span class="kb-chip">{chip}</span>)}
+                </div>
+              )}
+            </div>
+            <span class={`kb-pass-status ${color}`}>{item.status || "—"}</span>
+            <svg class="kb-pass-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        );
+      })}
+    </div>
+    {moreHref && <div class="kb-more-link"><a href={moreHref}>Explorar PASS &rarr;</a></div>}
   </div>
 </section>
+
+<style>
+  .kb-pass-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .kb-pass-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--kb-line);
+    border-radius: var(--kb-radius-md);
+    background: oklch(0.14 0.010 85 / 0.5);
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .kb-pass-item + .kb-pass-item {
+    margin-top: -1px;
+  }
+
+  .kb-pass-item:first-child {
+    border-radius: var(--kb-radius-md) var(--kb-radius-md) 0 0;
+  }
+
+  .kb-pass-item:last-child {
+    border-radius: 0 0 var(--kb-radius-md) var(--kb-radius-md);
+  }
+
+  .kb-pass-item:only-child {
+    border-radius: var(--kb-radius-md);
+  }
+
+  .kb-pass-item:hover {
+    border-color: var(--kb-line-brand);
+    background: oklch(0.16 0.012 85 / 0.7);
+    z-index: 1;
+    position: relative;
+  }
+
+  .kb-pass-dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    box-shadow: 0 0 10px var(--dot-color, var(--kb-text-muted));
+  }
+
+  .kb-pass-content strong {
+    display: block;
+    color: var(--kb-text-strong);
+    font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .kb-pass-text {
+    display: block;
+    color: var(--kb-text-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-top: 0.2rem;
+  }
+
+  .kb-pass-content .kb-chip-row {
+    margin-top: 0.65rem;
+  }
+
+  .kb-pass-status {
+    flex-shrink: 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--kb-radius-full);
+    white-space: nowrap;
+  }
+
+  .kb-pass-status.kb-amber { background: oklch(0.68 0.145 85 / 0.15); color: var(--kb-amber-soft); }
+  .kb-pass-status.kb-cyan { background: oklch(0.72 0.155 215 / 0.15); color: var(--kb-cyan-soft); }
+  .kb-pass-status.kb-brand { background: oklch(0.36 0.140 260 / 0.20); color: var(--kb-brand-soft); }
+  .kb-pass-status.kb-text-muted { background: oklch(0.62 0.015 260 / 0.12); color: var(--kb-text-muted); }
+  .kb-pass-status.kb-text-soft { background: oklch(0.42 0.012 260 / 0.10); color: var(--kb-text-soft); }
+
+  .kb-pass-arrow {
+    flex-shrink: 0;
+    color: var(--kb-text-soft);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .kb-pass-item:hover .kb-pass-arrow {
+    transform: translateX(4px);
+    color: var(--kb-cyan);
+  }
+
+  @media (max-width: 720px) {
+    .kb-pass-item {
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+    }
+    .kb-pass-status {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+    }
+    .kb-pass-content {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .kb-pass-arrow {
+      display: none;
+    }
+  }
+</style>

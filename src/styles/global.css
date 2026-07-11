@@ -450,6 +450,36 @@ h1 {
   letter-spacing: -0.03em;
 }
 
+.kb-hero-title {
+  background: linear-gradient(135deg, var(--kb-text-strong) 40%, var(--kb-cyan-soft) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.kb-hero-accent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+  padding-left: 0.25rem;
+}
+
+.kb-hero-accent-line {
+  width: 2px;
+  height: 2.5rem;
+  background: linear-gradient(180deg, var(--kb-cyan), transparent);
+  border-radius: 2px;
+}
+
+.kb-hero-accent span {
+  color: var(--kb-text-muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 h2 {
   font-size: clamp(2rem, 3.5vw, 3.8rem);
   font-weight: 700;
@@ -530,6 +560,7 @@ h3 {
   inset: 10%;
   animation: kb-spin 70s linear infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 .kb-orbit-line:nth-of-type(2) {
@@ -945,6 +976,68 @@ h3 {
   .kb-actions a {
     width: 100%;
   }
+}
+
+/* ── Location list ── */
+.kb-loc-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.kb-loc-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--kb-line);
+  border-radius: var(--kb-radius-md);
+  background: oklch(0.14 0.010 85 / 0.4);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.kb-loc-item:hover {
+  border-color: var(--kb-line-amber);
+}
+
+.kb-loc-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.kb-loc-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.kb-loc-body strong {
+  display: block;
+  color: var(--kb-text-strong);
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.kb-loc-body p {
+  color: var(--kb-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0.15rem 0 0;
+}
+
+.kb-loc-body .kb-chip-row {
+  margin-top: 0.55rem;
+}
+
+.kb-loc-arrow {
+  flex-shrink: 0;
+  color: var(--kb-text-soft);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.kb-loc-item:hover .kb-loc-arrow {
+  transform: translateX(4px);
+  color: var(--kb-amber);
 }
 
 /* Bento — featured card spans 2 of 3 columns */

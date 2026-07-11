@@ -14,8 +14,12 @@ const { page } = Astro.props;
   <div class="kb-container kb-hero-grid">
     <div>
       <span class="kb-eyebrow">{page.eyebrow}</span>
-      <h1>{page.h1}</h1>
+      <h1 class="kb-hero-title">{page.h1}</h1>
       <p class="kb-lead">{page.lead}</p>
+      <div class="kb-hero-accent">
+        <div class="kb-hero-accent-line"></div>
+        <span>Arquitectura &middot; Producto &middot; Operaci&oacute;n</span>
+      </div>
       <div class="kb-actions">
         <a class="kb-button-primary" href={whatsapp(page.cta)} target="_blank" rel="noopener">Hablar del proyecto</a>
         <a class="kb-button-secondary" href={page.secondary[0]}>{page.secondary[1]}</a>
@@ -41,8 +45,8 @@ const { page } = Astro.props;
     if (!canvas || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
-    const COUNT = 60;
-    const MAX_DIST = 120;
+    const COUNT = 120;
+    const MAX_DIST = 160;
 
     function resize() {
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -53,7 +57,7 @@ const { page } = Astro.props;
     window.addEventListener("resize", resize);
 
     for (let i = 0; i < COUNT; i++) {
-      particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4 });
+      particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 });
     }
 
     function draw() {
@@ -63,19 +67,21 @@ const { page } = Astro.props;
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
+        const isBrand = i % 3 !== 0;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = "oklch(0.55 0.120 260 / 0.35)";
+        ctx.arc(p.x, p.y, isBrand ? 2.5 : 2, 0, Math.PI * 2);
+        ctx.fillStyle = isBrand ? "oklch(0.55 0.120 260 / 0.5)" : "oklch(0.68 0.145 85 / 0.35)";
         ctx.fill();
         for (let j = i + 1; j < COUNT; j++) {
           const q = particles[j];
           const dx = p.x - q.x, dy = p.y - q.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MAX_DIST) {
+            const alpha = Math.max(0, (1 - dist / MAX_DIST) * 0.35);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `oklch(0.55 0.120 260 / ${(1 - dist / MAX_DIST) * 0.15})`;
+            ctx.strokeStyle = `oklch(0.55 0.120 260 / ${alpha})`;
             ctx.stroke();
           }
         }
@@ -101,21 +107,44 @@ const { page } = Astro.props;
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
-      const geom = new THREE.TorusKnotGeometry(1.6, 0.5, 128, 24);
-      const edges = new THREE.EdgesGeometry(geom);
-      const mat = new THREE.LineBasicMaterial({ color: 0x4488ee, transparent: true, opacity: 0.25 });
-      const mesh = new THREE.LineSegments(edges, mat);
-      scene.add(mesh);
+
+      const knotGeom = new THREE.TorusKnotGeometry(1.6, 0.5, 128, 24);
+      const knotEdges = new THREE.EdgesGeometry(knotGeom);
+      const knotMat = new THREE.LineBasicMaterial({ color: 0x4488ee, transparent: true, opacity: 0.5 });
+      const knot = new THREE.LineSegments(knotEdges, knotMat);
+      scene.add(knot);
+
       const innerGeom = new THREE.TorusKnotGeometry(1.6, 0.5, 64, 16);
-      const innerMat = new THREE.MeshBasicMaterial({ color: 0x2266cc, wireframe: true, transparent: true, opacity: 0.08 });
+      const innerMat = new THREE.MeshBasicMaterial({ color: 0xcc8833, wireframe: true, transparent: true, opacity: 0.25 });
       const inner = new THREE.Mesh(innerGeom, innerMat);
       scene.add(inner);
+
+      const ringData = [
+        { radius: 2.1, tube: 0.03, rotX: 0.3, rotY: 0.5, color: 0x4488ee, speed: 0.003 },
+        { radius: 2.1, tube: 0.03, rotX: 1.0, rotY: 0.2, color: 0xcc8833, speed: -0.004 },
+        { radius: 2.1, tube: 0.03, rotX: 0.6, rotY: 0.8, color: 0x44ccbb, speed: 0.002 },
+      ];
+      const rings = ringData.map((d) => {
+        const g = new THREE.TorusGeometry(d.radius, d.tube, 48, 64);
+        const e = new THREE.EdgesGeometry(g);
+        const m = new THREE.LineBasicMaterial({ color: d.color, transparent: true, opacity: 0.25 });
+        const ring = new THREE.LineSegments(e, m);
+        ring.rotation.x = d.rotX;
+        ring.rotation.y = d.rotY;
+        scene.add(ring);
+        return { mesh: ring, ...d };
+      });
+
       function animate() {
         requestAnimationFrame(animate);
-        mesh.rotation.x += 0.004;
-        mesh.rotation.y += 0.007;
-        inner.rotation.x += 0.003;
-        inner.rotation.y += 0.005;
+        knot.rotation.x += 0.006;
+        knot.rotation.y += 0.01;
+        inner.rotation.x += 0.004;
+        inner.rotation.y += 0.007;
+        rings.forEach((r) => {
+          r.mesh.rotation.x += r.speed * 0.5;
+          r.mesh.rotation.y += r.speed;
+        });
         renderer.render(scene, camera);
       }
       animate();

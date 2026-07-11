@@ -210,7 +210,23 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
           title="Cercanía regional, ejecución remota."
           text="KOR Bytes comunica su origen local sin encerrarse geográficamente: el sitio debe posicionar Sincelejo/Sucre y también vender capacidad para Colombia y LATAM."
         />
-        <CardGrid items={locations} kind="location" />
+        <div class="kb-loc-list">
+          {locations.map((loc) => (
+            <a class="kb-loc-item" href={loc.href}>
+              <span class="kb-loc-icon">&#x1F4CD;</span>
+              <div class="kb-loc-body">
+                <strong>{loc.title}</strong>
+                <p>{loc.text}</p>
+                {loc.chips && loc.chips.length > 0 && (
+                  <div class="kb-chip-row">
+                    {loc.chips.map((chip) => <span class="kb-chip">{chip}</span>)}
+                  </div>
+                )}
+              </div>
+              <svg class="kb-loc-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
     <ServicesSection title="Servicios disponibles por cobertura" text="Software, productos PASS, integraciones, web, automatización e infraestructura se pueden ejecutar por fases y con comunicación remota." />

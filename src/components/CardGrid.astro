@@ -5,27 +5,26 @@ import Chips from "./Chips.astro";
 
 interface Props {
   items: CardItem[];
-  kind?: "project" | "service" | "location";
   featured?: boolean;
 }
 
-const { items, kind = "project", featured } = Astro.props;
+const { items, featured } = Astro.props;
+
+const gradients = [
+  { a: "oklch(0.36 0.140 260)", b: "oklch(0.14 0.030 260)" },
+  { a: "oklch(0.68 0.145 85)",  b: "oklch(0.16 0.020 85)" },
+  { a: "oklch(0.65 0.125 165)", b: "oklch(0.14 0.025 165)" },
+  { a: "oklch(0.72 0.155 215)", b: "oklch(0.16 0.040 215)" },
+  { a: "oklch(0.52 0.140 280)", b: "oklch(0.14 0.030 280)" },
+];
 ---
 
 <div class="kb-grid kb-grid-3">
-  {items.map((item, idx) => (
-    kind === "service" || kind === "location" ? (
-      <div class={`dbl-shell reveal${featured && idx === 0 ? " kb-featured" : ""}`}>
-        <a class="dbl-core" href={item.href}>
-          {item.tag && <span class="kb-badge">{item.tag}</span>}
-          <h3 style={item.tag ? "margin-top:1rem" : undefined}>{item.title}</h3>
-          <p>{item.text}</p>
-          <Chips chips={item.chips} />
-        </a>
-      </div>
-    ) : (
-      <article class={`kb-project reveal${featured && idx === 0 ? " kb-featured" : ""}`}>
-        <div class="kb-project-visual" aria-hidden="true">
+  {items.map((item, idx) => {
+    const g = gradients[idx % gradients.length];
+    return (
+      <article class={`kb-project${featured && idx === 0 ? " kb-featured" : ""}`}>
+        <div class="kb-project-visual" aria-hidden="true" style={`--vis-a:${g.a};--vis-b:${g.b}`}>
           <span class="kb-project-code">{initials(item.title)}</span>
         </div>
         <div class="kb-project-body">
@@ -38,11 +37,11 @@ const { items, kind = "project", featured } = Astro.props;
           <Chips chips={item.chips} />
           {item.href && (
             <p style="margin-top:1.1rem">
-              <a class="kb-button-secondary" href={item.href}>Ver detalle</a>
+              <a class="kb-button-secondary" href={item.href}>Estudio de caso &rarr;</a>
             </p>
           )}
         </div>
       </article>
-    )
-  ))}
+    );
+  })}
 </div>

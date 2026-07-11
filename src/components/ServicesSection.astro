@@ -1,6 +1,5 @@
 ---
 import { services } from "@/data/site";
-import CardGrid from "./CardGrid.astro";
 import SectionHead from "./SectionHead.astro";
 
 interface Props {
@@ -9,11 +8,130 @@ interface Props {
 }
 
 const { title, text } = Astro.props;
+
+const serviceColors = [
+  { bg: "oklch(0.16 0.060 260 / 0.5)", border: "var(--kb-line-brand)", accent: "var(--kb-cyan)" },
+  { bg: "oklch(0.16 0.030 85 / 0.5)", border: "var(--kb-line-amber)", accent: "var(--kb-amber)" },
+  { bg: "oklch(0.14 0.035 165 / 0.5)", border: "oklch(0.48 0.070 165 / 0.3)", accent: "var(--kb-emerald)" },
+];
 ---
 
 <section class="kb-section section-raised">
   <div class="kb-container">
     <SectionHead badge="Servicios" title={title} text={text} />
-    <CardGrid items={services} kind="service" />
+    <div class="kb-svc-grid">
+      {services.map((svc, idx) => {
+        const c = serviceColors[idx % serviceColors.length];
+        return (
+          <div class={`kb-svc-card${idx === 0 ? " kb-svc-featured" : ""}`}>
+            <a class="kb-svc-inner" href={svc.href} style={`--svc-bg:${c.bg};--svc-border:${c.border};--svc-accent:${c.accent}`}>
+              <div class="kb-svc-visual" aria-hidden="true">
+                <span class="kb-svc-icon">{idx === 0 ? "{}" : idx === 1 ? "</>" : "[ ]"}</span>
+              </div>
+              <div class="kb-svc-body">
+                <span class="kb-svc-tag">{svc.tag}</span>
+                <h3>{svc.title}</h3>
+                <p>{svc.text}</p>
+              </div>
+            </a>
+          </div>
+        );
+      })}
+    </div>
   </div>
 </section>
+
+<style>
+  .kb-svc-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 1rem;
+  }
+
+  .kb-svc-card {
+    border: 1px solid var(--kb-line);
+    border-radius: var(--kb-radius-lg);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .kb-svc-card:hover {
+    box-shadow: 0 0 0 1px var(--kb-line-brand), var(--kb-shadow-md);
+  }
+
+  .kb-svc-featured {
+    grid-row: span 2;
+  }
+
+  .kb-svc-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    background: var(--svc-bg, var(--kb-bg-raised));
+  }
+
+  .kb-svc-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    background: linear-gradient(135deg, var(--svc-bg, oklch(0.14 0.030 260 / 0.6)), oklch(0.10 0.006 260 / 0.8));
+    border-bottom: 1px solid var(--svc-border, var(--kb-line));
+  }
+
+  .kb-svc-featured .kb-svc-visual {
+    min-height: 130px;
+  }
+
+  .kb-svc-icon {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.6rem;
+    color: var(--svc-accent, var(--kb-text-soft));
+    opacity: 0.5;
+  }
+
+  .kb-svc-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .kb-svc-tag {
+    display: inline-flex;
+    width: fit-content;
+    border: 1px solid var(--kb-line);
+    border-radius: var(--kb-radius-full);
+    background: oklch(1 0 0 / 0.06);
+    color: var(--kb-amber);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.3rem 0.55rem;
+  }
+
+  .kb-svc-body h3 {
+    color: var(--kb-text-strong);
+    margin: 0;
+  }
+
+  .kb-svc-body p {
+    color: var(--kb-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .kb-svc-grid {
+      grid-template-columns: 1fr;
+    }
+    .kb-svc-featured {
+      grid-row: span 1;
+    }
+    .kb-svc-featured .kb-svc-visual {
+      min-height: 90px;
+    }
+  }
+</style>
