@@ -36,6 +36,7 @@ export interface CardItem {
   href?: string;
   text: string;
   chips?: string[];
+  image?: string;
 }
 
 export interface FaqItem {
@@ -104,6 +105,7 @@ export const passProducts: CardItem[] = [
     sector: "PASS Core",
     text: "Núcleo conceptual para reutilizar usuarios, roles, organizaciones, sedes, pagos, notificaciones, reportes, auditoría, archivos, QR e integraciónes.",
     chips: ["PASS Core", "Módulos comunes", "Marca madre"],
+    image: "/images/pass/korpass-core.webp",
   },
   {
     title: "VolleyPass",
@@ -111,6 +113,7 @@ export const passProducts: CardItem[] = [
     sector: "Deporte y voleibol",
     text: "Operación digital para ligas, clubes y torneos: carnet digital con QR, jugadores, clubes, pagos, reglas por liga, documentación y competencias.",
     chips: ["QR", "Torneos", "Clubes", "Pagos"],
+    image: "/images/pass/volleypass.webp",
   },
   {
     title: "DatesPass",
@@ -184,6 +187,7 @@ export const projects: CardItem[] = [
     sector: "Gestión electoral",
     text: "Centro de comando electoral con campañas, equipos, líderes, votantes, censo, validación, puestos, zonas, call center, encuestas, mensajería, Día D, evidencias y reportes.",
     chips: ["Comando político", "Call center", "Día D", "Hablame SMS"],
+    image: "/images/proyectos/sigma.webp",
   },
   {
     title: "LuckyCore",
@@ -191,6 +195,7 @@ export const projects: CardItem[] = [
     sector: "Rifas y sorteos",
     text: "Plataforma web para rifas, números, carrito, checkout, pagos, auditoría, estados de compra, reportes y administración en Filament.",
     chips: ["Rifas", "Checkout", "Filament", "Auditoría"],
+    image: "/images/proyectos/luckycore.webp",
   },
   {
     title: "ArchiveMaster",
@@ -198,6 +203,7 @@ export const projects: CardItem[] = [
     sector: "Gestión documental",
     text: "Administración documental con roles operativos, carga, consulta, edición, movimientos, impresión, oficinas, trazabilidad y posibles funciones con IA.",
     chips: ["Documentos", "Roles", "IA", "Trazabilidad"],
+    image: "/images/proyectos/archivemaster.webp",
   },
   {
     title: "Sistema PQRS",
@@ -206,6 +212,7 @@ export const projects: CardItem[] = [
     text: "Recepción, radicación, estados, dependencias, respuestas, vencimientos, reportes, adjuntos y trazabilidad para solicitudes ciudadanas o institucionales.",
     chips: ["PQRS", "SLAs", "Reportes", "Adjuntos"],
     href: "/casos/torcoroma-pqrs.html",
+    image: "/images/proyectos/torcoroma-pqrs.webp",
   },
   {
     title: "NEXUS OMS",
@@ -214,6 +221,7 @@ export const projects: CardItem[] = [
     text: "Integración VTEX + ICG para sincronizar pedidos, inventario y estados operativos entre ecommerce, backoffice y operación comercial.",
     chips: ["VTEX", "ICG", "OMS", "Middleware"],
     href: "/casos/nexus-oms-integración-vtex-icg.html",
+    image: "/images/proyectos/nexus-oms.webp",
   },
   {
     title: "Certificados QR",
@@ -221,6 +229,7 @@ export const projects: CardItem[] = [
     sector: "Educación/certificación",
     text: "Certificados con firma visual institucional, QR de validación, hash único, URL pública, estados, logs, revocación y plantillas controladas.",
     chips: ["QR", "Hash", "Validación", "Plantillas"],
+    image: "/images/proyectos/certificados-qr.webp",
   },
   {
     title: "Portal de noticias",
@@ -228,6 +237,7 @@ export const projects: CardItem[] = [
     sector: "Medios digitales",
     text: "Sitio tipo medio digital para noticias destacadas, categorías, última hora, opinión, videos, redes sociales y una presencia más profesional.",
     chips: ["WordPress", "Noticias", "SEO", "Redes"],
+    image: "/images/proyectos/portal-noticias.webp",
   },
   {
     title: "Ecosistema VPS",
@@ -235,6 +245,7 @@ export const projects: CardItem[] = [
     sector: "Deploy y operación",
     text: "VPS con Dokploy para múltiples instancias: página institucional, SIGMA, automatizaciones OpenClaw y portales WordPress conectados a dominios.",
     chips: ["Dokploy", "VPS", "WordPress", "OpenClaw"],
+    image: "/images/proyectos/ecosistema-vps.webp",
   },
   {
     title: "NotFound Band",
