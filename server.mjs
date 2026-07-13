@@ -76,6 +76,16 @@ function serveFile(filePath, statusCode, req, res) {
   const accept = req.headers['accept-encoding'] || '';
   const canCompress = COMPRESSIBLE.has(ext);
 
+  // Static assets that are NOT compressed MUST carry Content-Length.
+  // Proxies/CDNs otherwise cache a truncated response, leaving the browser
+  // with 0 bytes (this was the root cause of broken WebP mockups in prod).
+  const fileSize = (() => {
+    try { return statSync(filePath).size; } catch { return -1; }
+  })();
+  if (!canCompress && fileSize >= 0) {
+    res.setHeader('Content-Length', String(fileSize));
+  }
+
   if (canCompress && accept.includes('br')) {
     res.setHeader('Content-Encoding', 'br');
     pipeline(createReadStream(filePath), createBrotliCompress(), res).catch(() => {});
