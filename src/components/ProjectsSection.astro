@@ -20,7 +20,9 @@ const { title, items, moreHref, featured } = Astro.props;
       title={title}
       text="Fichas resumidas para mostrar alcance, sector y madurez sin publicar métricas no verificadas ni claims sensibles."
     />
-    <CardGrid items={items} featured={featured} />
+    <div data-reveal-stagger>
+      <CardGrid items={items} featured={featured} />
+    </div>
     {moreHref && <div class="kb-more-link"><a href={moreHref}>Explorar proyectos &rarr;</a></div>}
   </div>
 </section>

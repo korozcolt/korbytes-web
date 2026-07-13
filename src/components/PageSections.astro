@@ -1,6 +1,5 @@
 ---
 import { faqFor, locations, passProducts, projects } from "@/data/site";
-import CardGrid from "./CardGrid.astro";
 import CtaSection from "./CtaSection.astro";
 import FaqSection from "./FaqSection.astro";
 import PassSection from "./PassSection.astro";
@@ -210,7 +209,7 @@ const byTitle = (titles: string[]) => projects.filter((project) => titles.includ
           title="Cercanía regional, ejecución remota."
           text="KOR Bytes comunica su origen local sin encerrarse geográficamente: el sitio debe posicionar Sincelejo/Sucre y también vender capacidad para Colombia y LATAM."
         />
-        <div class="kb-loc-list">
+        <div class="kb-loc-list" data-reveal-stagger>
           {locations.map((loc) => (
             <a class="kb-loc-item" href={loc.href}>
               <span class="kb-loc-icon">&#x1F4CD;</span>

@@ -37,6 +37,7 @@ export interface CardItem {
   text: string;
   chips?: string[];
   image?: string;
+  icon?: string;
 }
 
 export interface FaqItem {
@@ -60,6 +61,7 @@ export const services: CardItem[] = [
     tag: "Operación crítica",
     text: "Sistemas internos, backoffice, dashboards y flujos con trazabilidad para empresas que ya no pueden depender de hojas de cálculo o procesos manuales.",
     chips: ["Laravel", "Roles", "Auditoría", "Dashboards"],
+    icon: "ph-code",
   },
   {
     title: "Productos verticales PASS",
@@ -67,13 +69,15 @@ export const services: CardItem[] = [
     tag: "Producto reutilizable",
     text: "Una línea de productos para deporte, reservas, farmacia, transporte, educación, comercio, certificados y gestión documental.",
     chips: ["PASS Core", "SaaS", "QR", "Pagos"],
+    icon: "ph-stack",
   },
   {
     title: "Integraciones y APIs",
-    href: "/servicios/integraciónes-erp-crm.html",
+    href: "/servicios/integraciones-erp-crm.html",
     tag: "Conectar sistemas",
     text: "Middleware, APIs, pagos, ecommerce, CRM, ERP, sincronización de datos y automatizaciones para que los sistemas conversen sin fricción.",
     chips: ["APIs", "ERP", "CRM", "Pagos"],
+    icon: "ph-plugs-connected",
   },
   {
     title: "Web, SEO y conversión",
@@ -81,6 +85,7 @@ export const services: CardItem[] = [
     tag: "Presencia comercial",
     text: "Sitios rápidos, claros y medibles para empresas, productos, medios y marcas que necesitan ser encontradas y convertir oportunidades.",
     chips: ["SEO", "Core Web Vitals", "GA4", "WordPress"],
+    icon: "ph-globe",
   },
   {
     title: "Automatización",
@@ -88,6 +93,7 @@ export const services: CardItem[] = [
     tag: "Flujos inteligentes",
     text: "n8n, OpenClaw, webhooks, Gemini, notificaciones y flujos operativos para reducir tareas repetitivas y conectar servicios externos.",
     chips: ["n8n", "Webhooks", "Gemini", "Dokploy"],
+    icon: "ph-arrows-left-right",
   },
   {
     title: "Infraestructura y despliegues",
@@ -95,6 +101,7 @@ export const services: CardItem[] = [
     tag: "Operar en producción",
     text: "VPS, Docker, Dokploy, Hostinger, Redis, bases de datos, GitHub Actions y despliegues para productos Laravel, WordPress y servicios internos.",
     chips: ["Docker", "VPS", "Dokploy", "CI/CD"],
+    icon: "ph-cloud-arrow-up",
   },
 ];
 

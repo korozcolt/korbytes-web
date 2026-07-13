@@ -1,19 +1,52 @@
-import * as THREE from "three";
+import { toThreeColor } from "./oklch";
 
 const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export function initHeroScene() {
-  const canvas = document.getElementById("kb-hero-canvas");
   const container = document.getElementById("kb-three-scene");
-  if (!canvas || !container) return;
+  if (!container) return;
 
   if (prefersReducedMotion) {
-    canvas.style.display = "none";
+    container.classList.add("is-static");
     return;
   }
 
+  // Defer the heavy 3D code until the browser is idle enough that
+  // LCP / first paint have already landed. This keeps the ~460 KB
+  // THREE.js bundle out of the critical path while the page is
+  // already readable — the SVG traces already paint the architecture
+  // motif behind the copy, so the 3D scene is a progressive enrich.
+  const scheduleTeardown = () => {
+    window.removeEventListener("load", schedule);
+    document.removeEventListener("visibilitychange", onVisible);
+    startScene();
+  };
+  const schedule = () => scheduleTeardown();
+  const onVisible = () => {
+    if (document.visibilityState === "visible") scheduleTeardown();
+  };
+
+  if (document.readyState === "complete") {
+    schedule();
+  } else {
+    window.addEventListener("load", schedule, { once: true, passive: true });
+    document.addEventListener("visibilitychange", onVisible, { passive: true });
+  }
+
+  async function startScene() {
+    if (!container) return;
+    const THREE: any = await import("three");
+    mountScene(THREE, container);
+  }
+}
+
+function mountScene(THREE: any, container: HTMLElement) {
   const width = () => container.clientWidth;
   const height = () => container.clientHeight;
+
+  const canvas = document.createElement("canvas");
+  canvas.setAttribute("aria-hidden", "true");
+  container.appendChild(canvas);
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -29,16 +62,15 @@ export function initHeroScene() {
 
   const camera = new THREE.PerspectiveCamera(40, width() / height(), 0.1, 50);
   camera.position.set(0, 0.5, 6.4);
-
   // ── Architectural core: faceted icosahedron (PASS Core) ──
   const coreGeom = new THREE.IcosahedronGeometry(1.2, 0);
   const coreMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color("oklch(0.55 0.18 260)"),
+    color: toThreeColor(THREE, "oklch(0.55 0.18 260)"),
     wireframe: true,
     transparent: true,
     opacity: 0.65,
     roughness: 0.35,
-    emissive: new THREE.Color("oklch(0.30 0.20 265)"),
+    emissive: toThreeColor(THREE, "oklch(0.30 0.20 265)"),
     emissiveIntensity: 0.7,
   });
   const core = new THREE.Mesh(coreGeom, coreMat);
@@ -47,7 +79,7 @@ export function initHeroScene() {
   // Inner solid
   const innerGeom = new THREE.IcosahedronGeometry(0.96, 1);
   const innerMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color("oklch(0.78 0.155 80)"),
+    color: toThreeColor(THREE, "oklch(0.78 0.155 80)"),
     wireframe: true,
     transparent: true,
     opacity: 0.32,
@@ -58,7 +90,7 @@ export function initHeroScene() {
   // Glow halo
   const glowGeom = new THREE.SphereGeometry(1.5, 32, 32);
   const glowMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color("oklch(0.65 0.190 265)"),
+    color: toThreeColor(THREE, "oklch(0.65 0.190 265)"),
     transparent: true,
     opacity: 0.06,
     side: THREE.BackSide,
@@ -86,17 +118,16 @@ export function initHeroScene() {
     const angle = (i / verticals.length) * Math.PI * 2;
     const elev = (i % 2 === 0 ? 0.35 : -0.35);
     const geom = new THREE.SphereGeometry(0.07, 16, 16);
-    const mat = new THREE.MeshBasicMaterial({ color: new THREE.Color(v.color) });
+    const mat = new THREE.MeshBasicMaterial({ color: toThreeColor(THREE, v.color) });
     const mesh = new THREE.Mesh(geom, mat);
     mesh.userData.angle = angle;
     mesh.userData.radius = r;
     mesh.userData.elev = elev;
     orbitGroup.add(mesh);
 
-    // Faint orbit ring per satellite
     const ringGeom = new THREE.TorusGeometry(r, 0.005, 8, 64);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color(v.color),
+      color: toThreeColor(THREE, v.color),
       transparent: true,
       opacity: 0.18,
     });
@@ -107,7 +138,6 @@ export function initHeroScene() {
     return mesh;
   });
 
-  // Floating data points (decorative)
   const dust = new THREE.BufferGeometry();
   const dustCount = 220;
   const dustPositions = new Float32Array(dustCount * 3);
@@ -121,7 +151,7 @@ export function initHeroScene() {
   }
   dust.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
   const dustMat = new THREE.PointsMaterial({
-    color: new THREE.Color("oklch(0.78 0.155 215)"),
+    color: toThreeColor(THREE, "oklch(0.78 0.155 215)"),
     size: 0.018,
     transparent: true,
     opacity: 0.55,
@@ -130,7 +160,6 @@ export function initHeroScene() {
   const dustPoints = new THREE.Points(dust, dustMat);
   scene.add(dustPoints);
 
-  // Mouse parallax
   const pointer = { x: 0, y: 0, target: { x: 0, y: 0 } };
   window.addEventListener("pointermove", (e) => {
     const r = canvas.getBoundingClientRect();
@@ -138,12 +167,10 @@ export function initHeroScene() {
     pointer.target.y = ((e.clientY - r.top) / r.height - 0.5) * 2;
   }, { passive: true });
 
-  // Loop
   const clock = new THREE.Clock();
   let raf = 0;
   function tick() {
     const t = clock.getElapsedTime();
-    // Smooth pointer
     pointer.x += (pointer.target.x - pointer.x) * 0.05;
     pointer.y += (pointer.target.y - pointer.y) * 0.05;
 
@@ -173,7 +200,6 @@ export function initHeroScene() {
   }
   tick();
 
-  // Resize
   const ro = new ResizeObserver(() => {
     const w = width();
     const h = height();
@@ -184,7 +210,6 @@ export function initHeroScene() {
   });
   ro.observe(container);
 
-  // Pause when off-screen
   const io = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
       if (!raf) tick();

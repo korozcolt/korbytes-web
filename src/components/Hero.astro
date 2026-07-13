@@ -10,9 +10,6 @@ const { page } = Astro.props;
 ---
 
 <header class="kb-hero surface-ink" id="hero">
-  <!-- Three.js scene: orbital architecture visualization -->
-  <canvas id="kb-hero-canvas" aria-hidden="true"></canvas>
-
   <!-- Animated SVG: schematic overlay (orbit traces) -->
   <svg class="kb-hero-traces" aria-hidden="true" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
     <defs>
@@ -26,10 +23,8 @@ const { page } = Astro.props;
       <circle cx="400" cy="400" r="220" stroke-dasharray="2 6"/>
       <circle cx="400" cy="400" r="340" stroke-dasharray="1 14"/>
     </g>
-  </svg>
-
-  <div class="kb-container">
-    <div class="kb-hero-grid" data-reveal-stagger>
+  </svg>  <div class="kb-container">
+    <div class="kb-hero-grid">
       <!-- BIG TYPE STACK ─ left aligned, never centered -->
       <div class="kb-hero-copy">
         <div class="kb-hero-kicker">
@@ -141,3 +136,269 @@ const { page } = Astro.props;
   import { initHeroScene } from "@/scripts/hero-scene";
   initHeroScene();
 </script>
+
+<style>
+  /* ── Layout shell ─────────────────────────────────────────── */
+  .kb-hero-traces {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .kb-hero-traces {
+    z-index: 1;
+    opacity: 0.65;
+  }
+
+  .kb-hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+    padding-block: clamp(1rem, 3vw, 2rem);
+  }
+
+  /* ── Copy column ──────────────────────────────────────────── */
+  .kb-hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .kb-hero-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    align-items: center;
+  }
+  .kb-hero-loc {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--kb-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .kb-hero-title {
+    margin: 0;
+    font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+    font-size: clamp(2.4rem, 5.6vw, 5.2rem);
+    font-weight: 600;
+    line-height: 0.96;
+    letter-spacing: -0.028em;
+    color: var(--kb-text-strong);
+    text-wrap: balance;
+  }
+
+  .kb-hero-line {
+    display: block;
+  }
+
+  .kb-hero-word {
+    display: inline-block;
+  }
+
+  .kb-hero-word--accent {
+    color: var(--kb-cyan);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .kb-hero-word--italic {
+    color: var(--kb-text-muted);
+    font-style: italic;
+  }
+
+  .kb-hero-lead {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--kb-text-muted);
+    font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+    line-height: 1.62;
+    text-wrap: pretty;
+  }
+
+  .kb-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* ── Stats row ────────────────────────────────────────────── */
+  .kb-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--kb-line);
+  }
+  .kb-hero-stats > div { display: contents; }
+  .kb-hero-stats dt {
+    margin: 0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: var(--kb-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .kb-hero-stats dd {
+    margin: 0.15rem 0 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+  .kb-stat-num {
+    font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    font-weight: 700;
+    color: var(--kb-text-strong);
+    letter-spacing: -0.02em;
+  }
+  .kb-stat-suf {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--kb-cyan);
+    font-weight: 500;
+  }
+
+  /* ── Right column: 3D visual + overlay card ─────────────── */
+  .kb-hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-height: 320px;
+  }
+  .kb-hero-canvas-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .kb-hero-overlay-card {
+    position: absolute;
+    left: 8%;
+    bottom: 12%;
+    max-width: 360px;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--kb-line-strong);
+    border-radius: var(--kb-radius-md);
+    background: oklch(0.10 0.012 260 / 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--kb-text);
+    z-index: 3;
+    box-shadow: 0 12px 40px oklch(0 0 0 / 0.45);
+  }
+  .kb-hero-overlay-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .kb-hero-overlay-text {
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+    color: var(--kb-text-muted);
+    line-height: 1.45;
+  }
+  .kb-hero-overlay-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.8rem;
+  }
+  .kb-hero-overlay-link {
+    margin-left: auto;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--kb-cyan);
+    text-decoration: none;
+  }
+  .kb-hero-overlay-link:hover { color: var(--kb-cyan-soft); }
+
+  /* ── Floating tickers (decorative) ───────────────────────── */
+  .kb-hero-ticker {
+    position: absolute;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--kb-text-muted);
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--kb-line);
+    border-radius: var(--kb-radius-full);
+    background: oklch(0.12 0.010 260 / 0.7);
+    z-index: 3;
+  }
+  .kb-hero-ticker--top    { top: 8%;       right: 6%; }
+  .kb-hero-ticker--bottom { bottom: 6%;   right: 14%; }
+
+  /* ── Marquee ribbon ──────────────────────────────────────── */
+  .kb-hero-marquee {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    padding-block: 0.85rem;
+    border-top: 1px solid var(--kb-line);
+    border-bottom: 1px solid var(--kb-line);
+    overflow: hidden;
+  }
+  .kb-hero-marquee-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--kb-text-muted);
+    white-space: nowrap;
+    animation: kb-marquee 60s linear infinite;
+  }
+  .kb-hero-marquee-track span { flex-shrink: 0; }
+  .kb-hero-marquee-track i {
+    color: var(--kb-line-strong);
+    font-style: normal;
+    flex-shrink: 0;
+  }
+  @keyframes kb-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 980px) {
+    .kb-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .kb-hero-visual {
+      aspect-ratio: 16 / 11;
+      min-height: 280px;
+      max-height: 420px;
+    }
+    .kb-hero-overlay-card {
+      left: 4%;
+      max-width: 88%;
+    }
+    .kb-hero-ticker--top    { right: 4%; }
+    .kb-hero-ticker--bottom { right: 6%; }
+  }
+
+  @media (max-width: 600px) {
+    .kb-hero-stats {
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
+    .kb-hero-stats > div {
+      display: block;
+      padding-block: 0.4rem;
+      border-top: 1px dashed var(--kb-line);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kb-hero-marquee-track { animation: none; }
+  }
+</style>

@@ -19,14 +19,14 @@ const serviceColors = [
 <section class="kb-section section-raised">
   <div class="kb-container">
     <SectionHead badge="Servicios" title={title} text={text} />
-    <div class="kb-svc-grid">
+    <div class="kb-svc-grid" data-reveal-stagger>
       {services.map((svc, idx) => {
         const c = serviceColors[idx % serviceColors.length];
         return (
           <div class={`kb-svc-card${idx === 0 ? " kb-svc-featured" : ""}`}>
             <a class="kb-svc-inner" href={svc.href} style={`--svc-bg:${c.bg};--svc-border:${c.border};--svc-accent:${c.accent}`}>
               <div class="kb-svc-visual" aria-hidden="true">
-                <span class="kb-svc-icon">{idx === 0 ? "{}" : idx === 1 ? "</>" : "[ ]"}</span>
+                <i class={`kb-svc-icon ph ${svc.icon ?? "ph-stack"}`}></i>
               </div>
               <div class="kb-svc-body">
                 <span class="kb-svc-tag">{svc.tag}</span>
@@ -85,10 +85,9 @@ const serviceColors = [
   }
 
   .kb-svc-icon {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 1.6rem;
+    font-size: 1.75rem;
+    line-height: 1;
     color: var(--svc-accent, var(--kb-text-soft));
-    opacity: 0.5;
   }
 
   .kb-svc-body {

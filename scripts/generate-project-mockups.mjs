@@ -74,7 +74,7 @@ function bigTitle(x, y, label) {
   });
 }
 
-function stat(x, y, value, label, color = PALETTE.amber, idx = 0) {
+function stat(x, y, value, label, color = PALETTE.amber) {
   return text(x, y, value, {
     family: "monospace", size: 64, weight: 500, fill: color, letter: -2,
   }) + text(x, y + 30, label, {

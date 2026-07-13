@@ -17,9 +17,9 @@ const { title, items } = Astro.props;
       title={title}
       text="Respuestas cortas para búsquedas comerciales y para clientes que están evaluando alcance técnico."
     />
-    <div class="kb-grid kb-grid-2">
+    <div class="kb-grid kb-grid-2" data-reveal-stagger>
       {items.map((item) => (
-        <article class="kb-faq reveal">
+        <article class="kb-faq">
           <h3>{item.q}</h3>
           <p>{item.a}</p>
         </article>
