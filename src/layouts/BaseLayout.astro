@@ -1,19 +1,10 @@
 ---
 import "@/styles/global.css";
 import "@phosphor-icons/web/regular";
-import type { PageData } from "@/data/site";
-import { SITE, structuredData } from "@/data/site";
-import Footer from "@/components/Footer.astro";
-import Nav from "@/components/Nav.astro";
-import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { SITE, page, structuredData } from "@/data/site";
 
-interface Props {
-  page: PageData;
-}
-
-const { page } = Astro.props;
-const canonical = new URL(page.route, SITE).toString();
-const schema = JSON.stringify(structuredData(page, canonical));
+const canonical = new URL("/", SITE).toString();
+const schema = JSON.stringify(structuredData(canonical));
 ---
 
 <!doctype html>
@@ -41,19 +32,18 @@ const schema = JSON.stringify(structuredData(page, canonical));
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#020b18" />
-    <link rel="preload" as="image" href="/images/logo-oficial-dark.png" fetchpriority="high" />
+    <meta name="theme-color" content="#05090f" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Font load: preconnect enlaza el origen; el CSS se aplica asíncrono vía media swap,
          de modo que no bloquea el primer paint mientras LCP entra en ~1.8s. -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
       media="print"
       data-fonts="swap"
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" /></noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" /></noscript>
     <!-- GA4: config queued immediately, library deferred to after load to avoid long main-thread task -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -75,33 +65,9 @@ const schema = JSON.stringify(structuredData(page, canonical));
     <script is:inline type="application/ld+json" set:html={schema}></script>
   </head>
   <body>
-    <Nav current={page.nav} />
-    <main id="main-content">
-      <slot />
-    </main>
-    <Footer />
-    <WhatsAppFab message={page.cta} />
+    <slot />
     <script>
       import "@/scripts/animate";
-    </script>
-    <script>
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener("click", () => {
-          const isOpen = mobileMenu.classList.toggle("is-open");
-          mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
-        });
-
-        mobileMenu.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileMenu.classList.remove("is-open");
-            mobileMenuBtn.setAttribute("aria-expanded", "false");
-          });
-        });
-      }
-
     </script>
   </body>
 </html>

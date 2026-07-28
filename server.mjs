@@ -30,6 +30,30 @@ const MIME = {
 
 const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.json', '.svg', '.xml', '.txt']);
 
+// The site was consolidated into a single page (see index.astro). These
+// routes used to be separate pages; visitors and search engines land here
+// via old links/bookmarks and get sent to the matching anchor on '/'.
+const REDIRECTS = {
+  '/servicios': '/#servicios',
+  '/servicios/desarrollo-software-a-medida': '/#servicios',
+  '/servicios/desarrollo-web': '/#servicios',
+  '/servicios/integraciones-erp-crm': '/#servicios',
+  '/servicios/integraciónes-erp-crm': '/#servicios',
+  '/casos': '/#proyectos',
+  '/casos/nexus-oms-integracion-vtex-icg': '/#proyectos',
+  '/casos/nexus-oms-integración-vtex-icg': '/#proyectos',
+  '/casos/torcoroma-pqrs': '/#proyectos',
+  '/ecosistema-pass': '/#pass',
+  '/ubicaciones': '/#contacto',
+  '/ubicaciones/sincelejo': '/#contacto',
+  '/ubicaciones/sucre': '/#contacto',
+};
+
+function redirectTarget(urlPath) {
+  const bare = urlPath.replace(/\/$/, '').replace(/\.html$/i, '') || '/';
+  return REDIRECTS[bare] ?? null;
+}
+
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
@@ -99,6 +123,13 @@ function serveFile(filePath, statusCode, req, res) {
 
 createServer((req, res) => {
   let urlPath = req.url.split('?')[0].split('#')[0];
+
+  const redirect = redirectTarget(urlPath);
+  if (redirect) {
+    res.writeHead(301, { Location: redirect });
+    res.end();
+    return;
+  }
 
   if (urlPath !== '/' && urlPath.endsWith('/')) {
     res.writeHead(301, { Location: urlPath.slice(0, -1) });

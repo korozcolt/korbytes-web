@@ -1,57 +1,46 @@
 ---
-import { whatsapp } from "@/data/site";
+import { whatsapp, EMAIL, GITHUB_URL } from "@/data/site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="kb-foot">
+<footer class="kb-foot" id="contacto-footer">
   <div class="kb-container">
     <div class="kb-foot-grid">
       <div class="kb-foot-brand-block">
-        <a class="kb-foot-logo" href="/" aria-label="KOR Bytes inicio">
-          <img src="/images/logo-oficial-dark.png" width="600" height="200" alt="KOR Bytes S.A.S." loading="lazy" />
-        </a>
+        <a class="kb-foot-logo" href="#top" aria-label="KOR Bytes inicio">KOR Bytes<span class="kb-dot">.</span></a>
         <p class="kb-foot-pitch">
-          Construimos software operativo, productos verticales <span class="kb-wordmark">PASS</span>, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.
+          Software operativo, productos verticales PASS, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.
         </p>
         <address class="kb-foot-address">
           <div><strong>Sincelejo</strong> · Sucre · Colombia</div>
-          <div class="kb-foot-mute">Trabajo remoto · Modelo B2B</div>
+          <div class="kb-foot-mute">Remoto · Modelo B2B</div>
         </address>
       </div>
 
       <div>
         <h4>Empresa</h4>
         <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/ecosistema-pass/">Ecosistema PASS</a></li>
-          <li><a href="/casos/">Proyectos/Casos</a></li>
-          <li><a href="/ubicaciones/">Cobertura</a></li>
+          <li><a href="#top">Inicio</a></li>
+          <li><a href="#pass">Ecosistema PASS</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Servicios</h4>
+        <h4>Encuéntranos</h4>
         <ul>
-          <li><a href="/servicios/desarrollo-software-a-medida">Software a medida</a></li>
-          <li><a href="/servicios/integraciones-erp-crm">Integraciones</a></li>
-          <li><a href="/servicios/desarrollo-web">Web + SEO</a></li>
-          <li><a href="/servicios/">Ver mapa completo</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="mailto:gerencia@kor-bytes.com">gerencia@kor-bytes.com</a></li>
+          <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
           <li>
             <a href={whatsapp("Hola KOR Bytes, quiero una consultoría.")} target="_blank" rel="noopener">
               WhatsApp directo
             </a>
           </li>
           <li class="kb-foot-mono">+57 304 397 8157</li>
+          <li><a href={GITHUB_URL} target="_blank" rel="noopener">GitHub · korozcolt</a></li>
         </ul>
         <div class="kb-foot-cta">
-          <a class="kb-btn kb-btn--amber kb-foot-btn" href={whatsapp("Hola KOR Bytes, quiero empezar un proyecto.")} target="_blank" rel="noopener">
+          <a class="kb-btn kb-foot-btn" href={whatsapp("Hola KOR Bytes, quiero empezar un proyecto.")} target="_blank" rel="noopener">
             Empezar un proyecto
           </a>
         </div>
@@ -60,7 +49,8 @@ const year = new Date().getFullYear();
 
     <div class="kb-foot-foot">
       <div>© {year} KOR Bytes S.A.S. · Todos los derechos reservados</div>
-      <div class="kb-foot-claim">Información de proyectos publicada según su estado de madurez, sin métricas no verificadas.</div>
+      <div class="kb-foot-claim">Información publicada según estado de madurez, sin métricas no verificadas.</div>
+      <a href="#top" class="kb-foot-top">Volver arriba ↑</a>
     </div>
   </div>
 </footer>
@@ -68,12 +58,15 @@ const year = new Date().getFullYear();
 <style>
   .kb-foot-logo {
     display: inline-flex;
+    align-items: baseline;
+    font-family: "Familjen Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--kb-text-strong);
     margin-bottom: 1.25rem;
   }
-  .kb-foot-logo img {
-    width: 188px; height: auto;
-    filter: drop-shadow(0 0 18px oklch(0.78 0.155 215 / 0.18));
-  }
+  .kb-dot { color: var(--kb-accent); }
   .kb-foot-pitch {
     color: var(--kb-text-muted);
     line-height: 1.62;
@@ -94,11 +87,7 @@ const year = new Date().getFullYear();
     color: var(--kb-text-soft);
     letter-spacing: 0.02em;
   }
-  .kb-foot-cta {
-    margin-top: 1.1rem;
-  }
-  .kb-foot-btn {
-    font-size: 0.86rem;
-    padding: 0.7rem 1rem;
-  }
+  .kb-foot-cta { margin-top: 1.1rem; }
+  .kb-foot-btn { font-size: 0.86rem; padding: 0.7rem 1rem; }
+  .kb-foot-top { color: var(--kb-text-muted); font-size: 0.82rem; }
 </style>

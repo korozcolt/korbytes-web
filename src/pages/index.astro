@@ -1,13 +1,606 @@
 ---
-import Hero from "@/components/Hero.astro";
-import PageSections from "@/components/PageSections.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { pages } from "@/data/site";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import {
+  navAnchors,
+  services,
+  passProducts,
+  projects,
+  practica,
+  pasos,
+  hechos,
+  whatsapp,
+  EMAIL,
+  GITHUB_URL,
+} from "@/data/site";
 
-const page = pages.home;
+const stack = [
+  "Laravel", "Filament", "Livewire", "PASS Core", "n8n", "Dokploy",
+  "VPS", "Redis", "Postgres", "Shopify", "MercadoPago", "Wompi",
+  "Bagisto", "Docker", "GitHub Actions",
+];
+
+function initials(name: string) {
+  return name.split(/[\s/+-]+/).map((w) => w[0]).join("").slice(0, 3).toUpperCase();
+}
 ---
 
-<BaseLayout page={page}>
-  <Hero page={page} />
-  <PageSections variant="home" />
+<BaseLayout>
+  <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
+
+  <div id="preloader" class="kb-preloader" aria-hidden="true">
+    <div class="kb-preloader-top">
+      <span class="kb-mark">K</span>
+      <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+    </div>
+    <div class="kb-preloader-mid">
+      <span class="kb-preloader-label">Software operativo</span>
+      <span class="kb-preloader-num"><span id="preloader-num">0</span><span class="kb-dot">%</span></span>
+    </div>
+    <div class="kb-preloader-bar"><div id="preloader-fill" class="kb-preloader-fill"></div></div>
+  </div>
+
+  <header class="kb-header" id="site-header">
+    <div class="kb-container kb-header-inner">
+      <a href="#top" id="logo-slot" class="kb-logo-slot" aria-label="KOR Bytes inicio">
+        <span class="kb-mark">K</span>
+        <span class="kb-logo-slide-wrap">
+          <span class="kb-logo-slide">
+            <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+            <span class="kb-wordmark kb-wordmark--accent">KOR Bytes<span class="kb-dot kb-dot--inverse">.</span></span>
+          </span>
+        </span>
+      </a>
+
+      <nav class="kb-hnav" aria-label="Navegación principal">
+        {navAnchors.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+
+      <a class="kb-hnav-cta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+        <span class="kb-hnav-dot" aria-hidden="true"></span>Hablemos por WhatsApp
+      </a>
+
+      <button class="kb-menu-btn" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="kb-mobile-menu" id="mobile-menu">
+      {navAnchors.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+      <a href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+        Hablar por WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <a href="#top" id="logo-fixed" class="kb-logo-fixed" aria-hidden="true">
+    <span class="kb-mark">K</span>
+    <span class="kb-logo-slide-wrap">
+      <span class="kb-logo-slide">
+        <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+        <span class="kb-wordmark kb-wordmark--accent">KOR Bytes<span class="kb-dot kb-dot--inverse">.</span></span>
+      </span>
+    </span>
+  </a>
+
+  <main id="main-content">
+    <section id="top" class="kb-hero">
+      <div id="hero-sentinel" class="kb-container">
+        <div class="kb-hero-tiles">
+          {projects.slice(0, 3).map((p, i) => (
+            <a href="#proyectos" class="kb-hero-tile">
+              {p.image ? (
+                <img src={p.image} alt={p.name} loading={i === 0 ? "eager" : "lazy"} fetchpriority={i === 0 ? "high" : "auto"} />
+              ) : (
+                <div class="kb-hero-tile-fallback"><span>{initials(p.name)}</span></div>
+              )}
+              <span class="kb-hero-tile-index">[{String(i + 1).padStart(2, "0")}]</span>
+              <span class="kb-hero-tile-label">{p.name} · {p.sector}</span>
+            </a>
+          ))}
+        </div>
+
+        <div class="kb-hero-headline">
+          <h1>
+            KOR Bytes es una casa de software en Sincelejo. Construimos productos verticales y sistemas que <span class="kb-accent-text">sí aguantan</span> la operación.
+          </h1>
+          <div class="kb-hero-coverage">
+            <span class="kb-eyebrow">Cobertura</span>
+            <span class="kb-hero-coverage-text">Sincelejo, Sucre · Colombia<br />LATAM · Remoto-first · B2B</span>
+          </div>
+        </div>
+
+        <div class="kb-hero-bottom">
+          <span class="kb-text-soft">© 2026 KOR Bytes S.A.S.</span>
+          <div class="kb-hero-pills">
+            <a href="#servicios" class="kb-pill">Software a medida</a>
+            <a href="#pass" class="kb-pill">Productos PASS</a>
+            <a href="#servicios" class="kb-pill">Integraciones &amp; APIs</a>
+          </div>
+          <div class="kb-hero-contact-links">
+            <a href={whatsapp("Hola KOR Bytes, quiero un diagnóstico para mi proyecto.")} target="_blank" rel="noopener">WhatsApp</a>
+            <a href={`mailto:${EMAIL}`}>Correo</a>
+            <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="kb-marquee">
+      <div class="kb-marquee-track" data-marquee-track>
+        <div class="kb-marquee-group">
+          <span>Software operativo</span><span class="kb-accent-text">✳</span>
+          <span class="kb-text-soft">hablemos</span><span class="kb-accent-text">✳</span>
+          <span>Productos verticales PASS</span><span class="kb-accent-text">✳</span>
+          <span class="kb-text-soft">hablemos</span><span class="kb-accent-text">✳</span>
+          <span>Integraciones y automatización</span><span class="kb-accent-text">✳</span>
+          <span class="kb-text-soft">hablemos</span><span class="kb-accent-text">✳</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="kb-section kb-transition">
+      <div class="kb-container kb-transition-grid">
+        <div>
+          <span class="kb-eyebrow kb-eyebrow--dot">KOR Bytes como empresa madre</span>
+          <h2>De servicios<br />a <span class="kb-accent-text">productos.</span></h2>
+          <p class="kb-lead">La nueva narrativa no abandona el software a medida: lo ordena dentro de una casa de producto. PASS convierte patrones repetidos en verticales con módulos reutilizables.</p>
+          <a href="#pass" class="kb-btn">Explorar ecosistema PASS →</a>
+        </div>
+        <div class="kb-practica-list">
+          {practica.map((row) => (
+            <div class="kb-practica-row">
+              <span class="kb-accent-text kb-mono">{row.n}</span>
+              <span>{row.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="kb-section">
+      <div class="kb-container">
+        <div class="kb-section-head">
+          <div>
+            <span class="kb-eyebrow">Servicios</span>
+            <h2>Capacidades comerciales</h2>
+          </div>
+          <p class="kb-body">Desde la web pública hasta el sistema que opera por dentro.</p>
+        </div>
+        <div class="kb-grid kb-grid-3 kb-svc-grid" data-reveal-stagger>
+          {services.map((s) => (
+            <a href="#contacto" class="kb-svc-card">
+              <span class="kb-mono kb-accent-text">{s.tag}</span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <span class="kb-svc-more">Ver detalle →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div class="kb-marquee kb-marquee--soft">
+      <div class="kb-marquee-track" data-marquee-track>
+        <div class="kb-marquee-group kb-marquee-group--chips">
+          {stack.map((t) => <span class="kb-chip">{t}</span>)}
+        </div>
+      </div>
+    </div>
+
+    <section id="pass" class="kb-section">
+      <div class="kb-container">
+        <div class="kb-section-head">
+          <div>
+            <span class="kb-eyebrow">PASS</span>
+            <h2>Ecosistema PASS destacado</h2>
+          </div>
+          <p class="kb-body">Productos verticales publicados con su estado real, sin prometer madurez que todavía no existe.</p>
+        </div>
+        <div class="kb-grid kb-grid-3 kb-pass-grid" data-reveal-stagger>
+          {passProducts.map((p) => (
+            <div class="kb-pass-card">
+              <div class="kb-pass-card-top">
+                <span class="kb-pass-name">{p.name}</span>
+                <span class="kb-dot-accent" aria-hidden="true"></span>
+              </div>
+              <p>{p.desc}</p>
+              <div class="kb-chips">
+                {p.tags.map((tg) => <span class="kb-chip">{tg}</span>)}
+              </div>
+              <span class="kb-pass-estado">{p.estado}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="kb-section">
+      <div class="kb-container">
+        <div class="kb-section-head">
+          <div>
+            <span class="kb-eyebrow">Proyectos</span>
+            <h2>Proyectos destacados</h2>
+          </div>
+          <a href="#contacto" class="kb-more-link">Hablemos de tu caso →</a>
+        </div>
+        <div class="kb-grid kb-grid-3 kb-proj-grid" data-reveal-stagger>
+          {projects.map((pr) => (
+            <a href="#contacto" class="kb-proj-card">
+              <div class="kb-proj-media">
+                {pr.image ? (
+                  <img src={pr.image} alt={pr.name} loading="lazy" />
+                ) : (
+                  <div class="kb-proj-fallback"><span>{initials(pr.name)}</span></div>
+                )}
+                <span class="kb-proj-estado">{pr.estado}</span>
+              </div>
+              <div class="kb-proj-body">
+                <span class="kb-mono kb-text-soft">{pr.sector}</span>
+                <h3>{pr.name}</h3>
+                <p>{pr.desc}</p>
+                <div class="kb-chips">
+                  {pr.tags.map((tg) => <span class="kb-chip">{tg}</span>)}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso" class="kb-section">
+      <div class="kb-container kb-proceso-grid">
+        <div class="kb-proceso-sticky">
+          <span class="kb-eyebrow">Cómo trabajamos</span>
+          <h2>Del diagnóstico<br />a producción</h2>
+          <p class="kb-body">Cuatro etapas con entregables claros y trazabilidad en cada paso.</p>
+        </div>
+        <div class="kb-proceso-list">
+          {pasos.map((st) => (
+            <div class="kb-proceso-row">
+              <span class="kb-mono kb-accent-text kb-proceso-n">Paso {st.n}</span>
+              <h3>{st.title}</h3>
+              <p>{st.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section kb-section--soft">
+      <div class="kb-container kb-grid kb-grid-4 kb-hechos-grid">
+        {hechos.map((h) => (
+          <div class="kb-hecho">
+            <div class="kb-hecho-k">{h.k}</div>
+            <div class="kb-hecho-v">{h.v}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="contacto" class="kb-section kb-section--soft">
+      <div class="kb-container">
+        <div class="kb-cta">
+          <div>
+            <span class="kb-eyebrow">Siguiente paso</span>
+            <h2>¿Qué proceso<br />quieres <span class="kb-accent-text">ordenar</span> primero?</h2>
+            <p class="kb-lead">Podemos partir desde un producto nuevo, una integración, un rediseño web, una automatización o una plataforma existente que necesita estructura.</p>
+            <p class="kb-cta-finder">
+              Encuéntranos también en
+              <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a> y desde
+              <span class="kb-text">Sincelejo, Sucre, Colombia.</span>
+            </p>
+          </div>
+          <div class="kb-cta-actions">
+            <a class="kb-cta-btn kb-cta-btn--primary" href={whatsapp("Hola KOR Bytes, quiero empezar un proyecto.")} target="_blank" rel="noopener">Escribir por WhatsApp<span>→</span></a>
+            <a class="kb-cta-btn" href={`mailto:${EMAIL}`}>{EMAIL}<span>→</span></a>
+            <a class="kb-cta-btn" href="tel:+573043978157">+57 304 397 8157<span>→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsAppFab message="Hola KOR Bytes, quiero un diagnóstico para mi proyecto de software o producto digital." />
+
+  <script>
+    const preloader = document.getElementById("preloader");
+    const numEl = document.getElementById("preloader-num");
+    const fillEl = document.getElementById("preloader-fill");
+    const slot = document.getElementById("logo-slot");
+    const fixed = document.getElementById("logo-fixed");
+    const sentinel = document.getElementById("hero-sentinel");
+    const header = document.getElementById("site-header");
+
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function dismissPreloader() {
+      if (!preloader || preloader.dataset.done) return;
+      preloader.dataset.done = "1";
+      preloader.style.pointerEvents = "none";
+      preloader.style.opacity = "0";
+      setTimeout(() => { preloader.style.visibility = "hidden"; }, 600);
+    }
+
+    if (reduced || !preloader) {
+      dismissPreloader();
+    } else {
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / 1400);
+        if (numEl) numEl.textContent = String(Math.round(p * 100));
+        if (fillEl) fillEl.style.width = p * 100 + "%";
+        if (p < 1) requestAnimationFrame(tick);
+        else dismissPreloader();
+      };
+      requestAnimationFrame(tick);
+      setTimeout(dismissPreloader, 2400);
+    }
+
+    if (reduced || !slot || !fixed || !sentinel) {
+      if (fixed) fixed.style.display = "none";
+      if (slot) slot.style.visibility = "visible";
+    } else {
+      let baseTop: number | null = null;
+      let smooth: number | null = null;
+
+      function updateLogo() {
+        const r = slot!.getBoundingClientRect();
+        const vw = window.innerWidth, vh = window.innerHeight;
+        const st = sentinel!.getBoundingClientRect().top;
+        if (baseTop == null) baseTop = st;
+        else if (st > baseTop) baseTop = st;
+
+        const y = Math.max(0, baseTop - sentinel!.getBoundingClientRect().top);
+        const p = Math.min(1, Math.max(0, y / 760));
+        if (smooth == null) smooth = p;
+        smooth += (p - smooth) * 0.085;
+        if (Math.abs(p - smooth) < 0.0004) smooth = p;
+
+        const sp = smooth;
+        const e = sp < 0.5 ? 4 * sp * sp * sp : 1 - Math.pow(-2 * sp + 2, 3) / 2;
+        const maxByHeight = (vh * 0.22) / Math.max(r.height, 1);
+        const bigScale = Math.max(1, Math.min(6.4, (vw * 0.66) / Math.max(r.width, 1), maxByHeight));
+        const s = bigScale + (1 - bigScale) * e;
+        const startX = (vw - r.width * bigScale) / 2;
+        const startY = Math.max(90, vh * 0.2);
+        const x = startX + (r.left - startX) * e;
+        const ty = startY + (r.top - startY) * e;
+        fixed!.style.transform = `translate3d(${x}px, ${ty}px, 0) scale(${s})`;
+        requestAnimationFrame(updateLogo);
+      }
+      requestAnimationFrame(updateLogo);
+    }
+
+    if (header) {
+      addEventListener("scroll", () => {
+        header.classList.toggle("is-scrolled", window.scrollY > 8);
+      }, { passive: true });
+    }
+
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("is-open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("is-open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
 </BaseLayout>
+
+<style>
+  .kb-accent-text { color: var(--kb-accent); }
+  .kb-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--kb-text-soft);
+    margin-bottom: 1.1rem;
+  }
+  .kb-eyebrow--dot::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--kb-accent);
+    animation: kb-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes kb-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  /* ── Preloader ─────────────────────────────────────────────── */
+  .kb-preloader {
+    position: fixed; inset: 0; z-index: 300;
+    background: var(--kb-bg);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 48px;
+    transition: opacity 0.55s ease;
+  }
+  .kb-preloader-top { display: flex; align-items: center; gap: 12px; }
+  .kb-preloader-mid { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  .kb-preloader-label { font-family: "Familjen Grotesk", sans-serif; font-size: clamp(28px, 4vw, 64px); color: var(--kb-text-soft); }
+  .kb-preloader-num { font-family: "Familjen Grotesk", sans-serif; font-size: clamp(56px, 10vw, 160px); line-height: 0.9; color: var(--kb-text-strong); }
+  .kb-preloader-bar { height: 2px; background: rgba(255,255,255,0.1); margin-top: 26px; }
+  .kb-preloader-fill { height: 2px; background: var(--kb-accent); width: 0%; }
+
+  /* ── Logo ──────────────────────────────────────────────────── */
+  .kb-mark {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: var(--kb-accent);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: "Familjen Grotesk", sans-serif; font-weight: 700;
+    color: var(--kb-bg); font-size: 16px; flex-shrink: 0;
+  }
+  .kb-wordmark { display: block; height: 24px; line-height: 24px; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; color: var(--kb-text); white-space: nowrap; }
+  .kb-wordmark--accent { color: var(--kb-accent); }
+  .kb-dot { color: var(--kb-accent); }
+  .kb-dot--inverse { color: var(--kb-text); }
+  .kb-logo-slide-wrap { display: block; height: 24px; overflow: hidden; }
+  .kb-logo-slide { display: block; transition: transform 0.55s cubic-bezier(0.6, 0, 0.2, 1); }
+  a:hover .kb-logo-slide { transform: translateY(-100%); }
+
+  .kb-logo-slot, .kb-logo-fixed {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .kb-logo-slot { visibility: hidden; }
+  .kb-logo-fixed {
+    position: fixed; left: 0; top: 0; z-index: 250;
+    transform-origin: 0 0; will-change: transform; pointer-events: none;
+  }
+
+  /* ── Header ────────────────────────────────────────────────── */
+  .kb-header {
+    position: sticky; top: 0; z-index: 90;
+    background: rgba(5, 9, 15, 0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--kb-line);
+  }
+  .kb-header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; padding: 18px 0;
+  }
+  .kb-hnav {
+    display: flex; align-items: center; gap: 22px;
+    font-size: 14px; color: var(--kb-text-muted);
+  }
+  .kb-hnav a:first-child { color: var(--kb-text); }
+  .kb-hnav-cta {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 20px; border-radius: var(--kb-radius-full);
+    border: 1px solid var(--kb-line-strong); font-size: 13px;
+    white-space: nowrap;
+    transition: background var(--kb-duration-fast), border-color var(--kb-duration-fast), color var(--kb-duration-fast);
+  }
+  .kb-hnav-cta:hover { background: var(--kb-accent); border-color: var(--kb-accent); color: var(--kb-bg); }
+  .kb-hnav-dot { width: 7px; height: 7px; border-radius: 99px; background: var(--kb-accent); display: inline-block; }
+
+  .kb-menu-btn {
+    display: none; border: 1px solid var(--kb-line); background: transparent;
+    border-radius: var(--kb-radius-md); color: var(--kb-text); padding: 0.6rem;
+  }
+  .kb-menu-btn span { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
+  .kb-mobile-menu { display: none; padding: 0 24px 1.25rem; }
+  .kb-mobile-menu.is-open { display: grid; gap: 0.6rem; }
+
+  @media (max-width: 1080px) { .kb-hnav a:nth-child(4) { display: none; } }
+  @media (max-width: 880px) {
+    .kb-hnav, .kb-hnav-cta { display: none; }
+    .kb-menu-btn { display: inline-flex; }
+    .kb-logo-fixed { display: none !important; }
+    .kb-logo-slot { visibility: visible !important; }
+  }
+
+  /* ── Hero ──────────────────────────────────────────────────── */
+  .kb-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: max(200px, 32vh); padding-bottom: 0; }
+  .kb-hero-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .kb-hero-tile { position: relative; display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-floating); aspect-ratio: 4/5; max-height: 46vh; }
+  .kb-hero-tile img { width: 100%; height: 100%; object-fit: cover; opacity: 0.82; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s; }
+  .kb-hero-tile:hover img { transform: scale(1.06); opacity: 1; }
+  .kb-hero-tile-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--kb-bg-floating), var(--kb-bg-raised)); }
+  .kb-hero-tile-fallback span { font-family: "Familjen Grotesk", sans-serif; font-size: 2.4rem; color: var(--kb-accent); letter-spacing: -0.02em; }
+  .kb-hero-tile-index { position: absolute; left: 18px; top: 16px; font-family: "Familjen Grotesk", sans-serif; font-size: 13px; color: var(--kb-text); letter-spacing: 0.08em; }
+  .kb-hero-tile-label { position: absolute; left: 18px; bottom: 16px; padding: 7px 14px; border-radius: var(--kb-radius-full); background: rgba(5,9,15,0.72); backdrop-filter: blur(8px); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-text-muted); }
+
+  .kb-hero-headline { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 56px 48px; align-items: end; padding: 52px 0 26px; }
+  .kb-hero-headline h1 { max-width: 24ch; font-weight: 400; font-size: clamp(24px, 2.1vw, 34px); line-height: 1.32; text-wrap: pretty; }
+  .kb-hero-coverage { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; justify-self: end; }
+  .kb-hero-coverage-text { font-size: 15px; color: var(--kb-text-muted); line-height: 1.6; }
+
+  .kb-hero-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; padding: 26px 0 40px; border-top: 1px solid var(--kb-line); font-size: 14px; }
+  .kb-hero-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .kb-pill { padding: 9px 18px; border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); color: var(--kb-text-muted); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
+  .kb-pill:hover { border-color: var(--kb-accent); color: var(--kb-accent); }
+  .kb-hero-contact-links { display: flex; align-items: center; gap: 26px; color: var(--kb-text-muted); }
+  .kb-text-soft { color: var(--kb-text-soft); }
+  .kb-text { color: var(--kb-text); }
+
+  /* ── Marquee ───────────────────────────────────────────────── */
+  .kb-marquee { border-top: 1px solid var(--kb-line); border-bottom: 1px solid var(--kb-line); overflow: hidden; padding: 26px 0; background: #070d15; }
+  .kb-marquee--soft { padding: 20px 0; }
+  .kb-marquee-track { display: flex; width: max-content; animation: kb-marquee 28s linear infinite; }
+  .kb-marquee--soft .kb-marquee-track { animation-duration: 36s; }
+  .kb-marquee-group { display: flex; align-items: center; gap: 38px; padding-right: 38px; font-family: "Familjen Grotesk", sans-serif; font-size: clamp(26px, 3vw, 46px); letter-spacing: -0.02em; color: var(--kb-text); white-space: nowrap; }
+  .kb-marquee-group--chips { gap: 14px; padding-right: 14px; }
+  @keyframes kb-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+
+  /* ── Transition / practica ─────────────────────────────────── */
+  .kb-transition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 64px; align-items: start; }
+  .kb-practica-list { display: flex; flex-direction: column; border-top: 1px solid var(--kb-line); }
+  .kb-practica-row { display: flex; gap: 22px; padding: 24px 4px; border-bottom: 1px solid var(--kb-line); }
+  .kb-practica-row span:last-child { font-size: 16px; line-height: 1.6; color: var(--kb-text-muted); }
+
+  /* ── Section head ──────────────────────────────────────────── */
+  .kb-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 44px; flex-wrap: wrap; }
+  .kb-more-link { font-size: 14px; color: var(--kb-text-muted); border-bottom: 1px solid var(--kb-line-strong); padding-bottom: 4px; }
+
+  /* ── Service cards ─────────────────────────────────────────── */
+  .kb-svc-card { display: flex; flex-direction: column; gap: 16px; padding: 34px 30px 30px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); min-height: 260px; transition: background var(--kb-duration-slow), border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
+  .kb-svc-card:hover { background: var(--kb-bg-floating); border-color: var(--kb-line-accent); transform: translateY(-4px); }
+  .kb-svc-card p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
+  .kb-svc-more { margin-top: auto; font-size: 13px; color: var(--kb-text-muted); }
+
+  /* ── PASS cards ────────────────────────────────────────────── */
+  .kb-pass-card { display: flex; flex-direction: column; gap: 18px; padding: 30px 26px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
+  .kb-pass-card:hover { border-color: var(--kb-line-accent); }
+  .kb-pass-card-top { display: flex; align-items: center; justify-content: space-between; }
+  .kb-pass-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 21px; color: var(--kb-text-strong); }
+  .kb-dot-accent { width: 8px; height: 8px; border-radius: 99px; background: var(--kb-accent); display: inline-block; }
+  .kb-pass-card p { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--kb-text-muted); }
+  .kb-pass-estado { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--kb-line); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
+
+  /* ── Project cards ─────────────────────────────────────────── */
+  .kb-proj-card { display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
+  .kb-proj-card:hover { border-color: var(--kb-line-accent); }
+  .kb-proj-media { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--kb-bg-floating); }
+  .kb-proj-media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.78; transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s; }
+  .kb-proj-card:hover .kb-proj-media img { transform: scale(1.05); opacity: 1; }
+  .kb-proj-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--kb-bg-floating), var(--kb-bg-raised)); }
+  .kb-proj-fallback span { font-family: "Familjen Grotesk", sans-serif; font-size: 2.2rem; color: var(--kb-accent); }
+  .kb-proj-estado { position: absolute; left: 16px; top: 14px; padding: 6px 13px; border-radius: var(--kb-radius-full); background: rgba(5,9,15,0.78); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
+  .kb-proj-body { padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 12px; }
+  .kb-proj-body p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
+
+  /* ── Proceso ───────────────────────────────────────────────── */
+  .kb-proceso-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start; }
+  .kb-proceso-sticky { position: sticky; top: 110px; }
+  .kb-proceso-list { border-top: 1px solid var(--kb-line); }
+  .kb-proceso-row { padding: 34px 6px; border-bottom: 1px solid var(--kb-line); }
+  .kb-proceso-n { display: block; margin-bottom: 8px; }
+  .kb-proceso-row h3 { margin-bottom: 6px; }
+  .kb-proceso-row p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
+
+  /* ── Hechos ────────────────────────────────────────────────── */
+  .kb-hechos-grid { gap: 18px; }
+  .kb-hecho { padding: 34px 28px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
+  .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-size: 40px; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 10px; }
+  .kb-hecho-v { font-size: 14.5px; line-height: 1.55; color: var(--kb-text-muted); }
+
+  /* ── Contact CTA ───────────────────────────────────────────── */
+  .kb-cta { border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); padding: 70px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
+  .kb-cta-finder { margin-top: 1.4rem; font-size: 0.9rem; color: var(--kb-text-muted); }
+  .kb-cta-finder a { color: var(--kb-accent); }
+  .kb-cta-actions { display: flex; flex-direction: column; gap: 16px; min-width: 280px; }
+  .kb-cta-btn { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 26px; border-radius: var(--kb-radius-md); border: 1px solid var(--kb-line-strong); font-size: 16px; transition: border-color var(--kb-duration-fast), background var(--kb-duration-fast), color var(--kb-duration-fast); }
+  .kb-cta-btn--primary { background: var(--kb-accent); color: var(--kb-bg); border-color: var(--kb-accent); }
+  .kb-cta-btn--primary:hover { background: var(--kb-text-strong); border-color: var(--kb-text-strong); }
+  .kb-cta-btn:not(.kb-cta-btn--primary):hover { border-color: var(--kb-accent); color: var(--kb-accent); }
+</style>
