@@ -2,6 +2,7 @@ export const SITE = "https://kor-bytes.com";
 export const WHATSAPP_NUMBER = "573043978157";
 export const EMAIL = "gerencia@kor-bytes.com";
 export const GITHUB_URL = "https://github.com/korozcolt";
+export const PHONE = "+573043978157";
 
 export const page = {
   title: "KOR Bytes S.A.S. | Software operativo, productos PASS e infraestructura digital",
@@ -192,6 +193,25 @@ export const hechos: Array<{ k: string; v: string }> = [
   { k: "B2B", v: "Remoto-first para toda LATAM" },
 ];
 
+export const faqs: Array<{ question: string; answer: string }> = [
+  {
+    question: "¿Qué hace KOR Bytes en Sincelejo?",
+    answer: "KOR Bytes desarrolla software operativo para empresas: sistemas internos, productos verticales PASS, integraciones, automatización, presencia web e infraestructura digital desde Sincelejo, Sucre.",
+  },
+  {
+    question: "¿KOR Bytes desarrolla software a medida para empresas en Sucre?",
+    answer: "Sí. Diseñamos y construimos sistemas internos, dashboards, flujos con trazabilidad e integraciones para organizaciones que necesitan ordenar una operación existente.",
+  },
+  {
+    question: "¿Trabajan con empresas fuera de Sincelejo?",
+    answer: "Sí. El equipo trabaja de forma remoto-first con empresas B2B en Sucre, Colombia y Latinoamérica, manteniendo diagnóstico, entregas revisables y acompañamiento de producción.",
+  },
+  {
+    question: "¿Cómo puedo iniciar un proyecto de software con KOR Bytes?",
+    answer: "Puedes escribir por WhatsApp, correo o teléfono. El primer paso es entender la operación, los cuellos de botella y los datos disponibles para definir una ruta técnica realista.",
+  },
+];
+
 export function whatsapp(text: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
@@ -205,7 +225,15 @@ export function structuredData(canonical: string) {
       url: `${SITE}/`,
       logo: `${SITE}/images/logo-oficial.png`,
       email: EMAIL,
+      telephone: PHONE,
       sameAs: [GITHUB_URL],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: PHONE,
+        contactType: "sales",
+        availableLanguage: ["es"],
+        areaServed: ["CO", "LATAM"],
+      },
       address: {
         "@type": "PostalAddress",
         addressLocality: "Sincelejo",
@@ -258,6 +286,18 @@ export function structuredData(canonical: string) {
         "@type": "ListItem",
         position: index + 1,
         name: item.name,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: faqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
       })),
     },
   ];

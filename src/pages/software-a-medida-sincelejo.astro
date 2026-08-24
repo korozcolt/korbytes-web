@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { EMAIL, whatsapp } from "@/data/site";
+
+const title = "Software a medida en Sincelejo, Sucre | KOR Bytes";
+const description = "Desarrollo de software a medida en Sincelejo para empresas que necesitan sistemas internos, trazabilidad, integraciones y automatización de procesos.";
+---
+
+<BaseLayout title={title} description={description} path="/software-a-medida-sincelejo/">
+  <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="local-header">
+    <div class="kb-container local-header-inner">
+      <a href="/" class="local-brand" aria-label="KOR Bytes inicio">KOR Bytes<span>.</span></a>
+      <a class="kb-btn local-header-cta" href={whatsapp("Hola KOR Bytes, quiero hablar sobre software a medida para mi empresa.")} target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="local-hero">
+      <div class="kb-container local-hero-grid">
+        <div>
+          <span class="kb-eyebrow">Sincelejo · Sucre · Colombia</span>
+          <h1>Software a medida para operaciones que necesitan orden.</h1>
+          <p class="kb-lead">KOR Bytes desarrolla sistemas internos, dashboards, flujos con trazabilidad e integraciones para empresas de Sincelejo y la región que ya superaron las hojas de cálculo y los procesos manuales.</p>
+          <div class="local-actions">
+            <a class="kb-btn" href={whatsapp("Hola KOR Bytes, quiero un diagnóstico de software para mi empresa.")} target="_blank" rel="noopener">Solicitar diagnóstico</a>
+            <a class="local-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </div>
+        </div>
+        <aside class="local-aside" aria-label="Qué construimos">
+          <span class="kb-mono">Capacidades</span>
+          <ul>
+            <li>Sistemas internos y backoffice</li>
+            <li>Roles, auditoría y trazabilidad</li>
+            <li>Dashboards y reportes operativos</li>
+            <li>APIs, pagos y automatización</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="kb-section">
+      <div class="kb-container local-content-grid">
+        <div>
+          <span class="kb-eyebrow">Cuándo tiene sentido</span>
+          <h2>Cuando tu operación dejó de caber en una herramienta genérica.</h2>
+        </div>
+        <div class="local-copy">
+          <p>El software a medida no parte de una lista de funcionalidades: parte de cómo trabaja tu empresa. Primero entendemos responsabilidades, estados, datos, aprobaciones e integraciones; después definimos qué módulo conviene construir y qué se puede reutilizar.</p>
+          <p>Este enfoque aplica a equipos comerciales, administrativos, documentales, educativos, de comercio y servicios que necesitan control sobre su operación sin forzarla dentro de una plantilla.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section kb-section--soft">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Cómo trabajamos</span>
+        <div class="local-steps">
+          <article><span>01</span><h2>Diagnóstico</h2><p>Identificamos el proceso real, los cuellos de botella y los datos disponibles.</p></article>
+          <article><span>02</span><h2>Arquitectura</h2><p>Definimos módulos, roles, integraciones y el alcance que sí resuelve el problema.</p></article>
+          <article><span>03</span><h2>Construcción</h2><p>Entregamos iterativamente para validar la operación antes de avanzar.</p></article>
+          <article><span>04</span><h2>Producción</h2><p>Desplegamos, monitoreamos y acompañamos la evolución del sistema.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section">
+      <div class="kb-container local-cta">
+        <div><span class="kb-eyebrow">Siguiente paso</span><h2>Hablemos de la operación que quieres ordenar.</h2></div>
+        <a class="kb-btn" href={whatsapp("Hola KOR Bytes, quiero evaluar un sistema a medida para mi empresa.")} target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsAppFab message="Hola KOR Bytes, quiero evaluar software a medida para mi empresa." />
+</BaseLayout>
+
+<style>
+  .local-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 9, 15, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .local-header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .local-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }.local-brand span { color: var(--kb-accent); }
+  .local-header-cta { font-size: .82rem; padding: .7rem 1rem; }
+  .local-hero { padding: clamp(100px, 14vw, 180px) 0; }.local-hero-grid, .local-content-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, .75fr); gap: clamp(2.5rem, 8vw, 7rem); align-items: end; }
+  .local-hero h1 { max-width: 12ch; }.local-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 2rem; }.local-email { color: var(--kb-text-muted); font-size: .94rem; }
+  .local-aside { padding: 1.8rem; border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }.local-aside > span, .local-steps span { color: var(--kb-accent); }.local-aside ul { margin: 1.2rem 0 0; padding: 0; list-style: none; display: grid; gap: .8rem; color: var(--kb-text-muted); line-height: 1.5; }
+  .local-content-grid { align-items: start; }.local-content-grid h2 { max-width: 15ch; }.local-copy { color: var(--kb-text-muted); line-height: 1.72; font-size: 1.05rem; }.local-copy p:first-child { margin-top: 0; }
+  .local-steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--kb-line); }.local-steps article { padding: 1.7rem 1.3rem 1.2rem 0; border-bottom: 1px solid var(--kb-line); }.local-steps article + article { padding-left: 1.3rem; border-left: 1px solid var(--kb-line); }.local-steps h2 { font-size: 1.4rem; margin: .85rem 0 .5rem; }.local-steps p { margin: 0; color: var(--kb-text-muted); line-height: 1.55; font-size: .9rem; }
+  .local-cta { display: flex; align-items: end; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 6vw, 4rem); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }.local-cta h2 { max-width: 16ch; }
+  @media (max-width: 850px) { .local-hero-grid, .local-content-grid { grid-template-columns: 1fr; }.local-steps { grid-template-columns: repeat(2, 1fr); }.local-steps article:nth-child(3) { border-left: 0; padding-left: 0; }.local-cta { align-items: start; flex-direction: column; } }
+  @media (max-width: 520px) { .local-header-cta { display: none; }.local-steps { grid-template-columns: 1fr; }.local-steps article + article { border-left: 0; padding-left: 0; } }
+</style>

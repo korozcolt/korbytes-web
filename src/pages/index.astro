@@ -10,6 +10,7 @@ import {
   practica,
   pasos,
   hechos,
+  faqs,
   whatsapp,
   EMAIL,
   GITHUB_URL,
@@ -78,7 +79,7 @@ function initials(name: string) {
     </div>
   </header>
 
-  <a href="#top" id="logo-fixed" class="kb-logo-fixed" aria-hidden="true">
+  <a href="#top" id="logo-fixed" class="kb-logo-fixed" aria-hidden="true" tabindex="-1">
     <span class="kb-mark">K</span>
     <span class="kb-logo-slide-wrap">
       <span class="kb-logo-slide">
@@ -95,7 +96,16 @@ function initials(name: string) {
           {projects.slice(0, 3).map((p, i) => (
             <a href="#proyectos" class="kb-hero-tile">
               {p.image ? (
-                <img src={p.image} alt={p.name} loading={i === 0 ? "eager" : "lazy"} fetchpriority={i === 0 ? "high" : "auto"} />
+                <img
+                  src={p.image}
+                  srcset={`${p.image.replace(".webp", "-480.webp")} 480w, ${p.image.replace(".webp", "-768.webp")} 768w, ${p.image} 2400w`}
+                  sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1180px) 30vw, 346px"
+                  width="2400"
+                  height="1350"
+                  alt={p.name}
+                  loading="eager"
+                  fetchpriority={i === 0 ? "high" : "auto"}
+                />
               ) : (
                 <div class="kb-hero-tile-fallback"><span>{initials(p.name)}</span></div>
               )}
@@ -173,8 +183,8 @@ function initials(name: string) {
           <p class="kb-body">Desde la web pública hasta el sistema que opera por dentro.</p>
         </div>
         <div class="kb-grid kb-grid-3 kb-svc-grid" data-reveal-stagger>
-          {services.map((s) => (
-            <a href="#contacto" class="kb-svc-card">
+          {services.map((s, index) => (
+            <a href={index === 0 ? "/software-a-medida-sincelejo/" : "#contacto"} class="kb-svc-card">
               <span class="kb-mono kb-accent-text">{s.tag}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
@@ -284,6 +294,24 @@ function initials(name: string) {
       </div>
     </section>
 
+    <section id="preguntas" class="kb-section">
+      <div class="kb-container kb-faq-grid">
+        <div>
+          <span class="kb-eyebrow">Preguntas frecuentes</span>
+          <h2>Software para<br />operaciones reales.</h2>
+          <p class="kb-body">Respuestas directas para empresas de Sincelejo, Sucre, Colombia y LATAM que están evaluando un proyecto digital.</p>
+        </div>
+        <div class="kb-faq-list">
+          {faqs.map((faq) => (
+            <details class="kb-faq-item">
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section id="contacto" class="kb-section kb-section--soft">
       <div class="kb-container">
         <div class="kb-cta">
@@ -333,7 +361,7 @@ function initials(name: string) {
       dismissPreloader();
     } else {
       const t0 = performance.now();
-      const tick = (t) => {
+      const tick = (t: number) => {
         const p = Math.min(1, (t - t0) / 1400);
         if (numEl) numEl.textContent = String(Math.round(p * 100));
         if (fillEl) fillEl.style.width = p * 100 + "%";
@@ -593,6 +621,17 @@ function initials(name: string) {
   .kb-hecho { padding: 34px 28px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
   .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-size: 40px; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 10px; }
   .kb-hecho-v { font-size: 14.5px; line-height: 1.55; color: var(--kb-text-muted); }
+
+  /* ── FAQ / local search answers ───────────────────────────── */
+  .kb-faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }
+  .kb-faq-grid .kb-body { margin-top: 1.2rem; }
+  .kb-faq-list { border-top: 1px solid var(--kb-line); }
+  .kb-faq-item { border-bottom: 1px solid var(--kb-line); }
+  .kb-faq-item summary { cursor: pointer; list-style: none; padding: 22px 34px 22px 0; position: relative; font-family: "Familjen Grotesk", sans-serif; font-size: 1.12rem; font-weight: 600; line-height: 1.3; color: var(--kb-text-strong); }
+  .kb-faq-item summary::-webkit-details-marker { display: none; }
+  .kb-faq-item summary::after { content: "+"; position: absolute; right: 2px; top: 18px; color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 1.35rem; }
+  .kb-faq-item[open] summary::after { content: "−"; }
+  .kb-faq-item p { margin: 0; padding: 0 34px 22px 0; color: var(--kb-text-muted); font-size: 0.96rem; line-height: 1.65; }
 
   /* ── Contact CTA ───────────────────────────────────────────── */
   .kb-cta { border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); padding: 70px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }

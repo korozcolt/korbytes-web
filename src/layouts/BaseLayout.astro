@@ -1,9 +1,19 @@
 ---
 import "@/styles/global.css";
-import "@phosphor-icons/web/regular";
 import { SITE, page, structuredData } from "@/data/site";
 
-const canonical = new URL("/", SITE).toString();
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = page.title,
+  description = page.description,
+  path = "/",
+} = Astro.props;
+const canonical = new URL(path, SITE).toString();
 const schema = JSON.stringify(structuredData(canonical));
 ---
 
@@ -12,21 +22,21 @@ const schema = JSON.stringify(structuredData(canonical));
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{page.title}</title>
-    <meta name="description" content={page.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="author" content="KOR Bytes S.A.S." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={page.title} />
-    <meta property="og:description" content={page.description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={`${SITE}/images/logo-oficial.png`} />
     <meta property="og:image:alt" content="KOR Bytes S.A.S. software operativo y productos PASS" />
     <meta property="og:locale" content="es_CO" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={page.title} />
-    <meta name="twitter:description" content={page.description} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${SITE}/images/logo-oficial.png`} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -50,6 +60,18 @@ const schema = JSON.stringify(structuredData(canonical));
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-FGEEJ8RSN0");
+      document.addEventListener("click", function (event) {
+        var source = event.target instanceof Element ? event.target.closest("a") : null;
+        if (!source) return;
+
+        var href = source.getAttribute("href") || "";
+        var method = href.startsWith("https://wa.me/") ? "whatsapp"
+          : href.startsWith("mailto:") ? "email"
+          : href.startsWith("tel:") ? "phone"
+          : null;
+
+        if (method) gtag("event", "generate_lead", { method: method });
+      });
       window.addEventListener("load", function () {
         var s = document.createElement("script");
         s.src = "https://www.googletagmanager.com/gtag/js?id=G-FGEEJ8RSN0";

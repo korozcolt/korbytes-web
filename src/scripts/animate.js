@@ -1,6 +1,8 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+document.documentElement.classList.add("kb-motion-ready");
+
 gsap.registerPlugin(ScrollTrigger);
 
 const mm = gsap.matchMedia();
