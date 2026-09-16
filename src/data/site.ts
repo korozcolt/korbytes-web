@@ -2,6 +2,7 @@ export const SITE = "https://kor-bytes.com";
 export const WHATSAPP_NUMBER = "573043978157";
 export const EMAIL = "gerencia@kor-bytes.com";
 export const GITHUB_URL = "https://github.com/korozcolt";
+export const INSTAGRAM_URL = "https://www.instagram.com/kor_bytes/";
 export const PHONE = "+573043978157";
 
 export const page = {
@@ -219,14 +220,16 @@ export function whatsapp(text: string) {
 export function structuredData(canonical: string) {
   const graph: Array<Record<string, unknown>> = [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "ProfessionalService"],
       "@id": `${SITE}/#organization`,
       name: "KOR Bytes S.A.S.",
       url: `${SITE}/`,
       logo: `${SITE}/images/logo-oficial.png`,
+      image: `${SITE}/images/logo-oficial.png`,
       email: EMAIL,
       telephone: PHONE,
-      sameAs: [GITHUB_URL],
+      priceRange: "$$",
+      sameAs: [GITHUB_URL, INSTAGRAM_URL],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: PHONE,
@@ -240,7 +243,40 @@ export function structuredData(canonical: string) {
         addressRegion: "Sucre",
         addressCountry: "CO",
       },
-      areaServed: ["Sincelejo", "Sucre", "Colombia", "LATAM"],
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 9.3047,
+        longitude: -75.3978,
+      },
+      areaServed: [
+        {
+          "@type": "GeoCircle",
+          geoMidpoint: {
+            "@type": "GeoCoordinates",
+            latitude: 9.3047,
+            longitude: -75.3978,
+          },
+          geoRadius: "60000",
+        },
+        "Sincelejo",
+        "Sucre",
+        "Colombia",
+        "LATAM",
+      ],
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "00:00",
+        closes: "23:59",
+      },
       knowsAbout: [
         "Desarrollo de software a medida",
         "Productos SaaS verticales",
