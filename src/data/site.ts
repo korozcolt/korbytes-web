@@ -251,6 +251,14 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       priceRange: "$$",
       founder: { "@id": `${SITE}/#kristian-orozco` },
       sameAs: [GITHUB_URL, INSTAGRAM_URL],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Servicios KOR Bytes",
+        itemListElement: services.map((_, index) => ({
+          "@type": "Offer",
+          itemOffered: { "@id": `${SITE}/#service-${index + 1}` },
+        })),
+      },
       contactPoint: {
         "@type": "ContactPoint",
         telephone: PHONE,
@@ -329,6 +337,15 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       isPartOf: { "@id": `${SITE}/#website` },
       about: { "@id": `${SITE}/#organization` },
     },
+    ...services.map((s, index) => ({
+      "@type": "Service",
+      "@id": `${SITE}/#service-${index + 1}`,
+      name: s.title,
+      serviceType: s.title,
+      description: s.text,
+      provider: { "@id": `${SITE}/#organization` },
+      areaServed: ["Sincelejo", "Sucre", "Colombia", "LATAM"],
+    })),
     {
       "@type": "ItemList",
       "@id": `${canonical}#pass-products`,

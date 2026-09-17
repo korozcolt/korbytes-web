@@ -1,0 +1,78 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { EMAIL, SITE, whatsapp } from "@/data/site";
+
+const title = "Aviso legal y política de privacidad | KOR Bytes";
+const description = "Aviso legal, tratamiento de datos personales y política de privacidad de KOR Bytes S.A.S., casa de software en Sincelejo, Sucre, Colombia.";
+const path = "/aviso-legal";
+const breadcrumb = [
+  { name: "Inicio", url: `${SITE}/` },
+  { name: "Aviso legal", url: `${SITE}${path}` },
+];
+---
+
+<BaseLayout title={title} description={description} path={path} faqs={[]} breadcrumb={breadcrumb}>
+  <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="local-header">
+    <div class="kb-container local-header-inner">
+      <a href="/" class="local-brand" aria-label="KOR Bytes inicio">KOR Bytes<span>.</span></a>
+      <a class="kb-btn local-header-cta" href={whatsapp("Hola KOR Bytes, tengo una pregunta sobre el tratamiento de mis datos.")} target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="local-hero legal-hero">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Transparencia</span>
+        <h1>Aviso legal y política de privacidad.</h1>
+        <p class="kb-lead">Última actualización: septiembre de 2026.</p>
+      </div>
+    </section>
+
+    <section class="kb-section legal-content">
+      <div class="kb-container legal-copy">
+        <h2>1. Identificación</h2>
+        <p>Este sitio (kor-bytes.com) es operado por KOR Bytes S.A.S., con sede en Sincelejo, Sucre, Colombia. Contacto: <a href={`mailto:${EMAIL}`}>{EMAIL}</a> o por WhatsApp al +57 304 397 8157.</p>
+
+        <h2>2. Qué datos recopilamos</h2>
+        <p>Cuando escribes por WhatsApp, correo o teléfono, recibimos los datos que tú decides compartir (nombre, contacto, y detalles de tu proyecto) para responder tu solicitud. No usamos formularios que almacenen datos directamente en este sitio.</p>
+        <p>El sitio usa Google Analytics 4 para entender tráfico y comportamiento agregado (páginas vistas, origen de la visita, eventos de contacto). Esto implica cookies y almacenamiento local del navegador, gestionados por Google conforme a sus propias políticas.</p>
+
+        <h2>3. Para qué usamos tus datos</h2>
+        <p>Únicamente para responder tu consulta, elaborar una propuesta o dar seguimiento a un proyecto en curso. No vendemos, alquilamos ni compartimos tus datos de contacto con terceros para fines comerciales ajenos a la relación que tengas con KOR Bytes.</p>
+
+        <h2>4. Tus derechos (Ley 1581 de 2012, Colombia)</h2>
+        <p>Como titular de tus datos, tienes derecho a conocer, actualizar, rectificar y solicitar la eliminación de la información que nos hayas compartido, así como a revocar tu autorización en cualquier momento. Para ejercer estos derechos, escribe a <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
+
+        <h2>5. Cookies</h2>
+        <p>Este sitio usa cookies técnicas y de analítica (Google Analytics 4). Puedes bloquearlas o eliminarlas desde la configuración de tu navegador; el sitio sigue funcionando sin ellas, aunque perdemos visibilidad sobre cómo se usa.</p>
+
+        <h2>6. Propiedad intelectual</h2>
+        <p>El contenido, marca y diseño de este sitio pertenecen a KOR Bytes S.A.S. Los proyectos y productos de clientes mencionados aquí se muestran con fines de portafolio; cada marca, logo o nombre de cliente sigue perteneciendo a su respectivo dueño.</p>
+
+        <h2>7. Alcance</h2>
+        <p>La información publicada en este sitio (productos PASS, proyectos, estado de desarrollo) es de carácter comercial e informativo. Los términos específicos de cada proyecto (alcance, tiempos, precios) se acuerdan por separado con cada cliente, no por este aviso.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsAppFab message="Hola KOR Bytes, tengo una pregunta sobre el tratamiento de mis datos." />
+</BaseLayout>
+
+<style>
+  .local-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 9, 15, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .local-header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .local-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }.local-brand span { color: var(--kb-accent); }
+  .local-header-cta { font-size: .82rem; padding: .7rem 1rem; }
+  .legal-hero { padding: clamp(80px, 10vw, 130px) 0 40px; }
+  .legal-hero h1 { max-width: 20ch; }
+  .legal-copy { max-width: 68ch; color: var(--kb-text-muted); line-height: 1.72; font-size: 1.02rem; }
+  .legal-copy h2 { font-family: "Familjen Grotesk", sans-serif; color: var(--kb-text-strong); font-size: 1.25rem; margin: 2.2rem 0 .8rem; }
+  .legal-copy h2:first-child { margin-top: 0; }
+  .legal-copy a { color: var(--kb-accent); }
+  @media (max-width: 520px) { .local-header-cta { display: none; } }
+</style>
