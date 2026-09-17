@@ -1,20 +1,26 @@
 ---
 import "@/styles/global.css";
-import { SITE, page, structuredData } from "@/data/site";
+import { SITE, page, structuredData, type BreadcrumbItem } from "@/data/site";
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  breadcrumb?: BreadcrumbItem[];
 }
 
 const {
   title = page.title,
   description = page.description,
   path = "/",
+  faqs,
+  breadcrumb,
 } = Astro.props;
 const canonical = new URL(path, SITE).toString();
-const schema = JSON.stringify(structuredData(canonical));
+const schema = JSON.stringify(
+  structuredData(canonical, { title, description, faqs, breadcrumb })
+);
 ---
 
 <!doctype html>

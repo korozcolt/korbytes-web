@@ -2,13 +2,18 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
-import { EMAIL, whatsapp } from "@/data/site";
+import { EMAIL, SITE, whatsapp } from "@/data/site";
 
 const title = "Software a medida en Sincelejo, Sucre | KOR Bytes";
 const description = "Desarrollo de software a medida en Sincelejo para empresas que necesitan sistemas internos, trazabilidad, integraciones y automatización de procesos.";
+const path = "/software-a-medida-sincelejo";
+const breadcrumb = [
+  { name: "Inicio", url: `${SITE}/` },
+  { name: "Software a medida en Sincelejo", url: `${SITE}${path}` },
+];
 ---
 
-<BaseLayout title={title} description={description} path="/software-a-medida-sincelejo/">
+<BaseLayout title={title} description={description} path={path} faqs={[]} breadcrumb={breadcrumb}>
   <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
 
   <header class="local-header">

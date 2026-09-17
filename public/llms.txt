@@ -1,0 +1,41 @@
+# KOR Bytes S.A.S.
+
+> Casa de software B2B en Sincelejo, Sucre, Colombia. Desarrollo de software a medida, integraciones y una línea de productos SaaS verticales llamada "PASS". Remoto-first para Colombia y LATAM. Fundada y liderada por Kristian Orozco.
+
+## Servicios
+
+- Software a medida: sistemas internos, backoffice, dashboards y flujos con trazabilidad — https://kor-bytes.com/software-a-medida-sincelejo
+- Contratación de programador / ingeniero de sistemas en Sincelejo (equipo vs. freelance) — https://kor-bytes.com/programador-en-sincelejo
+- Integraciones y APIs: pagos (Wompi, MercadoPago), e-commerce (Shopify), sincronización de datos
+- Web, SEO y conversión: sitios rápidos en Astro/WordPress
+- Automatización: n8n, webhooks, Gemini
+- Infraestructura: VPS, Docker, Dokploy, CI/CD
+
+## Ecosistema de productos PASS
+
+Línea de productos SaaS verticales construida sobre módulos reutilizables:
+
+- KorPass — POS/ERP offline-first para farmacias (Bagisto, trazabilidad FEFO)
+- VolleyPass — carnetización deportiva digital con QR para ligas de voleibol
+- DatesPass — SaaS de reservas para clínicas capilares y spas (Laravel, DDD)
+- CampusPass — sistema de información escolar multi-campus
+- ContPass — control contable y presupuestal para Colombia
+- ShopStorePass — panel de operación multi-tienda sobre la API de Shopify, evolucionando a un OMS
+
+## Proyectos
+
+- SIGMA — centro de comando electoral (campañas, censo, Día D, reportes)
+- LuckyCore — plataforma de rifas y sorteos con checkout y auditoría
+- ArchiveMaster — gestión documental con roles e IA
+- Sistema PQRS — recepción y trazabilidad de peticiones ciudadanas
+
+## Contacto
+
+- WhatsApp / correo: gerencia@kor-bytes.com
+- GitHub: https://github.com/korozcolt
+- Instagram: https://www.instagram.com/kor_bytes/
+- Ubicación: Sincelejo, Sucre, Colombia — atiende clientes en toda LATAM de forma remota
+
+## Optional
+
+- Sitemap: https://kor-bytes.com/sitemap-index.xml

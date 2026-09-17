@@ -4,6 +4,9 @@ export const EMAIL = "gerencia@kor-bytes.com";
 export const GITHUB_URL = "https://github.com/korozcolt";
 export const INSTAGRAM_URL = "https://www.instagram.com/kor_bytes/";
 export const PHONE = "+573043978157";
+export const FOUNDER_NAME = "Kristian Orozco";
+export const FOUNDER_TITLE = "Fundador y arquitecto de software";
+export const BUILD_DATE = new Date().toISOString();
 
 export const page = {
   title: "KOR Bytes S.A.S. | Software operativo, productos PASS e infraestructura digital",
@@ -217,7 +220,23 @@ export function whatsapp(text: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
 
-export function structuredData(canonical: string) {
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface StructuredDataOptions {
+  title?: string;
+  description?: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  breadcrumb?: BreadcrumbItem[];
+}
+
+export function structuredData(canonical: string, opts: StructuredDataOptions = {}) {
+  const pageTitle = opts.title ?? page.title;
+  const pageDescription = opts.description ?? page.description;
+  const pageFaqs = opts.faqs ?? faqs;
+
   const graph: Array<Record<string, unknown>> = [
     {
       "@type": ["Organization", "ProfessionalService"],
@@ -229,6 +248,7 @@ export function structuredData(canonical: string) {
       email: EMAIL,
       telephone: PHONE,
       priceRange: "$$",
+      founder: { "@id": `${SITE}/#kristian-orozco` },
       sameAs: [GITHUB_URL, INSTAGRAM_URL],
       contactPoint: {
         "@type": "ContactPoint",
@@ -256,27 +276,13 @@ export function structuredData(canonical: string) {
             latitude: 9.3047,
             longitude: -75.3978,
           },
-          geoRadius: "60000",
+          geoRadius: 60000,
         },
         "Sincelejo",
         "Sucre",
         "Colombia",
         "LATAM",
       ],
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "00:00",
-        closes: "23:59",
-      },
       knowsAbout: [
         "Desarrollo de software a medida",
         "Productos SaaS verticales",
@@ -284,6 +290,22 @@ export function structuredData(canonical: string) {
         "Integraciones Laravel",
         "Automatización con n8n",
         "Infraestructura con Dokploy",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE}/#kristian-orozco`,
+      name: FOUNDER_NAME,
+      url: `${SITE}/`,
+      jobTitle: FOUNDER_TITLE,
+      worksFor: { "@id": `${SITE}/#organization` },
+      sameAs: [GITHUB_URL],
+      knowsAbout: [
+        "Laravel",
+        "Filament",
+        "n8n",
+        "Dokploy",
+        "Desarrollo de software a medida",
       ],
     },
     {
@@ -298,9 +320,10 @@ export function structuredData(canonical: string) {
       "@type": "WebPage",
       "@id": `${canonical}#webpage`,
       url: canonical,
-      name: page.title,
-      description: page.description,
+      name: pageTitle,
+      description: pageDescription,
       inLanguage: "es-CO",
+      dateModified: BUILD_DATE,
       isPartOf: { "@id": `${SITE}/#website` },
       about: { "@id": `${SITE}/#organization` },
     },
@@ -324,10 +347,13 @@ export function structuredData(canonical: string) {
         name: item.name,
       })),
     },
-    {
+  ];
+
+  if (pageFaqs.length > 0) {
+    graph.push({
       "@type": "FAQPage",
       "@id": `${canonical}#faq`,
-      mainEntity: faqs.map((item) => ({
+      mainEntity: pageFaqs.map((item) => ({
         "@type": "Question",
         name: item.question,
         acceptedAnswer: {
@@ -335,8 +361,21 @@ export function structuredData(canonical: string) {
           text: item.answer,
         },
       })),
-    },
-  ];
+    });
+  }
+
+  if (opts.breadcrumb && opts.breadcrumb.length > 0) {
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": `${canonical}#breadcrumb`,
+      itemListElement: opts.breadcrumb.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    });
+  }
 
   return { "@context": "https://schema.org", "@graph": graph };
 }

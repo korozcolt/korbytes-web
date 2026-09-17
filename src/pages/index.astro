@@ -186,7 +186,7 @@ function initials(name: string) {
         </div>
         <div class="kb-grid kb-grid-3 kb-svc-grid" data-reveal-stagger>
           {services.map((s, index) => (
-            <a href={index === 0 ? "/software-a-medida-sincelejo/" : "#contacto"} class="kb-svc-card">
+            <a href={index === 0 ? "/software-a-medida-sincelejo" : "#contacto"} class="kb-svc-card">
               <span class="kb-mono kb-accent-text">{s.tag}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
@@ -246,7 +246,7 @@ function initials(name: string) {
             <a href="#contacto" class="kb-proj-card">
               <div class="kb-proj-media">
                 {pr.image ? (
-                  <img src={pr.image} alt={pr.name} loading="lazy" />
+                  <img src={pr.image} alt={pr.name} width="2400" height="1350" loading="lazy" />
                 ) : (
                   <div class="kb-proj-fallback"><span>{initials(pr.name)}</span></div>
                 )}

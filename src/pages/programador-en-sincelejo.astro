@@ -2,10 +2,15 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
-import { EMAIL, whatsapp } from "@/data/site";
+import { EMAIL, SITE, whatsapp } from "@/data/site";
 
 const title = "Programador e ingeniero de sistemas en Sincelejo | KOR Bytes";
 const description = "¿Buscas un programador o ingeniero de sistemas en Sincelejo para tu empresa? Contrata un equipo completo de KOR Bytes en vez de un freelance: continuidad, respaldo y entrega real.";
+const path = "/programador-en-sincelejo";
+const breadcrumb = [
+  { name: "Inicio", url: `${SITE}/` },
+  { name: "Programador en Sincelejo", url: `${SITE}${path}` },
+];
 
 const comparacion = [
   {
@@ -50,7 +55,7 @@ const faqsProgramador: Array<{ question: string; answer: string }> = [
 ];
 ---
 
-<BaseLayout title={title} description={description} path="/programador-en-sincelejo/">
+<BaseLayout title={title} description={description} path={path} faqs={faqsProgramador} breadcrumb={breadcrumb}>
   <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
 
   <header class="local-header">
