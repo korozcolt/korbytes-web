@@ -7,6 +7,7 @@ import {
   services,
   passProducts,
   projects,
+  clientSites,
   practica,
   pasos,
   hechos,
@@ -263,6 +264,27 @@ function initials(name: string) {
                   {pr.tags.map((tg) => <span class="kb-chip">{tg}</span>)}
                 </div>
               </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes" class="kb-section kb-section--soft">
+      <div class="kb-container">
+        <div class="kb-section-head">
+          <div>
+            <span class="kb-eyebrow">Prueba, no promesa</span>
+            <h2>Sitios reales, en producción</h2>
+          </div>
+          <p class="kb-body">Enlaces directos a trabajo entregado — no capturas, no maquetas.</p>
+        </div>
+        <div class="kb-grid kb-grid-3 kb-client-grid">
+          {clientSites.map((c) => (
+            <a href={c.url} target="_blank" rel="noopener" class="kb-client-card">
+              <span class="kb-client-name">{c.name} ↗</span>
+              <p>{c.desc}</p>
+              <span class="kb-mono kb-text-soft kb-client-url">{c.url.replace("https://", "")}</span>
             </a>
           ))}
         </div>
@@ -616,6 +638,13 @@ function initials(name: string) {
   .kb-dot-accent { width: 8px; height: 8px; border-radius: 99px; background: var(--kb-accent); display: inline-block; }
   .kb-pass-card p { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--kb-text-muted); }
   .kb-pass-estado { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--kb-line); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
+
+  /* ── Client sites (real proof) ─────────────────────────────── */
+  .kb-client-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
+  .kb-client-card:hover { border-color: var(--kb-line-accent); }
+  .kb-client-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 19px; color: var(--kb-text-strong); }
+  .kb-client-card p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--kb-text-muted); }
+  .kb-client-url { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--kb-line); font-size: 11.5px; }
 
   /* ── Project cards ─────────────────────────────────────────── */
   .kb-proj-card { display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }

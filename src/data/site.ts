@@ -178,6 +178,45 @@ export const projects: Project[] = [
   },
 ];
 
+export interface ClientSite {
+  name: string;
+  url: string;
+  desc: string;
+}
+
+export const clientSites: ClientSite[] = [
+  {
+    name: "CEA Movilízate",
+    url: "https://ceamovilizatesas.com",
+    desc: "Plataforma para un Centro de Enseñanza Automovilística: matrícula en 6 pasos, captura biométrica y exámenes teóricos cronometrados.",
+  },
+  {
+    name: "La Alerta",
+    url: "https://laalerta.com",
+    desc: "Medio digital regional en Astro, con plantillas intercambiables de portal según la sección.",
+  },
+  {
+    name: "Tota Joyería",
+    url: "https://tota.studio",
+    desc: "Tienda Shopify para una joyería, con catálogo y checkout propios.",
+  },
+  {
+    name: "Marce y Lauren",
+    url: "https://marceylauren.com",
+    desc: "Tienda Shopify de marca de moda, con catálogo y experiencia de compra a medida.",
+  },
+  {
+    name: "Aldemar Alfaro",
+    url: "https://aldemaralfaro.com",
+    desc: "Sitio institucional construido en Astro.",
+  },
+  {
+    name: "La Certeza",
+    url: "https://lacerteza.co",
+    desc: "Sitio institucional construido en Astro.",
+  },
+];
+
 export const practica: Array<{ n: string; text: string }> = [
   { n: "01", text: "Diagnóstico, arquitectura y desarrollo de sistemas internos." },
   { n: "02", text: "Verticales PASS para sectores con operación recurrente." },
