@@ -1,0 +1,97 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { SITE, whatsapp } from "@/data/site";
+import { portfolio } from "@/data/portfolio";
+
+const title = "Portafolio real de proyectos | KOR Bytes";
+const description = "Más de 30 sistemas construidos por KOR Bytes: gestión electoral, salud, educación, e-commerce, farmacias, transporte y medios — con stack técnico y estado real de cada uno.";
+const path = "/portafolio";
+const breadcrumb = [
+  { name: "Inicio", url: `${SITE}/` },
+  { name: "Portafolio", url: `${SITE}${path}` },
+];
+
+const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
+---
+
+<BaseLayout title={title} description={description} path={path} faqs={[]} breadcrumb={breadcrumb}>
+  <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="local-header">
+    <div class="kb-container local-header-inner">
+      <a href="/" class="local-brand" aria-label="KOR Bytes inicio">KOR Bytes<span>.</span></a>
+      <a class="kb-btn local-header-cta" href={whatsapp("Hola KOR Bytes, vi el portafolio y quiero hablar de un proyecto.")} target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="local-hero portfolio-hero">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Prueba, no promesa</span>
+        <h1>{totalProyectos} sistemas reales, no una lista de servicios.</h1>
+        <p class="kb-lead">Cada entrada de esta lista es código que se escribió, se desplegó o sigue en desarrollo activo — con su stack y su estado real, sin inflar madurez que todavía no existe. Los que están en producción pública tienen link directo.</p>
+      </div>
+    </section>
+
+    {portfolio.map((group) => (
+      <section class="kb-section portfolio-group">
+        <div class="kb-container">
+          <h2 class="portfolio-sector">{group.sector}</h2>
+          <div class="kb-grid kb-grid-3 portfolio-grid">
+            {group.items.map((item) => (
+              <div class="portfolio-card">
+                <div class="portfolio-card-top">
+                  <span class="portfolio-name">{item.name}</span>
+                  {item.url && <a href={item.url} target="_blank" rel="noopener" class="portfolio-link" aria-label={`Ver ${item.name}`}>↗</a>}
+                </div>
+                <p>{item.desc}</p>
+                <span class="kb-mono kb-text-soft portfolio-stack">{item.stack}</span>
+                <span class="portfolio-status">{item.status}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <section class="kb-section kb-section--soft">
+      <div class="kb-container local-cta">
+        <div><span class="kb-eyebrow">Siguiente paso</span><h2>¿Tu operación se parece a alguno de estos?</h2></div>
+        <a class="kb-btn" href={whatsapp("Hola KOR Bytes, vi el portafolio y quiero evaluar un proyecto parecido.")} target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsAppFab message="Hola KOR Bytes, vi el portafolio y quiero hablar de un proyecto." />
+</BaseLayout>
+
+<style>
+  .local-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 9, 15, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .local-header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .local-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }.local-brand span { color: var(--kb-accent); }
+  .local-header-cta { font-size: .82rem; padding: .7rem 1rem; }
+
+  .portfolio-hero { padding: clamp(80px, 10vw, 130px) 0 30px; }
+  .portfolio-hero h1 { max-width: 20ch; }
+  .portfolio-hero .kb-lead { max-width: 62ch; }
+
+  .portfolio-group { padding-block: 26px; }
+  .portfolio-sector { font-family: "JetBrains Mono", monospace; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--kb-accent); margin: 0 0 20px; font-weight: 600; }
+  .portfolio-grid { gap: 16px; }
+  .portfolio-card { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
+  .portfolio-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .portfolio-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 17px; color: var(--kb-text-strong); }
+  .portfolio-link { color: var(--kb-accent); font-size: 18px; flex-shrink: 0; }
+  .portfolio-card p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--kb-text-muted); }
+  .portfolio-stack { font-size: 11px; }
+  .portfolio-status { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--kb-line); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--kb-text-soft); }
+
+  .local-cta { display: flex; align-items: end; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 6vw, 4rem); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }
+  .local-cta h2 { max-width: 16ch; }
+
+  @media (max-width: 850px) { .local-cta { align-items: start; flex-direction: column; } }
+  @media (max-width: 520px) { .local-header-cta { display: none; } }
+</style>
