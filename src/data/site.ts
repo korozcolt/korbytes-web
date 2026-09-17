@@ -3,6 +3,7 @@ export const WHATSAPP_NUMBER = "573043978157";
 export const EMAIL = "gerencia@kor-bytes.com";
 export const GITHUB_URL = "https://github.com/korozcolt";
 export const INSTAGRAM_URL = "https://www.instagram.com/kor_bytes/";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/kristian-orozco-backend";
 export const PHONE = "+573043978157";
 export const FOUNDER_NAME = "Kristian Orozco";
 export const FOUNDER_TITLE = "Fundador y arquitecto de software";
@@ -299,9 +300,10 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       url: `${SITE}/`,
       jobTitle: FOUNDER_TITLE,
       worksFor: { "@id": `${SITE}/#organization` },
-      sameAs: [GITHUB_URL],
+      sameAs: [GITHUB_URL, LINKEDIN_URL],
       knowsAbout: [
         "Laravel",
+        "React",
         "Filament",
         "n8n",
         "Dokploy",

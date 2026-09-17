@@ -15,6 +15,9 @@ import {
   EMAIL,
   GITHUB_URL,
   INSTAGRAM_URL,
+  LINKEDIN_URL,
+  FOUNDER_NAME,
+  FOUNDER_TITLE,
 } from "@/data/site";
 
 const stack = [
@@ -293,6 +296,23 @@ function initials(name: string) {
             <div class="kb-hecho-v">{h.v}</div>
           </div>
         ))}
+      </div>
+    </section>
+
+    <section id="fundador" class="kb-section">
+      <div class="kb-container kb-founder-grid">
+        <div>
+          <span class="kb-eyebrow">Quién construye esto</span>
+          <h2>{FOUNDER_NAME}</h2>
+        </div>
+        <div class="kb-founder-copy">
+          <p class="kb-lead">{FOUNDER_TITLE}: más de 10 años en Laravel y 5+ en React, diseñando APIs, integraciones y arquitecturas para operaciones reales.</p>
+          <p>Por ahora el equipo de KOR Bytes soy yo, apoyado en el camino por agentes de IA para moverme más rápido en diagnóstico, código y despliegue. Prefiero decirlo así de claro a inflar el tamaño del estudio — al final, quien responde y firma cada entrega soy yo.</p>
+          <div class="kb-founder-links">
+            <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub · korozcolt</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -623,6 +643,13 @@ function initials(name: string) {
   .kb-hecho { padding: 34px 28px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
   .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-size: 40px; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 10px; }
   .kb-hecho-v { font-size: 14.5px; line-height: 1.55; color: var(--kb-text-muted); }
+
+  /* ── Fundador ──────────────────────────────────────────────── */
+  .kb-founder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }
+  .kb-founder-copy p { color: var(--kb-text-muted); line-height: 1.72; font-size: 1.02rem; margin: 0 0 1rem; }
+  .kb-founder-copy .kb-lead { color: var(--kb-text); }
+  .kb-founder-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 1.4rem; }
+  .kb-founder-links a { color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 0.88rem; }
 
   /* ── FAQ / local search answers ───────────────────────────── */
   .kb-faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }
