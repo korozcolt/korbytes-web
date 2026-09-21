@@ -291,13 +291,16 @@ function initials(name: string) {
     </section>
 
     <section class="kb-section kb-section--soft">
-      <div class="kb-container kb-grid kb-grid-4 kb-hechos-grid">
-        {hechos.map((h) => (
-          <div class="kb-hecho">
-            <div class="kb-hecho-k">{h.k}</div>
-            <div class="kb-hecho-v">{h.v}</div>
-          </div>
-        ))}
+      <div class="kb-container">
+        <span class="kb-eyebrow">En cifras</span>
+        <div class="kb-hechos-grid" data-reveal-stagger>
+          {hechos.map((h) => (
+            <div class="kb-hecho">
+              <div class="kb-hecho-k">{h.k}</div>
+              <div class="kb-hecho-v">{h.v}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -610,10 +613,16 @@ function initials(name: string) {
   .kb-proceso-row p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
 
   /* ── Hechos ────────────────────────────────────────────────── */
-  .kb-hechos-grid { gap: 18px; }
-  .kb-hecho { padding: 34px 28px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
-  .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-size: 40px; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 10px; }
-  .kb-hecho-v { font-size: 14.5px; line-height: 1.55; color: var(--kb-text-muted); }
+  .kb-hechos-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kb-hecho { padding: 8px 32px; border-left: 1px solid var(--kb-line); }
+  .kb-hecho:first-child { padding-left: 0; border-left: none; }
+  .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 14px; }
+  .kb-hecho-v { font-size: 14px; line-height: 1.5; color: var(--kb-text-muted); max-width: 22ch; }
+  @media (max-width: 880px) {
+    .kb-hechos-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
+    .kb-hecho:nth-child(2n) { border-left: 1px solid var(--kb-line); padding-left: 24px; }
+    .kb-hecho:nth-child(2n+1) { border-left: none; padding-left: 0; }
+  }
 
   /* ── Fundador ──────────────────────────────────────────────── */
   .kb-founder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }

@@ -14,6 +14,17 @@ const breadcrumb = [
 ];
 
 const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
+
+function slugify(s: string) {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+const shippedHints = ["producción", "activo", "publicado", "maduro"];
+function isShipped(status: string) {
+  const s = status.toLowerCase();
+  return shippedHints.some((h) => s.includes(h));
+}
 ---
 
 <BaseLayout title={title} description={description} path={path} faqs={[]} breadcrumb={breadcrumb}>
@@ -26,6 +37,14 @@ const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
     </div>
   </header>
 
+  <nav class="sector-nav" aria-label="Ir a un sector">
+    <div class="kb-container sector-nav-inner">
+      {portfolio.map((group) => (
+        <a href={`#${slugify(group.sector)}`} class="sector-pill">{group.sector.split("·")[0].trim()}</a>
+      ))}
+    </div>
+  </nav>
+
   <main id="main-content">
     <section class="local-hero portfolio-hero">
       <div class="kb-container">
@@ -36,10 +55,10 @@ const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
     </section>
 
     {portfolio.map((group) => (
-      <section class="kb-section portfolio-group">
+      <section id={slugify(group.sector)} class="kb-section portfolio-group">
         <div class="kb-container">
           <h2 class="portfolio-sector">{group.sector}</h2>
-          <div class="kb-grid kb-grid-3 portfolio-grid">
+          <div class="kb-grid kb-grid-3 portfolio-grid" data-reveal-stagger>
             {group.items.map((item) => (
               <div class="portfolio-card">
                 <div class="portfolio-card-top">
@@ -48,7 +67,9 @@ const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
                 </div>
                 <p>{item.desc}</p>
                 <span class="kb-mono kb-text-soft portfolio-stack">{item.stack}</span>
-                <span class="portfolio-status">{item.status}</span>
+                <span class={`portfolio-status ${isShipped(item.status) ? "is-shipped" : "is-progress"}`}>
+                  <span class="portfolio-status-dot"></span>{item.status}
+                </span>
               </div>
             ))}
           </div>
@@ -74,20 +95,30 @@ const totalProyectos = portfolio.reduce((acc, g) => acc + g.items.length, 0);
   .local-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }.local-brand span { color: var(--kb-accent); }
   .local-header-cta { font-size: .82rem; padding: .7rem 1rem; }
 
-  .portfolio-hero { padding: clamp(80px, 10vw, 130px) 0 30px; }
-  .portfolio-hero h1 { max-width: 20ch; }
+  .sector-nav { position: sticky; top: 76px; z-index: 9; background: rgba(5, 9, 15, .9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .sector-nav-inner { display: flex; gap: 8px; overflow-x: auto; padding-block: 14px; scrollbar-width: none; }
+  .sector-nav-inner::-webkit-scrollbar { display: none; }
+  .sector-pill { flex: none; font-family: "JetBrains Mono", monospace; font-size: 11.5px; letter-spacing: .03em; white-space: nowrap; padding: 8px 15px; border-radius: var(--kb-radius-full); border: 1px solid var(--kb-line-strong); color: var(--kb-text-muted); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
+  .sector-pill:hover { border-color: var(--kb-accent); color: var(--kb-accent); }
+
+  .portfolio-hero { padding: clamp(64px, 8vw, 100px) 0 30px; }
+  .portfolio-hero h1 { max-width: 18ch; font-size: clamp(2rem, 4.6vw, 3.4rem); font-weight: 600; }
   .portfolio-hero .kb-lead { max-width: 62ch; }
 
-  .portfolio-group { padding-block: 26px; }
-  .portfolio-sector { font-family: "JetBrains Mono", monospace; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; color: var(--kb-accent); margin: 0 0 20px; font-weight: 600; }
+  .portfolio-group { padding-block: 26px; scroll-margin-top: 140px; }
+  .portfolio-sector { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--kb-text-strong); margin: 0 0 22px; }
   .portfolio-grid { gap: 16px; }
-  .portfolio-card { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); }
+  .portfolio-card { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-fast), transform var(--kb-duration-fast); }
+  .portfolio-card:hover { border-color: var(--kb-line-strong); transform: translateY(-2px); }
   .portfolio-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .portfolio-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 17px; color: var(--kb-text-strong); }
+  .portfolio-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 18px; color: var(--kb-text-strong); }
   .portfolio-link { color: var(--kb-accent); font-size: 18px; flex-shrink: 0; }
   .portfolio-card p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--kb-text-muted); }
   .portfolio-stack { font-size: 11px; }
-  .portfolio-status { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--kb-line); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--kb-text-soft); }
+  .portfolio-status { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--kb-line); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--kb-text-soft); }
+  .portfolio-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--kb-text-soft); flex-shrink: 0; }
+  .portfolio-status.is-shipped .portfolio-status-dot { background: #34d399; }
+  .portfolio-status.is-progress .portfolio-status-dot { background: var(--kb-accent); }
 
   .local-cta { display: flex; align-items: end; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 6vw, 4rem); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }
   .local-cta h2 { max-width: 16ch; }
