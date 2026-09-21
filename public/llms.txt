@@ -4,8 +4,8 @@
 
 ## Servicios
 
-- Software a medida: sistemas internos, backoffice, dashboards y flujos con trazabilidad — https://kor-bytes.com/software-a-medida-sincelejo
-- Contratación de programador / ingeniero de sistemas en Sincelejo (equipo vs. freelance) — https://kor-bytes.com/programador-en-sincelejo
+- [Software a medida](https://kor-bytes.com/software-a-medida-sincelejo): sistemas internos, backoffice, dashboards y flujos con trazabilidad
+- [Contratación de programador en Sincelejo](https://kor-bytes.com/programador-en-sincelejo): equipo vs. freelance, ingeniería de sistemas
 - Integraciones y APIs: pagos (Wompi, MercadoPago), e-commerce (Shopify), sincronización de datos
 - Web, SEO y conversión: sitios rápidos en Astro/WordPress
 - Automatización: n8n, webhooks, Gemini
@@ -15,27 +15,29 @@
 
 Línea de productos SaaS verticales construida sobre módulos reutilizables:
 
-- KorPass — POS/ERP offline-first para farmacias (Bagisto, trazabilidad FEFO)
-- VolleyPass — carnetización deportiva digital con QR para ligas de voleibol
-- DatesPass — SaaS de reservas para clínicas capilares y spas (Laravel, DDD)
-- CampusPass — sistema de información escolar multi-campus
-- ContPass — control contable y presupuestal para Colombia
-- ShopStorePass — panel de operación multi-tienda sobre la API de Shopify, evolucionando a un OMS
+- KorPass: POS/ERP offline-first para farmacias (Bagisto, trazabilidad FEFO)
+- VolleyPass: carnetización deportiva digital con QR para ligas de voleibol
+- DatesPass: SaaS de reservas para clínicas capilares y spas (Laravel, DDD)
+- CampusPass: sistema de información escolar multi-campus
+- ContPass: control contable y presupuestal para Colombia
+- ShopStorePass: panel de operación multi-tienda sobre la API de Shopify, evolucionando a un OMS
 
 ## Proyectos
 
-- SIGMA — centro de comando electoral (campañas, censo, Día D, reportes)
-- LuckyCore — plataforma de rifas y sorteos con checkout y auditoría
-- ArchiveMaster — gestión documental con roles e IA
-- Sistema PQRS — recepción y trazabilidad de peticiones ciudadanas
+- [Portafolio completo](https://kor-bytes.com/portafolio): 30 proyectos reales entregados, agrupados por sector
+- SIGMA: centro de comando electoral (campañas, censo, Día D, reportes)
+- LuckyCore: plataforma de rifas y sorteos con checkout y auditoría
+- ArchiveMaster: gestión documental con roles e IA
+- Sistema PQRS: recepción y trazabilidad de peticiones ciudadanas
 
 ## Contacto
 
 - WhatsApp / correo: gerencia@kor-bytes.com
-- GitHub: https://github.com/korozcolt
-- Instagram: https://www.instagram.com/kor_bytes/
+- [GitHub](https://github.com/korozcolt): repositorios públicos de Kristian Orozco
+- [Instagram](https://www.instagram.com/kor_bytes/): @kor_bytes
 - Ubicación: Sincelejo, Sucre, Colombia — atiende clientes en toda LATAM de forma remota
 
 ## Optional
 
-- Sitemap: https://kor-bytes.com/sitemap-index.xml
+- [Aviso legal](https://kor-bytes.com/aviso-legal): tratamiento de datos, Ley 1581 de 2012
+- [Sitemap](https://kor-bytes.com/sitemap-index.xml): índice completo de URLs indexables
