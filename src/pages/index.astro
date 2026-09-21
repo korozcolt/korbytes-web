@@ -84,16 +84,6 @@ function initials(name: string) {
     </div>
   </header>
 
-  <a href="#top" id="logo-fixed" class="kb-logo-fixed" aria-hidden="true" tabindex="-1">
-    <span class="kb-mark">K</span>
-    <span class="kb-logo-slide-wrap">
-      <span class="kb-logo-slide">
-        <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
-        <span class="kb-wordmark kb-wordmark--accent">KOR Bytes<span class="kb-dot kb-dot--inverse">.</span></span>
-      </span>
-    </span>
-  </a>
-
   <main id="main-content">
     <section id="top" class="kb-hero">
       <canvas id="hero-particles" class="kb-hero-canvas" aria-hidden="true"></canvas>
@@ -376,9 +366,6 @@ function initials(name: string) {
     const preloader = document.getElementById("preloader");
     const numEl = document.getElementById("preloader-num");
     const fillEl = document.getElementById("preloader-fill");
-    const slot = document.getElementById("logo-slot");
-    const fixed = document.getElementById("logo-fixed");
-    const sentinel = document.getElementById("hero-sentinel");
     const header = document.getElementById("site-header");
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -404,41 +391,6 @@ function initials(name: string) {
       };
       requestAnimationFrame(tick);
       setTimeout(dismissPreloader, 2400);
-    }
-
-    if (reduced || !slot || !fixed || !sentinel) {
-      if (fixed) fixed.style.display = "none";
-      if (slot) slot.style.visibility = "visible";
-    } else {
-      let baseTop: number | null = null;
-      let smooth: number | null = null;
-
-      function updateLogo() {
-        const r = slot!.getBoundingClientRect();
-        const vw = window.innerWidth, vh = window.innerHeight;
-        const st = sentinel!.getBoundingClientRect().top;
-        if (baseTop == null) baseTop = st;
-        else if (st > baseTop) baseTop = st;
-
-        const y = Math.max(0, baseTop - sentinel!.getBoundingClientRect().top);
-        const p = Math.min(1, Math.max(0, y / 760));
-        if (smooth == null) smooth = p;
-        smooth += (p - smooth) * 0.085;
-        if (Math.abs(p - smooth) < 0.0004) smooth = p;
-
-        const sp = smooth;
-        const e = sp < 0.5 ? 4 * sp * sp * sp : 1 - Math.pow(-2 * sp + 2, 3) / 2;
-        const maxByHeight = (vh * 0.22) / Math.max(r.height, 1);
-        const bigScale = Math.max(1, Math.min(6.4, (vw * 0.66) / Math.max(r.width, 1), maxByHeight));
-        const s = bigScale + (1 - bigScale) * e;
-        const startX = (vw - r.width * bigScale) / 2;
-        const startY = Math.max(90, vh * 0.2);
-        const x = startX + (r.left - startX) * e;
-        const ty = startY + (r.top - startY) * e;
-        fixed!.style.transform = `translate3d(${x}px, ${ty}px, 0) scale(${s})`;
-        requestAnimationFrame(updateLogo);
-      }
-      requestAnimationFrame(updateLogo);
     }
 
     if (header) {
@@ -520,13 +472,8 @@ function initials(name: string) {
   .kb-logo-slide { display: block; transition: transform 0.55s cubic-bezier(0.6, 0, 0.2, 1); }
   a:hover .kb-logo-slide { transform: translateY(-100%); }
 
-  .kb-logo-slot, .kb-logo-fixed {
+  .kb-logo-slot {
     display: flex; align-items: center; gap: 12px;
-  }
-  .kb-logo-slot { visibility: hidden; }
-  .kb-logo-fixed {
-    position: fixed; left: 0; top: 0; z-index: 250;
-    transform-origin: 0 0; will-change: transform; pointer-events: none;
   }
 
   /* ── Header ────────────────────────────────────────────────── */
@@ -567,8 +514,6 @@ function initials(name: string) {
   @media (max-width: 880px) {
     .kb-hnav, .kb-hnav-cta { display: none; }
     .kb-menu-btn { display: inline-flex; }
-    .kb-logo-fixed { display: none !important; }
-    .kb-logo-slot { visibility: visible !important; }
   }
 
   /* ── Hero ──────────────────────────────────────────────────── */
