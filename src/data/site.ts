@@ -182,6 +182,7 @@ export interface ClientSite {
   name: string;
   url: string;
   desc: string;
+  image: string;
 }
 
 export const clientSites: ClientSite[] = [
@@ -189,31 +190,37 @@ export const clientSites: ClientSite[] = [
     name: "CEA Movilízate",
     url: "https://ceamovilizatesas.com",
     desc: "Plataforma para un Centro de Enseñanza Automovilística: matrícula en 6 pasos, captura biométrica y exámenes teóricos cronometrados.",
+    image: "/images/clientes/ceamovilizate.webp",
   },
   {
     name: "La Alerta",
     url: "https://laalerta.com",
     desc: "Medio digital regional en Astro, con plantillas intercambiables de portal según la sección.",
+    image: "/images/clientes/laalerta.webp",
   },
   {
     name: "Tota Joyería",
     url: "https://tota.studio",
     desc: "Tienda Shopify para una joyería, con catálogo y checkout propios.",
+    image: "/images/clientes/tota.webp",
   },
   {
     name: "Marce y Lauren",
     url: "https://marceylauren.com",
     desc: "Tienda Shopify de marca de moda, con catálogo y experiencia de compra a medida.",
+    image: "/images/clientes/marceylauren.webp",
   },
   {
     name: "Aldemar Alfaro",
     url: "https://aldemaralfaro.com",
     desc: "Sitio institucional construido en Astro.",
+    image: "/images/clientes/aldemaralfaro.webp",
   },
   {
     name: "La Certeza",
     url: "https://lacerteza.co",
     desc: "Sitio institucional construido en Astro.",
+    image: "/images/clientes/lacerteza.webp",
   },
 ];
 

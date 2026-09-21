@@ -257,14 +257,29 @@ function initials(name: string) {
             <span class="kb-eyebrow">Prueba, no promesa</span>
             <h2>Sitios reales, en producción</h2>
           </div>
-          <p class="kb-body">Enlaces directos a trabajo entregado — no capturas, no maquetas.</p>
+          <p class="kb-body">Captura tomada en vivo de cada sitio — el link de abajo lleva directo a producción, no a una demo.</p>
         </div>
-        <div class="kb-grid kb-grid-3 kb-client-grid">
+        <div class="kb-grid kb-grid-3 kb-client-grid" data-reveal-stagger>
           {clientSites.map((c) => (
             <a href={c.url} target="_blank" rel="noopener" class="kb-client-card">
-              <span class="kb-client-name">{c.name} ↗</span>
-              <p>{c.desc}</p>
-              <span class="kb-mono kb-text-soft kb-client-url">{c.url.replace("https://", "")}</span>
+              <div class="kb-client-frame">
+                <div class="kb-client-chrome" aria-hidden="true">
+                  <span class="kb-client-dot"></span><span class="kb-client-dot"></span><span class="kb-client-dot"></span>
+                  <span class="kb-client-url-bar">{c.url.replace("https://", "")}</span>
+                </div>
+                <img
+                  src={c.image}
+                  srcset={`${c.image.replace(".webp", "-480.webp")} 480w, ${c.image} 960w`}
+                  sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1180px) 30vw, 360px"
+                  width="960" height="600"
+                  alt={`Captura en vivo de ${c.name}`}
+                  loading="lazy"
+                />
+              </div>
+              <div class="kb-client-body">
+                <span class="kb-client-name">{c.name} ↗</span>
+                <p>{c.desc}</p>
+              </div>
             </a>
           ))}
         </div>
@@ -585,11 +600,17 @@ function initials(name: string) {
   .kb-pass-estado { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--kb-line); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
 
   /* ── Client sites (real proof) ─────────────────────────────── */
-  .kb-client-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
-  .kb-client-card:hover { border-color: var(--kb-line-accent); }
-  .kb-client-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 19px; color: var(--kb-text-strong); }
-  .kb-client-card p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--kb-text-muted); }
-  .kb-client-url { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--kb-line); font-size: 11.5px; }
+  .kb-client-card { display: flex; flex-direction: column; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); overflow: hidden; transition: border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
+  .kb-client-card:hover { border-color: var(--kb-line-accent); transform: translateY(-3px); }
+  .kb-client-frame { position: relative; }
+  .kb-client-chrome { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--kb-bg-floating); border-bottom: 1px solid var(--kb-line); }
+  .kb-client-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--kb-line-strong); }
+  .kb-client-url-bar { margin-left: 8px; flex: 1; font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--kb-text-soft); background: var(--kb-bg); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-full); padding: 3px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kb-client-frame img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
+  .kb-client-card:hover .kb-client-frame img { transform: scale(1.035); }
+  .kb-client-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 26px 26px; }
+  .kb-client-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 18px; color: var(--kb-text-strong); }
+  .kb-client-body p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--kb-text-muted); }
 
   /* ── Project cards ─────────────────────────────────────────── */
   .kb-proj-card { display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
