@@ -96,37 +96,27 @@ function initials(name: string) {
 
   <main id="main-content">
     <section id="top" class="kb-hero">
-      <div id="hero-sentinel" class="kb-container">
-        <div class="kb-hero-tiles">
-          {projects.slice(0, 3).map((p, i) => (
-            <a href="#proyectos" class="kb-hero-tile">
-              {p.image ? (
-                <img
-                  src={p.image}
-                  srcset={`${p.image.replace(".webp", "-480.webp")} 480w, ${p.image.replace(".webp", "-768.webp")} 768w, ${p.image} 2400w`}
-                  sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1180px) 30vw, 346px"
-                  width="2400"
-                  height="1350"
-                  alt={p.name}
-                  loading="eager"
-                  fetchpriority={i === 0 ? "high" : "auto"}
-                />
-              ) : (
-                <div class="kb-hero-tile-fallback"><span>{initials(p.name)}</span></div>
-              )}
-              <span class="kb-hero-tile-index">[{String(i + 1).padStart(2, "0")}]</span>
-              <span class="kb-hero-tile-label">{p.name} · {p.sector}</span>
-            </a>
-          ))}
-        </div>
+      <canvas id="hero-particles" class="kb-hero-canvas" aria-hidden="true"></canvas>
 
-        <div class="kb-hero-headline">
-          <h1>
-            KOR Bytes es una casa de software en Sincelejo. Construimos productos verticales y sistemas que <span class="kb-accent-text">sí aguantan</span> la operación.
-          </h1>
-          <div class="kb-hero-coverage">
-            <span class="kb-eyebrow">Cobertura</span>
-            <span class="kb-hero-coverage-text">Sincelejo, Sucre · Colombia<br />LATAM · Remoto-first · B2B</span>
+      <div id="hero-sentinel" class="kb-container">
+        <div class="kb-hero-grid">
+          <div class="kb-hero-main">
+            <span class="kb-eyebrow kb-eyebrow--dot">Software operativo · Sincelejo, Sucre</span>
+            <h1>
+              KOR Bytes es una casa de software en Sincelejo. Construimos productos verticales y sistemas que <span class="kb-accent-text">sí aguantan</span> la operación.
+            </h1>
+            <p class="kb-hero-sub">Sincelejo, Sucre · Colombia — LATAM · Remoto-first · B2B</p>
+          </div>
+
+          <div class="kb-hero-signal" aria-hidden="true">
+            <span class="kb-signal-badge">30 proyectos reales entregados</span>
+            <div class="kb-signal-card">
+              <div class="kb-signal-card-head">
+                <span class="kb-signal-dot"></span> WhatsApp
+              </div>
+              <p class="kb-signal-bubble">"Hola KOR Bytes, quiero un diagnóstico para mi proyecto."</p>
+              <span class="kb-signal-meta">Así llega un lead — responde el fundador, no un bot</span>
+            </div>
           </div>
         </div>
 
@@ -582,22 +572,29 @@ function initials(name: string) {
   }
 
   /* ── Hero ──────────────────────────────────────────────────── */
-  .kb-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: max(200px, 32vh); padding-bottom: 0; }
-  .kb-hero-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-  .kb-hero-tile { position: relative; display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-floating); aspect-ratio: 4/5; max-height: 46vh; }
-  .kb-hero-tile img { width: 100%; height: 100%; object-fit: cover; opacity: 0.82; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s; }
-  .kb-hero-tile:hover img { transform: scale(1.06); opacity: 1; }
-  .kb-hero-tile-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--kb-bg-floating), var(--kb-bg-raised)); }
-  .kb-hero-tile-fallback span { font-family: "Familjen Grotesk", sans-serif; font-size: 2.4rem; color: var(--kb-accent); letter-spacing: -0.02em; }
-  .kb-hero-tile-index { position: absolute; left: 18px; top: 16px; font-family: "Familjen Grotesk", sans-serif; font-size: 13px; color: var(--kb-text); letter-spacing: 0.08em; }
-  .kb-hero-tile-label { position: absolute; left: 18px; bottom: 16px; padding: 7px 14px; border-radius: var(--kb-radius-full); background: rgba(5,9,15,0.72); backdrop-filter: blur(8px); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-text-muted); }
+  .kb-hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: max(200px, 32vh); padding-bottom: 0; overflow: clip; background: radial-gradient(ellipse 60% 50% at 82% 18%, rgba(255,91,46,0.10), transparent 60%); }
+  .kb-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.8; }
 
-  .kb-hero-headline { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 56px 48px; align-items: end; padding: 52px 0 26px; }
-  .kb-hero-headline h1 { max-width: 24ch; font-weight: 400; font-size: clamp(24px, 2.1vw, 34px); line-height: 1.32; text-wrap: pretty; }
-  .kb-hero-coverage { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; justify-self: end; }
-  .kb-hero-coverage-text { font-size: 15px; color: var(--kb-text-muted); line-height: 1.6; }
+  .kb-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 48px; align-items: end; padding: 52px 0 26px; }
+  .kb-hero-main { display: flex; flex-direction: column; align-items: flex-start; }
+  .kb-hero-main h1 { max-width: 15ch; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.1rem, 5.4vw, 4.4rem); line-height: 1.04; letter-spacing: -0.01em; text-wrap: pretty; }
+  .kb-hero-sub { margin-top: 22px; font-size: 15px; color: var(--kb-text-muted); line-height: 1.6; }
 
-  .kb-hero-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; padding: 26px 0 40px; border-top: 1px solid var(--kb-line); font-size: 14px; }
+  .kb-hero-signal { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+  .kb-signal-badge { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.03em; color: var(--kb-text-muted); background: var(--kb-glass); backdrop-filter: blur(8px); border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); padding: 7px 14px; white-space: nowrap; }
+  .kb-signal-card { width: 100%; background: var(--kb-glass); backdrop-filter: blur(14px); border: 1px solid var(--kb-line-strong); border-top-color: var(--kb-line-accent); border-radius: var(--kb-radius-lg); padding: 18px 20px; box-shadow: var(--kb-shadow-md); }
+  .kb-signal-card-head { display: flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-text-soft); }
+  .kb-signal-dot { width: 7px; height: 7px; border-radius: 50%; background: #25d366; box-shadow: 0 0 0 3px rgba(37,211,102,0.18); }
+  .kb-signal-bubble { margin: 14px 0 0; padding: 12px 14px; background: var(--kb-bg-floating); border-radius: var(--kb-radius-md) var(--kb-radius-md) var(--kb-radius-md) 4px; font-size: 14px; color: var(--kb-text); line-height: 1.5; }
+  .kb-signal-meta { display: block; margin-top: 12px; font-size: 12px; color: var(--kb-text-soft); line-height: 1.5; }
+
+  @media (max-width: 880px) {
+    .kb-hero-grid { grid-template-columns: 1fr; }
+    .kb-hero-signal { align-items: flex-start; }
+    .kb-hero-main h1 { max-width: 20ch; }
+  }
+
+  .kb-hero-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; padding: 26px 0 40px; border-top: 1px solid var(--kb-line); font-size: 14px; position: relative; z-index: 1; }
   .kb-hero-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
   .kb-pill { padding: 9px 18px; border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); color: var(--kb-text-muted); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
   .kb-pill:hover { border-color: var(--kb-accent); color: var(--kb-accent); }

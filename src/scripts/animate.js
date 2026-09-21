@@ -114,8 +114,80 @@ function initMagnetic() {
   });
 }
 
+// ── Hero particle network: small constellation of drifting dots with
+//    proximity lines, drawn on a <canvas>. Gated on reduced-motion (the
+//    canvas is simply left blank there — CSS supplies a static gradient
+//    fallback) and paused while the tab/hero is out of view.
+function initHeroParticles() {
+  const canvas = document.getElementById("hero-particles");
+  if (!canvas || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+
+  const ctx = canvas.getContext("2d");
+  const accent = "255, 91, 46";
+  let width, height, dpr, points, raf, running = true;
+
+  function resize() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = width < 640 ? 22 : width < 1080 ? 34 : 46;
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+    }));
+  }
+
+  function step() {
+    if (!running) return;
+    ctx.clearRect(0, 0, width, height);
+    const linkDist = width < 640 ? 90 : 130;
+
+    for (const p of points) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+    }
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < linkDist) {
+          ctx.strokeStyle = `rgba(${accent}, ${0.16 * (1 - dist / linkDist)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (const p of points) {
+      ctx.fillStyle = `rgba(${accent}, 0.5)`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  resize();
+  step();
+  addEventListener("resize", resize, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    running = !document.hidden;
+    if (running && !raf) step();
+  });
+}
+
 initCursor();
 initMagnetic();
+initHeroParticles();
 
 mm.add("(prefers-reduced-motion: reduce)", () => {
   document.querySelectorAll("[data-reveal-stagger]").forEach((el) => {
