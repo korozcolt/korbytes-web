@@ -4,6 +4,7 @@ export const EMAIL = "gerencia@kor-bytes.com";
 export const GITHUB_URL = "https://github.com/korozcolt";
 export const INSTAGRAM_URL = "https://www.instagram.com/kor_bytes/";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/kristian-orozco-backend";
+export const GOOGLE_MAPS_URL = "https://www.google.com/maps?cid=13465809282361179640";
 export const PHONE = "+573043978157";
 export const FOUNDER_NAME = "Kristian Orozco";
 export const FOUNDER_TITLE = "Fundador y arquitecto de software";
@@ -187,16 +188,28 @@ export interface ClientSite {
 
 export const clientSites: ClientSite[] = [
   {
+    name: "CARSUCRE",
+    url: "https://carsucre.gov.co",
+    desc: "Portal oficial de la Corporación Autónoma Regional de Sucre: autoridad ambiental, trámites ciudadanos y transparencia.",
+    image: "/images/clientes/carsucre.webp",
+  },
+  {
     name: "CEA Movilízate",
     url: "https://ceamovilizatesas.com",
     desc: "Plataforma para un Centro de Enseñanza Automovilística: matrícula en 6 pasos, captura biométrica y exámenes teóricos cronometrados.",
     image: "/images/clientes/ceamovilizate.webp",
   },
   {
-    name: "La Alerta",
-    url: "https://laalerta.com",
-    desc: "Medio digital regional en Astro, con plantillas intercambiables de portal según la sección.",
-    image: "/images/clientes/laalerta.webp",
+    name: "Kuwai Lencería",
+    url: "https://soykuwai.com",
+    desc: "Tienda online de lencería y moda con cobertura nacional, alta tasa de conversión y pagos automatizados.",
+    image: "/images/clientes/kuwai.webp",
+  },
+  {
+    name: "Herencia Rizada",
+    url: "https://herenciarizada.com",
+    desc: "Plataforma web para clínica y salón capilar: agendamiento de citas, catálogo y e-commerce integrado.",
+    image: "/images/clientes/herenciarizada.webp",
   },
   {
     name: "Tota Joyería",
@@ -215,6 +228,12 @@ export const clientSites: ClientSite[] = [
     url: "https://aldemaralfaro.com",
     desc: "Sitio institucional construido en Astro.",
     image: "/images/clientes/aldemaralfaro.webp",
+  },
+  {
+    name: "La Alerta",
+    url: "https://laalerta.com",
+    desc: "Medio digital regional en Astro, con plantillas intercambiables de portal según la sección.",
+    image: "/images/clientes/laalerta.webp",
   },
   {
     name: "La Certeza",
@@ -295,8 +314,9 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       email: EMAIL,
       telephone: PHONE,
       priceRange: "$$",
+      hasMap: GOOGLE_MAPS_URL,
       founder: { "@id": `${SITE}/#kristian-orozco` },
-      sameAs: [GITHUB_URL, INSTAGRAM_URL],
+      sameAs: [GITHUB_URL, INSTAGRAM_URL, LINKEDIN_URL, GOOGLE_MAPS_URL],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Servicios KOR Bytes",

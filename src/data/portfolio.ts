@@ -79,6 +79,13 @@ export const portfolio: PortfolioGroup[] = [
         desc: "SaaS para clínicas capilares y spas: reservas con control anti-doble-reserva, tratamientos por sesiones y e-commerce integrado.",
       },
       {
+        name: "Herencia Rizada",
+        stack: "E-commerce, agendamiento de citas, pasarela de pagos",
+        status: "Producción",
+        url: "https://herenciarizada.com",
+        desc: "Plataforma web para clínica y salón especializado en cuidado capilar rizado: agendamiento de citas especializadas, catálogo de productos y venta online.",
+      },
+      {
         name: "CoreDesk",
         stack: "RPA con Playwright, IA para atención al cliente",
         status: "Producción",
@@ -131,6 +138,13 @@ export const portfolio: PortfolioGroup[] = [
         desc: "Panel de operación multi-tienda sobre la API de Shopify para dueños de negocio sin equipo técnico, evolucionando hacia un OMS.",
       },
       {
+        name: "Kuwai Lencería",
+        stack: "Shopify a medida, e-commerce multicanal, pasarela de pagos",
+        status: "Producción",
+        url: "https://soykuwai.com",
+        desc: "Tienda online de lencería y moda con cobertura nacional, alta tasa de conversión y pagos automatizados.",
+      },
+      {
         name: "Temas Shopify a medida",
         stack: "Liquid, temas Shopify personalizados",
         status: "Producción",
@@ -142,6 +156,13 @@ export const portfolio: PortfolioGroup[] = [
   {
     sector: "Sector público y gestión electoral",
     items: [
+      {
+        name: "CARSUCRE — Corporación Autónoma Regional de Sucre",
+        stack: "Portal gubernamental, transparencia y accesibilidad",
+        status: "Producción",
+        url: "https://carsucre.gov.co",
+        desc: "Portal oficial de la autoridad ambiental de Sucre: trámites ambientales, normatividad, PQRSD y cumplimiento de estándares de Gobierno Digital.",
+      },
       {
         name: "SIGMA",
         stack: "Laravel, microservicio Python/Playwright para captchas",

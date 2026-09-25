@@ -1,5 +1,5 @@
 ---
-import { whatsapp, EMAIL, GITHUB_URL, INSTAGRAM_URL } from "@/data/site";
+import { whatsapp, EMAIL, GITHUB_URL, INSTAGRAM_URL, GOOGLE_MAPS_URL } from "@/data/site";
 const year = new Date().getFullYear();
 ---
 
@@ -14,6 +14,9 @@ const year = new Date().getFullYear();
         <address class="kb-foot-address">
           <div><strong>Sincelejo</strong> · Sucre · Colombia</div>
           <div class="kb-foot-mute">Remoto · Modelo B2B</div>
+          <div class="kb-foot-maps-link">
+            <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener">Ver ficha en Google Maps ↗</a>
+          </div>
         </address>
       </div>
 
@@ -40,6 +43,7 @@ const year = new Date().getFullYear();
             </a>
           </li>
           <li class="kb-foot-mono">+57 304 397 8157</li>
+          <li><a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener">Google Maps · KOR Bytes</a></li>
           <li><a href={GITHUB_URL} target="_blank" rel="noopener">GitHub · korozcolt</a></li>
           <li><a href={INSTAGRAM_URL} target="_blank" rel="noopener">Instagram · @kor_bytes</a></li>
         </ul>
@@ -85,6 +89,17 @@ const year = new Date().getFullYear();
     line-height: 1.6;
   }
   .kb-foot-mute { color: var(--kb-text-soft); font-size: 0.8rem; }
+  .kb-foot-maps-link { margin-top: 0.45rem; }
+  .kb-foot-maps-link a {
+    color: var(--kb-accent);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: opacity var(--kb-duration-fast) var(--kb-ease-out);
+  }
+  .kb-foot-maps-link a:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+  }
   .kb-foot-mono {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.78rem;

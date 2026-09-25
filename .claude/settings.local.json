@@ -3,7 +3,18 @@
     "allow": [
       "Bash(ls:*)",
       "WebFetch(domain:simpleparallax.com)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "mcp__notebooklm-mcp__notebook_describe",
+      "mcp__notebooklm-mcp__notebook_get",
+      "mcp__notebooklm-mcp__notebook_query",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(pkill -f \"server.mjs\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit --amend -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

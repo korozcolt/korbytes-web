@@ -66,6 +66,17 @@ const schema = JSON.stringify(
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-FGEEJ8RSN0");
+
+      var gaLoaded = false;
+      function loadGA4() {
+        if (gaLoaded) return;
+        gaLoaded = true;
+        var s = document.createElement("script");
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-FGEEJ8RSN0";
+        s.async = true;
+        document.head.appendChild(s);
+      }
+
       document.addEventListener("click", function (event) {
         var source = event.target instanceof Element ? event.target.closest("a") : null;
         if (!source) return;
@@ -76,13 +87,16 @@ const schema = JSON.stringify(
           : href.startsWith("tel:") ? "phone"
           : null;
 
-        if (method) gtag("event", "generate_lead", { method: method });
+        if (method) {
+          gtag("event", "generate_lead", {
+            method: method,
+            transport_type: "beacon"
+          });
+          loadGA4();
+        }
       });
       window.addEventListener("load", function () {
-        var s = document.createElement("script");
-        s.src = "https://www.googletagmanager.com/gtag/js?id=G-FGEEJ8RSN0";
-        s.async = true;
-        document.head.appendChild(s);
+        loadGA4();
         // Promote preloaded fonts from `media=print` to `media=all`.
         document.querySelectorAll('link[data-fonts="swap"]').forEach(function (l) {
           l.removeAttribute("data-fonts");
