@@ -305,7 +305,7 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
 
   const graph: Array<Record<string, unknown>> = [
     {
-      "@type": ["Organization", "ProfessionalService"],
+      "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
       "@id": `${SITE}/#organization`,
       name: "KOR Bytes S.A.S.",
       url: `${SITE}/`,
