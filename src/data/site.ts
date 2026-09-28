@@ -334,10 +334,19 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       },
       address: {
         "@type": "PostalAddress",
+        streetAddress: "Cl. 23 #13c 96",
         addressLocality: "Sincelejo",
         addressRegion: "Sucre",
         addressCountry: "CO",
       },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "08:00",
+          closes: "17:00",
+        },
+      ],
       geo: {
         "@type": "GeoCoordinates",
         latitude: 9.3047,
