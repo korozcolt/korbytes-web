@@ -33,7 +33,8 @@ Línea de productos SaaS verticales construida sobre módulos reutilizables:
 ## Contacto
 
 - WhatsApp / correo: gerencia@kor-bytes.com
-- [GitHub](https://github.com/korozcolt): repositorios públicos de Kristian Orozco
+- [GitHub Organización](https://github.com/korbytes): repositorios corporativos de Kor Bytes S.A.S.
+- [GitHub Fundador](https://github.com/korozcolt): repositorios y paquetes open source de Kristian Orozco
 - [Instagram](https://www.instagram.com/kor_bytes/): @kor_bytes
 - Ubicación: Sincelejo, Sucre, Colombia — atiende clientes en toda LATAM de forma remota
 
