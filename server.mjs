@@ -34,6 +34,8 @@ const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.json', '.svg', '.xml', '
 // routes used to be separate pages; visitors and search engines land here
 // via old links/bookmarks and get sent to the matching anchor on '/'.
 const REDIRECTS = {
+  '/sitemap.xml': '/sitemap-index.xml',
+  '/images/logo.webp': '/images/logo-oficial.png',
   '/servicios': '/#servicios',
   '/servicios/desarrollo-software-a-medida': '/#servicios',
   '/servicios/desarrollo-web': '/#servicios',
@@ -50,8 +52,24 @@ const REDIRECTS = {
 };
 
 function redirectTarget(urlPath) {
-  const bare = urlPath.replace(/\/$/, '').replace(/\.html$/i, '') || '/';
-  return REDIRECTS[bare] ?? null;
+  let decoded = urlPath;
+  try {
+    decoded = decodeURIComponent(urlPath);
+  } catch {}
+
+  const normalized = decoded.toLowerCase();
+  if (REDIRECTS[normalized]) return REDIRECTS[normalized];
+
+  const bare = normalized.replace(/\/$/, '').replace(/\.html$/i, '') || '/';
+  if (REDIRECTS[bare]) return REDIRECTS[bare];
+
+  // Wildcard fallback for legacy directories
+  if (bare.startsWith('/servicios')) return '/#servicios';
+  if (bare.startsWith('/casos')) return '/#proyectos';
+  if (bare.startsWith('/ubicaciones')) return '/#contacto';
+  if (bare.startsWith('/ecosistema-pass')) return '/#pass';
+
+  return null;
 }
 
 const CSP = [

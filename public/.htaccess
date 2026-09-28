@@ -1,6 +1,17 @@
 # Apache configuration for korbytes-web
 # Cache-Control headers and compression
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 301 Redirect old sitemap.xml to sitemap-index.xml
+  RewriteRule ^sitemap\.xml/?$ /sitemap-index.xml [R=301,L]
+
+  # 301 Redirect old images/logo.webp to logo-oficial.png
+  RewriteRule ^images/logo\.webp$ /images/logo-oficial.png [R=301,L]
+</IfModule>
+
+
 <IfModule mod_headers.c>
   # Cache images for 1 year
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">

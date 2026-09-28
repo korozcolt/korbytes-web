@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { whatsapp } from "@/data/site";
+---
+
+<BaseLayout
+  title="Página no encontrada (404) | KOR Bytes S.A.S."
+  description="La página que buscas no existe o ha sido movida a una nueva sección."
+  path="/404"
+>
+  <header class="kb-header" id="site-header">
+    <div class="kb-container kb-header-inner">
+      <a href="/" class="kb-logo-slot" aria-label="KOR Bytes">
+        <span class="kb-mark">K</span>
+        <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+      </a>
+      <a class="kb-hnav-cta" href="/">
+        Volver al inicio
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 24px;">
+    <div class="kb-container" style="max-width: 600px;">
+      <span class="kb-eyebrow" style="color: var(--kb-accent); font-family: var(--kb-font-mono); font-size: 1.1rem;">Error 404</span>
+      <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); margin: 16px 0 24px; font-weight: 700;">Página no encontrada</h1>
+      <p class="kb-lead" style="margin-bottom: 36px; color: var(--kb-text-muted);">
+        El enlace que intentas abrir ha sido reorganizado o ya no existe. Puedes regresar a la portada o escribirnos directamente si buscas un sistema en particular.
+      </p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/" class="kb-cta-btn kb-cta-btn--primary" style="padding: 14px 28px; border-radius: var(--kb-radius-md);">
+          Ir a la portada principal →
+        </a>
+        <a href={whatsapp("Hola KOR Bytes, estaba navegando en su web y busco información.")} target="_blank" rel="noopener" class="kb-cta-btn" style="padding: 14px 28px; border-radius: var(--kb-radius-md);">
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+  <WhatsAppFab />
+</BaseLayout>
