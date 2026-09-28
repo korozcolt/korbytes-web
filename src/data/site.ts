@@ -1,7 +1,8 @@
 export const SITE = "https://kor-bytes.com";
 export const WHATSAPP_NUMBER = "573043978157";
 export const EMAIL = "gerencia@kor-bytes.com";
-export const GITHUB_URL = "https://github.com/korozcolt";
+export const GITHUB_URL = "https://github.com/korbytes";
+export const GITHUB_FOUNDER_URL = "https://github.com/korozcolt";
 export const INSTAGRAM_URL = "https://www.instagram.com/kor_bytes/";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/kristian-orozco-backend";
 export const GOOGLE_MAPS_URL = "https://www.google.com/maps?cid=13465809282361179640";
@@ -383,7 +384,7 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       url: `${SITE}/`,
       jobTitle: FOUNDER_TITLE,
       worksFor: { "@id": `${SITE}/#organization` },
-      sameAs: [GITHUB_URL, LINKEDIN_URL],
+      sameAs: [GITHUB_FOUNDER_URL, LINKEDIN_URL],
       knowsAbout: [
         "Laravel",
         "React",
