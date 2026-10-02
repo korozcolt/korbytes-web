@@ -5,15 +5,60 @@ import WhatsAppFab from "@/components/WhatsAppFab.astro";
 import { EMAIL, SITE, whatsapp } from "@/data/site";
 
 const title = "Software a medida en Sincelejo, Sucre | KOR Bytes";
-const description = "Desarrollo de software a medida en Sincelejo para empresas que necesitan sistemas internos, trazabilidad, integraciones y automatización de procesos.";
+const description = "Software a medida en Sincelejo, Sucre: sistemas internos, integraciones y automatización para empresas. Casos reales en salud, educación y comercio.";
 const path = "/software-a-medida-sincelejo";
 const breadcrumb = [
   { name: "Inicio", url: `${SITE}/` },
   { name: "Software a medida en Sincelejo", url: `${SITE}${path}` },
 ];
+
+const sectores = [
+  { sector: "Salud y estética", texto: "Reservas con control anti-doble-reserva, tratamientos por sesiones, agendamiento de citas y venta online para clínicas, salones y spas." },
+  { sector: "Educación", texto: "Matrícula, exámenes cronometrados, calificaciones, asistencia y portales para docentes y acudientes." },
+  { sector: "Farmacias y comercio", texto: "POS e inventario con trazabilidad de lotes, tiendas Shopify a medida y paneles de operación multi-tienda." },
+  { sector: "Deporte", texto: "Carnetización digital con QR, clubes, torneos, ficha médica y cobro de suscripciones para ligas." },
+  { sector: "Sector público y gestión de datos", texto: "Plataformas con roles, auditoría y trazabilidad para organizaciones que manejan información sensible." },
+  { sector: "Contabilidad y finanzas", texto: "Control contable y presupuestal pensado para la normativa colombiana." },
+];
+
+const servicios = [
+  { nombre: "Sistemas internos y backoffice", texto: "Reemplazan hojas de cálculo y procesos manuales con flujos, estados y aprobaciones claras." },
+  { nombre: "Dashboards y reportes", texto: "Indicadores operativos con los datos que ya tienes, sin exportar a Excel cada semana." },
+  { nombre: "Integraciones y pagos", texto: "Conexión con Wompi, MercadoPago, Shopify y otras APIs para que los sistemas se hablen entre sí." },
+  { nombre: "Automatización", texto: "Flujos con n8n, webhooks e IA para tareas repetitivas como agendamiento, notificaciones y atención por WhatsApp." },
+  { nombre: "Portales web y e-commerce", texto: "Sitios y tiendas rápidos, con agendamiento, catálogo y pasarela de pagos integrados." },
+  { nombre: "Infraestructura y despliegue", texto: "Servidores, Docker y despliegue continuo para que el sistema quede en producción y se mantenga estable." },
+];
+
+const faqsSoftware: Array<{ question: string; answer: string }> = [
+  {
+    question: "¿Cuánto cuesta un software a medida en Sincelejo?",
+    answer: "Depende del alcance: un módulo acotado no cuesta lo mismo que un sistema interno con roles, reportes e integraciones. Empezamos con un diagnóstico gratuito por WhatsApp para entender el proceso y proponer un alcance con precio antes de construir.",
+  },
+  {
+    question: "¿Cuánto tarda en estar listo?",
+    answer: "Entregamos por etapas para que veas avances reales. Un módulo puntual se mide en semanas y un sistema completo en meses; el plazo exacto se define en el diagnóstico, cuando el alcance está claro.",
+  },
+  {
+    question: "¿Cuándo conviene software a medida en lugar de uno ya hecho?",
+    answer: "Cuando tu proceso no cabe en una herramienta genérica: necesitas aprobaciones propias, integraciones específicas, trazabilidad o reportes que los programas de caja no ofrecen. Si una herramienta existente ya resuelve el problema, te lo decimos.",
+  },
+  {
+    question: "¿Atienden empresas fuera de Sincelejo?",
+    answer: "Sí. Estamos en Sincelejo, Sucre, y trabajamos de forma remota con empresas de Colombia y LATAM. Si estás en la ciudad, también podemos reunirnos en persona.",
+  },
+  {
+    question: "¿Qué pasa después de la entrega?",
+    answer: "Desplegamos el sistema, lo monitoreamos y seguimos evolucionándolo. El soporte y las mejoras continuas se acuerdan según lo que tu operación necesite.",
+  },
+  {
+    question: "¿Pueden retomar un sistema que ya construyó otra persona?",
+    answer: "Sí. Empezamos con una revisión técnica del código y la infraestructura para decidir si conviene continuar, ordenar o rehacer partes. Si buscas contratar a una persona, mira nuestra página de programador en Sincelejo.",
+  },
+];
 ---
 
-<BaseLayout title={title} description={description} path={path} faqs={[]} breadcrumb={breadcrumb}>
+<BaseLayout title={title} description={description} path={path} faqs={faqsSoftware} breadcrumb={breadcrumb}>
   <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
 
   <header class="local-header">
@@ -56,6 +101,32 @@ const breadcrumb = [
         <div class="local-copy">
           <p>El software a medida no parte de una lista de funcionalidades: parte de cómo trabaja tu empresa. Primero entendemos responsabilidades, estados, datos, aprobaciones e integraciones; después definimos qué módulo conviene construir y qué se puede reutilizar.</p>
           <p>Este enfoque aplica a equipos comerciales, administrativos, documentales, educativos, de comercio y servicios que necesitan control sobre su operación sin forzarla dentro de una plantilla.</p>
+          <p>Somos una casa de software con sede en Sincelejo, Sucre, y trabajamos con empresas de la región y de todo el país. Si lo que buscas es contratar a una persona, mira <a href="/programador-en-sincelejo">programador en Sincelejo</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section kb-section--soft">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Qué podemos construir</span>
+        <h2 class="local-h2">Sistemas que sostienen la operación diaria de tu empresa.</h2>
+        <div class="local-cards">
+          {servicios.map((item) => (
+            <article><h3>{item.nombre}</h3><p>{item.texto}</p></article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Sectores y casos reales</span>
+        <h2 class="local-h2">Software ya en producción en salud, educación, comercio y deporte.</h2>
+        <p class="local-intro">No partimos de plantillas: cada sistema nace del proceso real del cliente. Estos son algunos sectores donde ya hemos entregado; puedes ver más en el <a href="/portafolio">portafolio completo</a>.</p>
+        <div class="local-cards">
+          {sectores.map((item) => (
+            <article><h3>{item.sector}</h3><p>{item.texto}</p></article>
+          ))}
         </div>
       </div>
     </section>
@@ -68,6 +139,23 @@ const breadcrumb = [
           <article><span>02</span><h2>Arquitectura</h2><p>Definimos módulos, roles, integraciones y el alcance que sí resuelve el problema.</p></article>
           <article><span>03</span><h2>Construcción</h2><p>Entregamos iterativamente para validar la operación antes de avanzar.</p></article>
           <article><span>04</span><h2>Producción</h2><p>Desplegamos, monitoreamos y acompañamos la evolución del sistema.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="kb-section">
+      <div class="kb-container local-faq-grid">
+        <div>
+          <span class="kb-eyebrow">Preguntas frecuentes</span>
+          <h2>Dudas comunes sobre software a medida en Sincelejo.</h2>
+        </div>
+        <div class="local-faq-list">
+          {faqsSoftware.map((faq) => (
+            <details class="local-faq-item">
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -94,7 +182,11 @@ const breadcrumb = [
   .local-aside { padding: 1.8rem; border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }.local-aside > span, .local-steps span { color: var(--kb-accent); }.local-aside ul { margin: 1.2rem 0 0; padding: 0; list-style: none; display: grid; gap: .8rem; color: var(--kb-text-muted); line-height: 1.5; }
   .local-content-grid { align-items: start; }.local-content-grid h2 { max-width: 15ch; }.local-copy { color: var(--kb-text-muted); line-height: 1.72; font-size: 1.05rem; }.local-copy p:first-child { margin-top: 0; }
   .local-steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--kb-line); }.local-steps article { padding: 1.7rem 1.3rem 1.2rem 0; border-bottom: 1px solid var(--kb-line); }.local-steps article + article { padding-left: 1.3rem; border-left: 1px solid var(--kb-line); }.local-steps h2 { font-size: 1.4rem; margin: .85rem 0 .5rem; }.local-steps p { margin: 0; color: var(--kb-text-muted); line-height: 1.55; font-size: .9rem; }
+  .local-h2 { max-width: 22ch; margin: 1rem 0 2rem; }.local-intro { max-width: 62ch; color: var(--kb-text-muted); line-height: 1.7; margin: 0 0 2rem; }.local-intro a, .local-copy a { color: var(--kb-accent); }
+  .local-cards { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--kb-line); }.local-cards article { padding: 1.6rem 1.3rem 1.4rem 0; border-bottom: 1px solid var(--kb-line); }.local-cards article:not(:nth-child(3n+1)) { padding-left: 1.3rem; border-left: 1px solid var(--kb-line); }.local-cards h3 { font-size: 1.15rem; margin: .6rem 0 .5rem; color: var(--kb-text-strong); }.local-cards p { margin: 0; color: var(--kb-text-muted); line-height: 1.55; font-size: .92rem; }.local-cards .kb-mono { color: var(--kb-accent); }
+  .local-faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(2.5rem, 6vw, 4rem); align-items: start; }.local-faq-grid h2 { max-width: 16ch; margin-top: 1rem; }.local-faq-list { border-top: 1px solid var(--kb-line); }.local-faq-item { border-bottom: 1px solid var(--kb-line); }
+  .local-faq-item summary { cursor: pointer; list-style: none; padding: 1.35rem 2.1rem 1.35rem 0; position: relative; font-family: "Familjen Grotesk", sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; color: var(--kb-text-strong); }.local-faq-item summary::-webkit-details-marker { display: none; }.local-faq-item summary::after { content: "+"; position: absolute; right: 2px; top: 1.15rem; color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 1.3rem; }.local-faq-item[open] summary::after { content: "−"; }.local-faq-item p { margin: 0; padding: 0 2.1rem 1.35rem 0; color: var(--kb-text-muted); font-size: .94rem; line-height: 1.65; }
   .local-cta { display: flex; align-items: end; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 6vw, 4rem); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }.local-cta h2 { max-width: 16ch; }
-  @media (max-width: 850px) { .local-hero-grid, .local-content-grid { grid-template-columns: 1fr; }.local-steps { grid-template-columns: repeat(2, 1fr); }.local-steps article:nth-child(3) { border-left: 0; padding-left: 0; }.local-cta { align-items: start; flex-direction: column; } }
-  @media (max-width: 520px) { .local-header-cta { display: none; }.local-steps { grid-template-columns: 1fr; }.local-steps article + article { border-left: 0; padding-left: 0; } }
+  @media (max-width: 850px) { .local-hero-grid, .local-content-grid { grid-template-columns: 1fr; }.local-steps, .local-cards { grid-template-columns: repeat(2, 1fr); }.local-cards article:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }.local-cards article:nth-child(even) { padding-left: 1.3rem; border-left: 1px solid var(--kb-line); }.local-steps article:nth-child(3) { border-left: 0; padding-left: 0; }.local-cta { align-items: start; flex-direction: column; } }
+  @media (max-width: 520px) { .local-header-cta { display: none; }.local-steps, .local-cards { grid-template-columns: 1fr; }.local-cards article, .local-cards article:nth-child(even) { padding-left: 0; border-left: 0; }.local-steps article + article { border-left: 0; padding-left: 0; } }
 </style>
