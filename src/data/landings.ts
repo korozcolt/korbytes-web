@@ -139,7 +139,7 @@ export const landings: Landing[] = [
       { name: "Sitios de clientes", text: "Tiendas Shopify, sitios WordPress y portales a medida que puedes ver en el portafolio." },
     ],
     faqs: [
-      { question: "¿Cuánto cuesta una landing page?", answer: "El precio depende de la cantidad de secciones, el contenido y las integraciones. Te enviamos una propuesta cerrada después de una conversación corta por WhatsApp." },
+      { question: "¿Cuánto cuesta una landing page?", answer: "Nuestras landing pages parten desde $800.000 COP. El valor final depende de la cantidad de secciones, el contenido y las integraciones, y te enviamos una propuesta cerrada después de una conversación corta por WhatsApp." },
       { question: "¿En cuánto tiempo la tienen lista?", answer: "Una landing estándar se entrega en pocos días una vez tenemos el contenido. El plazo exacto lo confirmamos en la propuesta." },
       { question: "¿Qué diferencia hay entre una landing y una página web completa?", answer: "La landing tiene un solo objetivo y una sola acción. Una página web completa tiene varias secciones y páginas. Si tu negocio apenas empieza, casi siempre conviene empezar por una landing bien hecha." },
       { question: "¿Me ayudan con el contenido y los textos?", answer: "Sí. Podemos redactar los textos con base en lo que nos cuentes de tu negocio y tus clientes." },

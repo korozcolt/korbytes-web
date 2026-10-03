@@ -83,6 +83,12 @@ export const guides: Guide[] = [
         ],
       },
       {
+        heading: "Cuánto cobramos en KOR Bytes",
+        paragraphs: [
+          "Nuestras landing pages parten desde $800.000 COP. Para tiendas en línea, sitios con varias secciones o desarrollos a medida damos una propuesta cerrada después de entender tu caso.",
+        ],
+      },
+      {
         heading: "Por qué los precios varían tanto",
         paragraphs: [
           "Casi todo el rango se explica por quién lo hace y qué incluye. Una plantilla armada por un freelancer, una agencia con diseño propio y un desarrollo a medida con integraciones no son el mismo producto aunque todos se llamen «página web». La ciudad pesa poco: las fuentes consultadas ven precios similares entre las principales ciudades, con Bogotá algo más cara.",
