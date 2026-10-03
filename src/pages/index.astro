@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import { landings } from "@/data/landings";
 import {
   navAnchors,
   services,
@@ -26,6 +27,16 @@ const stack = [
   "Laravel", "Filament", "Livewire", "PASS Core", "n8n", "Dokploy",
   "VPS", "Redis", "Postgres", "Shopify", "MercadoPago", "Wompi",
   "Bagisto", "Docker", "GitHub Actions",
+];
+
+// Cada servicio enlaza a su landing dedicada (índice = orden en `services`).
+const serviceLinks = [
+  "/desarrollo-de-software-colombia",
+  "#pass",
+  "/integracion-whatsapp-business",
+  "/landing-pages-colombia",
+  "/automatizacion-de-procesos",
+  "#contacto",
 ];
 
 function initials(name: string) {
@@ -171,7 +182,7 @@ function initials(name: string) {
         </div>
         <div class="kb-grid kb-grid-3 kb-svc-grid" data-reveal-stagger>
           {services.map((s, index) => (
-            <a href={index === 0 ? "/software-a-medida-sincelejo" : "#contacto"} class="kb-svc-card">
+            <a href={serviceLinks[index] ?? "#contacto"} class="kb-svc-card">
               <span class="kb-mono kb-accent-text">{s.tag}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
@@ -179,6 +190,19 @@ function initials(name: string) {
             </a>
           ))}
         </div>
+      </div>
+    </section>
+
+    <section class="kb-section kb-section--soft" aria-label="Soluciones por necesidad">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Soluciones por necesidad</span>
+        <h2 class="kb-solutions-title">¿Qué problema quieres resolver?</h2>
+        <ul class="kb-solutions">
+          {landings.map((l) => (
+            <li><a href={`/${l.slug}`}>{l.label}</a></li>
+          ))}
+          <li><a href="/software-a-medida-sincelejo">Software a medida en Sincelejo</a></li>
+        </ul>
       </div>
     </section>
 
@@ -590,6 +614,10 @@ function initials(name: string) {
   .kb-svc-card { display: flex; flex-direction: column; gap: 16px; padding: 34px 30px 30px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); min-height: 260px; transition: background var(--kb-duration-slow), border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
   .kb-svc-card:hover { background: var(--kb-bg-floating); border-color: var(--kb-line-accent); transform: translateY(-4px); }
   .kb-svc-card p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
+  .kb-solutions-title { margin: 1rem 0 1.6rem; max-width: 20ch; }
+  .kb-solutions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .7rem; }
+  .kb-solutions a { display: inline-block; padding: .7rem 1.2rem; border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); font-size: .95rem; color: var(--kb-text); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
+  .kb-solutions a:hover { border-color: var(--kb-accent); color: var(--kb-accent); }
   .kb-svc-more { margin-top: auto; font-size: 13px; color: var(--kb-text-muted); }
 
   /* ── PASS cards ────────────────────────────────────────────── */

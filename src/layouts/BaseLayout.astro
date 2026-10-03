@@ -8,6 +8,7 @@ interface Props {
   path?: string;
   faqs?: Array<{ question: string; answer: string }>;
   breadcrumb?: BreadcrumbItem[];
+  extraGraph?: Array<Record<string, unknown>>;
 }
 
 const {
@@ -16,10 +17,11 @@ const {
   path = "/",
   faqs,
   breadcrumb,
+  extraGraph,
 } = Astro.props;
 const canonical = new URL(path, SITE).toString();
 const schema = JSON.stringify(
-  structuredData(canonical, { title, description, faqs, breadcrumb })
+  structuredData(canonical, { title, description, faqs, breadcrumb, extraGraph })
 );
 ---
 

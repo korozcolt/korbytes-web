@@ -1,4 +1,5 @@
 ---
+import { landings } from "@/data/landings";
 import { whatsapp, EMAIL, GITHUB_URL, INSTAGRAM_URL, GOOGLE_MAPS_URL } from "@/data/site";
 const year = new Date().getFullYear();
 ---
@@ -30,6 +31,15 @@ const year = new Date().getFullYear();
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="/software-a-medida-sincelejo">Software a medida en Sincelejo</a></li>
           <li><a href="/programador-en-sincelejo">Programador en Sincelejo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="kb-foot-heading">Soluciones</p>
+        <ul>
+          {landings.map((l) => (
+            <li><a href={`/${l.slug}`}>{l.label}</a></li>
+          ))}
         </ul>
       </div>
 

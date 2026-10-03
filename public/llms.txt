@@ -6,6 +6,13 @@
 
 - [Software a medida](https://kor-bytes.com/software-a-medida-sincelejo): sistemas internos, backoffice, dashboards y flujos con trazabilidad
 - [Contratación de programador en Sincelejo](https://kor-bytes.com/programador-en-sincelejo): equipo vs. freelance, ingeniería de sistemas
+- [Desarrollo de software en Colombia](https://kor-bytes.com/desarrollo-de-software-colombia): sistemas a medida, integraciones y automatización para empresas de todo el país
+- [Landing pages](https://kor-bytes.com/landing-pages-colombia): páginas rápidas, con SEO y botón de WhatsApp
+- [Dashboards y reportes](https://kor-bytes.com/dashboards-operativos): indicadores operativos con los datos de la empresa
+- [Automatización de procesos](https://kor-bytes.com/automatizacion-de-procesos): n8n, webhooks e IA
+- [Sistema de inventario y POS](https://kor-bytes.com/sistema-de-inventario-y-pos): stock, lotes, caja y reportes
+- [Aplicaciones móviles](https://kor-bytes.com/desarrollo-de-aplicaciones-moviles): iOS y Android con React Native
+- [Integración con WhatsApp Business](https://kor-bytes.com/integracion-whatsapp-business): mensajes automáticos, agendamiento y atención asistida
 - Integraciones y APIs: pagos (Wompi, MercadoPago), e-commerce (Shopify), sincronización de datos
 - Web, SEO y conversión: sitios rápidos en Astro/WordPress
 - Automatización: n8n, webhooks, Gemini

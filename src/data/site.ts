@@ -12,9 +12,9 @@ export const FOUNDER_TITLE = "Fundador y arquitecto de software";
 export const BUILD_DATE = new Date().toISOString();
 
 export const page = {
-  title: "KOR Bytes S.A.S. | Software operativo, productos PASS e infraestructura digital",
+  title: "Desarrollo de software a medida en Colombia | KOR Bytes S.A.S.",
   description:
-    "Casa de software en Sincelejo para productos verticales PASS, software a medida, integraciones, automatización, web SEO e infraestructura digital en Colombia y LATAM.",
+    "Casa de software en Sincelejo: software a medida, integraciones, automatización, landing pages y productos PASS para empresas de toda Colombia. Escríbenos y respondemos con una ruta clara.",
 };
 
 export interface NavAnchor {
@@ -297,6 +297,7 @@ export interface StructuredDataOptions {
   description?: string;
   faqs?: Array<{ question: string; answer: string }>;
   breadcrumb?: BreadcrumbItem[];
+  extraGraph?: Array<Record<string, unknown>>;
 }
 
 export function structuredData(canonical: string, opts: StructuredDataOptions = {}) {
@@ -471,6 +472,8 @@ export function structuredData(canonical: string, opts: StructuredDataOptions = 
       })),
     });
   }
+
+  if (opts.extraGraph) graph.push(...opts.extraGraph);
 
   return { "@context": "https://schema.org", "@graph": graph };
 }
