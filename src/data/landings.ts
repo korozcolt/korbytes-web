@@ -32,6 +32,14 @@ export interface Landing {
   related: string[];
 }
 
+export const budgetOptions = [
+  "Aún no lo sé",
+  "Menos de $3 millones",
+  "$3 a $10 millones",
+  "$10 a $30 millones",
+  "Más de $30 millones",
+];
+
 export const needOptions = [
   "Software a medida / sistema interno",
   "Landing page o página web",

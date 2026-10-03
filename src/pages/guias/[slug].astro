@@ -28,7 +28,7 @@ const extraGraph = [
     description: guide.description,
     inLanguage: "es-CO",
     datePublished: guide.published,
-    dateModified: guide.published,
+    dateModified: guide.updated ?? guide.published,
     mainEntityOfPage: url,
     author: { "@id": `${SITE}/#kristian-orozco` },
     publisher: { "@id": `${SITE}/#organization` },

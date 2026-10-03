@@ -1,6 +1,6 @@
 ---
 import { WHATSAPP_NUMBER, EMAIL } from "@/data/site";
-import { needOptions } from "@/data/landings";
+import { needOptions, budgetOptions } from "@/data/landings";
 
 interface Props {
   need?: string;
@@ -25,6 +25,12 @@ const { need = needOptions[0], source } = Astro.props;
     <span>¿Qué necesitas?</span>
     <select name="necesidad">
       {needOptions.map((o) => <option value={o} selected={o === need}>{o}</option>)}
+    </select>
+  </label>
+  <label>
+    <span>Presupuesto aproximado <em>(opcional)</em></span>
+    <select name="presupuesto">
+      {budgetOptions.map((o) => <option value={o}>{o}</option>)}
     </select>
   </label>
   <label>
@@ -54,11 +60,13 @@ const { need = needOptions[0], source } = Astro.props;
       }
       const empresa = String(data.get("empresa") ?? "").trim();
       const necesidad = String(data.get("necesidad") ?? "").trim();
+      const presupuesto = String(data.get("presupuesto") ?? "").trim();
       const detalle = String(data.get("detalle") ?? "").trim();
 
       const lines = [
         `Hola KOR Bytes, soy ${nombre}${empresa ? ` de ${empresa}` : ""}.`,
         `Necesito: ${necesidad}.`,
+        presupuesto && presupuesto !== "Aún no lo sé" ? `Presupuesto aprox.: ${presupuesto}.` : "",
         detalle ? `Contexto: ${detalle}` : "",
         `(Escribo desde ${location.pathname})`,
       ].filter(Boolean);
@@ -68,6 +76,7 @@ const { need = needOptions[0], source } = Astro.props;
           method: "form_whatsapp",
           lead_source: form.dataset.source ?? location.pathname,
           lead_need: necesidad,
+          lead_budget: presupuesto,
           transport_type: "beacon",
         });
       } catch {}

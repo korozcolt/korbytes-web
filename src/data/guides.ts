@@ -11,6 +11,7 @@ export interface Guide {
   h1: string;
   intro: string;
   published: string;
+  updated?: string;
   waMessage: string;
   need: string;
   sections: GuideSection[];
@@ -29,6 +30,7 @@ export const guides: Guide[] = [
     intro:
       "No existe un precio único, y desconfía de quien te lo da sin preguntarte nada. El costo de una página web depende de unas pocas variables que puedes definir tú antes de pedir cotizaciones. Esta guía te explica cuáles son para que compares propuestas con criterio.",
     published: "2026-10-03",
+    updated: "2026-10-04",
     waMessage: "Hola KOR Bytes, leí su guía de cuánto cuesta una página web y quiero una cotización.",
     need: "Landing page o página web",
     sections: [
@@ -68,6 +70,24 @@ export const guides: Guide[] = [
           "En KOR Bytes preferimos darte una propuesta cerrada después de una conversación corta, con alcance, plazo y precio por escrito. Así sabes exactamente qué recibes.",
         ],
       },
+      {
+        heading: "Rangos de referencia del mercado colombiano (2026)",
+        paragraphs: [
+          "Estos valores se recopilaron de publicaciones de agencias y freelancers colombianos en 2026. Son una referencia para orientarte, no una cotización: el precio final depende de tu caso.",
+        ],
+        list: [
+          "Landing page: entre $800.000 y $3.000.000 COP (hay opciones desde $500.000).",
+          "Página web corporativa: entre $1.500.000 y $8.000.000 COP.",
+          "Tienda en línea: entre $2.000.000 y $15.000.000 COP o más, según catálogo y pagos.",
+          "Dominio y hosting: entre $150.000 y $500.000 COP al año, según el plan.",
+        ],
+      },
+      {
+        heading: "Por qué los precios varían tanto",
+        paragraphs: [
+          "Casi todo el rango se explica por quién lo hace y qué incluye. Una plantilla armada por un freelancer, una agencia con diseño propio y un desarrollo a medida con integraciones no son el mismo producto aunque todos se llamen «página web». La ciudad pesa poco: las fuentes consultadas ven precios similares entre las principales ciudades, con Bogotá algo más cara.",
+        ],
+      },
     ],
     faqs: [
       { question: "¿Cuánto tarda en estar lista una página web?", answer: "Una landing estándar puede salir en pocos días si el contenido está listo. Un sitio con varias secciones o tienda toma más tiempo; el plazo exacto se acuerda en la propuesta." },
@@ -85,6 +105,7 @@ export const guides: Guide[] = [
     intro:
       "El costo de una app depende más de lo que hace que de cómo se ve. Dos apps con la misma pantalla de inicio pueden costar muy distinto si una necesita pagos, mapas, notificaciones y un panel de administración. Aquí te explicamos cómo se compone el precio y cómo no gastar de más.",
     published: "2026-10-03",
+    updated: "2026-10-04",
     waMessage: "Hola KOR Bytes, leí su guía de cuánto cuesta una app y quiero evaluar mi idea.",
     need: "Aplicación móvil",
     sections: [
@@ -124,6 +145,24 @@ export const guides: Guide[] = [
           "Nuevas funcionalidades según el uso real.",
         ],
       },
+      {
+        heading: "Rangos de referencia del mercado colombiano (2026)",
+        paragraphs: [
+          "Estos valores se recopilaron de publicaciones de agencias colombianas en 2026. Son una referencia para orientarte, no una cotización.",
+        ],
+        list: [
+          "App muy sencilla: desde $2.000.000 COP.",
+          "MVP móvil para iOS y Android: entre $15.000.000 y $30.000.000 COP según la mayoría de fuentes; algunas lo ubican entre $20.000.000 y $50.000.000.",
+          "Tiempo típico de un MVP: entre 4 y 8 semanas.",
+          "Integraciones extra (pagos, APIs de terceros): entre $2.000.000 y $8.000.000 COP según la complejidad.",
+        ],
+      },
+      {
+        heading: "Por qué los precios varían tanto",
+        paragraphs: [
+          "La diferencia viene sobre todo del alcance: una app con login y una pantalla no se parece a una con pagos, notificaciones, mapas y panel de administración. También pesa si la hace un freelancer, una agencia o un equipo con backend propio. La ciudad influye poco.",
+        ],
+      },
     ],
     faqs: [
       { question: "¿Cuánto tarda desarrollar una app?", answer: "Un MVP se mide en semanas o pocos meses según el alcance. Definimos el plazo exacto en la propuesta." },
@@ -141,6 +180,7 @@ export const guides: Guide[] = [
     intro:
       "El Excel funciona hasta que deja de funcionar. Cuando el stock no coincide con la estantería, vendes lo que no tienes o cerrar la caja toma horas, el costo de seguir con hojas de cálculo ya es mayor que el de un sistema. Esta guía te ayuda a decidir.",
     published: "2026-10-03",
+    updated: "2026-10-04",
     waMessage: "Hola KOR Bytes, leí su guía de inventario y quiero revisar mi caso.",
     need: "Inventario, POS o facturación",
     sections: [
@@ -178,6 +218,18 @@ export const guides: Guide[] = [
         heading: "Cómo migrar sin parar la operación",
         paragraphs: [
           "Se carga el inventario actual desde Excel, se prueba en paralelo unos días y recién entonces se apaga el archivo viejo. Así no pierdes ventas durante el cambio.",
+        ],
+      },
+      {
+        heading: "Rangos de referencia del mercado colombiano (2026)",
+        paragraphs: [
+          "Valores recopilados de publicaciones de proveedores colombianos en 2026. Son orientativos, no una cotización.",
+        ],
+        list: [
+          "Programa de inventario ya hecho (SaaS): desde unos $20.000 hasta $180.000 COP al mes, según usuarios y módulos. Ojo: si nómina, POS e inventario se cobran por separado, el costo real puede ser entre 30 % y 80 % mayor al del plan base.",
+          "Sistema a medida básico: entre $5.000.000 y $15.000.000 COP.",
+          "Sistema a medida mediano: entre $15.000.000 y $50.000.000 COP, con 2 a 5 meses de desarrollo.",
+          "Integración con un sistema externo: entre $2.000.000 y $8.000.000 COP adicionales.",
         ],
       },
     ],
