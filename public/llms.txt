@@ -18,6 +18,12 @@
 - Automatización: n8n, webhooks, Gemini
 - Infraestructura: VPS, Docker, Dokploy, CI/CD
 
+## Guías
+
+- [Cuánto cuesta una página web en Colombia](https://kor-bytes.com/guias/cuanto-cuesta-una-pagina-web)
+- [Cuánto cuesta desarrollar una app móvil](https://kor-bytes.com/guias/cuanto-cuesta-desarrollar-una-app)
+- [Sistema de inventario para tu negocio](https://kor-bytes.com/guias/sistema-de-inventario-para-negocio)
+
 ## Ecosistema de productos PASS
 
 Línea de productos SaaS verticales construida sobre módulos reutilizables:

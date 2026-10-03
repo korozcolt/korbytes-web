@@ -1,0 +1,103 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import LeadForm from "@/components/LeadForm.astro";
+import { guides } from "@/data/guides";
+import { getLanding } from "@/data/landings";
+import { SITE, whatsapp } from "@/data/site";
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+const { guide } = Astro.props;
+const path = `/guias/${guide.slug}`;
+const url = `${SITE}${path}`;
+const landing = getLanding(guide.landing);
+const breadcrumb = [
+  { name: "Inicio", url: `${SITE}/` },
+  { name: "Guías", url: `${SITE}/guias` },
+  { name: guide.h1, url },
+];
+const extraGraph = [
+  {
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: guide.h1,
+    description: guide.description,
+    inLanguage: "es-CO",
+    datePublished: guide.published,
+    dateModified: guide.published,
+    mainEntityOfPage: url,
+    author: { "@id": `${SITE}/#kristian-orozco` },
+    publisher: { "@id": `${SITE}/#organization` },
+  },
+];
+---
+
+<BaseLayout title={guide.title} description={guide.description} path={path} faqs={guide.faqs} breadcrumb={breadcrumb} extraGraph={extraGraph}>
+  <a class="kb-skip" href="#main-content">Saltar al contenido principal</a>
+  <header class="g-header">
+    <div class="kb-container g-header-inner">
+      <a href="/" class="g-brand" aria-label="KOR Bytes inicio">KOR Bytes<span>.</span></a>
+      <a class="kb-btn g-cta" href={whatsapp(guide.waMessage)} target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <article class="kb-container g-article">
+      <span class="kb-eyebrow">Guía · {guide.published}</span>
+      <h1>{guide.h1}</h1>
+      <p class="kb-lead">{guide.intro}</p>
+
+      {guide.sections.map((s) => (
+        <section>
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((p) => <p>{p}</p>)}
+          {s.list && <ul>{s.list.map((li) => <li>{li}</li>)}</ul>}
+        </section>
+      ))}
+
+      <section class="g-box">
+        <h2>¿Quieres una propuesta para tu caso?</h2>
+        <p>Cuéntanos qué necesitas y te respondemos por WhatsApp con un alcance claro. Responde el fundador.</p>
+        <LeadForm need={guide.need} source={path} />
+        {landing && <p class="g-more">Más sobre este servicio: <a href={`/${landing.slug}`}>{landing.label}</a></p>}
+      </section>
+
+      <section>
+        <h2>Preguntas frecuentes</h2>
+        {guide.faqs.map((f) => (
+          <details class="g-faq">
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))}
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+  <WhatsAppFab message={guide.waMessage} />
+</BaseLayout>
+
+<style>
+  .g-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 9, 15, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .g-header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .g-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }
+  .g-brand span { color: var(--kb-accent); }
+  .g-cta { font-size: .82rem; padding: .7rem 1rem; }
+  .g-article { max-width: 760px; padding-block: clamp(48px, 8vw, 110px); }
+  .g-article h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.08; margin: 1rem 0 1.2rem; }
+  .g-article h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); margin: 2.6rem 0 .8rem; }
+  .g-article p, .g-article li { color: var(--kb-text-muted); line-height: 1.75; font-size: 1.04rem; }
+  .g-article ul { padding-left: 1.2rem; display: grid; gap: .4rem; }
+  .g-box { margin-top: 3rem; padding: clamp(1.4rem, 4vw, 2.2rem); border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }
+  .g-box h2 { margin-top: 0; }
+  .g-more a { color: var(--kb-accent); }
+  .g-faq { border-bottom: 1px solid var(--kb-line); }
+  .g-faq summary { cursor: pointer; padding: 1.1rem 0; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; color: var(--kb-text-strong); }
+  .g-faq p { margin: 0 0 1.1rem; }
+  @media (max-width: 600px) { .g-cta { display: none; } }
+</style>
