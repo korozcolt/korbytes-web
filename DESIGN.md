@@ -1,336 +1,152 @@
 # Design System
 
+Actualizado 2026-10-11. Describe lo que está implementado en `src/`, no una intención. Los tokens viven en `src/styles/global.css`.
+
 ## Theme
 
-**Dark mode committed palette.** Physical scene: un decisor técnico revisando el sitio a las 10pm desde su oficina en Bogotá o Medellín, evaluando si esta empresa de Sincelejo realmente puede ejecutar su proyecto. La pantalla debe sentirse como una herramienta de precisión, no como un showcase decorativo. El fondo desaparece; el contenido flota con autoridad.
+**Dark mode único.** Escena física: un decisor técnico revisando el sitio a las 10pm desde su oficina en Bogotá o Medellín, evaluando si esta empresa de Sincelejo puede ejecutar su proyecto. La pantalla se siente como una herramienta de precisión; el fondo desaparece y el contenido flota con autoridad.
 
-### Color Strategy: Committed
+**Idea central visual:** la portada es un recorrido en video que avanza con el scroll, del caos operativo al sistema (ver *Portada: recorrido*). Todo el resto del sitio hereda su paleta: azul noche de fondo, **ámbar** como único acento de acción, **cobalto** y **cian** como apoyo técnico.
 
-Un color saturado (cobalt/indigo profundo) lleva el 40-60% de la superficie emocional. El ámbar actúa como acento de confianza y calidez LATAM sin caer en clichés tropicales. El cyan original se preserva como acento técnico para elementos interactivos. Tres acentos con roles claros, no decorativos.
-
-## Color Tokens (OKLCH)
+## Color tokens
 
 ```css
-:root {
-  color-scheme: dark;
+--kb-bg:           #05090f;   /* fondo de página */
+--kb-bg-raised:    #0a121c;   /* tarjetas, paneles */
+--kb-bg-floating:  #0c141f;   /* superficies elevadas */
 
-  /* ── Core surfaces ── */
-  --kb-bg:        oklch(0.08 0.006 260);      /* near-black with micro-indigo tint */
-  --kb-bg-raised: oklch(0.12 0.008 260);       /* elevated surface — cards, panels */
-  --kb-bg-floating: oklch(0.16 0.010 260);     /* highest elevation — modals, overlays */
+--kb-accent:       #f0a43a;   /* ámbar: CTA, enlaces, estados activos */
+--kb-accent-soft:  #f5bd6a;
+--kb-accent-muted: rgba(240,164,58,.14);
+--kb-cobalt:       #3b5bdb;   /* resplandores de fondo, superficies de marca */
+--kb-cobalt-deep:  #12245e;
+--kb-cyan:         #38d0ee;   /* apoyo técnico (uso puntual) */
 
-  /* ── Brand primary — cobalt/indigo ── */
-  --kb-brand:        oklch(0.36 0.140 260);    /* seed-210 — deep indigo, confident */
-  --kb-brand-soft:   oklch(0.44 0.120 260);    /* hover, active states */
-  --kb-brand-muted:  oklch(0.28 0.090 260);    /* backgrounds, large accent areas */
-  --kb-brand-glow:   oklch(0.52 0.160 265);    /* glow effects, focus rings */
+--kb-text:         #eef2f6;
+--kb-text-strong:  #f4f7fa;
+--kb-text-muted:   #8a97a8;
+--kb-text-soft:    #718296;
 
-  /* ── Accent 1 — Cyan técnico (interactive elements) ── */
-  --kb-cyan:         oklch(0.72 0.155 215);    /* buttons, links, interactive */
-  --kb-cyan-soft:    oklch(0.80 0.110 215);    /* hover */
-  --kb-cyan-muted:   oklch(0.55 0.080 215);    /* badges, chips */
-
-  /* ── Accent 2 — Amber (trust, warmth, status) ── */
-  --kb-amber:        oklch(0.68 0.145 85);     /* confidence markers, production badges */
-  --kb-amber-soft:   oklch(0.78 0.100 85);     /* hover */
-  --kb-amber-muted:  oklch(0.50 0.095 85);     /* subtle warmth, section accents */
-
-  /* ── Accent 3 — Emerald (growth, success, completion) ── */
-  --kb-emerald:      oklch(0.65 0.125 165);    /* success states, "listo" badges */
-  --kb-emerald-soft: oklch(0.72 0.090 165);    /* hover */
-  --kb-emerald-muted: oklch(0.48 0.070 165);   /* subtle success indicators */
-
-  /* ── Text ramp ── */
-  --kb-text:         oklch(0.92 0.004 260);    /* primary body — near-white, cool */
-  --kb-text-strong:  oklch(0.97 0.002 260);    /* headings, emphasis */
-  --kb-text-muted:   oklch(0.62 0.015 260);    /* secondary text — ≥4.5:1 vs bg-raised */
-  --kb-text-soft:    oklch(0.42 0.012 260);    /* tertiary, captions, footnotes */
-
-  /* ── Borders & lines ── */
-  --kb-line:         oklch(0.22 0.015 260);    /* subtle separators */
-  --kb-line-strong:  oklch(0.32 0.020 260);    /* visible borders */
-  --kb-line-brand:   oklch(0.42 0.080 260);    /* brand-tinted borders */
-  --kb-line-amber:   oklch(0.45 0.060 85);     /* warm separators */
-
-  /* ── Surfaces (glass/translucent — used sparingly) ── */
-  --kb-glass:        oklch(0.12 0.008 260 / 0.82);   /* nav, modals */
-  --kb-glass-heavy:  oklch(0.08 0.006 260 / 0.94);   /* heavy overlays */
-
-  /* ── Shadows ── */
-  --kb-shadow-sm:    0 2px 8px oklch(0 0 0 / 0.28);
-  --kb-shadow-md:    0 8px 30px oklch(0 0 0 / 0.38);
-  --kb-shadow-lg:    0 20px 60px oklch(0 0 0 / 0.48);
-  --kb-shadow-brand: 0 8px 32px oklch(0.36 0.14 260 / 0.28);     /* indigo glow */
-  --kb-shadow-amber: 0 8px 28px oklch(0.68 0.145 85 / 0.20);     /* amber glow */
-
-  /* ── Radii ── */
-  --kb-radius-sm:   10px;
-  --kb-radius-md:   16px;
-  --kb-radius-lg:   24px;
-  --kb-radius-full: 999px;
-
-  /* ── Motion ── */
-  --kb-ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);
-  --kb-ease-in:     cubic-bezier(0.4, 0.0, 1, 1);
-  --kb-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --kb-duration-fast: 180ms;
-  --kb-duration-normal: 280ms;
-  --kb-duration-slow: 500ms;
-}
+--kb-line:         rgba(255,255,255,.07);
+--kb-line-strong:  rgba(255,255,255,.16);
+--kb-line-accent:  rgba(240,164,58,.45);
 ```
 
-### Palette Roles Map
+Historia: hasta 2026-10-10 el acento era naranja `#ff5b2e`. Cambió a ámbar para casar con la gradación del video (cobalto + ámbar) y con el cobalto de la marca. No quedan usos del naranja.
 
-| Token | Role | Used In |
-|-------|------|---------|
-| `--kb-bg` | Page background | body, main sections |
-| `--kb-bg-raised` | Elevated surfaces | cards, panels, service cards |
-| `--kb-brand` | Primary identity | hero accent areas, section bands, brand moments |
-| `--kb-brand-glow` | Focus/interactive glow | focus rings, hover glows |
-| `--kb-cyan` | Interactive elements | buttons, links, chips, badges, focus indicators |
-| `--kb-amber` | Trust/confidence | production badges, stat highlights, CTA warmth |
-| `--kb-emerald` | Success/completion | success states, completion badges |
-| `--kb-text` | Body copy | primary content text |
-| `--kb-text-muted` | Secondary text | descriptions, metadata |
-| `--kb-line` | Subtle borders | card borders, separators |
+**Reglas de uso:** el ámbar es el único color de acción (botones primarios, estados, números de paso). Cobalto solo en fondos (`radial-gradient` suaves) y cian solo como detalle. Nunca tres acentos compitiendo en el mismo bloque.
 
 ## Typography
 
-### Strategy: 3 voices with role clarity
+| Voz | Familia | Uso |
+|---|---|---|
+| Display | Familjen Grotesk 500/600/700 | H1 a H3, números grandes, citas |
+| Cuerpo | Inter Tight 400/500/600 | Texto, navegación, botones |
+| Mono | JetBrains Mono 400/500/700 | Eyebrows, etiquetas, chips, metadatos, contadores |
 
-| Voice | Family | Role | Weight Range |
-|-------|--------|------|-------------|
-| **Display** | Space Grotesk | Headings H1–H3, hero text, large labels | 500, 700 |
-| **Body** | DM Sans | Body text, nav, UI labels, paragraphs | 400, 500, 700 |
-| **Mono** | JetBrains Mono | Badges, chips, code references, stats, technical metadata | 400, 500, 700 |
+Carga desde Google Fonts con `media="print"` y cambio a `all` en `load` (no bloquea el primer pintado).
 
-### Rationale
+Escala fluida: `h1 clamp(2.6rem,7.4vw,6.2rem)`, `h2 clamp(1.9rem,4vw,3.6rem)`, `h3 clamp(1.18rem,1.7vw,1.55rem)`. Titulares enormes de impacto (manifiesto, cita del fundador, cifras) usan `clamp` propio en su sección.
 
-- **Space Grotesk** se preserva (identidad existente) pero recalibrado. Tracking máximo -0.03em en display, -0.015em en H2/H3. La versión actual (-0.045em) comprime demasiado.
-- **DM Sans** reemplaza Manrope. Geométrica pero cálida, excelente legibilidad en dark mode, pairing comprobado con Space Grotesk. Google Fonts.
-- **JetBrains Mono** añade la tercera voz técnica. Para tags de estado, nombres de productos (PASS, NEXUS, SIGMA), chips tecnológicos, stats numéricas. Diferencia inmediata entre "marca" y "código".
+## Portada: recorrido (scroll-world)
 
-### Typographic Scale
+`src/components/Journey.astro` + `src/scripts/journey.js` + `src/data/journey.ts`.
 
-```css
-/* Fluid heading scale */
-h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); line-height: 0.92; letter-spacing: -0.03em; font-weight: 700; }
-h2 { font-size: clamp(2rem, 3.5vw, 3.8rem); line-height: 0.96; letter-spacing: -0.02em; font-weight: 700; }
-h3 { font-size: clamp(1.25rem, 1.8vw, 1.75rem); line-height: 1.1; letter-spacing: -0.015em; font-weight: 700; }
+- Un video fijo a pantalla completa avanza o retrocede con el scroll. 5 paradas unidas por 4 clips: **Inicio** (escritorio con papeles y hoja de cálculo) → **Operación** (líneas de luz que salen del portátil) → **Evidencia** (sala de control) → **PASS** (galería de verticales) → **Contacto** (escritorio al atardecer).
+- Cada parada es un `<article>` renderizado en servidor (SEO, lector de pantalla, sin JS). La h1 es la de la parada 0. Las anclas se derivan del nombre (`#recorrido-<slug>`), nunca se escriben a mano.
+- Los textos salen de `site.ts` (cifras y nombres de producto no se duplican).
+- Tarjeta de vidrio (`backdrop-filter`) en las paradas 1 a 4; la portada flota sin caja sobre una viñeta.
+- Sin JS: cada parada es una sección con su fotograma. Con `prefers-reduced-motion`: solo fotogramas fijos.
+- Al terminar, `.after-journey::before` funde la última escena con el fondo de la página.
 
-/* Body */
-body { font-size: 1rem; line-height: 1.6; font-weight: 400; }
-.lead { font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.65; max-width: 65ch; }
+### Cómo se produjo (para regenerar)
 
-/* Mono voice */
-.mono-label { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em; }
-```
+1. Stills: OpenRouter, modelo `openai/gpt-image-2.5-sunburst` por `/api/v1/images`, 1536×1024, recortados a 16:9. Cohesión: mismo preámbulo de estilo (fotorrealista, bajo en luz, sombras cobalto, acentos ámbar, sin texto).
+2. Clips: Monid, `kling` `/v1/video/kling-2.6-i2v`, 1080p, 5 s, sin audio, `first_frame` + `last_frame` con los stills vecinos. 0.35 USD por clip.
+3. Codificación: escritorio 1920×1080 `crf 25 -g 8` (~4 MB/clip); móvil 1280×720 `crf 27 -g 4` (~2.1 MB/clip). Fotogramas fijos `public/world/stop-N(-m).webp`, extraídos del propio video para que el paso imagen→video no se note.
+4. Caché `immutable` en `/video` y `/world`: si se regenera un clip, **cambiar el nombre del archivo**.
 
-### Font Loading
+### Política de rendimiento del video (no negociable)
 
-```html
-<!-- Self-hosted or Google Fonts with swap + preload -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-```
+El video no puede competir con la carga de la página.
 
-## Surface Architecture
+- Nada se descarga hasta el primer scroll o gesto. Solo escritorio con buena conexión empieza 2.5 s después de `load`.
+- Móvil y ahorro de datos: nunca precarga masiva; un clip a la vez y solo los cercanos al scroll. Escritorio: máximo dos en vuelo.
+- Los clips se descargan como `Blob` (siempre buscables aunque el host no sirva `Range`). Por eso el CSP necesita `media-src 'self' blob:` (en `server.mjs`).
+- Medido en móvil, Slow 4G, CPU 4× más lenta: LCP 978 ms, CLS 0.00, scrub p95 14 ms por frame.
+- La versión móvil es un recorte del 16:9 con encuadre horizontal propio por parada (`focus`). Una cadena 9:16 nativa es la mejora pendiente.
 
-Four distinct surface treatments — each section has its own "skin":
+## Surface architecture
 
-### 1. Ink Surface (Hero, brand statements)
+1. **Escena** (portada): el video. Texto sobre vidrio oscuro, sin fondos planos compitiendo.
+2. **Plana** (la mayoría de secciones): `--kb-bg`, con resplandores cobalto muy suaves (`radial-gradient`, nunca en el borde superior de una sección para no crear escalón visible).
+3. **Elevada** (tarjetas): `--kb-bg-raised`, borde `--kb-line`, esquinas 22px (`--kb-radius-lg`). Borde **o** sombra, no ambos con blur grande.
+4. **Banda con imagen** (PASS, cifras): un fotograma del recorrido a todo el ancho con parallax suave y degradado a `--kb-bg` arriba y abajo, para continuar la historia del video.
+5. **Drenched** (CTA final): fondo con resplandor cobalto y ámbar sobre `--kb-bg-raised`.
 
-```css
-.ink-surface {
-  background: var(--kb-bg);
-  /* Subtle brand radial gradient — not a grid, not stripes */
-  background-image: radial-gradient(ellipse 40rem 30rem at 20% 0%, oklch(0.36 0.140 260 / 0.18), transparent 60%);
-}
-```
+## Layout y composición por sección
 
-### 2. Raised Surface (Services, Features, FAQ)
+Cada sección tiene una forma propia (regla: nada de cuadrículas idénticas repetidas).
 
-```css
-.raised-surface {
-  background: var(--kb-bg-raised);
-  border: 1px solid var(--kb-line);
-  border-radius: var(--kb-radius-md);
-  box-shadow: var(--kb-shadow-sm);
-  /* No backdrop-filter. Solid depth via color + shadow. */
-}
-```
+| Sección | Forma |
+|---|---|
+| Manifiesto | Frase enorme cuyas palabras se iluminan con el scroll + 3 prácticas en fila |
+| Servicios | Cuadrícula de 3, con índice, etiqueta y chips por tarjeta |
+| PASS | Banda con parallax + cuadrícula asimétrica 4/2, 2/4, 3/3 |
+| Proyectos | Tarjetas que se apilan (`position: sticky`); la anterior se hunde (scale .94 y oscurece) al llegar la siguiente. En ≤980px: columna estática |
+| Sitios reales | Bento de 12 columnas con anchos 7/5, 4/4/4, 5/7, 6/6 |
+| Proceso | Título fijo a la izquierda y línea vertical que se llena con el scroll; cada paso se enciende al alcanzarlo |
+| Cifras | Banda sobre el fotograma de la sala de control, números con contador |
+| Fundador | Cita grande con revelado por palabra, y debajo nombre y texto |
+| FAQ | Título fijo a la izquierda, acordeón numerado con apertura animada |
 
-### 3. Warm Elevated Surface (Projects, Cases, Locations)
+Breakpoint principal: `980px` (todo a una columna, menú hamburguesa, sticky desactivado). `640px`: bento a una columna, relleno reducido.
 
-```css
-.warm-surface {
-  background: oklch(0.14 0.010 85); /* warm-tinted raised */
-  border: 1px solid var(--kb-line-amber);
-  border-radius: var(--kb-radius-md);
-  box-shadow: var(--kb-shadow-sm);
-}
-```
+## Components
 
-### 4. Drenched Surface (CTA final, footer)
+- **Header:** pastilla de vidrio flotante (`position: fixed`), se oscurece al hacer scroll. En móvil, botón circular y panel desplegable propio.
+- **Botón primario:** pastilla ámbar con texto `--kb-bg`. **Fantasma:** borde `--kb-line-strong`, hover ámbar.
+- **Chips:** mono 0.7rem, fondo blanco al 5%.
+- **WhatsApp flotante:** se oculta en móvil durante el recorrido para no tapar los CTA de las paradas.
+- **Riel de paradas** (escritorio) y **barra de progreso** superior del recorrido.
 
-```css
-.drenched-surface {
-  background: linear-gradient(135deg, oklch(0.16 0.060 260), oklch(0.10 0.030 85));
-  border: 1px solid var(--kb-line-brand);
-  border-radius: var(--kb-radius-lg);
-}
-```
+## Motion
 
-## Component Anatomy
+Narrativo, no decorativo. GSAP + ScrollTrigger (`src/scripts/animate.js`); todo dentro de `gsap.matchMedia()`.
 
-### Double-Bezel Cards (high-end-visual-design pattern)
+1. **Recorrido** de la portada (video atado al scroll).
+2. **Manifiesto y cita del fundador:** palabras que pasan de opacidad .14 a 1 con scrub.
+3. **Proyectos apilados** y **línea de proceso** con scrub.
+4. **Contadores** (`data-count`) al entrar, **parallax** en bandas (`data-parallax`), **reveal con stagger** en cuadrículas (`data-reveal-stagger`).
 
-```css
-/* Outer shell */
-.card-shell {
-  background: var(--kb-bg-raised);
-  border: 1px solid var(--kb-line);
-  border-radius: var(--kb-radius-lg);
-  padding: 2px; /* thin frame */
-}
-/* Inner core */
-.card-core {
-  background: linear-gradient(180deg, oklch(0.14 0.010 260 / 0.6), oklch(0.11 0.006 260 / 0.8));
-  border-radius: calc(var(--kb-radius-lg) - 2px);
-  padding: 1.5rem;
-  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.06);
-}
-```
+Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `prefers-reduced-motion: reduce`: no se divide ni anima ningún texto, los pasos del proceso quedan encendidos, el recorrido muestra solo fotogramas.
 
-### Buttons
+## Absolute bans
 
-```css
-/* Primary — pill, solid cyan, white text on fill */
-.btn-primary {
-  background: var(--kb-cyan);
-  color: var(--kb-bg); /* near-black text on saturated cyan */
-  border-radius: var(--kb-radius-full);
-  font-weight: 700;
-  padding: 0.85rem 1.4rem;
-  transition: transform var(--kb-duration-fast) var(--kb-ease-out);
-}
-.btn-primary:hover { transform: translateY(-1px); }
-.btn-primary:active { transform: scale(0.985); }
+1. Texto con degradado (`background-clip: text`).
+2. Glassmorphism como estilo por defecto: solo header, menú móvil y tarjetas del recorrido.
+3. Eyebrow en cada sección: máximo uno cada tres.
+4. Cuadrículas de tarjetas idénticas.
+5. Borde + sombra con blur ≥ 16px a la vez.
+6. `border-radius` de 32px o más en tarjetas.
+7. Fondos de cuadrícula decorativos o rayas repetidas.
+8. Bordes laterales de acento (`side-stripe`).
+9. Plantilla "métrica héroe" (número enorme + etiqueta + degradado).
+10. Tarjetas dentro de tarjetas.
+11. **Identificadores escritos a mano:** anclas, slugs e ids se derivan del nombre, nunca los teclea una persona.
+12. **Video que compita con la carga de la página** (ver política de rendimiento).
 
-/* Secondary — outline, transparent fill */
-.btn-secondary {
-  border: 1px solid var(--kb-line-strong);
-  color: var(--kb-text);
-  border-radius: var(--kb-radius-full);
-  background: transparent;
-  padding: 0.85rem 1.4rem;
-  font-weight: 600;
-  transition: border-color var(--kb-duration-fast) var(--kb-ease-out);
-}
-.btn-secondary:hover { border-color: var(--kb-cyan); }
-```
+## Implementation tech
 
-### Badges / Status Pills
+- **Framework:** Astro (SSR con adaptador Node, servidor propio `server.mjs` con caché, gzip y CSP).
+- **Estilos:** CSS vanilla con custom properties.
+- **Animación:** GSAP core + ScrollTrigger; motor propio `journey.js` para el video.
+- **Iconos:** Phosphor Icons.
+- **Imágenes:** capturas reales de clientes (WebP con `srcset`), mockups de proyectos y fotogramas del recorrido.
 
-```css
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.65rem;
-  border-radius: var(--kb-radius-full);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
+## Pendientes de diseño
 
-.badge-production { background: oklch(0.68 0.145 85 / 0.15); color: var(--kb-amber); border: 1px solid oklch(0.68 0.145 85 / 0.25); }
-.badge-development { background: oklch(0.36 0.140 260 / 0.15); color: var(--kb-brand-soft); border: 1px solid oklch(0.36 0.140 260 / 0.25); }
-.badge-concept { background: oklch(0.12 0.008 260 / 0.6); color: var(--kb-text-muted); border: 1px solid var(--kb-line); }
-.badge-success { background: oklch(0.65 0.125 165 / 0.15); color: var(--kb-emerald); border: 1px solid oklch(0.65 0.125 165 / 0.25); }
-```
-
-## Motion Design
-
-### Philosophy
-
-Motion here is **narrative, not decorative**. Three moments of emphasis across the entire page — not a scroll-fade on every section. Each animation communicates hierarchy, sequence, or feedback.
-
-### Moments
-
-1. **Hero Entrance** (page load, GSAP core)
-   - Eyebrow → stagger 0.08s → H1 → stagger 0.1s → lead → stagger 0.08s → CTAs → stagger 0.06s → stats
-   - Easing: `power3.out` for headings, `power2.out` for body
-   - Duration: 0.6-0.8s per element
-   - Reduced motion: all elements visible instantly
-
-2. **Project Cards Stack** (scroll, GSAP ScrollTrigger)
-   - Projects section: cards pin and stack (sticky-stack pattern)
-   - Each card scales to 0.94 and fades to 0.5 as next card arrives
-   - Reduced motion: static grid, no stacking
-
-3. **CTA Section Scale** (scroll entry, GSAP ScrollTrigger)
-   - CTA card scales from 0.96 to 1 with subtle opacity ramp
-   - Duration: 0.7s, ease: `power3.out`
-   - Reduced motion: static
-
-### Reduced Motion Protocol
-
-All animations gated behind:
-```javascript
-const mm = gsap.matchMedia();
-mm.add("(prefers-reduced-motion: no-preference)", () => {
-  // animations here
-});
-```
-
-Under `(prefers-reduced-motion: reduce)`, all elements render in final state instantly.
-
-## Layout Grids
-
-```css
-/* Container */
-.container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-
-/* Grids — all collapse to 1 column below 980px */
-.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
-.grid-bento { grid-template-columns: 2fr 1fr 1fr; gap: 1rem; }
-
-/* Hero grid: asymmetric 1.1fr / 0.9fr */
-.hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr); gap: 3rem; align-items: center; }
-```
-
-## Absolute Bans (from impeccable + frontend-design + design-taste-frontend)
-
-1. ❌ Gradient text (`background-clip: text`) — banned globally
-2. ❌ Glassmorphism as default — uso puntual solo en nav overlay
-3. ❌ Eyebrow above every section — máximo 1 cada 3 secciones
-4. ❌ Identical card grids — cada grid tiene variación visual
-5. ❌ `border: 1px solid X` + `box-shadow: 0 Npx Mpx` with M ≥ 16px — pick one
-6. ❌ `border-radius: 32px+` on cards — max 24px
-7. ❌ Decorative grid backgrounds (linear-gradient line grids)
-8. ❌ Side-stripe borders
-9. ❌ Space Mono as default — JetBrains Mono instead
-10. ❌ repeating-linear-gradient stripe backgrounds
-11. ❌ Hero metric template (big number + small label + gradient)
-12. ❌ Nested cards (cards inside cards)
-
-## Breakpoints
-
-| Breakpoint | Behavior |
-|-----------|----------|
-| `≤ 980px` | All grids → 1 column, nav links → hamburger, backdrop-filter disabled |
-| `≤ 640px` | Tighter container, smaller logo (150px), buttons full-width, reduced padding (72px) |
-
-## Implementation Tech
-
-- **Framework:** Astro (preserved — zero framework change)
-- **Styling:** CSS vanilla with custom properties (preserved — 826 lines refactored, not replaced)
-- **Animation:** GSAP core + ScrollTrigger (new dependency — added via npm)
-- **Fonts:** Google Fonts with preload + swap (updated families, same loading strategy)
-- **Icons:** Phosphor Icons (new dependency — replaces inline SVGs)
-- **Images:** Real screenshots + Unsplash placeholders where needed
+- Versión móvil nativa 9:16 del recorrido (hoy es recorte del 16:9).
+- Probar el scrub en un iPhone real (iOS Safari).
+- Imagen Open Graph nueva con la marca actual (hoy usa el logo).
+- Light mode: evaluado y descartado por ahora; el sitio es dark único.

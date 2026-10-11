@@ -77,6 +77,42 @@ mm.add("(prefers-reduced-motion: no-preference)", () => {
   });
 });
 
+// ── Proyectos apilados: la tarjeta anterior se hunde al llegar la siguiente (solo escritorio).
+mm.add("(prefers-reduced-motion: no-preference) and (min-width: 981px)", () => {
+  const cards = gsap.utils.toArray("[data-stack-card]");
+  cards.forEach((card, i) => {
+    const next = cards[i + 1];
+    if (!next) return;
+    gsap.to(card, {
+      scale: 0.94, "--dim": 0.6, ease: "none",
+      scrollTrigger: { trigger: next, start: "top 78%", end: "top 28%", scrub: true },
+    });
+  });
+});
+
+// ── Proceso: la línea se llena con el scroll y cada paso se enciende al alcanzarlo.
+mm.add("(prefers-reduced-motion: no-preference)", () => {
+  gsap.utils.toArray("[data-progress]").forEach((list) => {
+    const line = list.querySelector(".kb-proceso-line");
+    if (line) {
+      gsap.fromTo(line, { "--p": 0 }, {
+        "--p": 1, ease: "none",
+        scrollTrigger: { trigger: list, start: "top 65%", end: "bottom 65%", scrub: true },
+      });
+    }
+    list.querySelectorAll("[data-progress-step]").forEach((step) => {
+      ScrollTrigger.create({
+        trigger: step, start: "top 65%",
+        onEnter: () => step.classList.add("is-on"),
+        onLeaveBack: () => step.classList.remove("is-on"),
+      });
+    });
+  });
+});
+mm.add("(prefers-reduced-motion: reduce)", () => {
+  document.querySelectorAll("[data-progress-step]").forEach((el) => el.classList.add("is-on"));
+});
+
 // ── Marquee: duplicate the track once so the CSS keyframe (-50%) loops seamlessly.
 (function initMarquee() {
   document.querySelectorAll("[data-marquee-track]").forEach((track) => {
