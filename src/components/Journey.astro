@@ -1,0 +1,786 @@
+---
+/**
+ * Recorrido de la portada (scroll-world): un video fijo a pantalla completa que avanza
+ * o retrocede con el scroll, del caos operativo al sistema. Cada parada se renderiza en
+ * servidor como un <article> real (SEO, lector de pantalla, sin JS); el motor
+ * (src/scripts/journey.js) fija el video y reparte el texto según el scroll.
+ * Una sola h1 en toda la página: la de la parada 0.
+ */
+import { journey } from "@/data/journey";
+
+const stops = journey;
+const total = stops.length;
+
+// El ancla se deriva del nombre de la parada (nunca se escribe a mano).
+const slug = (text: string) =>
+  text
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+const anchor = (label: string) => `recorrido-${slug(label)}`;
+const pad = (n: number) => String(n).padStart(2, "0");
+
+const config = {
+  stops: stops.map((stop, i) => ({
+    still: `/world/stop-${i}.webp`,
+    stillM: `/world/stop-${i}-m.webp`,
+    focus: stop.focus,
+  })),
+  clips: Array.from({ length: total - 1 }, (_, i) => ({
+    src: `/video/journey/clip-${i + 1}.mp4`,
+    srcM: `/video/journey/clip-${i + 1}-m.mp4`,
+  })),
+  // Peso de scroll (en alturas de ventana) de cada parada y de cada clip.
+  holds: stops.map((_, i) => (i === 0 ? 1.15 : i === total - 1 ? 2.6 : 1.05)),
+  transit: 1.5,
+  crossfade: 0.07,
+};
+---
+
+<section id="top" class="journey" data-journey data-config={JSON.stringify(config)} aria-label="Recorrido: del caos operativo al sistema">
+  <noscript>
+    <style
+      set:html={stops
+        .map(
+          (stop, i) =>
+            `#${anchor(stop.label)}.stop{background:var(--kb-bg) url(/world/stop-${i}-m.webp) center/cover no-repeat}` +
+            `@media (min-width:861px){#${anchor(stop.label)}.stop{background-image:url(/world/stop-${i}.webp)}}`
+        )
+        .join("")}
+    />
+  </noscript>
+
+  <div class="journey-stage" data-journey-stage aria-hidden="true"></div>
+  <div class="journey-bar" aria-hidden="true"><span data-journey-bar></span></div>
+
+  <div class="journey-panels">
+    {
+      stops.map((stop, i) => {
+        const id = anchor(stop.label);
+        const Heading = i === 0 ? "h1" : "h2";
+        return (
+          <article
+            class:list={["stop", { "stop--first": i === 0, "stop--last": i === total - 1 }]}
+            id={id}
+            data-stop
+            data-side={stop.side}
+            data-valign={stop.valign}
+            aria-labelledby={`${id}-title`}
+          >
+            <p class="sr-only">{stop.scene}</p>
+            <div class="stop__card">
+              <p class="stop__meta">
+                <span class="stop__num">{pad(i + 1)}</span>
+                <span class="stop__of">/ {pad(total)}</span>
+                <span class="stop__label">{stop.label}</span>
+              </p>
+              <p class="stop__eyebrow">{stop.eyebrow}</p>
+              <Heading class="stop__title" id={`${id}-title`}>
+                {stop.title}
+              </Heading>
+              {stop.body && <p class="stop__body">{stop.body}</p>}
+
+              {stop.items && (
+                <ul class="stop__list">
+                  {stop.items.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
+
+              {stop.stats && (
+                <dl class="stop__stats">
+                  {stop.stats.map((s) => (
+                    <div>
+                      <dt>{s.k}</dt>
+                      <dd>{s.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              {stop.tags && (
+                <ul class="stop__tags">
+                  {stop.tags.map((tag) => <li>{tag}</li>)}
+                </ul>
+              )}
+
+              {stop.contact && (
+                <address class="stop__contact">
+                  <p><span>Correo</span><a href={`mailto:${stop.contact.email}`}>{stop.contact.email}</a></p>
+                  <p><span>Teléfono</span><a href={stop.contact.phoneHref}>{stop.contact.phone}</a></p>
+                  <p><span>Sede</span><b>{stop.contact.place}</b></p>
+                </address>
+              )}
+
+              {(stop.cta || stop.ctaSecondary) && (
+                <div class="stop__cta">
+                  {stop.cta && (
+                    <a
+                      class="j-btn j-btn--primary"
+                      href={stop.cta.url}
+                      {...(stop.cta.external ? { target: "_blank", rel: "noopener" } : {})}
+                    >
+                      {stop.cta.label}
+                    </a>
+                  )}
+                  {stop.ctaSecondary && (
+                    <a class="j-btn j-btn--ghost" href={stop.ctaSecondary.url}>{stop.ctaSecondary.label}</a>
+                  )}
+                </div>
+              )}
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  <nav class="journey-rail" aria-label="Paradas del recorrido">
+    {
+      stops.map((stop, i) => (
+        <button type="button" class:list={["rail-dot", { "is-active": i === 0 }]} data-stop-dot aria-label={`Ir a ${stop.label}`}>
+          <span class="rail-dot__label">{stop.label}</span>
+          <i></i>
+        </button>
+      ))
+    }
+  </nav>
+
+  <p class="journey-hint" data-journey-hint aria-hidden="true">
+    <span>Desliza para recorrer</span>
+    <i></i>
+  </p>
+
+  <div class="journey-track" data-journey-track aria-hidden="true"></div>
+</section>
+
+<script>
+  import { mountJourney } from "../scripts/journey.js";
+
+  const root = document.querySelector<HTMLElement>("[data-journey]");
+  if (root?.dataset.config) {
+    try {
+      mountJourney(root, JSON.parse(root.dataset.config));
+    } catch (error) {
+      console.error("No se pudo iniciar el recorrido", error);
+    }
+  }
+</script>
+
+<style is:global>
+  .journey {
+    --j-ink: var(--kb-text-strong);
+    --j-ink-soft: rgba(238, 242, 246, 0.78);
+    --j-accent: var(--kb-accent);
+    --j-deep: var(--kb-bg);
+    --j-glass: rgba(4, 8, 16, 0.58);
+    --j-line: rgba(255, 255, 255, 0.14);
+    --j-ease: cubic-bezier(0.32, 0.72, 0, 1);
+    position: relative;
+    color: var(--j-ink);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- escenario (video de fondo fijo) ---------- */
+  .journey-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: var(--j-deep);
+    overflow: hidden;
+  }
+  /* Viñeta: oscurece bordes y zona de texto sin tapar el centro de la escena. */
+  .journey-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 40;
+    background:
+      radial-gradient(ellipse 120% 90% at 50% 45%, transparent 40%, rgba(2, 5, 10, 0.55) 100%),
+      linear-gradient(90deg, rgba(2, 5, 10, 0.5) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .journey-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: opacity;
+  }
+  .journey-scene__still,
+  .journey-scene__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+  .journey-scene__still {
+    will-change: transform;
+    transform-origin: 50% 50%;
+  }
+  .journey-scene.has-clip .journey-scene__still {
+    opacity: 0;
+  }
+  .journey-scene__video {
+    z-index: 1;
+  }
+
+  .journey-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 120;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .journey-bar span {
+    display: block;
+    height: 100%;
+    background: var(--j-accent);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+  }
+
+  /* ---------- paradas ---------- */
+  .journey-panels {
+    position: relative;
+    z-index: 30;
+  }
+  .stop__card {
+    padding: 36px;
+    background: var(--j-glass);
+    border: 1px solid var(--j-line);
+    border-radius: var(--kb-radius-lg);
+    -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    backdrop-filter: blur(22px) saturate(1.2);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .stop__card {
+      background: rgba(4, 8, 16, 0.9);
+    }
+  }
+  /* La portada no lleva caja: el titular flota sobre la escena. */
+  .stop--first .stop__card {
+    padding: 0;
+    background: none;
+    border: 0;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .stop__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 20px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--j-ink-soft);
+  }
+  .stop__num {
+    font-size: 0.95rem;
+    color: var(--j-accent);
+  }
+  .stop__label {
+    margin-left: auto;
+  }
+  .stop--first .stop__meta {
+    display: none;
+  }
+
+  .stop__eyebrow {
+    margin: 0 0 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--j-accent);
+  }
+  .stop__title {
+    margin: 0;
+    font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--j-ink);
+    text-wrap: balance;
+  }
+  .stop--first .stop__title {
+    max-width: 19ch;
+    font-size: clamp(2.1rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    text-wrap: pretty;
+    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.6);
+  }
+  .stop__body {
+    margin: 16px 0 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--j-ink-soft);
+    text-wrap: pretty;
+  }
+  .stop--first .stop__body {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  .stop__list {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .stop__list li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    color: var(--j-ink);
+  }
+  .stop__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 12px;
+    height: 1px;
+    background: var(--j-accent);
+  }
+
+  .stop__stats {
+    display: flex;
+    gap: 36px;
+    margin: 24px 0 0;
+  }
+  .stop__stats dt {
+    font-size: clamp(2.2rem, 3.4vw, 3rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--j-ink);
+    font-family: "Familjen Grotesk", sans-serif;
+  }
+  .stop__stats dd {
+    margin: 6px 0 0;
+    font-size: 0.8rem;
+    color: var(--j-ink-soft);
+  }
+
+  .stop__tags {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .stop__tags li {
+    padding: 5px 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--j-ink);
+    border: 1px solid var(--j-line);
+    border-radius: var(--kb-radius-full);
+  }
+
+  .stop__contact {
+    font-style: normal;
+    margin: 24px 0 0;
+    display: grid;
+    gap: 10px;
+  }
+  .stop__contact p {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    font-size: 0.92rem;
+  }
+  .stop__contact span {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--j-accent);
+  }
+  .stop__contact a {
+    color: var(--j-ink);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+    transition: color 300ms var(--j-ease);
+  }
+  .stop__contact a:hover {
+    color: var(--j-accent);
+  }
+  .stop__contact b {
+    font-weight: 500;
+  }
+
+  .stop__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  /* ---------- botones ---------- */
+  .j-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 24px;
+    font-family: "Inter Tight", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--kb-radius-full);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      transform 400ms var(--j-ease),
+      background-color 300ms var(--j-ease),
+      color 300ms var(--j-ease),
+      border-color 300ms var(--j-ease);
+  }
+  .j-btn--primary {
+    background: var(--j-accent);
+    color: var(--kb-bg);
+  }
+  .j-btn--primary:hover {
+    background: var(--kb-text-strong);
+    color: var(--kb-bg);
+    transform: translateY(-1px);
+  }
+  .j-btn--ghost {
+    color: var(--j-ink);
+    border-color: var(--j-line);
+    background: rgba(4, 8, 16, 0.35);
+  }
+  .j-btn--ghost:hover {
+    color: var(--j-accent);
+    border-color: var(--j-accent);
+  }
+  .j-btn:active {
+    transform: scale(0.98);
+  }
+  .j-btn:focus-visible,
+  .rail-dot:focus-visible,
+  .stop__contact a:focus-visible {
+    outline: 2px solid var(--j-accent);
+    outline-offset: 3px;
+  }
+
+  /* ---------- riel de paradas ---------- */
+  .journey-rail {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    z-index: 45;
+    transform: translateY(-50%);
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .rail-dot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .rail-dot i {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(238, 242, 246, 0.4);
+    transition:
+      transform 500ms var(--j-ease),
+      background-color 500ms var(--j-ease),
+      box-shadow 500ms var(--j-ease);
+  }
+  .rail-dot:hover i {
+    background: var(--j-ink);
+    transform: scale(1.3);
+  }
+  .rail-dot.is-active i {
+    background: var(--j-accent);
+    transform: scale(1.5);
+    box-shadow: 0 0 0 5px rgba(240, 164, 58, 0.24);
+  }
+  .rail-dot__label {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translate3d(8px, -50%, 0);
+    white-space: nowrap;
+    padding: 4px 12px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--j-ink);
+    background: var(--j-glass);
+    border: 1px solid var(--j-line);
+    border-radius: 9999px;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 400ms var(--j-ease),
+      transform 400ms var(--j-ease);
+  }
+  .rail-dot:hover .rail-dot__label,
+  .rail-dot:focus-visible .rail-dot__label,
+  .rail-dot.is-active .rail-dot__label {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0);
+  }
+
+  /* ---------- pista de scroll ---------- */
+  .journey-hint {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 45;
+    margin: 0;
+    transform: translateX(-50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--j-ink);
+    pointer-events: none;
+  }
+  .journey-hint i {
+    position: relative;
+    width: 22px;
+    height: 34px;
+    border: 1px solid rgba(238, 242, 246, 0.5);
+    border-radius: 12px;
+  }
+  .journey-hint i::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    width: 3px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--j-accent);
+    transform: translateX(-50%);
+    animation: journey-wheel 1.9s var(--j-ease) infinite;
+  }
+  @keyframes journey-wheel {
+    0% {
+      opacity: 0;
+      top: 6px;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      top: 17px;
+    }
+  }
+
+  /* ---------- modo recorrido (con JS): todo fijo sobre el video ---------- */
+  .journey.is-ready .journey-panels {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+  .journey.is-ready .stop {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 max(48px, 6vw);
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+  .journey.is-ready .stop__card {
+    width: min(100%, 520px);
+    max-height: calc(100dvh - 176px);
+    overflow: hidden;
+    pointer-events: auto;
+  }
+  .journey.is-ready .stop--first .stop__card {
+    width: min(100%, 760px);
+    max-height: none;
+    overflow: visible;
+  }
+  .journey.is-ready .stop[data-side="right"] {
+    justify-content: flex-end;
+    padding-right: 96px;
+  }
+  .journey.is-ready .stop[data-valign="end"] {
+    align-items: flex-end;
+    padding-bottom: 56px;
+  }
+  .journey.is-ready .journey-hint,
+  .journey.is-ready .journey-rail {
+    display: flex;
+  }
+  .journey.is-past .journey-hint,
+  .journey.is-past .journey-rail {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .journey-track {
+    position: relative;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  /* Contenido posterior al recorrido: fondo propio que cubre el video fijo. */
+  .after-journey {
+    position: relative;
+    z-index: 50;
+    background: var(--kb-bg);
+  }
+  /* Puente: la última escena se funde con el fondo de la página en lugar de cortarse. */
+  .after-journey::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 60vh;
+    background: linear-gradient(to bottom, transparent, var(--kb-bg));
+    pointer-events: none;
+  }
+
+  /* ---------- sin JavaScript: cada parada es una sección con su fotograma ---------- */
+  .journey:not(.is-ready) .stop {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding: 96px 24px;
+    background: var(--kb-bg);
+  }
+  .journey:not(.is-ready) .stop__card {
+    width: min(100%, 520px);
+  }
+  .journey:not(.is-ready) .journey-stage,
+  .journey:not(.is-ready) .journey-bar {
+    display: none;
+  }
+
+  /* ---------- tablet y móvil ---------- */
+  @media (max-width: 860px) {
+    .journey.is-ready .stop,
+    .journey.is-ready .stop[data-side="right"] {
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding: 0 16px calc(24px + env(safe-area-inset-bottom));
+    }
+    .journey.is-ready .stop[data-valign="end"] {
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+    .journey.is-ready .stop__card,
+    .journey.is-ready .stop--first .stop__card {
+      width: 100%;
+      max-width: 560px;
+      max-height: calc(100dvh - 128px - env(safe-area-inset-bottom));
+      overflow-y: auto;
+      padding: 22px;
+      border-radius: var(--kb-radius-md);
+    }
+    .journey.is-ready .stop--first .stop__card {
+      padding: 0 4px;
+      overflow: visible;
+    }
+    .stop__meta {
+      margin-bottom: 14px;
+    }
+    .stop__title {
+      font-size: 1.6rem;
+    }
+    .stop--first .stop__title {
+      font-size: clamp(1.9rem, 8.4vw, 2.5rem);
+    }
+    .stop__body {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .stop__list {
+      margin-top: 14px;
+      gap: 8px;
+    }
+    .stop__list li {
+      font-size: 0.82rem;
+    }
+    .stop__stats {
+      margin-top: 16px;
+    }
+    .stop__tags {
+      margin-top: 14px;
+    }
+    .stop__cta {
+      margin-top: 20px;
+    }
+    .stop__cta .j-btn {
+      flex: 1 1 auto;
+    }
+    .journey.is-ready .journey-hint,
+    .journey.is-ready .journey-rail {
+      display: none;
+    }
+  }
+
+  @media (max-height: 760px) and (min-width: 861px) {
+    .stop__card {
+      padding: 28px;
+    }
+    .stop__list {
+      margin-top: 14px;
+      gap: 8px;
+    }
+  }
+
+  /* En móvil el botón flotante de WhatsApp taparía los CTA de las paradas: se oculta durante el recorrido. */
+  @media (max-width: 860px) {
+    html:has(.journey.is-ready:not(.is-past)) .kb-wa-fab {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: scale(0.8) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-hint i::after {
+      animation: none;
+    }
+  }
+</style>
