@@ -117,13 +117,30 @@ export function mountJourney(root, cfg) {
 	}
 
 	// ---- carga de clips (Blob: siempre buscable aunque el host no sirva byte ranges) ----
+	// Politica de rendimiento: el video nunca compite con la carga de la pagina.
+	//  - Nada se descarga hasta el primer scroll/gesto (o, en escritorio sin ahorro de datos,
+	//    hasta unos segundos despues de `load`).
+	//  - Movil o ahorro de datos: un clip a la vez y solo los cercanos al scroll, sin precarga masiva.
+	let engaged = false;
+	let idleOK = false;
+	let inflight = 0;
+	const maxInflight = () => (useLightClips() ? 1 : 2);
+	function engage() {
+		if (engaged) return;
+		engaged = true;
+		read();
+	}
 	function loadClip(s) {
 		if (reduce || s.kind !== "transit" || s.loading || !s.clip) return;
+		if (!engaged && !idleOK) return;
+		if (inflight >= maxInflight()) return;
 		s.loading = true;
+		inflight++;
 		const url = useLightClips() && s.clip.srcM ? s.clip.srcM : s.clip.src;
 		fetch(url)
 			.then((r) => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
 			.then((blob) => {
+				inflight = Math.max(0, inflight - 1);
 				const v = document.createElement("video");
 				v.className = "journey-scene__video";
 				v.muted = true;
@@ -151,20 +168,22 @@ export function mountJourney(root, cfg) {
 				s.hasClip = true;
 			})
 			.catch(() => {
+				inflight = Math.max(0, inflight - 1);
 				s.loading = false;
 			});
 	}
 
-	// Precarga secuencial en segundo plano (el primero ya, el resto en reposo).
+	// Precarga secuencial en reposo: solo escritorio con buena conexion.
 	function preloadInOrder() {
-		if (reduce || saveData) return;
+		if (reduce || useLightClips()) return;
 		const queue = segs.filter((s) => s.kind === "transit");
 		let k = 0;
 		const next = () => {
+			// Avanza solo cuando el clip actual ya esta cargado o en curso (nunca pierde un turno).
+			while (k < queue.length && (queue[k].loading || queue[k].hasClip)) k++;
 			if (k >= queue.length) return;
-			loadClip(queue[k++]);
-			const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
-			idle(next, { timeout: 4000 });
+			loadClip(queue[k]);
+			window.setTimeout(next, 1500);
 		};
 		next();
 	}
@@ -281,11 +300,15 @@ export function mountJourney(root, cfg) {
 	}
 	window.addEventListener("pointerdown", firstGesture, { once: true, passive: true });
 	window.addEventListener("touchstart", firstGesture, { once: true, passive: true });
+	window.addEventListener("pointerdown", engage, { once: true, passive: true });
+	window.addEventListener("wheel", engage, { once: true, passive: true });
+	window.addEventListener("keydown", engage, { once: true, passive: true });
 
 	// ---- eventos ----
 	window.addEventListener(
 		"scroll",
 		() => {
+			engage();
 			if (!ticking) {
 				ticking = true;
 				requestAnimationFrame(read);
@@ -329,8 +352,17 @@ export function mountJourney(root, cfg) {
 	root.classList.add("is-ready");
 	layout();
 	requestAnimationFrame(raf);
-	if (!reduce) loadClip(segs[1]); // el primer clip, de inmediato
-	window.setTimeout(preloadInOrder, 600);
+	// Escritorio con buena conexion: tras `load` y un respiro, el primer clip y luego el resto en reposo.
+	if (!reduce && !useLightClips()) {
+		const startIdle = () =>
+			window.setTimeout(() => {
+				idleOK = true;
+				loadClip(segs[1]);
+				preloadInOrder();
+			}, 2500);
+		if (document.readyState === "complete") startIdle();
+		else window.addEventListener("load", startIdle, { once: true });
+	}
 	const initial = stopFromHref(window.location.hash);
 	if (initial > 0) window.setTimeout(() => jumpTo(initial, true), 50);
 }
