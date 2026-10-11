@@ -136,7 +136,6 @@ function initials(name: string) {
       <div class="kb-container">
         <div class="kb-section-head">
           <div>
-            <span class="kb-eyebrow">Servicios</span>
             <h2>Capacidades comerciales</h2>
           </div>
           <p class="kb-body">Desde la web pública hasta el sistema que opera por dentro.</p>
@@ -157,7 +156,6 @@ function initials(name: string) {
 
     <section class="kb-section kb-section--soft" aria-label="Soluciones por necesidad">
       <div class="kb-container">
-        <span class="kb-eyebrow">Soluciones por necesidad</span>
         <h2 class="kb-solutions-title">¿Qué problema quieres resolver?</h2>
         <ul class="kb-solutions">
           {landings.map((l) => (
@@ -203,33 +201,31 @@ function initials(name: string) {
       </div>
     </section>
 
-    <section id="proyectos" class="kb-section">
+    <section id="proyectos" class="kb-section kb-projects">
       <div class="kb-container">
         <div class="kb-section-head">
-          <div>
-            <span class="kb-eyebrow">Proyectos</span>
-            <h2>Proyectos destacados</h2>
-          </div>
+          <h2>Proyectos destacados</h2>
           <a href="/portafolio" class="kb-more-link">Ver portafolio completo →</a>
         </div>
-        <div class="kb-grid kb-grid-3 kb-proj-grid" data-reveal-stagger>
-          {projects.map((pr) => (
-            <a href="#contacto" class="kb-proj-card">
-              <div class="kb-proj-media">
-                {pr.image ? (
-                  <img src={pr.image} alt={pr.name} width="2400" height="1350" loading="lazy" />
-                ) : (
-                  <div class="kb-proj-fallback"><span>{initials(pr.name)}</span></div>
-                )}
-                <span class="kb-proj-estado">{pr.estado}</span>
-              </div>
-              <div class="kb-proj-body">
+        <div class="kb-stack" data-stack>
+          {projects.map((pr, i) => (
+            <a href="#contacto" class="kb-stack-card" data-stack-card style={`--i:${i}`}>
+              <div class="kb-stack-info">
+                <span class="kb-mono kb-stack-n">{String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
                 <span class="kb-mono kb-text-soft">{pr.sector}</span>
                 <h3>{pr.name}</h3>
                 <p>{pr.desc}</p>
                 <div class="kb-chips">
                   {pr.tags.map((tg) => <span class="kb-chip">{tg}</span>)}
                 </div>
+                <span class="kb-stack-estado">{pr.estado}</span>
+              </div>
+              <div class="kb-stack-media">
+                {pr.image ? (
+                  <img src={pr.image} alt={pr.name} width="2400" height="1350" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="kb-proj-fallback"><span>{initials(pr.name)}</span></div>
+                )}
               </div>
             </a>
           ))}
@@ -244,9 +240,9 @@ function initials(name: string) {
             <span class="kb-eyebrow">Prueba, no promesa</span>
             <h2>Sitios reales, en producción</h2>
           </div>
-          <p class="kb-body">Captura tomada en vivo de cada sitio — el link de abajo lleva directo a producción, no a una demo.</p>
+          <p class="kb-body">Captura tomada en vivo de cada sitio. El enlace lleva directo a producción, no a una demo.</p>
         </div>
-        <div class="kb-grid kb-grid-3 kb-client-grid" data-reveal-stagger>
+        <div class="kb-client-bento" data-reveal-stagger>
           {clientSites.map((c) => (
             <a href={c.url} target="_blank" rel="noopener" class="kb-client-card">
               <div class="kb-client-frame">
@@ -257,7 +253,7 @@ function initials(name: string) {
                 <img
                   src={c.image}
                   srcset={`${c.image.replace(".webp", "-480.webp")} 480w, ${c.image} 960w`}
-                  sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1180px) 30vw, 360px"
+                  sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 1180px) 50vw, 600px"
                   width="960" height="600"
                   alt={`Captura en vivo de ${c.name}`}
                   loading="lazy"
@@ -276,26 +272,28 @@ function initials(name: string) {
     <section id="proceso" class="kb-section">
       <div class="kb-container kb-proceso-grid">
         <div class="kb-proceso-sticky">
-          <span class="kb-eyebrow">Cómo trabajamos</span>
           <h2>Del diagnóstico<br />a producción</h2>
           <p class="kb-body">Cuatro etapas con entregables claros y trazabilidad en cada paso.</p>
         </div>
-        <div class="kb-proceso-list">
+        <ol class="kb-proceso-list" data-progress>
+          <span class="kb-proceso-line" aria-hidden="true"><i></i></span>
           {pasos.map((st) => (
-            <div class="kb-proceso-row">
-              <span class="kb-mono kb-accent-text kb-proceso-n">Paso {st.n}</span>
-              <h3>{st.title}</h3>
-              <p>{st.desc}</p>
-            </div>
+            <li class="kb-proceso-row" data-progress-step>
+              <span class="kb-proceso-n" aria-hidden="true">{st.n}</span>
+              <div>
+                <h3><span class="sr-only">Paso {st.n}: </span>{st.title}</h3>
+                <p>{st.desc}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
 
-    <section class="kb-section kb-section--soft">
-      <div class="kb-container">
-        <span class="kb-eyebrow">En cifras</span>
-        <h2 class="kb-hechos-title">KOR Bytes en números</h2>
+    <section class="kb-section kb-facts" data-parallax aria-label="KOR Bytes en números">
+      <img src="/world/stop-2.webp" srcset="/world/stop-2-m.webp 960w, /world/stop-2.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" loading="lazy" decoding="async" />
+      <div class="kb-container kb-facts-inner">
+        <h2>KOR Bytes en números</h2>
         <div class="kb-hechos-grid" data-reveal-stagger>
           {hechos.map((h) => (
             <div class="kb-hecho">
@@ -307,18 +305,22 @@ function initials(name: string) {
       </div>
     </section>
 
-    <section id="fundador" class="kb-section">
-      <div class="kb-container kb-founder-grid">
-        <div>
-          <span class="kb-eyebrow">Quién construye esto</span>
-          <h2>{FOUNDER_NAME}</h2>
-        </div>
-        <div class="kb-founder-copy">
-          <p class="kb-lead">{FOUNDER_TITLE}: más de 10 años en Laravel y 5+ en React, diseñando APIs, integraciones y arquitecturas para operaciones reales.</p>
-          <p>Por ahora el equipo de KOR Bytes soy yo, apoyado en el camino por agentes de IA para moverme más rápido en diagnóstico, código y despliegue. Prefiero decirlo así de claro a inflar el tamaño del estudio — al final, quien responde y firma cada entrega soy yo.</p>
-          <div class="kb-founder-links">
-            <a href={GITHUB_FOUNDER_URL} target="_blank" rel="noopener">GitHub · korozcolt</a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
+    <section id="fundador" class="kb-section kb-founder">
+      <div class="kb-container">
+        <span class="kb-eyebrow">Quién construye esto</span>
+        <p class="kb-founder-quote" data-words>Quien responde y firma cada entrega soy yo.</p>
+        <div class="kb-founder-grid">
+          <div>
+            <h2>{FOUNDER_NAME}</h2>
+            <p class="kb-founder-role kb-mono">{FOUNDER_TITLE}</p>
+          </div>
+          <div class="kb-founder-copy">
+            <p class="kb-lead">Más de 10 años en Laravel y 5+ en React, diseñando APIs, integraciones y arquitecturas para operaciones reales.</p>
+            <p>Por ahora el equipo de KOR Bytes soy yo, apoyado en el camino por agentes de IA para moverme más rápido en diagnóstico, código y despliegue. Prefiero decirlo así de claro a inflar el tamaño del estudio.</p>
+            <div class="kb-founder-links">
+              <a href={GITHUB_FOUNDER_URL} target="_blank" rel="noopener">GitHub · korozcolt</a>
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener">LinkedIn</a>
+            </div>
           </div>
         </div>
       </div>
@@ -326,8 +328,7 @@ function initials(name: string) {
 
     <section id="preguntas" class="kb-section">
       <div class="kb-container kb-faq-grid">
-        <div>
-          <span class="kb-eyebrow">Preguntas frecuentes</span>
+        <div class="kb-faq-sticky">
           <h2>Software para<br />operaciones reales.</h2>
           <p class="kb-body">Respuestas directas para empresas de Sincelejo, Sucre, Colombia y LATAM que están evaluando un proyecto digital.</p>
         </div>
@@ -606,69 +607,117 @@ function initials(name: string) {
   .kb-pass-card p { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--kb-text-muted); }
   .kb-pass-estado { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--kb-line); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
 
-  /* ── Client sites (real proof) ─────────────────────────────── */
+  /* ── Proyectos: tarjetas que se apilan al hacer scroll ────── */
+  .kb-stack { display: grid; gap: 28px; }
+  .kb-stack-card {
+    position: sticky; top: calc(96px + var(--i, 0) * 18px);
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 0;
+    min-height: min(430px, 70vh);
+    border-radius: var(--kb-radius-lg); overflow: hidden;
+    background: var(--kb-bg-raised); border: 1px solid var(--kb-line-strong);
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.45);
+    transform-origin: 50% 0%; will-change: transform;
+    transition: border-color var(--kb-duration-slow);
+  }
+  .kb-stack-card::after { content: ""; position: absolute; inset: 0; z-index: 2; background: var(--kb-bg); opacity: var(--dim, 0); pointer-events: none; }
+  .kb-stack-card:hover { border-color: var(--kb-line-accent); }
+  .kb-stack-info { display: flex; flex-direction: column; gap: 14px; padding: clamp(26px, 3.4vw, 48px); }
+  .kb-stack-info h3 { font-size: clamp(1.7rem, 2.8vw, 2.5rem); }
+  .kb-stack-info p { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--kb-text-muted); }
+  .kb-stack-n { color: var(--kb-accent); }
+  .kb-stack-estado { margin-top: auto; padding-top: 14px; font-family: "JetBrains Mono", monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--kb-text-soft); }
+  .kb-stack-media { position: relative; background: var(--kb-bg-floating); overflow: hidden; }
+  .kb-stack-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left center; transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1); }
+  .kb-stack-card:hover .kb-stack-media img { transform: scale(1.04); }
+  .kb-proj-fallback { width: 100%; height: 100%; min-height: 240px; display: flex; align-items: center; justify-content: center; background: var(--kb-bg-floating); }
+  .kb-proj-fallback span { font-family: "Familjen Grotesk", sans-serif; font-size: 3rem; color: var(--kb-accent); }
+  @media (max-width: 980px) {
+    .kb-stack-card { position: static; grid-template-columns: 1fr; min-height: 0; }
+    .kb-stack-media { order: -1; aspect-ratio: 16 / 9; }
+  }
+
+  /* ── Sitios reales: bento asimétrico ───────────────────────── */
+  .kb-client-bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }
+  .kb-client-bento > :nth-child(9n + 1) { grid-column: span 7; }
+  .kb-client-bento > :nth-child(9n + 2) { grid-column: span 5; }
+  .kb-client-bento > :nth-child(9n + 3), .kb-client-bento > :nth-child(9n + 4), .kb-client-bento > :nth-child(9n + 5) { grid-column: span 4; }
+  .kb-client-bento > :nth-child(9n + 6) { grid-column: span 5; }
+  .kb-client-bento > :nth-child(9n + 7) { grid-column: span 7; }
+  .kb-client-bento > :nth-child(9n + 8), .kb-client-bento > :nth-child(9n + 9) { grid-column: span 6; }
   .kb-client-card { display: flex; flex-direction: column; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); overflow: hidden; transition: border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
   .kb-client-card:hover { border-color: var(--kb-line-accent); transform: translateY(-3px); }
-  .kb-client-frame { position: relative; }
+  .kb-client-frame { position: relative; display: flex; flex-direction: column; flex: 1; min-height: 220px; }
   .kb-client-chrome { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: var(--kb-bg-floating); border-bottom: 1px solid var(--kb-line); }
   .kb-client-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--kb-line-strong); }
   .kb-client-url-bar { margin-left: 8px; flex: 1; font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--kb-text-soft); background: var(--kb-bg); border: 1px solid var(--kb-line); border-radius: var(--kb-radius-full); padding: 3px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .kb-client-frame img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
+  .kb-client-frame img { display: block; width: 100%; flex: 1; min-height: 0; object-fit: cover; object-position: left top; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
   .kb-client-card:hover .kb-client-frame img { transform: scale(1.035); }
-  .kb-client-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 26px 26px; }
+  .kb-client-body { display: flex; flex-direction: column; gap: 8px; padding: 20px 24px 24px; }
   .kb-client-name { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 18px; color: var(--kb-text-strong); }
   .kb-client-body p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--kb-text-muted); }
+  @media (max-width: 980px) {
+    .kb-client-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kb-client-bento > * { grid-column: auto !important; }
+  }
+  @media (max-width: 640px) { .kb-client-bento { grid-template-columns: 1fr; } }
 
-  /* ── Project cards ─────────────────────────────────────────── */
-  .kb-proj-card { display: block; border-radius: var(--kb-radius-lg); overflow: hidden; background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
-  .kb-proj-card:hover { border-color: var(--kb-line-accent); }
-  .kb-proj-media { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--kb-bg-floating); }
-  .kb-proj-media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.78; transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1), opacity 0.4s; }
-  .kb-proj-card:hover .kb-proj-media img { transform: scale(1.05); opacity: 1; }
-  .kb-proj-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--kb-bg-floating), var(--kb-bg-raised)); }
-  .kb-proj-fallback span { font-family: "Familjen Grotesk", sans-serif; font-size: 2.2rem; color: var(--kb-accent); }
-  .kb-proj-estado { position: absolute; left: 16px; top: 14px; padding: 6px 13px; border-radius: var(--kb-radius-full); background: rgba(5,9,15,0.78); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-accent); }
-  .kb-proj-body { padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 12px; }
-  .kb-proj-body p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
-
-  /* ── Proceso ───────────────────────────────────────────────── */
+  /* ── Proceso: línea de progreso ────────────────────────────── */
   .kb-proceso-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px; align-items: start; }
-  .kb-proceso-sticky { position: sticky; top: 110px; }
-  .kb-proceso-list { border-top: 1px solid var(--kb-line); }
-  .kb-proceso-row { padding: 34px 6px; border-bottom: 1px solid var(--kb-line); }
-  .kb-proceso-n { display: block; margin-bottom: 8px; }
-  .kb-proceso-row h3 { margin-bottom: 6px; }
-  .kb-proceso-row p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
+  @media (min-width: 981px) { .kb-proceso-sticky, .kb-faq-sticky { position: sticky; top: 110px; } }
+  .kb-proceso-sticky .kb-body { margin-top: 1.2rem; }
+  .kb-proceso-list { position: relative; list-style: none; margin: 0; padding: 0 0 0 60px; }
+  .kb-proceso-line { position: absolute; left: 19px; top: 8px; bottom: 8px; width: 2px; background: var(--kb-line-strong); overflow: hidden; border-radius: 2px; }
+  .kb-proceso-line i { display: block; width: 100%; height: 100%; background: var(--kb-accent); transform-origin: 50% 0; transform: scaleY(var(--p, 1)); }
+  .kb-proceso-row { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 0 22px; padding: 0 0 56px; }
+  .kb-proceso-row:last-child { padding-bottom: 0; }
+  .kb-proceso-n { position: absolute; left: -60px; top: -4px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--kb-bg); border: 2px solid var(--kb-line-strong); font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--kb-text-soft); transition: border-color var(--kb-duration-slow), color var(--kb-duration-slow), background var(--kb-duration-slow); grid-row: 1; }
+  .kb-proceso-row.is-on .kb-proceso-n { border-color: var(--kb-accent); color: var(--kb-bg); background: var(--kb-accent); }
+  .kb-proceso-row > div { grid-column: 1 / -1; }
+  .kb-proceso-row h3 { margin-bottom: 8px; }
+  .kb-proceso-row p { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--kb-text-muted); max-width: 52ch; }
 
-  /* ── Hechos ────────────────────────────────────────────────── */
-  .kb-hechos-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); }
-  .kb-hecho { padding: 8px 32px; border-left: 1px solid var(--kb-line); }
+  /* ── Cifras: banda sobre el fotograma de la sala de control ── */
+  .kb-facts { position: relative; overflow: hidden; padding-block: clamp(96px, 12vw, 170px); background: var(--kb-bg); }
+  .kb-facts > img { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; will-change: transform; }
+  .kb-facts::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg), rgba(5, 9, 15, 0.72) 25%, rgba(5, 9, 15, 0.72) 75%, var(--kb-bg)); }
+  .kb-facts-inner { position: relative; z-index: 1; }
+  .kb-hechos-grid { margin-top: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kb-hecho { padding: 8px 32px; border-left: 1px solid var(--kb-line-strong); }
   .kb-hecho:first-child { padding-left: 0; border-left: none; }
-  .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -0.02em; color: var(--kb-text-strong); margin-bottom: 14px; }
-  .kb-hecho-v { font-size: 14px; line-height: 1.5; color: var(--kb-text-muted); max-width: 22ch; }
+  .kb-hecho-k { font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.2rem, 4.8vw, 4.2rem); line-height: 1; letter-spacing: -0.03em; color: var(--kb-text-strong); margin-bottom: 14px; overflow-wrap: anywhere; }
+  .kb-hecho-v { font-size: 14px; line-height: 1.5; color: var(--kb-text); max-width: 22ch; }
   @media (max-width: 880px) {
     .kb-hechos-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
-    .kb-hecho:nth-child(2n) { border-left: 1px solid var(--kb-line); padding-left: 24px; }
+    .kb-hecho:nth-child(2n) { border-left: 1px solid var(--kb-line-strong); padding-left: 24px; }
     .kb-hecho:nth-child(2n+1) { border-left: none; padding-left: 0; }
   }
 
-  /* ── Fundador ──────────────────────────────────────────────── */
-  .kb-founder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }
+  /* ── Fundador: cita grande ─────────────────────────────────── */
+  .kb-founder-quote { margin: 0; max-width: 20ch; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.2rem, 6vw, 5.2rem); line-height: 1.02; letter-spacing: -0.03em; color: var(--kb-text-strong); text-wrap: balance; }
+  .kb-founder-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px 64px; align-items: start; margin-top: clamp(48px, 7vw, 96px); padding-top: 36px; border-top: 1px solid var(--kb-line); }
+  .kb-founder-role { margin: 10px 0 0; color: var(--kb-accent); }
   .kb-founder-copy p { color: var(--kb-text-muted); line-height: 1.72; font-size: 1.02rem; margin: 0 0 1rem; }
-  .kb-founder-copy .kb-lead { color: var(--kb-text); }
+  .kb-founder-copy .kb-lead { color: var(--kb-text); margin-top: 0; }
   .kb-founder-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 1.4rem; }
   .kb-founder-links a { color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 0.88rem; }
 
-  /* ── FAQ / local search answers ───────────────────────────── */
+  /* ── FAQ ───────────────────────────────────────────────────── */
   .kb-faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: start; }
-  .kb-faq-grid .kb-body { margin-top: 1.2rem; }
-  .kb-faq-list { border-top: 1px solid var(--kb-line); }
-  .kb-faq-item { border-bottom: 1px solid var(--kb-line); }
-  .kb-faq-item summary { cursor: pointer; list-style: none; padding: 22px 34px 22px 0; position: relative; font-family: "Familjen Grotesk", sans-serif; font-size: 1.12rem; font-weight: 600; line-height: 1.3; color: var(--kb-text-strong); }
+  .kb-faq-sticky .kb-body { margin-top: 1.2rem; }
+  .kb-faq-list { border-top: 1px solid var(--kb-line); counter-reset: faq; }
+  .kb-faq-item { border-bottom: 1px solid var(--kb-line); counter-increment: faq; }
+  .kb-faq-item summary { cursor: pointer; list-style: none; padding: 24px 40px 24px 44px; position: relative; font-family: "Familjen Grotesk", sans-serif; font-size: 1.12rem; font-weight: 600; line-height: 1.3; color: var(--kb-text-strong); transition: color var(--kb-duration-fast); }
+  .kb-faq-item summary:hover { color: var(--kb-accent); }
   .kb-faq-item summary::-webkit-details-marker { display: none; }
-  .kb-faq-item summary::after { content: "+"; position: absolute; right: 2px; top: 18px; color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 1.35rem; }
-  .kb-faq-item[open] summary::after { content: "−"; }
-  .kb-faq-item p { margin: 0; padding: 0 34px 22px 0; color: var(--kb-text-muted); font-size: 0.96rem; line-height: 1.65; }
+  .kb-faq-item summary::before { content: counter(faq, decimal-leading-zero); position: absolute; left: 0; top: 27px; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; font-weight: 500; color: var(--kb-text-soft); }
+  .kb-faq-item summary::after { content: "+"; position: absolute; right: 4px; top: 20px; color: var(--kb-accent); font-family: "JetBrains Mono", monospace; font-size: 1.4rem; transition: transform var(--kb-duration-normal) var(--kb-ease-out); }
+  .kb-faq-item[open] summary::after { transform: rotate(45deg); }
+  .kb-faq-item p { margin: 0; padding: 0 40px 26px 44px; color: var(--kb-text-muted); font-size: 0.97rem; line-height: 1.7; }
+  .kb-faq-item:focus-within { border-color: var(--kb-line-strong); }
+  @supports (interpolate-size: allow-keywords) {
+    .kb-faq-item::details-content { height: 0; overflow: clip; transition: height var(--kb-duration-slow) var(--kb-ease-out), content-visibility var(--kb-duration-slow) allow-discrete; }
+    .kb-faq-item[open]::details-content { height: auto; }
+  }
 
   /* ── Contact CTA ───────────────────────────────────────────── */
   .kb-cta { border-radius: var(--kb-radius-lg); background: radial-gradient(ellipse 40rem 26rem at 85% 0%, rgba(59, 91, 219, 0.28), transparent 65%), radial-gradient(ellipse 30rem 20rem at 0% 100%, rgba(240, 164, 58, 0.12), transparent 65%), var(--kb-bg-raised); border: 1px solid var(--kb-line-strong); padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
