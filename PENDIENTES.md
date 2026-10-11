@@ -1,5 +1,18 @@
 # KOR Bytes - Tareas Pendientes
 
+## Portada: recorrido en video (2026-10-11)
+
+Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Pendientes abiertos:
+
+- [ ] Rotar la clave de OpenRouter (quedó escrita en una conversación).
+- [ ] Probar el scrub en un iPhone real (iOS Safari).
+- [ ] Verificar en `kor-bytes.com` tras el deploy que el video avance con el scroll (CSP `media-src blob:`).
+- [ ] Cadena 9:16 nativa para móvil (~1.40 USD; quedan 3.20 en Monid). Hoy es un recorte del 16:9.
+- [ ] Imagen Open Graph nueva con la marca actual.
+- [ ] Decidir si los 47 MB de video van en git o en un CDN/bucket.
+- [ ] Resolver `astro check` (se cae por un fallo del runtime de Node).
+- [ ] Lighthouse completo sobre la página final.
+
 ## Prioridad Alta
 
 ### NIT Empresarial
