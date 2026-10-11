@@ -29,6 +29,54 @@ mm.add("(prefers-reduced-motion: no-preference)", () => {
   });
 });
 
+// ── Palabras que se iluminan con el scroll + contadores. Con reduced-motion
+//    el texto queda completo y visible (nada se divide ni se anima).
+mm.add("(prefers-reduced-motion: no-preference)", () => {
+  gsap.utils.toArray("[data-words]").forEach((el) => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.setAttribute("aria-label", words.join(" "));
+    el.textContent = "";
+    const spans = words.map((w, i) => {
+      const span = document.createElement("span");
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = w;
+      el.appendChild(span);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
+      return span;
+    });
+    gsap.fromTo(spans, { opacity: 0.14 }, {
+      opacity: 1, ease: "none", stagger: 0.12,
+      scrollTrigger: { trigger: el, start: "top 82%", end: "bottom 48%", scrub: true },
+    });
+  });
+
+  gsap.utils.toArray("[data-count]").forEach((el) => {
+    const target = Number(el.dataset.count);
+    if (!Number.isFinite(target)) return;
+    const state = { n: 0 };
+    el.textContent = "0";
+    ScrollTrigger.create({
+      trigger: el, start: "top 90%", once: true,
+      onEnter: () => gsap.to(state, {
+        n: target, duration: 1.2, ease: "power3.out",
+        onUpdate: () => { el.textContent = String(Math.round(state.n)); },
+      }),
+    });
+  });
+});
+
+// ── Parallax suave en imágenes de banda ([data-parallax] > img).
+mm.add("(prefers-reduced-motion: no-preference)", () => {
+  gsap.utils.toArray("[data-parallax]").forEach((el) => {
+    const img = el.querySelector("img");
+    if (!img) return;
+    gsap.fromTo(img, { yPercent: -7 }, {
+      yPercent: 7, ease: "none",
+      scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+    });
+  });
+});
+
 // ── Marquee: duplicate the track once so the CSS keyframe (-50%) loops seamlessly.
 (function initMarquee() {
   document.querySelectorAll("[data-marquee-track]").forEach((track) => {
@@ -123,7 +171,7 @@ function initHeroParticles() {
   if (!canvas || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
 
   const ctx = canvas.getContext("2d");
-  const accent = "255, 91, 46";
+  const accent = "240, 164, 58";
   let width, height, dpr, points, raf, running = true;
 
   function resize() {

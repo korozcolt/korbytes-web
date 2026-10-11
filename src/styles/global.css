@@ -7,10 +7,13 @@
   --kb-bg-floating:  #0c141f;
   --kb-bg-ink:       #05090f;
 
-  /* ── Accent — single confident orange, no decorative multi-accent ── */
-  --kb-accent:       #ff5b2e;
-  --kb-accent-soft:  #ff7c53;
-  --kb-accent-muted: rgba(255, 91, 46, 0.14);
+  /* ── Accent — ámbar (confianza, calidez) + cobalto y cian como apoyo técnico ── */
+  --kb-accent:       #f0a43a;
+  --kb-accent-soft:  #f5bd6a;
+  --kb-accent-muted: rgba(240, 164, 58, 0.14);
+  --kb-cobalt:       #3b5bdb;
+  --kb-cobalt-deep:  #12245e;
+  --kb-cyan:         #38d0ee;
 
   /* ── Text ramp ──────────────────────────────────────────────── */
   --kb-text:         #eef2f6;
@@ -21,7 +24,7 @@
   /* ── Borders & lines ───────────────────────────────────────── */
   --kb-line:         rgba(255, 255, 255, 0.07);
   --kb-line-strong:  rgba(255, 255, 255, 0.16);
-  --kb-line-accent:  rgba(255, 91, 46, 0.45);
+  --kb-line-accent:  rgba(240, 164, 58, 0.45);
 
   /* ── Glass / translucent (ponctuelles) ─────────────────────── */
   --kb-glass:        rgba(5, 9, 15, 0.82);

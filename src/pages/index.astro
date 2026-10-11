@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
+import Journey from "@/components/Journey.astro";
 import { landings } from "@/data/landings";
 import {
   navAnchors,
@@ -97,44 +98,23 @@ function initials(name: string) {
   </header>
 
   <main id="main-content">
-    <section id="top" class="kb-hero">
-      <canvas id="hero-particles" class="kb-hero-canvas" aria-hidden="true"></canvas>
+    <Journey />
 
-      <div id="hero-sentinel" class="kb-container">
-        <div class="kb-hero-grid">
-          <div class="kb-hero-main">
-            <span class="kb-eyebrow kb-eyebrow--dot">Software operativo · Sincelejo, Sucre</span>
-            <h1>
-              KOR Bytes es una casa de software en Sincelejo. Construimos productos verticales y sistemas que <span class="kb-accent-text">sí aguantan</span> la operación.
-            </h1>
-            <p class="kb-hero-sub">Sincelejo, Sucre · Colombia — LATAM · Remoto-first · B2B</p>
-          </div>
-
-          <div class="kb-hero-signal" aria-hidden="true">
-            <span class="kb-signal-badge">30 proyectos reales entregados</span>
-            <div class="kb-signal-card">
-              <div class="kb-signal-card-head">
-                <span class="kb-signal-dot"></span> WhatsApp
-              </div>
-              <p class="kb-signal-bubble">"Hola KOR Bytes, quiero un diagnóstico para mi proyecto."</p>
-              <span class="kb-signal-meta">Así llega un lead — responde el fundador, no un bot</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="kb-hero-bottom">
-          <span class="kb-text-soft">© 2026 KOR Bytes S.A.S.</span>
-          <div class="kb-hero-pills">
-            <a href="#servicios" class="kb-pill">Software a medida</a>
-            <a href="#pass" class="kb-pill">Productos PASS</a>
-            <a href="#servicios" class="kb-pill">Integraciones &amp; APIs</a>
-          </div>
-          <div class="kb-hero-contact-links">
-            <a href={whatsapp("Hola KOR Bytes, quiero un diagnóstico para mi proyecto.")} target="_blank" rel="noopener">WhatsApp</a>
-            <a href={`mailto:${EMAIL}`}>Correo</a>
-            <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener">Instagram</a>
-          </div>
+    <div class="after-journey">
+    <section class="kb-section kb-manifesto" aria-label="Qué hacemos">
+      <div class="kb-container">
+        <span class="kb-eyebrow kb-eyebrow--dot">KOR Bytes como empresa madre</span>
+        <p class="kb-manifesto-text" data-words>No hacemos software. Ordenamos operaciones. PASS convierte patrones repetidos en verticales con módulos reutilizables, y cada proyecto a medida parte de ese mismo núcleo.</p>
+        <div class="kb-manifesto-foot">
+          <ol class="kb-practica-list">
+            {practica.map((row) => (
+              <li class="kb-practica-row">
+                <span class="kb-accent-text kb-mono">{row.n}</span>
+                <span>{row.text}</span>
+              </li>
+            ))}
+          </ol>
+          <a href="#pass" class="kb-btn">Explorar ecosistema PASS →</a>
         </div>
       </div>
     </section>
@@ -152,25 +132,6 @@ function initials(name: string) {
       </div>
     </div>
 
-    <section class="kb-section kb-transition">
-      <div class="kb-container kb-transition-grid">
-        <div>
-          <span class="kb-eyebrow kb-eyebrow--dot">KOR Bytes como empresa madre</span>
-          <h2>De servicios<br />a <span class="kb-accent-text">productos.</span></h2>
-          <p class="kb-lead">La nueva narrativa no abandona el software a medida: lo ordena dentro de una casa de producto. PASS convierte patrones repetidos en verticales con módulos reutilizables.</p>
-          <a href="#pass" class="kb-btn">Explorar ecosistema PASS →</a>
-        </div>
-        <div class="kb-practica-list">
-          {practica.map((row) => (
-            <div class="kb-practica-row">
-              <span class="kb-accent-text kb-mono">{row.n}</span>
-              <span>{row.text}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <section id="servicios" class="kb-section">
       <div class="kb-container">
         <div class="kb-section-head">
@@ -183,9 +144,10 @@ function initials(name: string) {
         <div class="kb-grid kb-grid-3 kb-svc-grid" data-reveal-stagger>
           {services.map((s, index) => (
             <a href={serviceLinks[index] ?? "#contacto"} class="kb-svc-card">
-              <span class="kb-mono kb-accent-text">{s.tag}</span>
+              <span class="kb-svc-top"><span class="kb-svc-n kb-mono">{String(index + 1).padStart(2, "0")}</span><span class="kb-mono kb-accent-text">{s.tag}</span></span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              <span class="kb-chips">{s.chips.map((c) => <span class="kb-chip">{c}</span>)}</span>
               <span class="kb-svc-more">Ver detalle →</span>
             </a>
           ))}
@@ -214,16 +176,16 @@ function initials(name: string) {
       </div>
     </div>
 
-    <section id="pass" class="kb-section">
-      <div class="kb-container">
-        <div class="kb-section-head">
-          <div>
-            <span class="kb-eyebrow">PASS</span>
-            <h2>Ecosistema PASS destacado</h2>
-          </div>
+    <section id="pass" class="kb-section kb-pass">
+      <div class="kb-pass-banner" data-parallax>
+        <img src="/world/stop-3.webp" srcset="/world/stop-3-m.webp 960w, /world/stop-3.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" loading="lazy" decoding="async" />
+        <div class="kb-container kb-pass-banner-copy">
+          <h2>Ecosistema PASS</h2>
           <p class="kb-body">Productos verticales publicados con su estado real, sin prometer madurez que todavía no existe.</p>
         </div>
-        <div class="kb-grid kb-grid-3 kb-pass-grid" data-reveal-stagger>
+      </div>
+      <div class="kb-container">
+        <div class="kb-grid kb-pass-grid" data-reveal-stagger>
           {passProducts.map((p) => (
             <div class="kb-pass-card">
               <div class="kb-pass-card-top">
@@ -337,7 +299,7 @@ function initials(name: string) {
         <div class="kb-hechos-grid" data-reveal-stagger>
           {hechos.map((h) => (
             <div class="kb-hecho">
-              <div class="kb-hecho-k">{h.k}</div>
+              <div class="kb-hecho-k" data-count={/^\d+$/.test(h.k) ? h.k : undefined}>{h.k}</div>
               <div class="kb-hecho-v">{h.v}</div>
             </div>
           ))}
@@ -401,6 +363,7 @@ function initials(name: string) {
         </div>
       </div>
     </section>
+    </div>
   </main>
 
   <Footer />
@@ -522,14 +485,20 @@ function initials(name: string) {
 
   /* ── Header ────────────────────────────────────────────────── */
   .kb-header {
-    position: sticky; top: 0; z-index: 90;
-    background: rgba(5, 9, 15, 0.82);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--kb-line);
+    position: fixed; top: 14px; left: 50%; z-index: 90;
+    width: min(1120px, calc(100% - 28px));
+    transform: translateX(-50%);
+    background: rgba(5, 9, 15, 0.55);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    backdrop-filter: blur(18px) saturate(1.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--kb-radius-full);
+    transition: background var(--kb-duration-normal) var(--kb-ease-out), border-color var(--kb-duration-normal) var(--kb-ease-out);
   }
+  .kb-header.is-scrolled { background: rgba(5, 9, 15, 0.82); border-color: var(--kb-line-strong); }
   .kb-header-inner {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; padding: 18px 0;
+    gap: 24px; padding: 10px 12px 10px 18px;
   }
   .kb-hnav {
     display: flex; align-items: center; gap: 22px;
@@ -547,12 +516,23 @@ function initials(name: string) {
   .kb-hnav-dot { width: 7px; height: 7px; border-radius: 99px; background: var(--kb-accent); display: inline-block; }
 
   .kb-menu-btn {
-    display: none; border: 1px solid var(--kb-line); background: transparent;
-    border-radius: var(--kb-radius-md); color: var(--kb-text); padding: 0.6rem;
+    display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 44px; height: 44px; padding: 0;
+    border: 1px solid var(--kb-line-strong); background: transparent;
+    border-radius: var(--kb-radius-full); color: var(--kb-text);
   }
-  .kb-menu-btn span { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
-  .kb-mobile-menu { display: none; padding: 0 24px 1.25rem; }
-  .kb-mobile-menu.is-open { display: grid; gap: 0.6rem; }
+  .kb-menu-btn span { display: block; width: 18px; height: 2px; margin: 0; background: currentColor; border-radius: 2px; }
+  .kb-mobile-menu {
+    display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+    padding: 10px; border-radius: var(--kb-radius-lg);
+    background: rgba(5, 9, 15, 0.94);
+    -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+    border: 1px solid var(--kb-line-strong);
+  }
+  .kb-mobile-menu.is-open { display: grid; gap: 2px; }
+  .kb-mobile-menu a { padding: 14px 16px; border-radius: var(--kb-radius-md); font-size: 1rem; color: var(--kb-text); }
+  .kb-mobile-menu a:last-child { margin-top: 6px; background: var(--kb-accent); color: var(--kb-bg); font-weight: 600; text-align: center; }
+  .kb-mobile-menu a:not(:last-child):hover { background: rgba(255, 255, 255, 0.06); color: var(--kb-accent); }
 
   @media (max-width: 1080px) { .kb-hnav a:nth-child(4) { display: none; } }
   @media (max-width: 880px) {
@@ -560,34 +540,6 @@ function initials(name: string) {
     .kb-menu-btn { display: inline-flex; }
   }
 
-  /* ── Hero ──────────────────────────────────────────────────── */
-  .kb-hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: max(200px, 32vh); padding-bottom: 0; overflow: clip; background: radial-gradient(ellipse 60% 50% at 82% 18%, rgba(255,91,46,0.10), transparent 60%); }
-  .kb-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.8; }
-
-  .kb-hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 48px; align-items: end; padding: 52px 0 26px; }
-  .kb-hero-main { display: flex; flex-direction: column; align-items: flex-start; }
-  .kb-hero-main h1 { max-width: 15ch; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2.1rem, 5.4vw, 4.4rem); line-height: 1.04; letter-spacing: -0.01em; text-wrap: pretty; }
-  .kb-hero-sub { margin-top: 22px; font-size: 15px; color: var(--kb-text-muted); line-height: 1.6; }
-
-  .kb-hero-signal { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
-  .kb-signal-badge { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.03em; color: var(--kb-text-muted); background: var(--kb-glass); backdrop-filter: blur(8px); border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); padding: 7px 14px; white-space: nowrap; }
-  .kb-signal-card { width: 100%; background: var(--kb-glass); backdrop-filter: blur(14px); border: 1px solid var(--kb-line-strong); border-top-color: var(--kb-line-accent); border-radius: var(--kb-radius-lg); padding: 18px 20px; box-shadow: var(--kb-shadow-md); }
-  .kb-signal-card-head { display: flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--kb-text-soft); }
-  .kb-signal-dot { width: 7px; height: 7px; border-radius: 50%; background: #25d366; box-shadow: 0 0 0 3px rgba(37,211,102,0.18); }
-  .kb-signal-bubble { margin: 14px 0 0; padding: 12px 14px; background: var(--kb-bg-floating); border-radius: var(--kb-radius-md) var(--kb-radius-md) var(--kb-radius-md) 4px; font-size: 14px; color: var(--kb-text); line-height: 1.5; }
-  .kb-signal-meta { display: block; margin-top: 12px; font-size: 12px; color: var(--kb-text-soft); line-height: 1.5; }
-
-  @media (max-width: 880px) {
-    .kb-hero-grid { grid-template-columns: 1fr; }
-    .kb-hero-signal { align-items: flex-start; }
-    .kb-hero-main h1 { max-width: 20ch; }
-  }
-
-  .kb-hero-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; padding: 26px 0 40px; border-top: 1px solid var(--kb-line); font-size: 14px; position: relative; z-index: 1; }
-  .kb-hero-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-  .kb-pill { padding: 9px 18px; border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); color: var(--kb-text-muted); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
-  .kb-pill:hover { border-color: var(--kb-accent); color: var(--kb-accent); }
-  .kb-hero-contact-links { display: flex; align-items: center; gap: 26px; color: var(--kb-text-muted); }
   .kb-text-soft { color: var(--kb-text-soft); }
   .kb-text { color: var(--kb-text); }
 
@@ -600,25 +552,50 @@ function initials(name: string) {
   .kb-marquee-group--chips { gap: 14px; padding-right: 14px; }
   @keyframes kb-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 
-  /* ── Transition / practica ─────────────────────────────────── */
-  .kb-transition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 64px; align-items: start; }
-  .kb-practica-list { display: flex; flex-direction: column; border-top: 1px solid var(--kb-line); }
-  .kb-practica-row { display: flex; gap: 22px; padding: 24px 4px; border-bottom: 1px solid var(--kb-line); }
-  .kb-practica-row span:last-child { font-size: 16px; line-height: 1.6; color: var(--kb-text-muted); }
+  /* ── Manifiesto ────────────────────────────────────────────── */
+  .kb-manifesto { padding-block: clamp(80px, 9vw, 130px) clamp(112px, 13vw, 190px); background: radial-gradient(ellipse 50rem 34rem at 10% 45%, rgba(59, 91, 219, 0.16), transparent 66%); }
+  .kb-manifesto-text { margin: 0; max-width: 24ch; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2rem, 5.2vw, 4.6rem); line-height: 1.04; letter-spacing: -0.025em; color: var(--kb-text-strong); text-wrap: balance; }
+  .kb-manifesto-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px 64px; align-items: end; margin-top: clamp(48px, 7vw, 96px); }
+  .kb-practica-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--kb-line); }
+  .kb-practica-row { display: flex; flex-direction: column; gap: 14px; padding: 24px 28px 4px 0; }
+  .kb-practica-row span:last-child { font-size: 15px; line-height: 1.6; color: var(--kb-text-muted); }
+  @media (max-width: 980px) {
+    .kb-manifesto-foot { grid-template-columns: 1fr; }
+    .kb-practica-list { grid-template-columns: 1fr; }
+    .kb-practica-row { flex-direction: row; gap: 22px; padding: 20px 4px; border-bottom: 1px solid var(--kb-line); }
+  }
 
   /* ── Section head ──────────────────────────────────────────── */
   .kb-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 44px; flex-wrap: wrap; }
   .kb-more-link { font-size: 14px; color: var(--kb-text-muted); border-bottom: 1px solid var(--kb-line-strong); padding-bottom: 4px; }
 
   /* ── Service cards ─────────────────────────────────────────── */
-  .kb-svc-card { display: flex; flex-direction: column; gap: 16px; padding: 34px 30px 30px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); min-height: 260px; transition: background var(--kb-duration-slow), border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
+  .kb-svc-card { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 34px 30px 30px; border-radius: var(--kb-radius-lg); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0) 40%), var(--kb-bg-raised); border: 1px solid var(--kb-line); min-height: 320px; transition: background var(--kb-duration-slow), border-color var(--kb-duration-slow), transform var(--kb-duration-slow); }
   .kb-svc-card:hover { background: var(--kb-bg-floating); border-color: var(--kb-line-accent); transform: translateY(-4px); }
   .kb-svc-card p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--kb-text-muted); }
   .kb-solutions-title { margin: 1rem 0 1.6rem; max-width: 20ch; }
   .kb-solutions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .7rem; }
   .kb-solutions a { display: inline-block; padding: .7rem 1.2rem; border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-full); font-size: .95rem; color: var(--kb-text); transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast); }
   .kb-solutions a:hover { border-color: var(--kb-accent); color: var(--kb-accent); }
+  .kb-svc-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .kb-svc-n { color: var(--kb-text-soft); }
+  .kb-svc-card:hover .kb-svc-n { color: var(--kb-accent); }
   .kb-svc-more { margin-top: auto; font-size: 13px; color: var(--kb-text-muted); }
+
+  /* ── PASS ──────────────────────────────────────────────────── */
+  .kb-pass { padding-top: 0; }
+  .kb-pass-banner { position: relative; height: clamp(320px, 52vh, 560px); margin-bottom: clamp(48px, 6vw, 80px); overflow: hidden; display: flex; align-items: flex-end; }
+  .kb-pass-banner img { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; will-change: transform; }
+  .kb-pass-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg) 0%, rgba(5, 9, 15, 0.1) 30%, rgba(5, 9, 15, 0.35) 60%, var(--kb-bg) 100%); }
+  .kb-pass-banner-copy { position: relative; z-index: 1; padding-bottom: clamp(32px, 5vw, 64px); }
+  .kb-pass-banner-copy .kb-body { margin-top: 14px; max-width: 52ch; color: var(--kb-text); }
+  .kb-pass-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .kb-pass-grid > :nth-child(1) { grid-column: span 4; }
+  .kb-pass-grid > :nth-child(2) { grid-column: span 2; }
+  .kb-pass-grid > :nth-child(3) { grid-column: span 2; }
+  .kb-pass-grid > :nth-child(4) { grid-column: span 4; }
+  .kb-pass-grid > :nth-child(5), .kb-pass-grid > :nth-child(6) { grid-column: span 3; }
+  @media (max-width: 980px) { .kb-pass-grid { grid-template-columns: 1fr; } .kb-pass-grid > * { grid-column: auto !important; } }
 
   /* ── PASS cards ────────────────────────────────────────────── */
   .kb-pass-card { display: flex; flex-direction: column; gap: 18px; padding: 30px 26px; border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); transition: border-color var(--kb-duration-slow); }
@@ -694,7 +671,7 @@ function initials(name: string) {
   .kb-faq-item p { margin: 0; padding: 0 34px 22px 0; color: var(--kb-text-muted); font-size: 0.96rem; line-height: 1.65; }
 
   /* ── Contact CTA ───────────────────────────────────────────── */
-  .kb-cta { border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); border: 1px solid var(--kb-line); padding: 70px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
+  .kb-cta { border-radius: var(--kb-radius-lg); background: radial-gradient(ellipse 40rem 26rem at 85% 0%, rgba(59, 91, 219, 0.28), transparent 65%), radial-gradient(ellipse 30rem 20rem at 0% 100%, rgba(240, 164, 58, 0.12), transparent 65%), var(--kb-bg-raised); border: 1px solid var(--kb-line-strong); padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
   .kb-cta-finder { margin-top: 1.4rem; font-size: 0.9rem; color: var(--kb-text-muted); }
   .kb-cta-finder a { color: var(--kb-accent); text-decoration: underline; text-underline-offset: 3px; }
   .kb-cta-actions { display: flex; flex-direction: column; gap: 16px; min-width: 280px; }
