@@ -7,3 +7,8 @@ templates/
 
 # Fuentes originales del recorrido (stills, clips crudos, prompts): pesan ~67 MB, ver docs/PROCESO-RECORRIDO-PORTADA.md
 source/
+
+# Secretos locales (RESEND_API_KEY, etc.): nunca a git
+.env
+.env.*
+!.env.example

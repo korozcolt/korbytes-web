@@ -4,6 +4,7 @@ import { join, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGzip, createBrotliCompress } from 'node:zlib';
 import { pipeline } from 'node:stream/promises';
+import { handleLead } from './lead-api.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const distDir = resolve(__dirname, 'dist');
@@ -143,6 +144,16 @@ function serveFile(filePath, statusCode, req, res) {
 
 createServer((req, res) => {
   let urlPath = req.url.split('?')[0].split('#')[0];
+
+  if (urlPath === '/api/lead') {
+    Object.entries(SECURITY_HEADERS).forEach(([k, v]) => res.setHeader(k, v));
+    handleLead(req, res).catch((err) => {
+      console.error('[lead] error inesperado:', err);
+      if (!res.headersSent) res.writeHead(500);
+      res.end();
+    });
+    return;
+  }
 
   const redirect = redirectTarget(urlPath);
   if (redirect) {
