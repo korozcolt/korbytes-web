@@ -147,7 +147,7 @@ Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `p
 
 ## Implementation tech
 
-- **Framework:** Astro (SSR con adaptador Node, servidor propio `server.mjs` con caché, gzip y CSP).
+- **Framework:** Astro 6 en modo estático (`output: "static"`), servido por un servidor Node propio (`server.mjs`) con caché, gzip y CSP.
 - **Estilos:** CSS vanilla con custom properties.
 - **Animación:** GSAP core + ScrollTrigger; motor propio `journey.js` para el video.
 - **Iconos:** Phosphor Icons.

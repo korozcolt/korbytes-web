@@ -553,6 +553,24 @@ python3 -m http.server 4500                     # desde la raíz del repo
 
 ---
 
+## NotebookLM (2026-10-12)
+
+El proyecto tiene su cuaderno **"KOR Bytes S.A.S."** (id `ecfbceb1-ad80-412e-a879-e1c6ada9453f`). Se agregaron tres fuentes, todas verificadas como procesadas:
+
+| Fuente en el cuaderno | Archivo del repo |
+|---|---|
+| korbytes-web — Estado actual: portada, marca y rendimiento (2026-10-12) | `docs/NOTEBOOKLM_KORBYTES_PORTADA_2026-10-12.md` (resumen con preguntas y respuestas, escrito para NotebookLM) |
+| korbytes-web — Proceso completo de la portada con video (2026-10-12) | `docs/PROCESO-RECORRIDO-PORTADA.md` (este documento) |
+| korbytes-web — DESIGN.md sistema de diseño vigente (2026-10-12) | `DESIGN.md` |
+
+**Hallazgo:** el cuaderno ya tenía una ficha `korbytes-web.md` de julio de 2026 que describe un sitio anterior (Three.js, anime.js, Space Grotesk y DM Sans, tokens OKLCH, rutas `servicios/` y `casos/`, 11 verticales PASS). Contradice al sitio actual en casi todo. No se borró (borrar es irreversible y no se había pedido); se **renombró como `[OBSOLETO, julio 2026]`** para que se distinga. Queda pendiente decidir si se elimina.
+
+**Verificación:** se le preguntó al cuaderno por los colores, las tipografías, las tecnologías y el Lighthouse móvil; respondió correctamente y citó solo las fuentes nuevas, sin usar la obsoleta. Esa prueba además delató un error de `DESIGN.md` (decía "SSR con adaptador Node" cuando el sitio es estático servido por Node), que se corrigió y se volvió a subir esa fuente (se borró y re-subió la que yo había agregado).
+
+**Mantenimiento:** las fuentes de NotebookLM no se sincronizan solas. Si cambian esos tres archivos, hay que volver a subirlos.
+
+---
+
 ## 12. Cómo reproducir o continuar
 
 **Regenerar un clip** (cuesta 0.35 USD; confirmar antes de gastar):

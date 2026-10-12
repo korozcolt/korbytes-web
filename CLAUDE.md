@@ -44,6 +44,10 @@ Usar el **CLI oficial**: `npx -y lighthouse <url> --chrome-flags="--headless=new
 
 Una rama por tema (`feat/…`, `fix/…`, `perf/…`, `docs/…`), commits descriptivos con `Co-Authored-By`, y **solo se mergea a `main` (que despliega solo) cuando el usuario lo pide**. Se mergea con `--no-ff`. Tras cada cambio visual: comprobar en el navegador (escritorio y 390 px) antes de decir que está listo.
 
+## NotebookLM
+
+Cuaderno **"KOR Bytes S.A.S."** (id `ecfbceb1-ad80-412e-a879-e1c6ada9453f`, https://notebooklm.google.com/notebook/ecfbceb1-ad80-412e-a879-e1c6ada9453f). Las fuentes de NotebookLM **no se sincronizan solas**: cuando cambien `DESIGN.md`, `docs/PROCESO-RECORRIDO-PORTADA.md` o `docs/NOTEBOOKLM_KORBYTES_PORTADA_2026-10-12.md`, hay que volver a subirlas (borrar la fuente anterior y añadir el archivo con `source_add`, luego renombrarla). La ficha antigua `korbytes-web.md` (julio 2026) está marcada como obsoleta en el cuaderno.
+
 ## Estado (2026-10-12)
 
 Todo lo descrito está en `main` y desplegado. Abierto: bajar el tiempo hasta el primer byte del servidor (~450 ms, evaluar CDN), decidir si los 47 MB de video van en git, resolver `astro check`, refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp. Detalle en `PENDIENTES.md`.

@@ -7,6 +7,7 @@ Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Hecho: las 16 páginas 
 - [ ] Bajar el tiempo hasta el primer byte (~450 ms): limita la nota simulada de PageSpeed en el sitio publicado (móvil 83; con throttling real da 100). Evaluar un CDN (p. ej. Cloudflare gratuito) delante del servidor.
 - [ ] Refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp tras el deploy.
 - [ ] Decidir si los 47 MB de video van en git o en un CDN/bucket.
+- [ ] Decidir si se borra del cuaderno de NotebookLM la fuente obsoleta `korbytes-web.md` (julio 2026; hoy renombrada como [OBSOLETO]).
 - [ ] Resolver `astro check` (se cae por un fallo del runtime de Node).
 
 ## Prioridad Alta
