@@ -497,7 +497,7 @@ Páginas internas en móvil, simulado, sitio publicado: landings 81, guía 92, p
 | Imágenes con texto inventado y barras negras | Limitación de Gemini 2.5 Flash Image | Se cambió a `gpt-image-2.5-sunburst`, y el preámbulo ahora pide "no black bars" |
 | Error 404 al usar `gpt-image` por `chat/completions` | Los modelos de imagen puros viven en `/api/v1/images` | Se usó ese endpoint |
 | `ffmpeg` sin `libwebp` | Compilación sin ese codificador | PNG con ffmpeg y conversión con Pillow |
-| `astro check` se cae | Fallo del propio runtime de Node, no del código | Se verificó con `npm run build` y pruebas en navegador. **No se resolvió**, queda como deuda |
+| `astro check` se cae | Se quedaba sin memoria (heap OOM) porque TypeScript revisaba `templates/` (plantillas de terceros, ignoradas por git pero no por `tsconfig`) | **Resuelto** (2026-10-11): `exclude` en `tsconfig.json`. Ya da 0 errores; arregló además `<WhatsAppFab />` sin `message` en `404.astro` |
 | **Los videos habrían fallado en producción** | El CSP del servidor (`default-src 'self'`) bloquea `blob:` en `media-src`. En desarrollo no hay CSP | Se agregó `media-src 'self' blob:` en `server.mjs` y se verificó la cabecera |
 | Precarga masiva en móvil | El motor precargaba los 4 clips en reposo | Política de la sección 9.2 |
 | Escalón visible tras el recorrido | El resplandor cobalto del manifiesto empezaba justo en el borde superior | Se movió el centro del degradado a media sección |
@@ -610,6 +610,6 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 Cerrados el 2026-10-12: rotar la clave de OpenRouter, probar el scrub en un iPhone real (ambos confirmados por el usuario), la imagen Open Graph, el Lighthouse de rendimiento, y la versión móvil 9:16 (decisión de no hacerla).
 
 1. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
-2. **Resolver `astro check`**, que se cae por un fallo del runtime de Node.
+2. ~~Resolver `astro check`~~ (hecho: era un OOM por `templates/`).
 3. **Bajar el tiempo hasta el primer byte** del servidor (~450 ms medidos desde aquí): es lo que limita la nota simulada de PageSpeed (83 en móvil). Opción a evaluar: CDN delante del servidor (por ejemplo Cloudflare, plan gratuito).
 5. **Refrescar la caché de la imagen Open Graph** en LinkedIn, Facebook y WhatsApp tras el despliegue.

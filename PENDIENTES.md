@@ -7,7 +7,7 @@ Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Hecho: las 16 páginas 
 - [ ] Bajar el tiempo hasta el primer byte (~450 ms): limita la nota simulada de PageSpeed en el sitio publicado (móvil 83; con throttling real da 100). Evaluar un CDN (p. ej. Cloudflare gratuito) delante del servidor.
 - [ ] Refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp tras el deploy.
 - [ ] Decidir si los 47 MB de video van en git o en un CDN/bucket.
-- [ ] Resolver `astro check` (se cae por un fallo del runtime de Node).
+- [x] Resolver `astro check` (2026-10-11): no era el runtime; se quedaba sin memoria por revisar `templates/`. Excluido en `tsconfig.json`.
 
 ## Prioridad Alta
 

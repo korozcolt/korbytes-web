@@ -81,7 +81,7 @@ El menú anterior era una píldora flotante que "parecía de restaurante". Ahora
 
 - Bajar el tiempo hasta el primer byte del servidor (~450 ms): evaluar CDN; hace falta saber dónde está alojado el servidor.
 - Decidir si los 47 MB de video van en git o en un CDN/bucket.
-- `astro check` se cae por un fallo del runtime de Node; se verifica con `npm run build`.
+- `astro check` funciona; antes se caía por OOM al revisar `templates/`, ya excluido en `tsconfig.json`.
 - Refrescar la caché de la imagen Open Graph en las redes.
 - Copia de seguridad de `source/journey/` (67 MB: imágenes originales, clips crudos de Kling y prompts), que solo existe en el disco local y no está en git; los enlaces de Kling caducan a los 30 días.
 

@@ -12,7 +12,7 @@ npm run build                     # genera dist/ (también descarga las fuentes:
 npm run build && PORT=4400 node server.mjs   # probar producción con sus cabeceras, caché y CSP
 ```
 
-`npm run check` (`astro check`) **se cae** por un fallo del runtime de Node; verifica con `npm run build` y en el navegador.
+`npm run check` (`astro check`) funciona (0 errores); `tsconfig.json` excluye `templates/` y `source/` porque, si no, se queda sin memoria. Verifica también con `npm run build` y en el navegador.
 
 ## Mapa rápido
 
@@ -50,4 +50,4 @@ Cuaderno **"KOR Bytes S.A.S."** (id `ecfbceb1-ad80-412e-a879-e1c6ada9453f`, http
 
 ## Estado (2026-10-12)
 
-Todo lo descrito está en `main` y desplegado. Abierto: bajar el tiempo hasta el primer byte del servidor (~450 ms, evaluar CDN), decidir si los 47 MB de video van en git, resolver `astro check`, refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp. Detalle en `PENDIENTES.md`.
+Todo lo descrito está en `main` y desplegado. Abierto: bajar el tiempo hasta el primer byte del servidor (~450 ms, evaluar CDN), decidir si los 47 MB de video van en git, refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp. Detalle en `PENDIENTES.md`.
