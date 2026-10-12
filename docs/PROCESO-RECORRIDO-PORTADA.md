@@ -414,6 +414,32 @@ Sobre el último: se había revisado esa banda en una sola resolución. Los text
 
 ---
 
+## Imagen Open Graph (2026-10-12)
+
+**Qué es:** la imagen de vista previa que aparece al compartir un enlace en WhatsApp, LinkedIn, X o Slack. Hasta este día `og:image` y `twitter:image` apuntaban a `logo-oficial.png`: texto azul marino sobre fondo transparente, casi invisible sobre un fondo oscuro, y sin ninguna señal de la identidad nueva.
+
+**Concepto:** contar la historia del sitio en una sola imagen. Tres fotogramas del recorrido unidos como una tira (**caos → flujo → sistema**), el primero desaturado y los otros a color, separados por líneas cian que se desvanecen antes del texto. Sobre ellos, los tres pasos al estilo del riel del recorrido, el logo oficial arriba y el titular de marca abajo: *"No hacemos software. Ordenamos operaciones."* en blanco y cian.
+
+**Cómo se hizo:**
+
+- Plantilla HTML en `scripts/og-image.html` (1200×630), con las tipografías del sitio (Familjen Grotesk, Inter Tight, JetBrains Mono), los fotogramas `public/world/stop-0/1/2.webp` y `logo-oficial-dark.png`. No introduce ningún color fuera de la marca (marino `#050d1a`, cian `#04b0e0`).
+- Captura con un navegador a 1200×630 y exportación a JPEG: `public/images/og-default.jpg`, **115 KB** (WhatsApp recomienda menos de 300 KB).
+- `BaseLayout.astro` apunta `og:image` y `twitter:image` a ese archivo, e incluye `og:image:width`, `og:image:height`, `og:image:type` y un texto alternativo descriptivo.
+
+**Cómo regenerarla:**
+
+```bash
+python3 -m http.server 4500                     # desde la raíz del repo
+# abrir http://localhost:4500/scripts/og-image.html con viewport 1200x630,
+# esperar a que carguen las fuentes y capturar; exportar a JPEG calidad ~86
+```
+
+**Verificado:** miniatura reducida a 300 px (el titular se lee) y recorte tipo X/Twitter 2:1 (queda dentro de la zona segura: los márgenes son de 38 px arriba y 44 px abajo).
+
+**No verificado, para ser fiel:** no pude comprobar cómo la muestran WhatsApp, LinkedIn o X en vivo, porque esas plataformas guardan la vista previa en caché y hay que pedirles que la refresquen (depurador de LinkedIn, *Sharing Debugger* de Facebook, y en WhatsApp a veces solo se actualiza compartiendo el enlace con un parámetro nuevo). Tampoco se generó una imagen distinta por página: todas comparten esta.
+
+---
+
 ## 12. Cómo reproducir o continuar
 
 **Regenerar un clip** (cuesta 0.35 USD; confirmar antes de gastar):
@@ -453,7 +479,6 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 1. **Rotar la clave de OpenRouter**, que quedó escrita en la conversación.
 2. **Probar el scrub en un iPhone real** (iOS Safari), que es lo más frágil.
 3. **Cadena 9:16 nativa para móvil** (unos 1.40 USD; quedan 3.20 en Monid). Hoy es un recorte del 16:9.
-4. **Imagen Open Graph** nueva con la marca actual (hoy usa el logo).
 5. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
 6. **Resolver `astro check`**, que se cae por un fallo del runtime.
 7. **Lighthouse de rendimiento** sobre la página final con la cabecera nueva (accesibilidad, buenas prácticas y SEO ya están en 100, sección 9.4).

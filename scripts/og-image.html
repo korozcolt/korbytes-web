@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+  Plantilla de la imagen Open Graph (1200x630). Se sirve desde la raíz del repo y se captura
+  con un navegador. Ver docs/PROCESO-RECORRIDO-PORTADA.md, sección "Imagen Open Graph".
+    python3 -m http.server 4500   # desde la raíz del repo
+    # abrir http://localhost:4500/scripts/og-image.html con viewport 1200x630 y capturar
+  Usa los fotogramas del recorrido y el logo oficial: no introduce ningún color fuera de la marca.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>OG KOR Bytes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#050d1a; --brand:#081c3c; --cyan:#04b0e0; --text:#f4f9fc; --muted:#8fa3b8; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; background: var(--bg); overflow: hidden; }
+  .og { position: relative; width: 1200px; height: 630px; overflow: hidden; color: var(--text); font-family: "Inter Tight", sans-serif; }
+
+  /* Tira de tres fotogramas del recorrido: caos -> flujo -> sistema */
+  .strip { position: absolute; inset: 0 0 auto 0; height: 630px; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .frame { position: relative; overflow: hidden; }
+  .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .f0 img { object-position: 72% 50%; filter: saturate(0.55) brightness(0.85) contrast(1.05); }
+  .f1 img { object-position: 36% 50%; filter: saturate(1.05) brightness(0.95); }
+  .f2 img { object-position: 78% 50%; filter: saturate(1.1) brightness(0.95); }
+  .frame + .frame::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; z-index: 3; background: linear-gradient(to bottom, rgba(4,176,224,0) 0%, rgba(4,176,224,.75) 22%, rgba(4,176,224,.75) 46%, rgba(4,176,224,0) 66%); box-shadow: 0 0 16px rgba(4,176,224,.55); }
+
+  /* Capas de legibilidad: marino de marca abajo y arriba */
+  .shade { position: absolute; inset: 0; z-index: 2; background:
+      linear-gradient(to bottom, rgba(5,13,26,.78) 0%, rgba(5,13,26,0) 24%),
+      linear-gradient(to top, rgba(5,13,26,1) 0%, rgba(5,13,26,.96) 20%, rgba(5,13,26,.62) 46%, rgba(5,13,26,0) 70%); }
+
+  .top { position: absolute; z-index: 4; left: 52px; right: 52px; top: 38px; display: flex; align-items: center; justify-content: space-between; }
+  .top img { height: 54px; width: auto; display: block; }
+  .url { font: 500 15px "JetBrains Mono", monospace; letter-spacing: .08em; color: var(--text); opacity: .85; }
+
+  /* Etiquetas de paso sobre cada fotograma, como el riel del recorrido */
+  .steps { position: absolute; z-index: 4; left: 0; right: 0; top: 250px; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .step { padding-left: 52px; font: 500 14px "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--text); display: flex; align-items: center; gap: 12px; }
+  .step:not(:first-child) { padding-left: 34px; }
+  .step i { width: 11px; height: 11px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(4,176,224,.28), 0 0 18px rgba(4,176,224,.9); flex-shrink: 0; }
+  .step span { color: var(--cyan); }
+  .f-dim i { background: #8fa3b8; box-shadow: 0 0 0 5px rgba(143,163,184,.22); }
+  .f-dim span { color: #8fa3b8; }
+
+  .copy { position: absolute; z-index: 4; left: 52px; right: 52px; bottom: 44px; }
+  h1 { font: 700 76px/0.98 "Familjen Grotesk", sans-serif; letter-spacing: -0.03em; }
+  h1 em { font-style: normal; color: var(--cyan); }
+  .sub { margin-top: 20px; display: flex; align-items: center; gap: 18px; font: 400 23px/1.3 "Inter Tight", sans-serif; color: var(--muted); }
+  .sub b { font-weight: 500; color: var(--text); }
+  .pill { font: 500 14px "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; padding: 7px 14px; border: 1px solid rgba(4,176,224,.6); border-radius: 8px; color: var(--cyan); background: rgba(4,176,224,.1); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="og" id="og">
+    <div class="strip">
+      <div class="frame f0"><img src="../public/world/stop-0.webp" alt="" /></div>
+      <div class="frame f1"><img src="../public/world/stop-1.webp" alt="" /></div>
+      <div class="frame f2"><img src="../public/world/stop-2.webp" alt="" /></div>
+    </div>
+    <div class="shade"></div>
+
+    <div class="top">
+      <img src="../public/images/logo-oficial-dark.png" alt="KOR Bytes" />
+      <span class="url">KOR-BYTES.COM</span>
+    </div>
+
+    <div class="steps">
+      <div class="step f-dim"><i></i><span>01</span> Caos</div>
+      <div class="step"><i></i><span>02</span> Flujo</div>
+      <div class="step"><i></i><span>03</span> Sistema</div>
+    </div>
+
+    <div class="copy">
+      <h1>No hacemos software.<br /><em>Ordenamos operaciones.</em></h1>
+      <p class="sub"><span class="pill">Sincelejo · LATAM</span><span><b>Software operativo</b> y productos verticales PASS</span></p>
+    </div>
+  </div>
+</body>
+</html>
