@@ -4,7 +4,7 @@
 
 Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Hecho: las 16 páginas medidas (15 en 100/100/100/100, portada 99 en rendimiento), clave de OpenRouter rotada, scrub probado en iPhone real, imagen Open Graph, Lighthouse de rendimiento (móvil 99, escritorio 100), versión móvil se queda como está.
 
-- [ ] Volver a medir Lighthouse sobre el sitio publicado tras el despliegue de las optimizaciones (antes en producción: móvil 72, escritorio 99).
+- [ ] Bajar el tiempo hasta el primer byte (~450 ms): limita la nota simulada de PageSpeed en el sitio publicado (móvil 83; con throttling real da 100). Evaluar un CDN (p. ej. Cloudflare gratuito) delante del servidor.
 - [ ] Refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp tras el deploy.
 - [ ] Decidir si los 47 MB de video van en git o en un CDN/bucket.
 - [ ] Resolver `astro check` (se cae por un fallo del runtime de Node).

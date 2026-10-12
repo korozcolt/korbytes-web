@@ -426,10 +426,34 @@ Hasta aquí no existía una medición de rendimiento con Lighthouse real (la her
 
 **Hallazgo de accesibilidad que apareció al medir las páginas internas:** cuatro páginas sacaban 95 o 96 por el criterio *link-in-text-block*. Al cambiar el acento a cian, los enlaces dentro de párrafos quedaron con un contraste de **1.02:1 frente al texto gris que los rodea** (el cian y el gris tienen casi la misma luminosidad), así que solo se distinguían por color. Antes, con ámbar, no se notaba. Se corrigió en un solo lugar para todo el sitio: `p a:not([class])` va subrayado en `global.css`. Es una consecuencia directa de la paleta nueva que el Lighthouse de la portada no habría detectado.
 
+**Medición en el sitio publicado (2026-10-12, tras el despliegue).** Se confirmó que el despliegue estaba en vivo (sin referencias a Google Fonts y con los `preload` nuevos) y se midió `kor-bytes.com` con el mismo Lighthouse:
+
+| Método | Rendimiento móvil de la portada | FCP / LCP |
+|---|---|---|
+| Lighthouse por defecto (red **simulada**), 3 corridas | **83, 83, 84** | 1.6 s / 4.4 s |
+| Lighthouse con throttling **real** de Chrome, 2 corridas | **100, 100** | 1.0 a 1.15 s |
+| Traza de DevTools con Slow 4G y CPU 4× | n/a | **LCP 726 ms**, CLS 0 |
+| Build local, simulado (referencia) | 99 | 1.2 s / 2.0 s |
+| Escritorio, simulado | **100** | 0.35 s / 0.54 s |
+
+Páginas internas en móvil, simulado, sitio publicado: landings 81, guía 92, portafolio 90, software a medida 92, aviso legal 99. Accesibilidad, buenas prácticas y SEO: 100 en todas.
+
+**Por qué el sitio publicado da 83 y el local 99, con el mismo código.** No es el código. El modo por defecto de Lighthouse no frena la red de verdad: *estima* los tiempos a partir de un modelo y de lo que observa. Cuando el servidor ya tiene latencia propia (aquí el documento tarda ~450 ms en llegar al primer byte desde esta máquina; en local, ~120 ms), el modelo la multiplica por cada paso de la cadena de carga, y el LCP simulado se infla hasta 4.4 s. Con throttling real, el mismo sitio saca 100 y la traza de DevTools da LCP de 726 ms. Los números "reales" son los segundos y terceros de la tabla; el 83 es lo que mostrará PageSpeed Insights por defecto.
+
+**Qué significa en la práctica:**
+
+- La experiencia real del visitante es buena (LCP bajo 1.2 s con red lenta y CPU 4× más lenta).
+- Si lo que importa es **la nota que muestra PageSpeed Insights**, el factor que la limita ya no es el código sino el **tiempo hasta el primer byte** del servidor. Bajarlo es de infraestructura, no de la web: servir desde un CDN (por ejemplo Cloudflare, plan gratuito) delante del servidor, o un servidor más cercano al visitante. No se hizo ni se probó; es una recomendación, no un resultado.
+- Google evalúa la posición con datos de **usuarios reales** (Core Web Vitals en CrUX), no con esta nota de laboratorio. Para este sitio todavía no hay datos de campo.
+
+**No se pudo confirmar con PageSpeed Insights:** la API pública sin clave devolvió "cuota diaria excedida", así que no hay una medición hecha desde los servidores de Google.
+
+**CLS residual:** con throttling real aparece un CLS de 0.023 (por debajo del umbral de "bueno", que es 0.1), causado por el cambio de la tipografía Familjen Grotesk en la tarjeta del titular. Con el modo simulado marca 0. No se persiguió.
+
 **Límites, para ser fiel:**
 
 - Son números de **laboratorio** (Lighthouse con red y CPU simuladas), no de usuarios reales. No hay datos de campo (CrUX) para este sitio.
-- El "después" se midió sobre el build local. Los números del sitio publicado se medirán de nuevo tras el próximo despliegue; el "antes" publicado (72 / 99) sí es del sitio real.
+- El "después" principal se midió sobre el build local; el sitio publicado se midió después del despliegue y está en el bloque de arriba.
 - La nota de móvil de la portada sube a 99 y no a 100; no se investigó el punto que falta.
 
 ---
@@ -538,5 +562,5 @@ Cerrados el 2026-10-12: rotar la clave de OpenRouter, probar el scrub en un iPho
 
 1. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
 2. **Resolver `astro check`**, que se cae por un fallo del runtime de Node.
-3. **Volver a medir Lighthouse sobre el sitio publicado** tras el despliegue de la sección 9.5, y registrar el resultado.
+3. **Bajar el tiempo hasta el primer byte** del servidor (~450 ms medidos desde aquí): es lo que limita la nota simulada de PageSpeed (83 en móvil). Opción a evaluar: CDN delante del servidor (por ejemplo Cloudflare, plan gratuito).
 5. **Refrescar la caché de la imagen Open Graph** en LinkedIn, Facebook y WhatsApp tras el despliegue.
