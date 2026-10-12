@@ -1,4 +1,5 @@
 ---
+import Logo from "@/components/Logo.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
@@ -19,7 +20,7 @@ const breadcrumb = [
   faqs={[]}
   breadcrumb={breadcrumb}
 >
-  <header class="gi-header"><div class="kb-container"><a href="/" class="gi-brand">KOR Bytes<span>.</span></a></div></header>
+  <header class="gi-header"><div class="kb-container"><a href="/" class="gi-brand" aria-label="KOR Bytes inicio"><Logo height={30} alt="" /></a></div></header>
   <main id="main-content" class="kb-container gi-main">
     <span class="kb-eyebrow">Guías</span>
     <h1>Guías para decidir mejor antes de contratar software.</h1>

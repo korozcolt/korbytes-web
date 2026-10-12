@@ -23,10 +23,10 @@ export interface NavAnchor {
 }
 
 export const navAnchors: NavAnchor[] = [
-  { label: "Inicio", href: "#top" },
-  { label: "Ecosistema PASS", href: "#pass" },
+  { label: "PASS", href: "#pass" },
   { label: "Servicios", href: "#servicios" },
   { label: "Proyectos", href: "#proyectos" },
+  { label: "Proceso", href: "#proceso" },
   { label: "Contacto", href: "#contacto" },
 ];
 

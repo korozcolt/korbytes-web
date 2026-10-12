@@ -1,4 +1,5 @@
 ---
+import Logo from "@/components/Logo.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
@@ -18,7 +19,7 @@ const breadcrumb = [
 
   <header class="local-header">
     <div class="kb-container local-header-inner">
-      <a href="/" class="local-brand" aria-label="KOR Bytes inicio">KOR Bytes<span>.</span></a>
+      <a href="/" class="local-brand" aria-label="KOR Bytes inicio"><Logo height={30} alt="" /></a>
       <a class="kb-btn local-header-cta" href={whatsapp("Hola KOR Bytes, tengo una pregunta sobre el tratamiento de mis datos.")} target="_blank" rel="noopener">Hablar por WhatsApp</a>
     </div>
   </header>
@@ -64,7 +65,7 @@ const breadcrumb = [
 </BaseLayout>
 
 <style>
-  .local-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 9, 15, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
+  .local-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 13, 26, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
   .local-header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
   .local-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }.local-brand span { color: var(--kb-accent); }
   .local-header-cta { font-size: .82rem; padding: .7rem 1rem; }

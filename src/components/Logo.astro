@@ -1,0 +1,25 @@
+---
+/**
+ * Logo oficial de KOR Bytes sobre fondo oscuro (public/images/logo-oficial-dark.png, 600x200).
+ * Es el único logo que se usa en el sitio: no se reconstruye con texto ni con otra marca.
+ * Si el enlace que lo envuelve ya tiene aria-label, pasar alt="" para no duplicar el nombre.
+ */
+interface Props {
+  height?: number;
+  alt?: string;
+}
+const { height = 30, alt = "KOR Bytes" } = Astro.props;
+---
+
+<img
+  class="kb-logo-img"
+  src="/images/logo-oficial-dark.png"
+  width={height * 3}
+  height={height}
+  alt={alt}
+  decoding="async"
+/>
+
+<style>
+  .kb-logo-img { display: block; width: auto; flex-shrink: 0; }
+</style>
