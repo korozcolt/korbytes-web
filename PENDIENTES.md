@@ -1,17 +1,13 @@
 # KOR Bytes - Tareas Pendientes
 
-## Portada: recorrido en video (2026-10-11)
+## Portada: recorrido en video (2026-10-12)
 
-Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Pendientes abiertos:
+Proceso completo en `docs/PROCESO-RECORRIDO-PORTADA.md`. Hecho: las 16 páginas medidas (15 en 100/100/100/100, portada 99 en rendimiento), clave de OpenRouter rotada, scrub probado en iPhone real, imagen Open Graph, Lighthouse de rendimiento (móvil 99, escritorio 100), versión móvil se queda como está.
 
-- [ ] Rotar la clave de OpenRouter (quedó escrita en una conversación).
-- [ ] Probar el scrub en un iPhone real (iOS Safari).
-- [ ] Verificar en `kor-bytes.com` tras el deploy que el video avance con el scroll (CSP `media-src blob:`).
-- [ ] Cadena 9:16 nativa para móvil (~1.40 USD; quedan 3.20 en Monid). Hoy es un recorte del 16:9.
+- [ ] Volver a medir Lighthouse sobre el sitio publicado tras el despliegue de las optimizaciones (antes en producción: móvil 72, escritorio 99).
+- [ ] Refrescar la caché de la imagen Open Graph en LinkedIn/Facebook/WhatsApp tras el deploy.
 - [ ] Decidir si los 47 MB de video van en git o en un CDN/bucket.
 - [ ] Resolver `astro check` (se cae por un fallo del runtime de Node).
-- [ ] Lighthouse de rendimiento sobre la página final (accesibilidad, buenas prácticas y SEO ya están en 100, 2026-10-12).
-- [x] Imagen Open Graph nueva (hecha 2026-10-12, `public/images/og-default.jpg`). Falta refrescar la caché en LinkedIn/Facebook/WhatsApp tras el deploy.
 
 ## Prioridad Alta
 

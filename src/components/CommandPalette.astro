@@ -268,7 +268,7 @@ let n = 0;
     flex: 1; min-width: 0; height: 100%;
     background: transparent; border: 0; outline: 0;
     color: var(--kb-text-strong);
-    font: 500 1.05rem "Inter Tight", system-ui, sans-serif;
+    font: 500 1.05rem var(--font-inter);
   }
   .kb-pal-head input::placeholder { color: var(--kb-text-soft); }
   .kb-pal-head:focus-within { color: var(--kb-accent); box-shadow: inset 0 -2px 0 var(--kb-accent); }
@@ -278,7 +278,7 @@ let n = 0;
   }
   .kb-pal-group {
     padding: 14px 10px 6px;
-    font: 500 0.68rem "JetBrains Mono", ui-monospace, monospace;
+    font: 500 0.68rem var(--font-mono);
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--kb-text-soft);
   }
   .kb-pal-opt {
@@ -293,7 +293,7 @@ let n = 0;
   .kb-pal-label { font-size: 0.95rem; line-height: 1.3; }
   .kb-pal-hint {
     flex-shrink: 0; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    font: 400 0.72rem "JetBrains Mono", ui-monospace, monospace; color: var(--kb-text-soft);
+    font: 400 0.72rem var(--font-mono); color: var(--kb-text-soft);
   }
   .kb-pal-empty { margin: 0; padding: 28px 20px 32px; text-align: center; color: var(--kb-text-muted); font-size: 0.92rem; }
   .kb-pal-foot {
@@ -306,7 +306,7 @@ let n = 0;
     display: inline-block; min-width: 20px; margin-right: 4px; padding: 2px 6px;
     text-align: center; border: 1px solid var(--kb-line-strong); border-radius: 5px;
     background: rgba(255, 255, 255, 0.04);
-    font: 500 0.68rem "JetBrains Mono", ui-monospace, monospace; color: var(--kb-text-muted);
+    font: 500 0.68rem var(--font-mono); color: var(--kb-text-muted);
   }
   @media (max-width: 640px) {
     .kb-pal { margin-top: 8vh; }

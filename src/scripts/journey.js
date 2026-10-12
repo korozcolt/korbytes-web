@@ -59,8 +59,10 @@ export function mountJourney(root, cfg) {
 		img.className = "journey-scene__still";
 		img.alt = "";
 		img.decoding = "async";
+		// El src se asigna por cercania al scroll (loadStill): al montar solo se pide la primera imagen,
+		// no las cinco, para no competir con la carga de la pagina.
 		const stopIndex = s.i;
-		img.src = useLightClips() && stops[stopIndex].stillM ? stops[stopIndex].stillM : stops[stopIndex].still;
+		s.stillSrc = () => (useLightClips() && stops[stopIndex].stillM ? stops[stopIndex].stillM : stops[stopIndex].still);
 		scene.appendChild(img);
 		stage.appendChild(scene);
 		Object.assign(s, {
@@ -114,6 +116,12 @@ export function mountJourney(root, cfg) {
 			top: seg.start + (seg.end - seg.start) * 0.5,
 			behavior: reduce || instant ? "auto" : "smooth",
 		});
+	}
+
+	// Imagen fija de cada escena: se pide cuando el scroll se acerca (2.5 alturas antes y 1.5 despues).
+	function loadStill(s) {
+		if (s.img.getAttribute("src")) return;
+		s.img.src = s.stillSrc();
 	}
 
 	// ---- carga de clips (Blob: siempre buscable aunque el host no sirva byte ranges) ----
@@ -196,6 +204,7 @@ export function mountJourney(root, cfg) {
 		for (let i = 0; i < segs.length; i++) if (y >= segs[i].start) ci = i;
 
 		segs.forEach((s, i) => {
+			if (y > s.start - 2.5 * vh && y < s.end + 1.5 * vh) loadStill(s);
 			if (y > s.start - 1.8 * vh && y < s.end + 1.2 * vh) loadClip(s);
 			const local = clamp((y - s.start) / (s.end - s.start));
 			s.local = local;

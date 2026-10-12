@@ -45,7 +45,7 @@ Historia: hasta 2026-10-10 el acento era naranja `#ff5b2e`; ese día pasó a ám
 | Cuerpo | Inter Tight 400/500/600 | Texto, navegación, botones |
 | Mono | JetBrains Mono 400/500/700 | Eyebrows, etiquetas, chips, metadatos, contadores |
 
-Carga desde Google Fonts con `media="print"` y cambio a `all` en `load` (no bloquea el primer pintado).
+**Autoalojadas** con la API de fuentes de Astro 6 (`fonts` en `astro.config.mjs`; se descargan en el build, sin peticiones a Google en producción). Se precargan Familjen Grotesk e Inter Tight; JetBrains Mono no. **Regla: nunca escribir el nombre literal de una fuente en el CSS** (Astro les pone un sufijo hash y el nombre literal no coincidiría); usar `var(--font-familjen)`, `var(--font-inter)` o `var(--font-mono)`.
 
 Escala fluida: `h1 clamp(2.6rem,7.4vw,6.2rem)`, `h2 clamp(1.9rem,4vw,3.6rem)`, `h3 clamp(1.18rem,1.7vw,1.55rem)`. Titulares enormes de impacto (manifiesto, cita del fundador, cifras) usan `clamp` propio en su sección.
 
@@ -67,6 +67,10 @@ Escala fluida: `h1 clamp(2.6rem,7.4vw,6.2rem)`, `h2 clamp(1.9rem,4vw,3.6rem)`, `
 3. Codificación: escritorio 1920×1080 `crf 25 -g 8` (~4 MB/clip); móvil 1280×720 `crf 27 -g 4` (~2.1 MB/clip). Fotogramas fijos `public/world/stop-N(-m).webp`, extraídos del propio video para que el paso imagen→video no se note.
 4. Caché `immutable` en `/video` y `/world`: si se regenera un clip, **cambiar el nombre del archivo**.
 
+### Preloader
+
+Ya no es un contador de adorno: se retira en cuanto las tipografías están listas y la imagen de portada decodificada, con un tope de 1.5 s. Sin JavaScript se oculta con `<noscript>`. La imagen de portada se precarga con `<link rel="preload">` y las demás imágenes fijas del recorrido se piden por proximidad al scroll.
+
 ### Política de rendimiento del video (no negociable)
 
 El video no puede competir con la carga de la página.
@@ -74,8 +78,8 @@ El video no puede competir con la carga de la página.
 - Nada se descarga hasta el primer scroll o gesto. Solo escritorio con buena conexión empieza 2.5 s después de `load`.
 - Móvil y ahorro de datos: nunca precarga masiva; un clip a la vez y solo los cercanos al scroll. Escritorio: máximo dos en vuelo.
 - Los clips se descargan como `Blob` (siempre buscables aunque el host no sirva `Range`). Por eso el CSP necesita `media-src 'self' blob:` (en `server.mjs`).
-- Medido en móvil, Slow 4G, CPU 4× más lenta: LCP 978 ms, CLS 0.00, scrub p95 14 ms por frame.
-- La versión móvil es un recorte del 16:9 con encuadre horizontal propio por parada (`focus`). Una cadena 9:16 nativa es la mejora pendiente.
+- Medido en móvil, Slow 4G, CPU 4× más lenta: LCP 978 ms, CLS 0.00, scrub p95 14 ms por frame (traza de DevTools). Con Lighthouse real (2026-10-12): rendimiento 99 en móvil y 100 en escritorio, CLS 0 (detalle en `docs/PROCESO-RECORRIDO-PORTADA.md`, sección 9.5).
+- La versión móvil es un recorte del 16:9 con encuadre horizontal propio por parada (`focus`). Decisión del usuario: se queda así.
 
 ## Surface architecture
 
@@ -155,6 +159,4 @@ Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `p
 
 ## Pendientes de diseño
 
-- Versión móvil nativa 9:16 del recorrido (hoy es recorte del 16:9).
-- Probar el scrub en un iPhone real (iOS Safari).
 - Light mode: evaluado y descartado por ahora; el sitio es dark único.
