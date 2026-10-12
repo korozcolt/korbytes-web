@@ -21,6 +21,16 @@ const { need = needOptions[0], source } = Astro.props;
       <input name="empresa" type="text" autocomplete="organization" placeholder="Ej: Droguería San José" />
     </label>
   </div>
+  <div class="lead-form__row">
+    <label>
+      <span>Correo <em>(opcional)</em></span>
+      <input name="correo" type="email" autocomplete="email" inputmode="email" placeholder="tu@empresa.com" />
+    </label>
+    <label>
+      <span>Teléfono <em>(opcional)</em></span>
+      <input name="telefono" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ej: 300 123 4567" />
+    </label>
+  </div>
   <label>
     <span>¿Qué necesitas?</span>
     <select name="necesidad">
@@ -37,15 +47,19 @@ const { need = needOptions[0], source } = Astro.props;
     <span>Cuéntanos en una frase el problema <em>(opcional)</em></span>
     <textarea name="detalle" rows="3" placeholder="Ej: Llevamos el inventario en Excel y nunca cuadra con la tienda."></textarea>
   </label>
+  <input class="lead-form__trap" name="web" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <button class="kb-btn lead-form__submit" type="submit">Enviar por WhatsApp</button>
   <p class="lead-form__note">
-    Se abre WhatsApp con tu mensaje listo para enviar. Respondemos en horario laboral. También puedes escribir a
+    Recibimos tu solicitud por correo y se abre WhatsApp con tu mensaje listo. Respondemos en horario laboral. Usamos tus datos solo para
+    contactarte (<a href="/aviso-legal">aviso legal</a>). También puedes escribir a
     <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
   </p>
 </form>
 
 <script>
   declare function gtag(...args: unknown[]): void;
+
+  const openedAt = Date.now();
 
   document.querySelectorAll<HTMLFormElement>("[data-lead-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
@@ -62,12 +76,23 @@ const { need = needOptions[0], source } = Astro.props;
       const necesidad = String(data.get("necesidad") ?? "").trim();
       const presupuesto = String(data.get("presupuesto") ?? "").trim();
       const detalle = String(data.get("detalle") ?? "").trim();
+      const correo = String(data.get("correo") ?? "").trim();
+      const telefono = String(data.get("telefono") ?? "").trim();
+
+      const badMail = form.querySelector<HTMLInputElement>('input[name="correo"]');
+      if (correo && badMail && !badMail.validity.valid) {
+        badMail.focus();
+        badMail.setAttribute("aria-invalid", "true");
+        return;
+      }
 
       const lines = [
         `Hola KOR Bytes, soy ${nombre}${empresa ? ` de ${empresa}` : ""}.`,
         `Necesito: ${necesidad}.`,
         presupuesto && presupuesto !== "Aún no lo sé" ? `Presupuesto aprox.: ${presupuesto}.` : "",
         detalle ? `Contexto: ${detalle}` : "",
+        correo ? `Correo: ${correo}` : "",
+        telefono ? `Teléfono: ${telefono}` : "",
         `(Escribo desde ${location.pathname})`,
       ].filter(Boolean);
 
@@ -79,6 +104,22 @@ const { need = needOptions[0], source } = Astro.props;
           lead_budget: presupuesto,
           transport_type: "beacon",
         });
+      } catch {}
+
+      // Registro por correo: sin await para que WhatsApp se abra dentro del gesto del usuario (Safari bloquea ventanas tras un await).
+      // Si falla o el servidor no está configurado, el contacto sigue por WhatsApp como siempre.
+      try {
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          keepalive: true,
+          body: JSON.stringify({
+            nombre, empresa, necesidad, presupuesto, detalle, correo, telefono,
+            web: String(data.get("web") ?? ""),
+            origen: form.dataset.source ?? location.pathname,
+            t: openedAt,
+          }),
+        }).catch(() => {});
       } catch {}
 
       const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lines.join("\n"))}`;
@@ -104,6 +145,7 @@ const { need = needOptions[0], source } = Astro.props;
     outline: 2px solid var(--kb-accent); outline-offset: 1px; border-color: var(--kb-accent);
   }
   .lead-form input[aria-invalid="true"] { border-color: #ff6b6b; }
+  .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   .lead-form__submit { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 600; }
   .lead-form__note { margin: 0; font-size: .8rem; color: var(--kb-text-soft); line-height: 1.55; }
   .lead-form__note a { color: var(--kb-accent); text-decoration: underline; text-underline-offset: 3px; }
