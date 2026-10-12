@@ -149,9 +149,12 @@ Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `p
 - **Iconos:** Phosphor Icons.
 - **Imágenes:** capturas reales de clientes (WebP con `srcset`), mockups de proyectos y fotogramas del recorrido.
 
+## Imagen para compartir (Open Graph)
+
+`public/images/og-default.jpg` (1200×630, 115 KB): tira caos → flujo → sistema con tres fotogramas del recorrido, logo oficial y el titular de marca. Fuente editable en `scripts/og-image.html`; cómo regenerarla en `docs/PROCESO-RECORRIDO-PORTADA.md`.
+
 ## Pendientes de diseño
 
 - Versión móvil nativa 9:16 del recorrido (hoy es recorte del 16:9).
 - Probar el scrub en un iPhone real (iOS Safari).
-- Imagen Open Graph nueva con la marca actual (hoy usa el logo).
 - Light mode: evaluado y descartado por ahora; el sitio es dark único.
