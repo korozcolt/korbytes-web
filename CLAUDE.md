@@ -46,7 +46,7 @@ Una rama por tema (`feat/…`, `fix/…`, `perf/…`, `docs/…`), commits descr
 
 ## NotebookLM
 
-Cuaderno **"KOR Bytes S.A.S."** (id `ecfbceb1-ad80-412e-a879-e1c6ada9453f`, https://notebooklm.google.com/notebook/ecfbceb1-ad80-412e-a879-e1c6ada9453f). Las fuentes de NotebookLM **no se sincronizan solas**: cuando cambien `DESIGN.md`, `docs/PROCESO-RECORRIDO-PORTADA.md` o `docs/NOTEBOOKLM_KORBYTES_PORTADA_2026-10-12.md`, hay que volver a subirlas (borrar la fuente anterior y añadir el archivo con `source_add`, luego renombrarla). La ficha antigua `korbytes-web.md` (julio 2026) está marcada como obsoleta en el cuaderno.
+Cuaderno **"KOR Bytes S.A.S."** (id `ecfbceb1-ad80-412e-a879-e1c6ada9453f`, https://notebooklm.google.com/notebook/ecfbceb1-ad80-412e-a879-e1c6ada9453f). Las fuentes de NotebookLM **no se sincronizan solas**: cuando cambien `DESIGN.md`, `docs/PROCESO-RECORRIDO-PORTADA.md` o `docs/NOTEBOOKLM_KORBYTES_PORTADA_2026-10-12.md`, hay que volver a subirlas (borrar la fuente anterior y añadir el archivo con `source_add`, luego renombrarla). La ficha antigua `korbytes-web.md` (julio 2026), que contradecía el sitio actual, **se borró del cuaderno el 2026-10-12**.
 
 ## Estado (2026-10-12)
 
