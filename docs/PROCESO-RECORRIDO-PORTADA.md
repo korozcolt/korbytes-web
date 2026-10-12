@@ -1,6 +1,6 @@
 # Cómo se construyó la portada de KOR Bytes: proceso completo
 
-Documento de proceso. Cuenta cómo se llegó a la portada actual: el concepto, las imágenes y sus prompts, la generación de video, la codificación, el motor de scroll, la política de rendimiento, el rediseño de las demás secciones, los errores encontrados y cómo reproducirlo. Escrito el 2026-10-11, sobre el trabajo del 2026-10-10 y 2026-10-11.
+Documento de proceso. Cuenta cómo se llegó a la portada actual: el concepto, las imágenes y sus prompts, la generación de video, la codificación, el motor de scroll, la política de rendimiento, el rediseño de las demás secciones, los errores encontrados y cómo reproducirlo. Escrito entre el 2026-10-11 y el 2026-10-12, sobre el trabajo de esos días y el del 2026-10-10. Actualizado al cierre del 2026-10-12.
 
 Complementa a:
 
@@ -11,6 +11,37 @@ Complementa a:
 La referencia de método fue el proyecto Alfaro & Bolaño (`aldemarbolano/docs/proceso-creacion-web.md`). Allí el recorrido era una oficina real. Aquí es un recorrido conceptual, con imágenes generadas, y eso cambia varias decisiones (sección 3).
 
 Al final, la sección 13 dice con honestidad qué no quedó registrado.
+
+---
+
+## Estado actual (léelo primero)
+
+**Todo está en `main` y desplegado** (último commit de código: `2faf387`; documentación: `18d7116` y posteriores). No hay ramas con trabajo pendiente de mergear.
+
+| Qué | Estado |
+|---|---|
+| Portada con recorrido de video atado al scroll (5 paradas, 4 clips) | Hecho |
+| Rediseño de proyectos, clientes, proceso, cifras, fundador y FAQ | Hecho |
+| Logo oficial en todo el sitio; paleta marino `#081c3c` y cian `#04b0e0` | Hecho (se corrigió un error mío, sección 8.1) |
+| Cabecera de barra con subrayado activo e indicador de parada; paleta `Ctrl/⌘ K` | Hecho |
+| Favicons nuevos (cuadrado cian con K) con parámetro de caché `?v=2` | Hecho |
+| Imagen Open Graph nueva (caos → flujo → sistema) | Hecho |
+| Rendimiento: fuentes autoalojadas, preloader honesto, imágenes por proximidad | Hecho |
+| Lighthouse (local): 99 móvil y 100 escritorio en la portada; 100 en las otras 15 páginas | Medido |
+| Lighthouse (sitio publicado, simulado): móvil 83; con throttling real: 100 | Medido, ver 9.5 |
+| Versión móvil 9:16 nativa del video | **Descartada por decisión del usuario** |
+
+**Cinco cosas que conviene saber antes de tocar el sitio** (el detalle y el porqué están en las secciones 8 a 10; las reglas condensadas, en `CLAUDE.md`):
+
+1. Los colores y el logo salen del logo oficial; no inventar otros.
+2. Las fuentes se usan con `var(--font-*)`, nunca con el nombre literal (Astro les pone un sufijo hash).
+3. El video no debe competir con la carga: nada se descarga antes del primer scroll.
+4. `/video` y `/world` tienen caché `immutable`: al regenerar un archivo, cambiarle el nombre.
+5. Un texto grande se revisa a varios anchos; los enlaces dentro de párrafos van subrayados.
+
+**Pendiente abierto** (lista completa en la sección 14 y en `PENDIENTES.md`): bajar el tiempo hasta el primer byte del servidor (~450 ms; evaluar un CDN), decidir si los 47 MB de video van en git, resolver `astro check` y refrescar la caché de la imagen Open Graph tras el despliegue.
+
+**Fuentes que no están en git:** `source/journey/` (67 MB: stills, clips crudos de Kling y prompts). Existe solo en el disco local del autor. Los enlaces de Kling caducan a los 30 días, así que hay que hacer copia de seguridad si se quiere poder regenerar un tramo sin repetir el gasto.
 
 ---
 
@@ -30,7 +61,7 @@ Al final, la sección 13 dice con honestidad qué no quedó registrado.
 
 **Costo de generación:** 1.40 USD en video (4 clips × 0.35) y unos centavos en imágenes (sección 4.4).
 
-**Resultado medido** (móvil emulado, Slow 4G, CPU 4× más lenta, build de producción): LCP 978 ms, CLS 0.00, scrub con p95 de 14 ms por frame. Peso total de clips: 16 MB en escritorio y 8.6 MB en móvil, y no se descarga ninguno hasta el primer scroll (sección 9).
+**Resultado medido** (detalle y límites en la sección 9): portada con Lighthouse oficial en local, **99 en móvil y 100 en escritorio**, CLS 0; las otras 15 páginas, 100. En el sitio publicado, con throttling real, 100 y LCP de ~1 s; con el modo simulado por defecto sale 83 porque el servidor tiene ~450 ms hasta el primer byte. Scrub fluido (p95 de 14 ms por frame). Clips de 16 MB en escritorio y 8.6 MB en móvil, y no se descarga ninguno hasta el primer scroll.
 
 ---
 
@@ -127,7 +158,7 @@ Los modelos de imagen de OpenRouter se listan con `GET /api/v1/models?output_mod
 
 ### 4.5 Manejo de la clave
 
-La clave de OpenRouter se guardó en `~/.config/openrouter/key` (permisos 600) para que no pasara por el chat, pero **el usuario la pegó en la conversación al guardarla**. Quedó expuesta en ese registro. **Hay que rotarla** (sección 14). Nunca se escribió en un archivo del repo.
+La clave de OpenRouter se guardó en `~/.config/openrouter/key` (permisos 600) para que no pasara por el chat, pero **el usuario la pegó en la conversación al guardarla**. Quedó expuesta en ese registro. **El usuario la rotó el 2026-10-12.** Lección: las claves se guardan en un archivo local y no se pegan en el chat. Nunca se escribió en un archivo del repo.
 
 ---
 
@@ -490,7 +521,7 @@ Sobre el último: se había revisado esa banda en una sola resolución. Los text
 
 - Repositorio: `github.com/korozcolt/korbytes-web`.
 - Se trabajó siempre en ramas (`feat/scroll-journey-home`, `feat/visual-sections`, `fix/facts-word-wrap`) y se mezcló a `main` solo cuando el usuario lo pidió. Cada merge fue `--no-ff`.
-- **Despliegue:** `main` se publica automáticamente en Dokploy según la configuración heredada del proyecto de Aldemar, pero **esto no se verificó desde aquí** (no hay acceso a Dokploy).
+- **Despliegue:** `main` se publica automáticamente en Dokploy al hacer push (tarda de uno a unos pocos minutos). **Verificado el 2026-10-12:** tras el merge de las optimizaciones, la versión nueva (sin referencias a Google Fonts y con los `preload`) estuvo en `kor-bytes.com` en cerca de un minuto. Las medidas de la sección 9.5 se hicieron sobre ese despliegue.
 - Los 47 MB de video y los fotogramas están versionados en git (`public/video/journey/`, `public/world/`). Queda abierta la decisión de si eso es lo correcto a largo plazo (sección 14).
 - Las fuentes originales (stills, clips crudos de Kling, prompts) están en `source/journey/` y **están fuera de git** (`.gitignore`, 67 MB). Sin ellas no se puede regenerar un tramo sin repetir el gasto.
 
@@ -552,7 +583,7 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 - **Los prompts literales del usuario** durante la sesión. Sí se conservan sus decisiones y reacciones (por ejemplo, "usa un modelo más actual", "ojo con la versión mobile", "aquí hay un error").
 - **Los reintentos fallidos con Gemini Nano Banana 2.1**: solo consta que dieron 429, no qué ventana de tiempo cubrió.
 - **Datos de campo (CrUX) y el rendimiento de las páginas internas.** El Lighthouse de rendimiento sí se midió el 2026-10-12 (sección 9.5), pero solo en laboratorio y solo en la portada.
-- **Si el despliegue automático ocurrió** tras cada merge.
+- **El tiempo exacto de cada despliegue** (solo se observó uno, de ~1 minuto, el 2026-10-12).
 
 ---
 
