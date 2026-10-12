@@ -253,7 +253,7 @@ La primera codificación usó crf 20 (escritorio, 8 MB) y crf 23 (móvil, 3.5 MB
 
 ### 7.5 Móvil: recorte, no versión nativa
 
-La versión móvil es un **recorte vertical del mismo video 16:9**, con un encuadre horizontal propio por parada (`focus`, interpolado entre paradas). Es el recurso de respaldo del skill. **Una cadena 9:16 nativa sigue pendiente** y es la mejora de calidad móvil más grande (costaría unos 1.40 USD más). En pantallas estrechas se ve solo la franja central, con menos resolución efectiva.
+La versión móvil es un **recorte vertical del mismo video 16:9**, con un encuadre horizontal propio por parada (`focus`, interpolado entre paradas). Es el recurso de respaldo del skill. **Decisión del usuario (2026-10-12): la versión móvil se queda así**, porque le gusta como está y no ve necesaria una cadena 9:16 nativa. Es una opción abierta (costaría unos 1.40 USD), no una deuda. En pantallas estrechas se ve solo la franja central, con menos resolución efectiva.
 
 ---
 
@@ -378,6 +378,60 @@ Primera pasada: accesibilidad 96, con tres fallos reales que eran míos y se cor
 
 Esta herramienta de Lighthouse **no incluye la categoría de rendimiento**, así que esos números siguen siendo los de la sección 9.3.
 
+### 9.5 Lighthouse de rendimiento y optimización (2026-10-12)
+
+Hasta aquí no existía una medición de rendimiento con Lighthouse real (la herramienta de DevTools usada antes la excluye). Se usó el **CLI oficial `lighthouse` 13.5** con Chrome headless, la configuración estándar de móvil (Slow 4G simulado, CPU 4× más lenta) y de escritorio, contra el build de producción servido por `server.mjs` y contra el sitio publicado.
+
+**Antes** (portada):
+
+| | Móvil | Escritorio |
+|---|---|---|
+| Rendimiento (local) | **78** | 99 |
+| Rendimiento (sitio publicado) | **72** | 99 |
+| FCP / LCP (móvil, simulado) | 2.9 s / 4.6 s (publicado: 3.1 s / 5.3 s) | 0.2 s / 0.8 s |
+| CLS (móvil) | 0.023 | 0.004 |
+| Peso transferido (móvil) | 626 KB | 9.1 MB |
+
+**Causas encontradas** (con la película de fotogramas de Lighthouse y el desglose de LCP):
+
+1. **El preloader.** Existía de antes: un contador falso 0 → 100 % de 1.4 s fijos que tapaba la página. El contenido real (titular, botones) solo se veía a ~1.5 s. La captura de Lighthouse lo mostró fotograma a fotograma.
+2. **La imagen de portada se descubría tarde**: la crea el motor con JavaScript, así que el navegador no la pedía hasta ejecutar el script.
+3. **Fuentes desde Google Fonts** con cambio tardío tras el evento `load`: dos viajes a otros dominios, y el titular (el elemento LCP) se repintaba al llegar la tipografía, lo que también movía el diseño (CLS).
+4. **Las 5 imágenes fijas se pedían a la vez** al montar el motor (unos 250 KB en móvil), aunque solo se vea una.
+5. (Sin tocar) Google Tag Manager aporta unos 73 KB de JavaScript sin usar; son de terceros y tienen un costo de bloqueo de 0 ms, así que se dejó.
+
+**Cambios:**
+
+- **Preloader honesto:** se quitó el contador. Se retira en cuanto las tipografías están listas y la imagen de portada está decodificada (con red rápida es casi instantáneo; con red lenta sigue siendo una pantalla de carga real), con un **tope de 1.5 s** para no bloquear nunca. Se agregó `<noscript>` para ocultarlo sin JavaScript (antes, sin JS, tapaba la página para siempre).
+- **`<link rel="preload">` de la imagen de portada** (versión móvil o escritorio según el ancho), con `fetchpriority="high"`.
+- **Fuentes autoalojadas** con la API de fuentes de Astro 6 (`fonts` en `astro.config.mjs`): se descargan en el build, se sirven desde nuestro dominio, se precargan las dos críticas (Familjen Grotesk e Inter Tight) y llevan métricas de respaldo ajustadas para que el cambio de tipografía no mueva el diseño.
+- **Imágenes fijas por proximidad:** al montar solo se pide la primera; las demás se piden cuando el scroll se acerca (2.5 alturas antes y 1.5 después). Verificado: tras un salto largo, la imagen de la parada aparece cargada en menos de 700 ms.
+
+**Trampa importante descubierta en el proceso:** la API de fuentes de Astro nombra las familias con un sufijo hash (`"Familjen Grotesk-b30e965a2cb06af0"`). El CSS que decía `font-family: "Familjen Grotesk"` **no las habría encontrado** y todo el sitio habría caído a la tipografía del sistema, sin errores visibles en el build. Se migraron las 67 declaraciones a las variables `var(--font-familjen)`, `var(--font-inter)` y `var(--font-mono)`. **Regla nueva: nunca escribir el nombre literal de una fuente en el CSS; usar siempre esas variables.**
+
+**Después** (build de producción local; móvil = mediana de 3 corridas, que dieron 99, 99 y 99):
+
+| | Móvil | Escritorio |
+|---|---|---|
+| Rendimiento | **99** | **100** |
+| FCP / LCP (simulado) | 1.2 s / ~2.0 s | 0.3 s / 0.5 s |
+| CLS | **0** | **0** |
+| TBT | 0 a 6 ms | 0 ms |
+| Peso transferido | **419 KB** | 8.6 MB* |
+| Accesibilidad, buenas prácticas, SEO | 100, 100, 100 | 100, 100, 100 |
+
+\* El peso de escritorio incluye los dos primeros clips de video, que se piden 2.5 s después de `load` por la política de la sección 9.2. Es intencional y no afectó la nota.
+
+**Las 16 páginas del sitio** (móvil, mismo método, build local): 15 sacan **100 en rendimiento, accesibilidad, buenas prácticas y SEO**; la portada saca 99 en rendimiento y 100 en lo demás. LCP entre 1.6 s y 1.9 s y CLS 0 en todas. Páginas medidas: portada, las 7 landings, las 3 guías y el índice de guías, portafolio, software a medida en Sincelejo, programador en Sincelejo y aviso legal (la 404 también dio 100 en una medición aparte).
+
+**Hallazgo de accesibilidad que apareció al medir las páginas internas:** cuatro páginas sacaban 95 o 96 por el criterio *link-in-text-block*. Al cambiar el acento a cian, los enlaces dentro de párrafos quedaron con un contraste de **1.02:1 frente al texto gris que los rodea** (el cian y el gris tienen casi la misma luminosidad), así que solo se distinguían por color. Antes, con ámbar, no se notaba. Se corrigió en un solo lugar para todo el sitio: `p a:not([class])` va subrayado en `global.css`. Es una consecuencia directa de la paleta nueva que el Lighthouse de la portada no habría detectado.
+
+**Límites, para ser fiel:**
+
+- Son números de **laboratorio** (Lighthouse con red y CPU simuladas), no de usuarios reales. No hay datos de campo (CrUX) para este sitio.
+- El "después" se midió sobre el build local. Los números del sitio publicado se medirán de nuevo tras el próximo despliegue; el "antes" publicado (72 / 99) sí es del sitio real.
+- La nota de móvil de la portada sube a 99 y no a 100; no se investigó el punto que falta.
+
 ---
 
 ## 10. Problemas encontrados y cómo se resolvieron
@@ -398,6 +452,10 @@ Esta herramienta de Lighthouse **no incluye la categoría de rendimiento**, así
 | Tarjeta apilada translúcida dejaba ver la de abajo | Se animaba `opacity` en la tarjeta que se hunde | Se anima una capa opaca (`--dim`) en lugar de la opacidad |
 | El navegador seguía ejecutando el JS viejo tras editar | Caché del servidor de desarrollo | Recarga con parámetro nuevo; en producción no ocurre |
 | Título del proceso se superponía a los pasos en móvil | `position: sticky` también en una columna | `sticky` solo desde 981 px (también en FAQ) |
+| Rendimiento móvil de 78 (72 en producción) | Preloader con contador falso, imagen de portada descubierta tarde, fuentes de Google con cambio tardío, 5 imágenes a la vez | Sección 9.5: móvil 99 y CLS 0 |
+| Las fuentes autoalojadas no se habrían aplicado | Astro nombra las familias con un sufijo hash; el CSS usaba el nombre literal | Migradas 67 declaraciones a `var(--font-*)`; regla nueva en `DESIGN.md` |
+| 4 páginas con accesibilidad 95 a 96 | Enlaces cian dentro de párrafos grises: contraste 1.02:1, solo se distinguían por color | Subrayado global de `p a:not([class])` |
+| Preloader tapaba la página sin JavaScript | Se retiraba solo por script | `<noscript>` que lo oculta |
 | **"Sincelejo" partido en "Sincelej / o"** | **Error mío:** al reducir el tamaño añadí `overflow-wrap: anywhere` | Se quitó, y los datos de texto usan un tamaño menor sin salto de línea. Verificado a 390, 1000 y 1700 px |
 
 Sobre el último: se había revisado esa banda en una sola resolución. Los textos grandes se verifican a varios anchos antes de darlos por cerrados.
@@ -469,17 +527,16 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 - **El análisis de costuras por luma** que se hizo en Aldemar no se repitió aquí; la verificación fue visual.
 - **Los prompts literales del usuario** durante la sesión. Sí se conservan sus decisiones y reacciones (por ejemplo, "usa un modelo más actual", "ojo con la versión mobile", "aquí hay un error").
 - **Los reintentos fallidos con Gemini Nano Banana 2.1**: solo consta que dieron 429, no qué ventana de tiempo cubrió.
-- **Lighthouse de rendimiento** de la página final: la herramienta usada excluye esa categoría. Solo hay traza de rendimiento (LCP/CLS) del 2026-10-10. Accesibilidad, buenas prácticas y SEO sí se midieron el 2026-10-12 (sección 9.4).
+- **Datos de campo (CrUX) y el rendimiento de las páginas internas.** El Lighthouse de rendimiento sí se midió el 2026-10-12 (sección 9.5), pero solo en laboratorio y solo en la portada.
 - **Si el despliegue automático ocurrió** tras cada merge.
 
 ---
 
 ## 14. Pendientes abiertos
 
-1. **Rotar la clave de OpenRouter**, que quedó escrita en la conversación.
-2. **Probar el scrub en un iPhone real** (iOS Safari), que es lo más frágil.
-3. **Cadena 9:16 nativa para móvil** (unos 1.40 USD; quedan 3.20 en Monid). Hoy es un recorte del 16:9.
-5. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
-6. **Resolver `astro check`**, que se cae por un fallo del runtime.
-7. **Lighthouse de rendimiento** sobre la página final con la cabecera nueva (accesibilidad, buenas prácticas y SEO ya están en 100, sección 9.4).
-8. **Verificar el despliegue** en `kor-bytes.com`: que el video avance con el scroll (prueba real del CSP).
+Cerrados el 2026-10-12: rotar la clave de OpenRouter, probar el scrub en un iPhone real (ambos confirmados por el usuario), la imagen Open Graph, el Lighthouse de rendimiento, y la versión móvil 9:16 (decisión de no hacerla).
+
+1. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
+2. **Resolver `astro check`**, que se cae por un fallo del runtime de Node.
+3. **Volver a medir Lighthouse sobre el sitio publicado** tras el despliegue de la sección 9.5, y registrar el resultado.
+5. **Refrescar la caché de la imagen Open Graph** en LinkedIn, Facebook y WhatsApp tras el despliegue.

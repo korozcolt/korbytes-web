@@ -86,7 +86,7 @@ const extraGraph = [
 <style>
   .g-header { position: sticky; top: 0; z-index: 10; background: rgba(5, 13, 26, .88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--kb-line); }
   .g-header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  .g-brand { font-family: "Familjen Grotesk", sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }
+  .g-brand { font-family: var(--font-familjen); font-size: 1.2rem; font-weight: 700; color: var(--kb-text-strong); }
   .g-brand span { color: var(--kb-accent); }
   .g-cta { font-size: .82rem; padding: .7rem 1rem; }
   .g-article { max-width: 760px; padding-block: clamp(48px, 8vw, 110px); }
@@ -96,9 +96,9 @@ const extraGraph = [
   .g-article ul { padding-left: 1.2rem; display: grid; gap: .4rem; }
   .g-box { margin-top: 3rem; padding: clamp(1.4rem, 4vw, 2.2rem); border: 1px solid var(--kb-line-strong); border-radius: var(--kb-radius-lg); background: var(--kb-bg-raised); }
   .g-box h2 { margin-top: 0; }
-  .g-more a { color: var(--kb-accent); }
+  .g-more a { color: var(--kb-accent); text-decoration: underline; text-underline-offset: 3px; }
   .g-faq { border-bottom: 1px solid var(--kb-line); }
-  .g-faq summary { cursor: pointer; padding: 1.1rem 0; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; color: var(--kb-text-strong); }
+  .g-faq summary { cursor: pointer; padding: 1.1rem 0; font-family: var(--font-familjen); font-weight: 600; color: var(--kb-text-strong); }
   .g-faq p { margin: 0 0 1.1rem; }
   @media (max-width: 600px) { .g-cta { display: none; } }
 </style>

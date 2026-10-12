@@ -106,7 +106,7 @@ const { need = needOptions[0], source } = Astro.props;
   .lead-form input[aria-invalid="true"] { border-color: #ff6b6b; }
   .lead-form__submit { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 600; }
   .lead-form__note { margin: 0; font-size: .8rem; color: var(--kb-text-soft); line-height: 1.55; }
-  .lead-form__note a { color: var(--kb-accent); }
+  .lead-form__note a { color: var(--kb-accent); text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 560px) {
     .lead-form__row { grid-template-columns: 1fr; }
     .lead-form__submit { justify-self: stretch; }
