@@ -3,6 +3,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
 import Journey from "@/components/Journey.astro";
+import Logo from "@/components/Logo.astro";
+import CommandPalette from "@/components/CommandPalette.astro";
+import { journey } from "@/data/journey";
 import { landings } from "@/data/landings";
 import {
   navAnchors,
@@ -50,8 +53,7 @@ function initials(name: string) {
 
   <div id="preloader" class="kb-preloader" aria-hidden="true">
     <div class="kb-preloader-top">
-      <span class="kb-mark">K</span>
-      <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+      <Logo height={44} alt="" />
     </div>
     <div class="kb-preloader-mid">
       <span class="kb-preloader-label">Software operativo</span>
@@ -60,42 +62,55 @@ function initials(name: string) {
     <div class="kb-preloader-bar"><div id="preloader-fill" class="kb-preloader-fill"></div></div>
   </div>
 
-  <header class="kb-header" id="site-header">
-    <div class="kb-container kb-header-inner">
-      <a href="#top" id="logo-slot" class="kb-logo-slot" aria-label="KOR Bytes">
-        <span class="kb-mark">K</span>
-        <span class="kb-logo-slide-wrap">
-          <span class="kb-logo-slide">
-            <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
-            <span class="kb-wordmark kb-wordmark--accent">KOR Bytes<span class="kb-dot kb-dot--inverse">.</span></span>
-          </span>
-        </span>
+  <header class="kb-header" id="site-header" data-stops={JSON.stringify(journey.map((j) => j.label))}>
+    <div class="kb-header-inner">
+      <a href="#top" id="logo-slot" class="kb-logo-slot" aria-label="KOR Bytes, ir al inicio">
+        <Logo height={34} alt="" />
       </a>
 
-      <nav class="kb-hnav" aria-label="Navegación principal">
+      <p class="kb-hstop" id="header-stop" aria-hidden="true">
+        <span class="kb-hstop-n" id="header-stop-n">01</span><span class="kb-hstop-of">/ {String(journey.length).padStart(2, "0")}</span>
+        <span class="kb-hstop-label" id="header-stop-label">{journey[0].label}</span>
+      </p>
+
+      <nav class="kb-hnav" id="main-nav" aria-label="Navegación principal">
         {navAnchors.map((item) => (
-          <a href={item.href}>{item.label}</a>
+          <a href={item.href} data-nav-link>{item.label}</a>
         ))}
+        <span class="kb-hnav-bar" id="nav-bar" aria-hidden="true"></span>
       </nav>
 
-      <a class="kb-hnav-cta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
-        <span class="kb-hnav-dot" aria-hidden="true"></span>Hablemos por WhatsApp
-      </a>
-
-      <button class="kb-menu-btn" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="kb-hactions">
+        <button type="button" class="kb-hsearch" data-palette-open aria-keyshortcuts="Control+K Meta+K">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <span class="kb-hsearch-text">Buscar</span>
+          <span class="kb-hsearch-keys" aria-hidden="true"><kbd data-kbd-mod>Ctrl</kbd><kbd>K</kbd></span>
+        </button>
+        <a class="kb-hcta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+          Hablemos
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+        </a>
+        <button class="kb-menu-btn" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
     <div class="kb-mobile-menu" id="mobile-menu">
-      {navAnchors.map((item) => (
-        <a href={item.href}>{item.label}</a>
+      <button type="button" class="kb-mm-search" data-palette-open>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        Buscar en el sitio
+      </button>
+      {navAnchors.map((item, i) => (
+        <a href={item.href}><span class="kb-mm-n">{String(i + 1).padStart(2, "0")}</span>{item.label}</a>
       ))}
-      <a href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
-        Hablar por WhatsApp
+      <a class="kb-mm-cta" href={whatsapp("Hola KOR Bytes, quiero una consultoría para mi proyecto digital.")} target="_blank" rel="noopener">
+        Hablemos por WhatsApp
       </a>
     </div>
   </header>
+
+  <CommandPalette />
 
   <main id="main-content">
     <Journey />
@@ -407,18 +422,68 @@ function initials(name: string) {
       }, { passive: true });
     }
 
+    // ── Indicador de parada del recorrido (lo emite el motor del video).
+    const stopN = document.getElementById("header-stop-n");
+    const stopL = document.getElementById("header-stop-label");
+    const stopLabels: string[] = JSON.parse(header?.dataset.stops ?? "[]");
+    document.addEventListener("journey:stop", (e) => {
+      const i = (e as CustomEvent<{ index: number }>).detail.index;
+      if (stopN) stopN.textContent = String(i + 1).padStart(2, "0");
+      if (stopL) stopL.textContent = stopLabels[i] ?? "";
+    });
+
+    // ── Sección activa: el enlace se resalta y el subrayado se desliza hasta él.
+    const nav = document.getElementById("main-nav");
+    const bar = document.getElementById("nav-bar");
+    const links = nav ? Array.from(nav.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")) : [];
+    const targets = links.map((a) => document.querySelector(a.getAttribute("href") ?? ""));
+    const visibleTargets = new Set<Element>();
+
+    function moveBar(link: HTMLAnchorElement | null) {
+      if (!nav || !bar) return;
+      if (!link) { bar.classList.remove("is-on"); return; }
+      const nr = nav.getBoundingClientRect();
+      const lr = link.getBoundingClientRect();
+      bar.style.setProperty("--x", `${lr.left - nr.left}px`);
+      bar.style.setProperty("--w", `${lr.width}px`);
+      bar.classList.add("is-on");
+    }
+    function refreshActive() {
+      let current: HTMLAnchorElement | null = null;
+      links.forEach((a, i) => {
+        const t = targets[i];
+        const on = !!t && visibleTargets.has(t);
+        if (on) current = a;
+      });
+      links.forEach((a) => {
+        if (a === current) a.setAttribute("aria-current", "location");
+        else a.removeAttribute("aria-current");
+      });
+      moveBar(current);
+    }
+    if (targets.some(Boolean)) {
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((en) => (en.isIntersecting ? visibleTargets.add(en.target) : visibleTargets.delete(en.target)));
+        refreshActive();
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      targets.forEach((t) => t && spy.observe(t));
+      addEventListener("resize", refreshActive, { passive: true });
+    }
+
+    // ── Menú móvil.
     const menuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
+    function setMenu(open: boolean) {
+      if (!menuBtn || !mobileMenu) return;
+      mobileMenu.classList.toggle("is-open", open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    }
     if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener("click", () => {
-        const isOpen = mobileMenu.classList.toggle("is-open");
-        menuBtn.setAttribute("aria-expanded", String(isOpen));
-      });
-      mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.remove("is-open");
-          menuBtn.setAttribute("aria-expanded", "false");
-        });
+      menuBtn.addEventListener("click", () => setMenu(!mobileMenu.classList.contains("is-open")));
+      mobileMenu.querySelectorAll("a, button").forEach((el) => el.addEventListener("click", () => setMenu(false)));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) { setMenu(false); menuBtn.focus(); }
       });
     }
   </script>
@@ -464,88 +529,120 @@ function initials(name: string) {
   .kb-preloader-bar { height: 2px; background: rgba(255,255,255,0.1); margin-top: 26px; }
   .kb-preloader-fill { height: 2px; background: var(--kb-accent); width: 0%; }
 
-  /* ── Logo ──────────────────────────────────────────────────── */
-  .kb-mark {
-    width: 34px; height: 34px; border-radius: 10px;
-    background: var(--kb-accent);
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: "Familjen Grotesk", sans-serif; font-weight: 700;
-    color: var(--kb-bg); font-size: 16px; flex-shrink: 0;
-  }
-  .kb-wordmark { display: block; height: 24px; line-height: 24px; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; color: var(--kb-text); white-space: nowrap; }
-  .kb-wordmark--accent { color: var(--kb-accent); }
-  .kb-dot { color: var(--kb-accent); }
-  .kb-dot--inverse { color: var(--kb-text); }
-  .kb-logo-slide-wrap { display: block; height: 24px; overflow: hidden; }
-  .kb-logo-slide { display: block; transition: transform 0.55s cubic-bezier(0.6, 0, 0.2, 1); }
-  a:hover .kb-logo-slide { transform: translateY(-100%); }
-
-  .kb-logo-slot {
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  /* ── Header ────────────────────────────────────────────────── */
+  /* ── Cabecera: barra de herramienta, no píldora ────────────── */
   .kb-header {
-    position: fixed; top: 14px; left: 50%; z-index: 90;
-    width: min(1120px, calc(100% - 28px));
-    transform: translateX(-50%);
-    background: rgba(5, 9, 15, 0.55);
-    -webkit-backdrop-filter: blur(18px) saturate(1.3);
-    backdrop-filter: blur(18px) saturate(1.3);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: var(--kb-radius-full);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 90; height: 60px;
+    background: rgba(5, 13, 26, 0.38);
+    -webkit-backdrop-filter: blur(14px) saturate(1.25);
+    backdrop-filter: blur(14px) saturate(1.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
     transition: background var(--kb-duration-normal) var(--kb-ease-out), border-color var(--kb-duration-normal) var(--kb-ease-out);
   }
-  .kb-header.is-scrolled { background: rgba(5, 9, 15, 0.82); border-color: var(--kb-line-strong); }
+  .kb-header.is-scrolled { background: rgba(5, 13, 26, 0.88); border-bottom-color: var(--kb-line-strong); }
   .kb-header-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; padding: 10px 12px 10px 18px;
+    height: 100%; width: min(1320px, calc(100% - 40px)); margin: 0 auto;
+    display: flex; align-items: center; gap: 28px;
   }
-  .kb-hnav {
-    display: flex; align-items: center; gap: 22px;
-    font-size: 14px; color: var(--kb-text-muted);
+  .kb-logo-slot { display: flex; align-items: center; flex-shrink: 0; border-radius: 6px; }
+  .kb-logo-slot:focus-visible, .kb-hnav a:focus-visible, .kb-hsearch:focus-visible, .kb-hcta:focus-visible, .kb-menu-btn:focus-visible, .kb-mobile-menu a:focus-visible, .kb-mm-search:focus-visible {
+    outline: 2px solid var(--kb-accent); outline-offset: 3px;
   }
-  .kb-hnav a:first-child { color: var(--kb-text); }
-  .kb-hnav-cta {
-    display: flex; align-items: center; gap: 10px;
-    padding: 11px 20px; border-radius: var(--kb-radius-full);
-    border: 1px solid var(--kb-line-strong); font-size: 13px;
-    white-space: nowrap;
-    transition: background var(--kb-duration-fast), border-color var(--kb-duration-fast), color var(--kb-duration-fast);
+
+  /* Indicador de la parada del recorrido: solo mientras dura el video. */
+  .kb-hstop {
+    display: flex; align-items: baseline; gap: 6px; margin: 0; padding-left: 28px;
+    border-left: 1px solid var(--kb-line-strong);
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--kb-text-muted); white-space: nowrap;
+    transition: opacity var(--kb-duration-normal) var(--kb-ease-out);
   }
-  .kb-hnav-cta:hover { background: var(--kb-accent); border-color: var(--kb-accent); color: var(--kb-bg); }
-  .kb-hnav-dot { width: 7px; height: 7px; border-radius: 99px; background: var(--kb-accent); display: inline-block; }
+  .kb-hstop-n { color: var(--kb-accent); }
+  .kb-hstop-label { margin-left: 6px; color: var(--kb-text); }
+  :global(html:has(.journey.is-past)) .kb-hstop, :global(html:has(.journey:not(.is-ready))) .kb-hstop { opacity: 0; pointer-events: none; }
+
+  .kb-hnav { position: relative; align-self: stretch; display: flex; align-items: center; margin-left: auto; }
+  .kb-hnav a {
+    display: flex; align-items: center; height: 100%; padding: 0 16px;
+    font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--kb-text-muted);
+    transition: color var(--kb-duration-fast) var(--kb-ease-out);
+  }
+  .kb-hnav a:hover, .kb-hnav a[aria-current] { color: var(--kb-text-strong); }
+  .kb-hnav a[aria-current] { color: var(--kb-accent); }
+  /* Subrayado deslizante bajo el enlace de la sección activa. */
+  .kb-hnav-bar {
+    position: absolute; left: 0; bottom: -1px; height: 2px; width: var(--w, 0px);
+    background: var(--kb-accent); box-shadow: 0 0 14px rgba(var(--kb-accent-rgb), 0.7);
+    transform: translateX(var(--x, 0px)); opacity: 0;
+    transition: transform var(--kb-duration-slow) var(--kb-ease-out), width var(--kb-duration-slow) var(--kb-ease-out), opacity var(--kb-duration-normal);
+  }
+  .kb-hnav-bar.is-on { opacity: 1; }
+
+  .kb-hactions { display: flex; align-items: center; gap: 10px; }
+  .kb-hsearch {
+    position: relative; display: inline-flex; align-items: center; gap: 10px; height: 36px; padding: 0 8px 0 12px;
+    border: 1px solid var(--kb-line-strong); border-radius: 8px; background: rgba(255, 255, 255, 0.03);
+    color: var(--kb-text-muted); font-family: "Inter Tight", sans-serif; font-size: 13px; cursor: pointer;
+    transition: border-color var(--kb-duration-fast), color var(--kb-duration-fast), background var(--kb-duration-fast);
+  }
+  .kb-hsearch:hover { border-color: var(--kb-line-accent); color: var(--kb-text-strong); background: rgba(var(--kb-accent-rgb), 0.08); }
+  .kb-hsearch-keys kbd {
+    display: inline-block; min-width: 20px; margin-left: 3px; padding: 2px 6px; text-align: center;
+    border: 1px solid var(--kb-line-strong); border-radius: 5px; background: rgba(255, 255, 255, 0.05);
+    font: 500 11px "JetBrains Mono", ui-monospace, monospace; color: var(--kb-text-muted);
+  }
+  .kb-hcta {
+    display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px;
+    border-radius: 8px; background: var(--kb-accent); color: var(--kb-bg) !important;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
+    transition: background var(--kb-duration-fast), transform var(--kb-duration-fast) var(--kb-ease-out);
+  }
+  .kb-hcta:hover { background: var(--kb-text-strong); }
+  .kb-hcta svg { transition: transform var(--kb-duration-fast) var(--kb-ease-out); }
+  .kb-hcta:hover svg { transform: translate(2px, -2px); }
 
   .kb-menu-btn {
     display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    width: 44px; height: 44px; padding: 0;
+    width: 44px; height: 44px; padding: 0; cursor: pointer;
     border: 1px solid var(--kb-line-strong); background: transparent;
-    border-radius: var(--kb-radius-full); color: var(--kb-text);
+    border-radius: 10px; color: var(--kb-text);
   }
-  .kb-menu-btn span { display: block; width: 18px; height: 2px; margin: 0; background: currentColor; border-radius: 2px; }
+  .kb-menu-btn span { display: block; width: 18px; height: 2px; margin: 0; background: currentColor; border-radius: 2px; transition: transform var(--kb-duration-normal) var(--kb-ease-out), opacity var(--kb-duration-fast); }
+  .kb-menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .kb-menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .kb-menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .kb-mobile-menu {
-    display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0;
-    padding: 10px; border-radius: var(--kb-radius-lg);
-    background: rgba(5, 9, 15, 0.94);
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    padding: 12px 20px 20px; max-height: calc(100dvh - 60px); overflow-y: auto;
+    background: rgba(5, 13, 26, 0.97);
     -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
-    border: 1px solid var(--kb-line-strong);
+    border-bottom: 1px solid var(--kb-line-strong);
   }
   .kb-mobile-menu.is-open { display: grid; gap: 2px; }
-  .kb-mobile-menu a { padding: 14px 16px; border-radius: var(--kb-radius-md); font-size: 1rem; color: var(--kb-text); }
-  .kb-mobile-menu a:last-child { margin-top: 6px; background: var(--kb-accent); color: var(--kb-bg); font-weight: 600; text-align: center; }
-  .kb-mobile-menu a:not(:last-child):hover { background: rgba(255, 255, 255, 0.06); color: var(--kb-accent); }
+  .kb-mobile-menu a, .kb-mm-search {
+    display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 0 4px;
+    border-bottom: 1px solid var(--kb-line); font-size: 1.15rem; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; color: var(--kb-text);
+  }
+  .kb-mm-search { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--kb-line); cursor: pointer; color: var(--kb-text-muted); font-family: "Inter Tight", sans-serif; font-weight: 500; font-size: 1rem; text-align: left; }
+  .kb-mm-n { width: 26px; font: 500 0.72rem "JetBrains Mono", ui-monospace, monospace; color: var(--kb-accent); }
+  .kb-mobile-menu a.kb-mm-cta { margin-top: 14px; justify-content: center; min-height: 52px; border: 0; border-radius: 10px; background: var(--kb-accent); color: var(--kb-bg); font-family: "Inter Tight", sans-serif; font-size: 1rem; }
 
-  @media (max-width: 1080px) { .kb-hnav a:nth-child(4) { display: none; } }
-  @media (max-width: 880px) {
-    .kb-hnav, .kb-hnav-cta { display: none; }
+  @media (max-width: 1240px) { .kb-hstop { display: none; } .kb-hnav a { padding: 0 12px; } }
+  @media (max-width: 1080px) { .kb-hsearch-keys { display: none; } .kb-hsearch-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } .kb-hsearch { width: 40px; padding: 0; justify-content: center; } }
+  @media (max-width: 920px) {
+    .kb-hnav, .kb-hcta { display: none; }
+    .kb-hactions { margin-left: auto; }
     .kb-menu-btn { display: inline-flex; }
+    .kb-hsearch { width: 44px; height: 44px; border-radius: 10px; }
   }
 
+  .kb-dot { color: var(--kb-accent); }
   .kb-text-soft { color: var(--kb-text-soft); }
   .kb-text { color: var(--kb-text); }
 
   /* ── Marquee ───────────────────────────────────────────────── */
-  .kb-marquee { border-top: 1px solid var(--kb-line); border-bottom: 1px solid var(--kb-line); overflow: hidden; padding: 26px 0; background: #070d15; }
+  .kb-marquee { border-top: 1px solid var(--kb-line); border-bottom: 1px solid var(--kb-line); overflow: hidden; padding: 26px 0; background: #08142a; }
   .kb-marquee--soft { padding: 20px 0; }
   .kb-marquee-track { display: flex; width: max-content; animation: kb-marquee 28s linear infinite; }
   .kb-marquee--soft .kb-marquee-track { animation-duration: 36s; }
@@ -554,7 +651,7 @@ function initials(name: string) {
   @keyframes kb-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 
   /* ── Manifiesto ────────────────────────────────────────────── */
-  .kb-manifesto { padding-block: clamp(80px, 9vw, 130px) clamp(112px, 13vw, 190px); background: radial-gradient(ellipse 50rem 34rem at 10% 45%, rgba(59, 91, 219, 0.16), transparent 66%); }
+  .kb-manifesto { padding-block: clamp(80px, 9vw, 130px) clamp(112px, 13vw, 190px); background: radial-gradient(ellipse 50rem 34rem at 10% 45%, rgba(4, 176, 224, 0.10), transparent 66%); }
   .kb-manifesto-text { margin: 0; max-width: 24ch; font-family: "Familjen Grotesk", sans-serif; font-weight: 600; font-size: clamp(2rem, 5.2vw, 4.6rem); line-height: 1.04; letter-spacing: -0.025em; color: var(--kb-text-strong); text-wrap: balance; }
   .kb-manifesto-foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px 64px; align-items: end; margin-top: clamp(48px, 7vw, 96px); }
   .kb-practica-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--kb-line); }
@@ -587,7 +684,7 @@ function initials(name: string) {
   .kb-pass { padding-top: 0; }
   .kb-pass-banner { position: relative; height: clamp(320px, 52vh, 560px); margin-bottom: clamp(48px, 6vw, 80px); overflow: hidden; display: flex; align-items: flex-end; }
   .kb-pass-banner img { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; object-fit: cover; will-change: transform; }
-  .kb-pass-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg) 0%, rgba(5, 9, 15, 0.1) 30%, rgba(5, 9, 15, 0.35) 60%, var(--kb-bg) 100%); }
+  .kb-pass-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg) 0%, rgba(5, 13, 26, 0.1) 30%, rgba(5, 13, 26, 0.35) 60%, var(--kb-bg) 100%); }
   .kb-pass-banner-copy { position: relative; z-index: 1; padding-bottom: clamp(32px, 5vw, 64px); }
   .kb-pass-banner-copy .kb-body { margin-top: 14px; max-width: 52ch; color: var(--kb-text); }
   .kb-pass-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -679,7 +776,7 @@ function initials(name: string) {
   /* ── Cifras: banda sobre el fotograma de la sala de control ── */
   .kb-facts { position: relative; overflow: hidden; padding-block: clamp(96px, 12vw, 170px); background: var(--kb-bg); }
   .kb-facts > img { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; will-change: transform; }
-  .kb-facts::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg), rgba(5, 9, 15, 0.72) 25%, rgba(5, 9, 15, 0.72) 75%, var(--kb-bg)); }
+  .kb-facts::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--kb-bg), rgba(5, 13, 26, 0.72) 25%, rgba(5, 13, 26, 0.72) 75%, var(--kb-bg)); }
   .kb-facts-inner { position: relative; z-index: 1; }
   .kb-hechos-grid { margin-top: clamp(36px, 5vw, 64px); display: grid; grid-template-columns: repeat(4, 1fr); }
   .kb-hecho { padding: 8px 32px; border-left: 1px solid var(--kb-line-strong); }
@@ -721,7 +818,7 @@ function initials(name: string) {
   }
 
   /* ── Contact CTA ───────────────────────────────────────────── */
-  .kb-cta { border-radius: var(--kb-radius-lg); background: radial-gradient(ellipse 40rem 26rem at 85% 0%, rgba(59, 91, 219, 0.28), transparent 65%), radial-gradient(ellipse 30rem 20rem at 0% 100%, rgba(240, 164, 58, 0.12), transparent 65%), var(--kb-bg-raised); border: 1px solid var(--kb-line-strong); padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
+  .kb-cta { border-radius: var(--kb-radius-lg); background: radial-gradient(ellipse 40rem 26rem at 85% 0%, rgba(4, 176, 224, 0.20), transparent 65%), var(--kb-brand); border: 1px solid var(--kb-line-strong); padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; }
   .kb-cta-finder { margin-top: 1.4rem; font-size: 0.9rem; color: var(--kb-text-muted); }
   .kb-cta-finder a { color: var(--kb-accent); text-decoration: underline; text-underline-offset: 3px; }
   .kb-cta-actions { display: flex; flex-direction: column; gap: 16px; min-width: 280px; }

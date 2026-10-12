@@ -1,33 +1,33 @@
 :root {
   color-scheme: dark;
 
-  /* ── Core surfaces ─────────────────────────────────────────── */
-  --kb-bg:           #05090f;
-  --kb-bg-raised:    #0a121c;
-  --kb-bg-floating:  #0c141f;
-  --kb-bg-ink:       #05090f;
+  /* ── Core surfaces: azul marino de la marca, oscurecido ──────── */
+  --kb-bg:           #050d1a;
+  --kb-bg-raised:    #0a172b;
+  --kb-bg-floating:  #0e2038;
+  --kb-bg-ink:       #050d1a;
 
-  /* ── Accent — ámbar (confianza, calidez) + cobalto y cian como apoyo técnico ── */
-  --kb-accent:       #f0a43a;
-  --kb-accent-soft:  #f5bd6a;
-  --kb-accent-muted: rgba(240, 164, 58, 0.14);
-  --kb-cobalt:       #3b5bdb;
-  --kb-cobalt-deep:  #12245e;
-  --kb-cyan:         #38d0ee;
+  /* ── Marca (colores del logo oficial) ─────────────────────────
+     Azul marino #081c3c y cian #04b0e0. El cian es el único color de acción. */
+  --kb-brand:        #081c3c;
+  --kb-accent:       #04b0e0;
+  --kb-accent-soft:  #4cc9ee;
+  --kb-accent-muted: rgba(4, 176, 224, 0.14);
+  --kb-accent-rgb:   4, 176, 224;
 
   /* ── Text ramp ──────────────────────────────────────────────── */
-  --kb-text:         #eef2f6;
-  --kb-text-strong:  #f4f7fa;
-  --kb-text-muted:   #8a97a8;
-  --kb-text-soft:    #718296;
+  --kb-text:         #eaf2f8;
+  --kb-text-strong:  #f4f9fc;
+  --kb-text-muted:   #8fa3b8;
+  --kb-text-soft:    #7288a0;
 
   /* ── Borders & lines ───────────────────────────────────────── */
   --kb-line:         rgba(255, 255, 255, 0.07);
   --kb-line-strong:  rgba(255, 255, 255, 0.16);
-  --kb-line-accent:  rgba(240, 164, 58, 0.45);
+  --kb-line-accent:  rgba(4, 176, 224, 0.5);
 
   /* ── Glass / translucent (ponctuelles) ─────────────────────── */
-  --kb-glass:        rgba(5, 9, 15, 0.82);
+  --kb-glass:        rgba(5, 13, 26, 0.82);
 
   /* ── Shadows ────────────────────────────────────────────────── */
   --kb-shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.30);
@@ -249,7 +249,7 @@ h4 {
   position: relative;
   padding: clamp(64px, 8vw, 96px) 0 40px;
   border-top: 1px solid var(--kb-line);
-  background: #070d15;
+  background: #08142a;
 }
 .kb-foot-grid {
   display: grid;

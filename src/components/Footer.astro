@@ -1,4 +1,5 @@
 ---
+import Logo from "@/components/Logo.astro";
 import { landings } from "@/data/landings";
 import { whatsapp, EMAIL, GITHUB_URL, INSTAGRAM_URL, GOOGLE_MAPS_URL } from "@/data/site";
 const year = new Date().getFullYear();
@@ -8,7 +9,7 @@ const year = new Date().getFullYear();
   <div class="kb-container">
     <div class="kb-foot-grid">
       <div class="kb-foot-brand-block">
-        <a class="kb-foot-logo" href="#top" aria-label="KOR Bytes">KOR Bytes<span class="kb-dot">.</span></a>
+        <a class="kb-foot-logo" href="#top" aria-label="KOR Bytes"><Logo height={38} alt="" /></a>
         <p class="kb-foot-pitch">
           Software operativo, productos verticales PASS, integraciones, automatizaciones, web e infraestructura digital desde Sincelejo para Colombia y LATAM.
         </p>

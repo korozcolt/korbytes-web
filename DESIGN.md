@@ -1,40 +1,41 @@
 # Design System
 
-Actualizado 2026-10-11. Describe lo que está implementado en `src/`, no una intención. Los tokens viven en `src/styles/global.css`.
+Actualizado 2026-10-12. Describe lo que está implementado en `src/`, no una intención. Los tokens viven en `src/styles/global.css`.
 
 ## Theme
 
 **Dark mode único.** Escena física: un decisor técnico revisando el sitio a las 10pm desde su oficina en Bogotá o Medellín, evaluando si esta empresa de Sincelejo puede ejecutar su proyecto. La pantalla se siente como una herramienta de precisión; el fondo desaparece y el contenido flota con autoridad.
 
-**Idea central visual:** la portada es un recorrido en video que avanza con el scroll, del caos operativo al sistema (ver *Portada: recorrido*). Todo el resto del sitio hereda su paleta: azul noche de fondo, **ámbar** como único acento de acción, **cobalto** y **cian** como apoyo técnico.
+**Idea central visual:** la portada es un recorrido en video que avanza con el scroll, del caos operativo al sistema (ver *Portada: recorrido*). **La paleta sale del logo oficial**: azul marino y cian. El cian es el único color de acción; el ámbar solo vive dentro del video (la luz cálida de las escenas), nunca en la interfaz.
 
 ## Color tokens
 
 ```css
---kb-bg:           #05090f;   /* fondo de página */
---kb-bg-raised:    #0a121c;   /* tarjetas, paneles */
---kb-bg-floating:  #0c141f;   /* superficies elevadas */
+/* Marca = colores del logo oficial (public/images/logo-oficial*.png) */
+--kb-brand:        #081c3c;   /* azul marino del logo: CTA final, superficies de marca */
+--kb-accent:       #04b0e0;   /* cian del logo: CTA, enlaces, estados activos, único color de acción */
+--kb-accent-soft:  #4cc9ee;
+--kb-accent-muted: rgba(4,176,224,.14);
+--kb-accent-rgb:   4, 176, 224;   /* para rgba(var(--kb-accent-rgb), .3) */
 
---kb-accent:       #f0a43a;   /* ámbar: CTA, enlaces, estados activos */
---kb-accent-soft:  #f5bd6a;
---kb-accent-muted: rgba(240,164,58,.14);
---kb-cobalt:       #3b5bdb;   /* resplandores de fondo, superficies de marca */
---kb-cobalt-deep:  #12245e;
---kb-cyan:         #38d0ee;   /* apoyo técnico (uso puntual) */
+/* Superficies: el marino de la marca, oscurecido */
+--kb-bg:           #050d1a;
+--kb-bg-raised:    #0a172b;
+--kb-bg-floating:  #0e2038;
 
---kb-text:         #eef2f6;
---kb-text-strong:  #f4f7fa;
---kb-text-muted:   #8a97a8;
---kb-text-soft:    #718296;
+--kb-text:         #eaf2f8;
+--kb-text-strong:  #f4f9fc;
+--kb-text-muted:   #8fa3b8;
+--kb-text-soft:    #7288a0;
 
 --kb-line:         rgba(255,255,255,.07);
 --kb-line-strong:  rgba(255,255,255,.16);
---kb-line-accent:  rgba(240,164,58,.45);
+--kb-line-accent:  rgba(4,176,224,.5);
 ```
 
-Historia: hasta 2026-10-10 el acento era naranja `#ff5b2e`. Cambió a ámbar para casar con la gradación del video (cobalto + ámbar) y con el cobalto de la marca. No quedan usos del naranja.
+Historia: hasta 2026-10-10 el acento era naranja `#ff5b2e`; ese día pasó a ámbar `#f0a43a` (con cobalto) para casar con la gradación del video. **Ese cambio fue un error de criterio**: los colores de la empresa son los del logo oficial (azul marino `#081c3c` y cian `#04b0e0`, medidos sobre el PNG). El 2026-10-12 se corrigió: el cian es el acento, el marino es la marca, y ni el naranja, ni el ámbar ni el cobalto quedan en la interfaz.
 
-**Reglas de uso:** el ámbar es el único color de acción (botones primarios, estados, números de paso). Cobalto solo en fondos (`radial-gradient` suaves) y cian solo como detalle. Nunca tres acentos compitiendo en el mismo bloque.
+**Reglas de uso:** el cian es el único color de acción (botones primarios, estados, enlaces, números de paso). El marino de marca (`--kb-brand`) va en superficies de énfasis, como el CTA final. Los resplandores de fondo son cian a muy baja opacidad. Ningún color nuevo se introduce sin salir del logo.
 
 ## Typography
 
@@ -79,10 +80,10 @@ El video no puede competir con la carga de la página.
 ## Surface architecture
 
 1. **Escena** (portada): el video. Texto sobre vidrio oscuro, sin fondos planos compitiendo.
-2. **Plana** (la mayoría de secciones): `--kb-bg`, con resplandores cobalto muy suaves (`radial-gradient`, nunca en el borde superior de una sección para no crear escalón visible).
+2. **Plana** (la mayoría de secciones): `--kb-bg`, con resplandores cian muy suaves (`radial-gradient`, nunca en el borde superior de una sección para no crear escalón visible).
 3. **Elevada** (tarjetas): `--kb-bg-raised`, borde `--kb-line`, esquinas 22px (`--kb-radius-lg`). Borde **o** sombra, no ambos con blur grande.
 4. **Banda con imagen** (PASS, cifras): un fotograma del recorrido a todo el ancho con parallax suave y degradado a `--kb-bg` arriba y abajo, para continuar la historia del video.
-5. **Drenched** (CTA final): fondo con resplandor cobalto y ámbar sobre `--kb-bg-raised`.
+5. **Marca** (CTA final): fondo `--kb-brand` (azul marino del logo) con un resplandor cian.
 
 ## Layout y composición por sección
 
@@ -104,8 +105,10 @@ Breakpoint principal: `980px` (todo a una columna, menú hamburguesa, sticky des
 
 ## Components
 
-- **Header:** pastilla de vidrio flotante (`position: fixed`), se oscurece al hacer scroll. En móvil, botón circular y panel desplegable propio.
-- **Botón primario:** pastilla ámbar con texto `--kb-bg`. **Fantasma:** borde `--kb-line-strong`, hover ámbar.
+- **Logo:** siempre el archivo oficial (`public/images/logo-oficial-dark.png` sobre fondo oscuro, componente `Logo.astro`). No se reconstruye con texto ni con otra marca. Favicons e íconos de app salen de `favicon-oficial.png`.
+- **Cabecera:** barra a todo el ancho de 60 px (no una píldora flotante, que se leía como cafetería y no como empresa de tecnología). Navegación en JetBrains Mono, mayúsculas; subrayado cian que se desliza bajo la sección activa; mientras dura el video, un indicador `02 / 05 OPERACIÓN` que sigue la parada; botón de búsqueda con atajo `Ctrl/⌘ K` y botón `Hablemos` de esquinas de 8 px. En ≤920 px, botón de menú de 44 px y panel a ancho completo con enlaces numerados.
+- **Paleta de comandos** (`CommandPalette.astro`): `Ctrl/⌘ K` o `/` abre un `<dialog>` con búsqueda sobre secciones, soluciones, guías y acciones de contacto. Las entradas salen de los datos del sitio. Combobox accesible (`aria-activedescendant`), flechas, Enter y Esc.
+- **Botón primario:** cian con texto `--kb-bg`. **Fantasma:** borde `--kb-line-strong`, hover cian.
 - **Chips:** mono 0.7rem, fondo blanco al 5%.
 - **WhatsApp flotante:** se oculta en móvil durante el recorrido para no tapar los CTA de las paradas.
 - **Riel de paradas** (escritorio) y **barra de progreso** superior del recorrido.
@@ -124,7 +127,7 @@ Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `p
 ## Absolute bans
 
 1. Texto con degradado (`background-clip: text`).
-2. Glassmorphism como estilo por defecto: solo header, menú móvil y tarjetas del recorrido.
+2. Glassmorphism como estilo por defecto: solo cabecera, menú móvil, paleta y tarjetas del recorrido.
 3. Eyebrow en cada sección: máximo uno cada tres.
 4. Cuadrículas de tarjetas idénticas.
 5. Borde + sombra con blur ≥ 16px a la vez.
@@ -133,8 +136,10 @@ Easing por defecto `cubic-bezier(0.16,1,0.3,1)`; duraciones 200 a 520 ms. Con `p
 8. Bordes laterales de acento (`side-stripe`).
 9. Plantilla "métrica héroe" (número enorme + etiqueta + degradado).
 10. Tarjetas dentro de tarjetas.
-11. **Identificadores escritos a mano:** anclas, slugs e ids se derivan del nombre, nunca los teclea una persona.
-12. **Video que compita con la carga de la página** (ver política de rendimiento).
+11. **Reconstruir el logo con texto o inventar una marca de reemplazo** (la "K" ámbar cuadrada que hubo el 2026-10-10 fue un error).
+12. **Colores de marca que no salgan del logo oficial.**
+13. **Identificadores escritos a mano:** anclas, slugs e ids se derivan del nombre, nunca los teclea una persona.
+14. **Video que compita con la carga de la página** (ver política de rendimiento).
 
 ## Implementation tech
 

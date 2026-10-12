@@ -44,6 +44,7 @@ Al final, la sección 13 dice con honestidad qué no quedó registrado.
 | 2026-10-10 | Auditoría de rendimiento del video y recompresión. Merge a `main` (`bda9aa6`). |
 | 2026-10-11 | Rediseño de proyectos, clientes, proceso, cifras, fundador y FAQ, y `DESIGN.md`. Merge a `main` (`28168a4`). |
 | 2026-10-11 | Corrección de "Sincelejo" partido en dos líneas (`bf19429`). Este documento. |
+| 2026-10-12 | El usuario señala que los colores de marca son los del logo y que el menú no parece de tecnología: paleta marino/cian, logo oficial en todo el sitio, cabecera nueva y paleta de comandos. |
 
 Commits relevantes: `50c9fea` (recorrido), `46c50ef` (rendimiento), `bda9aa6` (merge), `dc66aee` (secciones), `28168a4` (merge), `7c3f732` y `bf19429` (corrección).
 
@@ -258,11 +259,20 @@ La versión móvil es un **recorte vertical del mismo video 16:9**, con un encua
 
 ## 8. El motor y la web
 
-### 8.1 Evolución de marca
+### 8.1 Evolución de marca (con una corrección)
 
-Hasta el 2026-10-10 el sitio tenía un único acento naranja (`#ff5b2e`). Como el usuario eligió "evolución fuerte" y las imágenes ya traían cobalto y ámbar, el acento pasó a **ámbar `#f0a43a`**, con cobalto (`#3b5bdb`) y cian (`#38d0ee`) como apoyo. No quedan usos del naranja en `src/` ni en el manifiesto.
+Hasta el 2026-10-10 el sitio tenía un único acento naranja (`#ff5b2e`). Como el usuario eligió "evolución fuerte" y las imágenes ya traían cobalto y ámbar, ese día el acento pasó a **ámbar `#f0a43a`**, con cobalto como apoyo.
 
-Hallazgo: `DESIGN.md` describía una paleta OKLCH, tipografías (Space Grotesk, DM Sans) y un sitio que **nunca se habían aplicado**; el código real usaba hex, Familjen Grotesk e Inter Tight. `DESIGN.md` se reescribió para describir lo implementado.
+**Eso fue un error de criterio.** El usuario lo señaló el 2026-10-12: *los colores de la empresa son los del logo*. Medidos sobre el PNG oficial, son **azul marino `#081c3c`** y **cian `#04b0e0`**. Yo no había mirado el logo antes de decidir la paleta; la tomé de las imágenes generadas. Además la cabecera usaba una "K" cuadrada ámbar y un texto "KOR Bytes." inventados en lugar del logo oficial.
+
+Correcciones del 2026-10-12:
+
+- **Paleta:** cian `#04b0e0` como único color de acción, marino `#081c3c` como color de marca (CTA final) y superficies en un marino oscurecido (`#050d1a`, `#0a172b`, `#0e2038`). Ya no hay ámbar, cobalto ni naranja en la interfaz. El ámbar solo queda en la luz cálida de las escenas del video (no se regeneró: costaría dinero y el contraste cálido sobre cian funciona).
+- **Logo:** componente `Logo.astro` con `logo-oficial-dark.png`, usado en cabecera, preloader, pie, 404 y las 7 cabeceras de páginas internas (antes cada una escribía "KOR Bytes." como texto).
+- **Favicons e íconos de app:** regenerados desde `favicon-oficial.png` (cuadrado cian con la K). El origen mide 160 px, así que los de 192 y 512 px son un reescalado (bordes algo menos nítidos).
+- **Cabecera:** se rediseñó (sección 8.5).
+
+Hallazgo previo: `DESIGN.md` describía una paleta OKLCH, tipografías (Space Grotesk, DM Sans) y un sitio que **nunca se habían aplicado**; el código real usaba hex, Familjen Grotesk e Inter Tight. `DESIGN.md` se reescribió dos veces para describir lo implementado.
 
 ### 8.2 Motor de scroll
 
@@ -295,6 +305,23 @@ Qué se hizo y por qué (la tabla completa de formas por sección está en `DESI
 - **FAQ:** acordeón numerado con apertura animada.
 
 Todo el movimiento usa `gsap.matchMedia()` y con `prefers-reduced-motion: reduce` el texto no se divide ni se anima.
+
+### 8.5 Cabecera y paleta de comandos
+
+El usuario dijo que el menú principal parecía "de un restaurante o una cafetería" y no de una empresa tecnológica, y pidió usar la skill de UI/UX para darle un toque propio. La causa era la forma: una píldora de vidrio flotante, centrada y redondeada, con enlaces en texto corriente.
+
+Qué se hizo, guiado por `ui-ux-pro-max` (estado activo visible, orden de tabulación lógico, foco visible, objetivos táctiles de 44 px, `prefers-reduced-motion`):
+
+- **Barra a todo el ancho** de 60 px con borde inferior, en lugar de píldora. Esquinas de 8 px en botones, no completamente redondeadas.
+- **Navegación en JetBrains Mono**, mayúsculas, con **subrayado cian que se desliza** bajo la sección activa (detección por `IntersectionObserver`) y `aria-current="location"`.
+- **Indicador de parada:** mientras dura el video, la cabecera muestra `02 / 05 OPERACIÓN` y sigue al motor (evento `journey:stop`). Se oculta al salir del recorrido.
+- **Búsqueda `Ctrl/⌘ K`:** paleta de comandos (`CommandPalette.astro`) con `<dialog>` modal nativo. Busca sobre secciones, soluciones (landings), guías y acciones de contacto, todo derivado de los datos del sitio. También abre con `/`. Combobox accesible, con flechas, Enter y Esc.
+- **Móvil:** botón de menú de 44 px que se transforma en X, panel a ancho completo con enlaces numerados, y una fila "Buscar en el sitio".
+- La nav pasó de 5 enlaces genéricos ("Inicio", "Ecosistema PASS"…) a 5 directos: PASS, Servicios, Proyectos, Proceso, Contacto (el logo ya lleva al inicio).
+
+Problema encontrado al probarlo: el filtro de la paleta ocultaba las opciones con el atributo `hidden`, pero el `display: flex` del CSS lo anulaba y se veían todas. Se corrigió con una regla `[hidden] { display: none }`.
+
+Qué **no** se hizo: la paleta solo existe en la portada; las páginas internas conservan su cabecera simple (con el logo oficial). No se probó el atajo con un teclado físico en Windows (el texto cambia a "Ctrl" por detección de plataforma; se verificó en Mac).
 
 ---
 
@@ -330,6 +357,26 @@ Build de producción servido con `server.mjs`, Chrome DevTools, móvil emulado (
 - El primer valor de tamaño de clip que se leyó en el navegador (3.2 MB) era la **copia antigua en caché** (la caché es `immutable`), no el archivo nuevo de 2.1 MB. Los pesos verdaderos se confirmaron con `stat` sobre los archivos.
 - **No se midió en un iPhone real**, que es lo más frágil del scrub.
 - No se ejecutó Lighthouse completo sobre la página final (solo la traza de rendimiento).
+
+
+### 9.4 Lighthouse tras la cabecera nueva (2026-10-12)
+
+Build de producción servido con `server.mjs`, portada, escritorio y móvil:
+
+| Categoría | Escritorio | Móvil |
+|---|---|---|
+| Accesibilidad | 100 | 100 |
+| Buenas prácticas | 100 | 100 |
+| SEO | 100 | 100 |
+| Navegación para agentes | 100 | 100 |
+
+Primera pasada: accesibilidad 96, con tres fallos reales que eran míos y se corrigieron:
+
+- `aria-label` en los `<p>` con revelado por palabra (no permitido en un párrafo sin rol). Se quitó; los `<span>` por palabra se leen en orden con normalidad.
+- El botón de búsqueda tenía un `aria-label` que no incluía su texto visible "Buscar" (criterio *label in name*). Se quitó el `aria-label` y el texto "Buscar" queda siempre en el DOM (oculto visualmente en pantallas estrechas con la técnica de *visually hidden*).
+- Un fallo de "árbol de accesibilidad mal formado" que desapareció al corregir los dos anteriores.
+
+Esta herramienta de Lighthouse **no incluye la categoría de rendimiento**, así que esos números siguen siendo los de la sección 9.3.
 
 ---
 
@@ -396,7 +443,7 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 - **El análisis de costuras por luma** que se hizo en Aldemar no se repitió aquí; la verificación fue visual.
 - **Los prompts literales del usuario** durante la sesión. Sí se conservan sus decisiones y reacciones (por ejemplo, "usa un modelo más actual", "ojo con la versión mobile", "aquí hay un error").
 - **Los reintentos fallidos con Gemini Nano Banana 2.1**: solo consta que dieron 429, no qué ventana de tiempo cubrió.
-- **Una auditoría Lighthouse completa** de la página final (accesibilidad, buenas prácticas, SEO). Solo hay traza de rendimiento y revisión visual.
+- **Lighthouse de rendimiento** de la página final: la herramienta usada excluye esa categoría. Solo hay traza de rendimiento (LCP/CLS) del 2026-10-10. Accesibilidad, buenas prácticas y SEO sí se midieron el 2026-10-12 (sección 9.4).
 - **Si el despliegue automático ocurrió** tras cada merge.
 
 ---
@@ -409,5 +456,5 @@ Para ser fiel, esto no se puede reconstruir con certeza:
 4. **Imagen Open Graph** nueva con la marca actual (hoy usa el logo).
 5. **Decidir si los 47 MB de video van en git** o en otro almacenamiento (CDN o bucket).
 6. **Resolver `astro check`**, que se cae por un fallo del runtime.
-7. **Ejecutar Lighthouse completo** sobre la página final y registrar los resultados.
+7. **Lighthouse de rendimiento** sobre la página final con la cabecera nueva (accesibilidad, buenas prácticas y SEO ya están en 100, sección 9.4).
 8. **Verificar el despliegue** en `kor-bytes.com`: que el video avance con el scroll (prueba real del CSP).

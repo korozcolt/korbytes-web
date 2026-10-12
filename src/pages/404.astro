@@ -1,4 +1,5 @@
 ---
+import Logo from "@/components/Logo.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Footer from "@/components/Footer.astro";
 import WhatsAppFab from "@/components/WhatsAppFab.astro";
@@ -13,8 +14,7 @@ import { whatsapp } from "@/data/site";
   <header class="kb-header" id="site-header">
     <div class="kb-container kb-header-inner">
       <a href="/" class="kb-logo-slot" aria-label="KOR Bytes">
-        <span class="kb-mark">K</span>
-        <span class="kb-wordmark">KOR Bytes<span class="kb-dot">.</span></span>
+        <Logo height={34} alt="" />
       </a>
       <a class="kb-hnav-cta" href="/">
         Volver al inicio

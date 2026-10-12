@@ -34,11 +34,9 @@ mm.add("(prefers-reduced-motion: no-preference)", () => {
 mm.add("(prefers-reduced-motion: no-preference)", () => {
   gsap.utils.toArray("[data-words]").forEach((el) => {
     const words = el.textContent.trim().split(/\s+/);
-    el.setAttribute("aria-label", words.join(" "));
     el.textContent = "";
     const spans = words.map((w, i) => {
       const span = document.createElement("span");
-      span.setAttribute("aria-hidden", "true");
       span.textContent = w;
       el.appendChild(span);
       if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
@@ -207,7 +205,7 @@ function initHeroParticles() {
   if (!canvas || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
 
   const ctx = canvas.getContext("2d");
-  const accent = "240, 164, 58";
+  const accent = "4, 176, 224";
   let width, height, dpr, points, raf, running = true;
 
   function resize() {
